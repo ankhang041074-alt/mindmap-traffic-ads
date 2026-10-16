@@ -101,13 +101,13 @@
 </head>
 <body class="antialiased min-h-screen p-4 md:p-6 selection:bg-indigo-500/20">
 
-  <div class="max-w-[1560px] mx-auto">
+  <div class="max-w-[1720px] mx-auto">
 
     <!-- Main Node Canvas Container -->
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-lg overflow-x-auto canvas-grid relative">
       
       <!-- Inner Canvas -->
-      <div id="canvas-wrapper" class="min-w-[1420px] p-6 md:p-8 relative">
+      <div id="canvas-wrapper" class="min-w-[1580px] p-6 md:p-8 relative">
         
         <!-- SVG Overlay for Bezier & Bridge Edges -->
         <svg id="edges-svg" class="absolute inset-0 w-full h-full pointer-events-none z-10"></svg>
@@ -150,18 +150,18 @@
           </div>
         </div>
 
-        <!-- MAIN 5-COLUMN BALANCED PIPELINE -->
-        <div class="grid grid-cols-5 gap-7 items-stretch relative z-20">
+        <!-- MAIN BALANCED PIPELINE: RESEARCH (COL 1) -> 2 DOWNSTREAM FLOWS (COLS 2-5) -->
+        <div class="flex gap-14 items-stretch relative z-20">
           
-          <!-- ==================== COL 1: BƯỚC 0 - RESEARCH (THẲNG ĐỨNG NHƯ CŨ) ==================== -->
-          <div class="col-span-1 flex flex-col justify-center">
+          <!-- ==================== COL 1: BƯỚC 0 - RESEARCH (IN FRONT, GENEROUS BREATHING ROOM) ==================== -->
+          <div class="w-[300px] shrink-0 flex flex-col justify-center">
             <div id="node-research" data-node="research"
                  onclick="focusNode('research')"
                  class="node-card cursor-pointer bg-[var(--background)] border-2 border-indigo-500/80 rounded-2xl p-5 shadow-md relative">
               
               <!-- Output Ports on Right Side (Level with Row 1 & Row 2) -->
-              <div class="port-dot port-out bg-emerald-500 ring-4 ring-emerald-500/20" id="port-res-out-free" style="top: 26%;"></div>
-              <div class="port-dot port-out bg-amber-500 ring-4 ring-amber-500/20" id="port-res-out-paid" style="top: 76%;"></div>
+              <div class="port-dot port-out bg-emerald-500 ring-4 ring-emerald-500/20" id="port-res-out-free" style="top: 20%;"></div>
+              <div class="port-dot port-out bg-amber-500 ring-4 ring-amber-500/20" id="port-res-out-paid" style="top: 80%;"></div>
 
               <div class="flex items-center justify-between gap-1 mb-2">
                 <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-indigo-500/15 text-indigo-400 border border-indigo-500/30"
@@ -245,10 +245,10 @@
           </div>
 
           <!-- ==================== COLS 2-5: TWO CHANNELS (FREE TRAFFIC & PAY ADS) ==================== -->
-          <div class="col-span-4 flex flex-col justify-between">
+          <div class="flex-1 flex flex-col justify-between min-w-0">
             
             <!-- ==================== ROW 1: LUỒNG 01 - CHANNEL FREE TRAFFIC ==================== -->
-            <div id="section-free" class="relative z-20">
+            <div id="section-free" class="relative z-20 mb-4">
               
               <!-- Track Header 1: Repositioned clearly with ample room, zero line collision -->
               <div class="flex items-center gap-3 mb-4">
@@ -453,19 +453,23 @@
             </div>
 
             <!-- ==================== CORRIDOR BRIDGE ==================== -->
-            <div id="bridge-corridor" class="my-6 relative z-20 flex items-center justify-center">
-              <div class="px-4 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-400 border border-amber-500/40 shadow-sm backdrop-blur"
-                   data-vi="⚡ Đưa Video [Hook giữ chân cao + Content bán hàng] xuống chạy Channel Pay Ads ⤵"
-                   data-en="⚡ Feed [High-Retention Hook + Sales Content] Video directly into Channel Paid Ads ⤵">
-                ⚡ Đưa Video [Hook giữ chân cao + Content bán hàng] xuống chạy Channel Pay Ads ⤵
+            <div id="bridge-corridor" class="my-8 py-1 relative z-20 flex items-center justify-center">
+              <div class="px-5 py-2 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-400 border border-amber-500/40 shadow-sm backdrop-blur flex items-center gap-2"
+                   data-vi="⚡ Cầu nối: Đưa Video [Hook giữ chân cao + Content bán hàng] xuống chạy Channel Pay Ads ⤵"
+                   data-en="⚡ Bridge: Feed [Retention Hook + Sales Content] into Channel Paid Ads ⤵">
+                <span>⚡</span>
+                <span data-vi="Cầu nối: Đưa Video [Hook giữ chân cao + Content bán hàng] xuống chạy Channel Pay Ads ⤵"
+                      data-en="Bridge: Feed [Retention Hook + Sales Content] into Channel Paid Ads ⤵">
+                  Cầu nối: Đưa Video [Hook giữ chân cao + Content bán hàng] xuống chạy Channel Pay Ads ⤵
+                </span>
               </div>
             </div>
 
             <!-- ==================== ROW 2: LUỒNG 02 - CHANNEL PAY ADS ==================== -->
-            <div id="section-paid" class="relative z-20">
+            <div id="section-paid" class="relative z-20 mt-2">
               
-              <!-- Track Header 2: Repositioned clearly with ample room, zero line collision -->
-              <div class="flex items-center gap-3 mb-4">
+              <!-- Track Header 2: Clear separation, generous spacing -->
+              <div class="flex items-center gap-3 mb-5">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-amber-500/15 text-amber-400 border border-amber-500/30 shadow-sm">
                   <span>🚀</span>
                   <span data-vi="LUỒNG 02: CHANNEL PAY ADS (QUẢNG CÁO & BOOKING KOC)" data-en="FLOW 02: CHANNEL PAID ADS (ADS & KOC BOOKING)">
@@ -484,9 +488,9 @@
                        class="node-card cursor-pointer bg-[var(--background)] border-2 border-amber-500/80 rounded-xl p-4 shadow-sm relative">
                     
                     <!-- Port receiving from Bridge (Hook retention video from above corridor) -->
-                    <div class="port-dot port-in bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-bridge" style="top: 32%;"></div>
+                    <div class="port-dot port-in bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-bridge" style="top: 26%;"></div>
                     <!-- Port receiving from Research on the left -->
-                    <div class="port-dot port-in bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-in" style="top: 68%;"></div>
+                    <div class="port-dot port-in bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-in" style="top: 74%;"></div>
                     <!-- Output port -->
                     <div class="port-dot port-out bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-out"></div>
                     
@@ -660,8 +664,17 @@
         midY = cr.top - wrapperRect.top + cr.height / 2;
       }
       
-      // Route left through corridor, past node-p-root to the open gap between Col 1 and Col 2
-      const leftX = p2.x - 24;
+      // Route left through corridor into the exact center of the gap between Col 1 (Research) and Col 2 (Pay Ads)
+      const resEl = document.getElementById('node-research');
+      const paidEl = document.getElementById('node-p-root');
+      let leftX = p2.x - 28;
+      if (resEl && paidEl) {
+        const rr = resEl.getBoundingClientRect();
+        const pr = paidEl.getBoundingClientRect();
+        const resRight = rr.right - wrapperRect.left;
+        const paidLeft = pr.left - wrapperRect.left;
+        leftX = (resRight + paidLeft) / 2;
+      }
       const r = 16;
 
       return [
