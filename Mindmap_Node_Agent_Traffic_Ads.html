@@ -10,7 +10,6 @@
       --background: #0b0f19;
       --foreground: #f8fafc;
       --card: #111827;
-      --card-node: #161f33;
       --border: #26324d;
       --muted-foreground: #94a3b8;
     }
@@ -18,7 +17,6 @@
       --background: #f1f5f9;
       --foreground: #0f172a;
       --card: #ffffff;
-      --card-node: #f8fafc;
       --border: #cbd5e1;
       --muted-foreground: #475569;
     }
@@ -92,17 +90,11 @@
       left: 50%;
       transform: translateX(-50%);
     }
-    .port-top {
-      top: -6px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
     .node-card:hover .port-in,
     .node-card:hover .port-out {
       transform: translateY(-50%) scale(1.3);
     }
-    .node-card:hover .port-bottom,
-    .node-card:hover .port-top {
+    .node-card:hover .port-bottom {
       transform: translateX(-50%) scale(1.3);
     }
   </style>
@@ -115,7 +107,7 @@
     <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl shadow-lg overflow-x-auto canvas-grid relative">
       
       <!-- Inner Canvas -->
-      <div id="canvas-wrapper" class="min-w-[1360px] p-6 md:p-8 relative">
+      <div id="canvas-wrapper" class="min-w-[1420px] p-6 md:p-8 relative">
         
         <!-- SVG Overlay for Bezier & Bridge Edges -->
         <svg id="edges-svg" class="absolute inset-0 w-full h-full pointer-events-none z-10"></svg>
@@ -158,451 +150,429 @@
           </div>
         </div>
 
-        <!-- ==================== BƯỚC 0: TỔNG HỢP BAN ĐẦU - RESEARCH FOUNDATION ==================== -->
-        <div class="mb-8 relative z-20">
-          <div id="node-research" data-node="research"
-               onclick="focusNode('research')"
-               class="node-card cursor-pointer bg-[var(--background)] border-2 border-indigo-500/80 rounded-2xl p-5 shadow-md relative">
-            
-            <!-- Output Ports to Downstream Pipelines -->
-            <div class="port-dot port-bottom bg-emerald-500 ring-4 ring-emerald-500/20" id="port-res-out-free" style="left: 12.5%;"></div>
-            <div class="port-dot port-bottom bg-amber-500 ring-4 ring-amber-500/20" id="port-res-out-paid" style="left: 5%;"></div>
-
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+        <!-- MAIN 5-COLUMN BALANCED PIPELINE -->
+        <div class="grid grid-cols-5 gap-7 items-stretch relative z-20">
+          
+          <!-- ==================== COL 1: BƯỚC 0 - RESEARCH (THẲNG ĐỨNG NHƯ CŨ) ==================== -->
+          <div class="col-span-1 flex flex-col justify-center">
+            <div id="node-research" data-node="research"
+                 onclick="focusNode('research')"
+                 class="node-card cursor-pointer bg-[var(--background)] border-2 border-indigo-500/80 rounded-2xl p-5 shadow-md relative">
               
-              <!-- Left: Header info -->
-              <div class="max-w-md shrink-0">
-                <div class="flex items-center gap-2 mb-1.5">
-                  <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-indigo-500/15 text-indigo-400 border border-indigo-500/30"
-                        data-vi="BƯỚC 0 • TỔNG HỢP BAN ĐẦU" data-en="STEP 0 • FOUNDATION">
-                    BƯỚC 0 • TỔNG HỢP BAN ĐẦU
+              <!-- Output Ports on Right Side (Level with Row 1 & Row 2) -->
+              <div class="port-dot port-out bg-emerald-500 ring-4 ring-emerald-500/20" id="port-res-out-free" style="top: 26%;"></div>
+              <div class="port-dot port-out bg-amber-500 ring-4 ring-amber-500/20" id="port-res-out-paid" style="top: 76%;"></div>
+
+              <div class="flex items-center justify-between gap-1 mb-2">
+                <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-indigo-500/15 text-indigo-400 border border-indigo-500/30"
+                      data-vi="BƯỚC 0 • TỔNG HỢP BAN ĐẦU" data-en="STEP 0 • FOUNDATION">
+                  BƯỚC 0 • TỔNG HỢP
+                </span>
+                <span class="text-xs font-mono text-[var(--muted-foreground)]">Research</span>
+              </div>
+
+              <h3 class="text-base font-bold text-[var(--foreground)] mb-1"
+                  data-vi="🔍 Research: Tìm các kênh làm tốt"
+                  data-en="🔍 Research: Benchmark top channels">
+                🔍 Research: Tìm các kênh làm tốt
+              </h3>
+              
+              <p class="text-xs text-[var(--muted-foreground)] leading-relaxed mb-3"
+                 data-vi="Phân tích sâu 5 yếu tố cốt lõi từ các kênh làm tốt để làm nguyên liệu đầu vào cho toàn bộ hệ thống:"
+                 data-en="Deep analysis of 5 core factors from winning channels to feed downstream operations:">
+                Phân tích sâu 5 yếu tố cốt lõi từ các kênh làm tốt để làm nguyên liệu đầu vào cho toàn bộ hệ thống:
+              </p>
+
+              <div class="space-y-2 text-xs">
+                <div class="px-3 py-2 rounded-xl bg-[var(--card)] border border-[var(--border)] font-medium flex items-center gap-2">
+                  <span class="text-sm">💡</span>
+                  <span data-vi="Phân tích Ý tưởng" data-en="Content Ideas">Phân tích Ý tưởng</span>
+                </div>
+                <div class="px-3 py-2 rounded-xl bg-[var(--card)] border border-[var(--border)] font-medium flex items-center gap-2">
+                  <span class="text-sm">🎣</span>
+                  <span data-vi="Phân tích Hook (Mở đầu)" data-en="Opening Hooks">Phân tích Hook (Mở đầu)</span>
+                </div>
+                <div class="px-3 py-2 rounded-xl bg-[var(--card)] border border-[var(--border)] font-medium flex items-center gap-2">
+                  <span class="text-sm">🎥</span>
+                  <span data-vi="Phân tích Góc quay" data-en="Camera Angles">Phân tích Góc quay</span>
+                </div>
+                <div class="px-3 py-2 rounded-xl bg-[var(--card)] border border-[var(--border)] font-medium flex items-center gap-2">
+                  <span class="text-sm">📖</span>
+                  <span data-vi="Cách kể chuyện" data-en="Storytelling">Cách kể chuyện</span>
+                </div>
+                <div class="px-3 py-2 rounded-xl bg-[var(--card)] border border-[var(--border)] font-medium flex items-center gap-2">
+                  <span class="text-sm">🛍️</span>
+                  <span data-vi="Cách giới thiệu sản phẩm" data-en="Product Pitch">Cách giới thiệu sản phẩm</span>
+                </div>
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-[var(--border)] flex flex-col gap-1.5 text-xs font-semibold">
+                <div class="flex items-center justify-between text-emerald-400">
+                  <span data-vi="Cấp nguyên liệu:" data-en="Feeds to:">Cấp nguyên liệu:</span>
+                  <span>Free Traffic ➔</span>
+                </div>
+                <div class="flex items-center justify-between text-amber-400">
+                  <span data-vi="Cấp nguyên liệu:" data-en="Feeds to:">Cấp nguyên liệu:</span>
+                  <span>Pay Ads ➔</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ==================== COLS 2-5: TWO CHANNELS (FREE TRAFFIC & PAY ADS) ==================== -->
+          <div class="col-span-4 flex flex-col justify-between">
+            
+            <!-- ==================== ROW 1: LUỒNG 01 - CHANNEL FREE TRAFFIC ==================== -->
+            <div id="section-free" class="relative z-20">
+              
+              <!-- Track Header 1: Repositioned clearly with ample room, zero line collision -->
+              <div class="flex items-center gap-3 mb-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shadow-sm">
+                  <span>🌱</span>
+                  <span data-vi="LUỒNG 01: CHANNEL FREE TRAFFIC (TỰ NHIÊN)" data-en="FLOW 01: CHANNEL FREE TRAFFIC (ORGANIC)">
+                    LUỒNG 01: CHANNEL FREE TRAFFIC (TỰ NHIÊN)
                   </span>
-                  <span class="text-xs font-mono text-[var(--muted-foreground)]">Research</span>
                 </div>
+                <div class="h-px flex-1 bg-gradient-to-r from-emerald-500/30 to-transparent"></div>
+              </div>
 
-                <h3 class="text-base font-bold text-[var(--foreground)] mb-1"
-                    data-vi="🔍 Research: Tìm các kênh làm tốt"
-                    data-en="🔍 Research: Benchmark top channels">
-                  🔍 Research: Tìm các kênh làm tốt
-                </h3>
+              <div class="grid grid-cols-4 gap-5 items-center">
                 
-                <p class="text-xs text-[var(--muted-foreground)] leading-relaxed mb-2"
-                   data-vi="Phân tích sâu 5 yếu tố cốt lõi từ các kênh làm tốt để làm nguyên liệu đầu vào cho toàn bộ hệ thống:"
-                   data-en="Deep analysis of 5 core factors from winning channels to feed downstream operations:">
-                  Phân tích sâu 5 yếu tố cốt lõi từ các kênh làm tốt để làm nguyên liệu đầu vào cho toàn bộ hệ thống:
-                </p>
-
-                <div class="flex items-center gap-4 text-xs font-medium">
-                  <span class="text-emerald-400"
-                        data-vi="🌱 Cấp nguyên liệu Free Traffic ➔"
-                        data-en="🌱 Feed Free Traffic ➔">🌱 Cấp nguyên liệu Free Traffic ➔</span>
-                  <span class="text-amber-400"
-                        data-vi="🚀 Cấp nguyên liệu Pay Ads ➔"
-                        data-en="🚀 Feed Pay Ads ➔">🚀 Cấp nguyên liệu Pay Ads ➔</span>
+                <!-- Col 2: Channel Free Traffic Root -->
+                <div>
+                  <div id="node-f-root" data-node="f-root"
+                       onclick="focusNode('f-root')"
+                       class="node-card cursor-pointer bg-[var(--background)] border-2 border-emerald-500/70 rounded-xl p-4 shadow-sm relative">
+                    <div class="port-dot port-in bg-emerald-500 ring-4 ring-emerald-500/20" id="port-f-root-in"></div>
+                    <div class="port-dot port-out bg-emerald-500 ring-4 ring-emerald-500/20" id="port-f-root-out"></div>
+                    
+                    <div class="flex items-center justify-between gap-1 mb-2">
+                      <span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/15 text-emerald-400">CHANNEL 01</span>
+                      <span class="text-xs font-mono text-[var(--muted-foreground)]">Free Traffic</span>
+                    </div>
+                    
+                    <h3 class="text-sm font-bold text-[var(--foreground)] mb-1">🌱 Channel Free Traffic</h3>
+                    <p class="text-xs text-[var(--muted-foreground)] leading-relaxed"
+                       data-vi="Nhận ý tưởng & góc quay từ Research, triển khai 3 nhánh xử lý video tự nhiên."
+                       data-en="Receives ideas & angles from Research, launching 3 organic video conversion paths.">
+                      Nhận ý tưởng &amp; góc quay từ Research, triển khai 3 nhánh xử lý video tự nhiên.
+                    </p>
+                  </div>
                 </div>
+
+                <!-- Col 3: Content Branches -->
+                <div class="space-y-3.5">
+                  <div id="node-f-viral" data-node="f-viral" onclick="focusNode('f-viral')"
+                       class="node-card cursor-pointer bg-[var(--background)] border border-emerald-500/40 hover:border-emerald-500 rounded-xl p-3.5 shadow-sm relative">
+                    <div class="port-dot port-in bg-emerald-500" id="port-f-viral-in"></div>
+                    <div class="port-dot port-out bg-emerald-500" id="port-f-viral-out"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/15 text-emerald-400"
+                            data-vi="NHÁNH 1 • VIRAL" data-en="BRANCH 1 • VIRAL">NHÁNH 1 • VIRAL</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="🔥 Content Viral" data-en="🔥 Viral Content">🔥 Content Viral</h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
+                       data-vi="Video đạt hiệu ứng viral, thu hút lượng lớn người xem mới."
+                       data-en="Breakout video goes viral, attracting a massive wave of new viewers.">
+                      Video đạt hiệu ứng viral, thu hút lượng lớn người xem mới.
+                    </p>
+                  </div>
+
+                  <div id="node-f-stable" data-node="f-stable" onclick="focusNode('f-stable')"
+                       class="node-card cursor-pointer bg-[var(--background)] border border-teal-500/40 hover:border-teal-500 rounded-xl p-3.5 shadow-sm relative">
+                    <div class="port-dot port-in bg-teal-500" id="port-f-stable-in"></div>
+                    <div class="port-dot port-out bg-teal-500" id="port-f-stable-out"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-semibold bg-teal-500/15 text-teal-400"
+                            data-vi="NHÁNH 2 • ỔN ĐỊNH" data-en="BRANCH 2 • STEADY">NHÁNH 2 • ỔN ĐỊNH</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="📊 Content View Ổn Định" data-en="📊 Consistent Views Content">📊 Content View Ổn Định</h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
+                       data-vi="Video duy trì lượt xem đều đặn, giữ tương tác ổn định trên kênh."
+                       data-en="Videos generate steady, reliable views and consistent daily engagement.">
+                      Video duy trì lượt xem đều đặn, giữ tương tác ổn định trên kênh.
+                    </p>
+                  </div>
+
+                  <div id="node-f-retain" data-node="f-retain" onclick="focusNode('f-retain')"
+                       class="node-card cursor-pointer bg-[var(--background)] border border-cyan-500/40 hover:border-cyan-500 rounded-xl p-3.5 shadow-sm relative">
+                    <div class="port-dot port-in bg-cyan-500" id="port-f-retain-in"></div>
+                    <div class="port-dot port-out bg-cyan-500" id="port-f-retain-out"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-semibold bg-cyan-500/15 text-cyan-400"
+                            data-vi="NHÁNH 3 • PHÂN TÍCH" data-en="BRANCH 3 • ANALYTICS">NHÁNH 3 • PHÂN TÍCH</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="🔍 Phân Tích Video Giữ Chân Lâu" data-en="🔍 Analyze High-Retention Videos">🔍 Phân Tích Video Giữ Chân Lâu</h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
+                       data-vi="Dùng phân tích để lọc ra những video nào giữ chân người xem lâu nhất."
+                       data-en="Use analytics to identify which videos retain viewer attention the longest.">
+                      Dùng phân tích để lọc ra những video nào giữ chân người xem lâu nhất.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Col 4: Logic / Condition / Hook Splicing -->
+                <div class="space-y-3.5">
+                  <div id="node-f-viral-push" data-node="f-viral-push" onclick="focusNode('f-viral-push')"
+                       class="node-card cursor-pointer bg-[var(--background)] border border-emerald-500/40 hover:border-emerald-500 rounded-xl p-3.5 shadow-sm relative">
+                    <div class="port-dot port-in bg-emerald-500" id="port-f-viral-push-in"></div>
+                    <div class="port-dot port-out bg-emerald-500" id="port-f-viral-push-out"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/15 text-emerald-400"
+                            data-vi="ĐẨY VIDEO TIẾP THEO" data-en="NEXT VIDEO PUSH">ĐẨY VIDEO TIẾP THEO</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="🎬 Đẩy Video Bán Hàng Tiếp Theo" data-en="🎬 Push Follow-Up Sales Video">🎬 Đẩy Video Bán Hàng Tiếp Theo</h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
+                       data-vi="Lập tức tung video bán hàng nối tiếp ngay sau video viral."
+                       data-en="Immediately publish a sales video right after the viral hit to ride the momentum.">
+                      Lập tức tung video bán hàng nối tiếp ngay sau video viral.
+                    </p>
+                  </div>
+
+                  <div id="node-f-stable-follow" data-node="f-stable-follow" onclick="focusNode('f-stable-follow')"
+                       class="node-card cursor-pointer bg-[var(--background)] border border-teal-500/40 hover:border-teal-500 rounded-xl p-3.5 shadow-sm relative">
+                    <div class="port-dot port-in bg-teal-500" id="port-f-stable-follow-in"></div>
+                    <div class="port-dot port-out bg-teal-500" id="port-f-stable-follow-out"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-semibold bg-teal-500/15 text-teal-400"
+                            data-vi="ĐIỀU KIỆN FOLLOW" data-en="FOLLOWER MILESTONE">ĐIỀU KIỆN FOLLOW</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="👥 Đạt Lượng Follow Nhất Định" data-en="👥 Reach Target Follower Count">👥 Đạt Lượng Follow Nhất Định</h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
+                       data-vi="Tích lũy cho đến khi kênh đạt được lượng người theo dõi nhất định."
+                       data-en="Accumulate audience until the channel reaches a specific follower threshold.">
+                      Tích lũy cho đến khi kênh đạt được lượng người theo dõi nhất định.
+                    </p>
+                  </div>
+
+                  <div id="node-f-retain-hook" data-node="f-retain-hook" onclick="focusNode('f-retain-hook')"
+                       class="node-card cursor-pointer bg-[var(--background)] border border-cyan-500/40 hover:border-cyan-500 rounded-xl p-3.5 shadow-sm relative">
+                    <div class="port-dot port-in bg-cyan-500" id="port-f-retain-hook-in"></div>
+                    <div class="port-dot port-out bg-cyan-500" id="port-f-retain-hook-out"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-semibold bg-cyan-500/15 text-cyan-400"
+                            data-vi="TÁCH HOOK GIỮ CHÂN" data-en="HOOK EXTRACTION">TÁCH HOOK GIỮ CHÂN</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="✂️ Lấy Hook (Đầu Vài Giây)" data-en="✂️ Extract Hook (First Few Seconds)">✂️ Lấy Hook (Đầu Vài Giây)</h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
+                       data-vi="Cắt lấy phần mở đầu (vài giây đầu tiên) giữ chân người xem tốt nhất."
+                       data-en="Take the opening few seconds (the Hook) that proved to hold viewers longest.">
+                      Cắt lấy phần mở đầu (vài giây đầu tiên) giữ chân người xem tốt nhất.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Col 5: Output Conversion Goals -->
+                <div class="space-y-3.5">
+                  <div id="node-f-viral-out" data-node="f-viral-out" onclick="focusNode('f-viral-out')"
+                       class="node-card cursor-pointer bg-[var(--background)] border-2 border-emerald-500/60 rounded-xl p-3.5 shadow-sm relative">
+                    <div class="port-dot port-in bg-emerald-500" id="port-f-viral-out-in"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500 text-white"
+                            data-vi="ĐÍCH ĐẾN 1.1" data-en="GOAL 1.1">ĐÍCH ĐẾN 1.1</span>
+                      <span class="text-xs font-mono text-emerald-400">Traffic ➔ Page</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="🏠 Để Khách Vào Thăm Trang" data-en="🏠 Drive Customers to Visit Page">🏠 Để Khách Vào Thăm Trang</h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
+                       data-vi="Điều hướng khách hàng đang quan tâm bấm vào thăm trang & gian hàng."
+                       data-en="Lead interested viewers to visit the profile/storefront and browse products.">
+                      Điều hướng khách hàng đang quan tâm bấm vào thăm trang &amp; gian hàng.
+                    </p>
+                  </div>
+
+                  <div id="node-f-stable-out" data-node="f-stable-out" onclick="focusNode('f-stable-out')"
+                       class="node-card cursor-pointer bg-[var(--background)] border-2 border-teal-500/60 rounded-xl p-3.5 shadow-sm relative">
+                    <div class="port-dot port-in bg-teal-500" id="port-f-stable-out-in"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-bold bg-teal-500 text-white"
+                            data-vi="ĐÍCH ĐẾN 1.2" data-en="GOAL 1.2">ĐÍCH ĐẾN 1.2</span>
+                      <span class="text-xs font-mono text-teal-400">Channel Pivot</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="🛒 Chuyển Sang Kênh Bán Hàng" data-en="🛒 Convert into Sales Channel">🛒 Chuyển Sang Kênh Bán Hàng</h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
+                       data-vi="Chuyển đổi kênh đã đủ lượng follow sang mô hình kênh bán hàng."
+                       data-en="Transition the established follower base into a dedicated sales channel.">
+                      Chuyển đổi kênh đã đủ lượng follow sang mô hình kênh bán hàng.
+                    </p>
+                  </div>
+
+                  <div id="node-f-retain-out" data-node="f-retain-out" onclick="focusNode('f-retain-out')"
+                       class="node-card cursor-pointer bg-[var(--background)] border-2 border-cyan-500 rounded-xl p-3.5 shadow-md relative">
+                    <div class="port-dot port-in bg-cyan-500" id="port-f-retain-out-in"></div>
+                    <div class="port-dot port-bottom bg-amber-500 ring-4 ring-amber-500/25" id="port-f-retain-out-bottom"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-bold bg-cyan-500 text-white"
+                            data-vi="TẠO VIDEO PAY ADS" data-en="BUILD PAID AD VIDEO">TẠO VIDEO PAY ADS</span>
+                      <span class="text-xs font-mono text-amber-400 font-semibold"
+                            data-vi="➔ Nối xuống Pay Ads" data-en="➔ Send to Paid Ads">➔ Nối xuống Pay Ads</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="🎯 Ghép Content Bán Hàng Đằng Sau" data-en="🎯 Append Sales Content Behind Hook">🎯 Ghép Content Bán Hàng Đằng Sau</h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
+                       data-vi="Ghép [Hook đầu vài giây] + [Content bán hàng đằng sau] để làm Video Pay Ads và đẩy thẳng xuống kênh Channel Pay Ads."
+                       data-en="Combine [First Few Seconds Hook] + [Sales Content Behind It] to create a Paid Ads video and feed it directly into Channel Paid Ads.">
+                      Ghép [Hook đầu vài giây] + [Content bán hàng đằng sau] để làm Video Pay Ads và đẩy thẳng xuống kênh Channel Pay Ads.
+                    </p>
+                  </div>
+                </div>
+
               </div>
-
-              <!-- Right: 5 Core Elements in Equal Horizontal Cards -->
-              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 flex-1">
-                <div class="px-3.5 py-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] flex flex-col justify-center">
-                  <div class="flex items-center gap-1.5 mb-1">
-                    <span class="text-base">💡</span>
-                    <span class="text-xs font-bold text-[var(--foreground)]" data-vi="Ý Tưởng" data-en="Ideas">Ý Tưởng</span>
-                  </div>
-                  <p class="text-[11px] text-[var(--muted-foreground)] leading-tight"
-                     data-vi="Phân tích góc nhìn & chủ đề" data-en="Angles & viral topics">
-                    Phân tích góc nhìn &amp; chủ đề
-                  </p>
-                </div>
-
-                <div class="px-3.5 py-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] flex flex-col justify-center">
-                  <div class="flex items-center gap-1.5 mb-1">
-                    <span class="text-base">🎣</span>
-                    <span class="text-xs font-bold text-[var(--foreground)]" data-vi="Hook Mở Đầu" data-en="Opening Hook">Hook Mở Đầu</span>
-                  </div>
-                  <p class="text-[11px] text-[var(--muted-foreground)] leading-tight"
-                     data-vi="3-5s đầu giữ chân người xem" data-en="First 3-5s retention hook">
-                    3-5s đầu giữ chân người xem
-                  </p>
-                </div>
-
-                <div class="px-3.5 py-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] flex flex-col justify-center">
-                  <div class="flex items-center gap-1.5 mb-1">
-                    <span class="text-base">🎥</span>
-                    <span class="text-xs font-bold text-[var(--foreground)]" data-vi="Góc Quay" data-en="Camera Angle">Góc Quay</span>
-                  </div>
-                  <p class="text-[11px] text-[var(--muted-foreground)] leading-tight"
-                     data-vi="Bố cục khung hình & góc máy" data-en="Framing & shot composition">
-                    Bố cục khung hình &amp; góc máy
-                  </p>
-                </div>
-
-                <div class="px-3.5 py-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] flex flex-col justify-center">
-                  <div class="flex items-center gap-1.5 mb-1">
-                    <span class="text-base">📖</span>
-                    <span class="text-xs font-bold text-[var(--foreground)]" data-vi="Kể Chuyện" data-en="Storytelling">Kể Chuyện</span>
-                  </div>
-                  <p class="text-[11px] text-[var(--muted-foreground)] leading-tight"
-                     data-vi="Mạch cảm xúc & nhịp độ" data-en="Narrative pacing & flow">
-                    Mạch cảm xúc &amp; nhịp độ
-                  </p>
-                </div>
-
-                <div class="px-3.5 py-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] flex flex-col justify-center">
-                  <div class="flex items-center gap-1.5 mb-1">
-                    <span class="text-base">🛍️</span>
-                    <span class="text-xs font-bold text-[var(--foreground)]" data-vi="Giới Thiệu SP" data-en="Product Pitch">Giới Thiệu SP</span>
-                  </div>
-                  <p class="text-[11px] text-[var(--muted-foreground)] leading-tight"
-                     data-vi="Cách lồng sản phẩm tự nhiên" data-en="Natural product placement">
-                    Cách lồng sản phẩm tự nhiên
-                  </p>
-                </div>
-              </div>
-
             </div>
-          </div>
-        </div>
 
-        <!-- ==================== ROW 1: LUỒNG 01 - CHANNEL FREE TRAFFIC ==================== -->
-        <div id="section-free" class="mb-6 relative z-20">
-          
-          <!-- Full-Width Track Header (Pulled to the Left Head) -->
-          <div class="flex items-center gap-3 mb-4">
-            <span class="px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
-                  data-vi="🌱 LUỒNG 01: CHANNEL FREE TRAFFIC (TỰ NHIÊN)"
-                  data-en="🌱 FLOW 01: CHANNEL FREE TRAFFIC (ORGANIC)">
-              🌱 LUỒNG 01: CHANNEL FREE TRAFFIC (TỰ NHIÊN)
-            </span>
-            <div class="h-px flex-1 bg-gradient-to-r from-emerald-500/30 to-transparent"></div>
-          </div>
+            <!-- ==================== CORRIDOR BRIDGE ==================== -->
+            <div id="bridge-corridor" class="my-6 relative z-20 flex items-center justify-center">
+              <div class="px-4 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-400 border border-amber-500/40 shadow-sm backdrop-blur"
+                   data-vi="⚡ Đưa Video [Hook giữ chân cao + Content bán hàng] xuống chạy Channel Pay Ads ⤵"
+                   data-en="⚡ Feed [High-Retention Hook + Sales Content] Video directly into Channel Paid Ads ⤵">
+                ⚡ Đưa Video [Hook giữ chân cao + Content bán hàng] xuống chạy Channel Pay Ads ⤵
+              </div>
+            </div>
 
-          <div class="grid grid-cols-4 gap-6 items-center">
-            
-            <!-- Col 1: Channel Free Traffic -->
-            <div>
-              <div id="node-f-root" data-node="f-root"
-                   onclick="focusNode('f-root')"
-                   class="node-card cursor-pointer bg-[var(--background)] border-2 border-emerald-500/70 rounded-xl p-4 shadow-md relative">
-                <div class="port-dot port-top bg-emerald-500" id="port-f-root-top"></div>
-                <div class="port-dot port-out bg-emerald-500 ring-4 ring-emerald-500/20" id="port-f-root-out"></div>
+            <!-- ==================== ROW 2: LUỒNG 02 - CHANNEL PAY ADS ==================== -->
+            <div id="section-paid" class="relative z-20">
+              
+              <!-- Track Header 2: Repositioned clearly with ample room, zero line collision -->
+              <div class="flex items-center gap-3 mb-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-amber-500/15 text-amber-400 border border-amber-500/30 shadow-sm">
+                  <span>🚀</span>
+                  <span data-vi="LUỒNG 02: CHANNEL PAY ADS (QUẢNG CÁO & BOOKING KOC)" data-en="FLOW 02: CHANNEL PAID ADS (ADS & KOC BOOKING)">
+                    LUỒNG 02: CHANNEL PAY ADS (QUẢNG CÁO & BOOKING KOC)
+                  </span>
+                </div>
+                <div class="h-px flex-1 bg-gradient-to-r from-amber-500/30 to-transparent"></div>
+              </div>
+
+              <div class="grid grid-cols-4 gap-5 items-center">
                 
-                <div class="flex items-center justify-between gap-1 mb-2">
-                  <span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/15 text-emerald-400">CHANNEL 01</span>
-                  <span class="text-xs font-mono text-[var(--muted-foreground)]">Free Traffic</span>
-                </div>
-                
-                <h3 class="text-base font-bold text-[var(--foreground)] mb-1">🌱 Channel Free Traffic</h3>
-                <p class="text-xs text-[var(--muted-foreground)] leading-relaxed"
-                   data-vi="Nhận ý tưởng & góc quay từ Research, triển khai 3 nhánh xử lý video tự nhiên."
-                   data-en="Receives ideas & angles from Research, launching 3 organic video conversion paths.">
-                  Nhận ý tưởng &amp; góc quay từ Research, triển khai 3 nhánh xử lý video tự nhiên.
-                </p>
-              </div>
-            </div>
-
-            <!-- Col 2: Content Branches -->
-            <div class="space-y-4">
-              <div id="node-f-viral" data-node="f-viral" onclick="focusNode('f-viral')"
-                   class="node-card cursor-pointer bg-[var(--background)] border border-emerald-500/40 hover:border-emerald-500 rounded-xl p-3.5 shadow-sm relative">
-                <div class="port-dot port-in bg-emerald-500" id="port-f-viral-in"></div>
-                <div class="port-dot port-out bg-emerald-500" id="port-f-viral-out"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/15 text-emerald-400"
-                        data-vi="NHÁNH 1 • VIRAL" data-en="BRANCH 1 • VIRAL">NHÁNH 1 • VIRAL</span>
-                </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="🔥 Content Viral" data-en="🔥 Viral Content">🔥 Content Viral</h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
-                   data-vi="Video đạt hiệu ứng viral, thu hút lượng lớn người xem mới."
-                   data-en="Breakout video goes viral, attracting a massive wave of new viewers.">
-                  Video đạt hiệu ứng viral, thu hút lượng lớn người xem mới.
-                </p>
-              </div>
-
-              <div id="node-f-stable" data-node="f-stable" onclick="focusNode('f-stable')"
-                   class="node-card cursor-pointer bg-[var(--background)] border border-teal-500/40 hover:border-teal-500 rounded-xl p-3.5 shadow-sm relative">
-                <div class="port-dot port-in bg-teal-500" id="port-f-stable-in"></div>
-                <div class="port-dot port-out bg-teal-500" id="port-f-stable-out"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-semibold bg-teal-500/15 text-teal-400"
-                        data-vi="NHÁNH 2 • ỔN ĐỊNH" data-en="BRANCH 2 • STEADY">NHÁNH 2 • ỔN ĐỊNH</span>
-                </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="📊 Content View Ổn Định" data-en="📊 Consistent Views Content">📊 Content View Ổn Định</h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
-                   data-vi="Video duy trì lượt xem đều đặn, giữ tương tác ổn định trên kênh."
-                   data-en="Videos generate steady, reliable views and consistent daily engagement.">
-                  Video duy trì lượt xem đều đặn, giữ tương tác ổn định trên kênh.
-                </p>
-              </div>
-
-              <div id="node-f-retain" data-node="f-retain" onclick="focusNode('f-retain')"
-                   class="node-card cursor-pointer bg-[var(--background)] border border-cyan-500/40 hover:border-cyan-500 rounded-xl p-3.5 shadow-sm relative">
-                <div class="port-dot port-in bg-cyan-500" id="port-f-retain-in"></div>
-                <div class="port-dot port-out bg-cyan-500" id="port-f-retain-out"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-semibold bg-cyan-500/15 text-cyan-400"
-                        data-vi="NHÁNH 3 • PHÂN TÍCH" data-en="BRANCH 3 • ANALYTICS">NHÁNH 3 • PHÂN TÍCH</span>
-                </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="🔍 Phân Tích Video Giữ Chân Lâu" data-en="🔍 Analyze High-Retention Videos">🔍 Phân Tích Video Giữ Chân Lâu</h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
-                   data-vi="Dùng phân tích để lọc ra những video nào giữ chân người xem lâu nhất."
-                   data-en="Use analytics to identify which videos retain viewer attention the longest.">
-                  Dùng phân tích để lọc ra những video nào giữ chân người xem lâu nhất.
-                </p>
-              </div>
-            </div>
-
-            <!-- Col 3: Logic / Condition / Hook Splicing -->
-            <div class="space-y-4">
-              <div id="node-f-viral-push" data-node="f-viral-push" onclick="focusNode('f-viral-push')"
-                   class="node-card cursor-pointer bg-[var(--background)] border border-emerald-500/40 hover:border-emerald-500 rounded-xl p-3.5 shadow-sm relative">
-                <div class="port-dot port-in bg-emerald-500" id="port-f-viral-push-in"></div>
-                <div class="port-dot port-out bg-emerald-500" id="port-f-viral-push-out"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/15 text-emerald-400"
-                        data-vi="ĐẨY VIDEO TIẾP THEO" data-en="NEXT VIDEO PUSH">ĐẨY VIDEO TIẾP THEO</span>
-                </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="🎬 Đẩy Video Bán Hàng Tiếp Theo" data-en="🎬 Push Follow-Up Sales Video">🎬 Đẩy Video Bán Hàng Tiếp Theo</h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
-                   data-vi="Lập tức tung video bán hàng nối tiếp ngay sau video viral."
-                   data-en="Immediately publish a sales video right after the viral hit to ride the momentum.">
-                  Lập tức tung video bán hàng nối tiếp ngay sau video viral.
-                </p>
-              </div>
-
-              <div id="node-f-stable-follow" data-node="f-stable-follow" onclick="focusNode('f-stable-follow')"
-                   class="node-card cursor-pointer bg-[var(--background)] border border-teal-500/40 hover:border-teal-500 rounded-xl p-3.5 shadow-sm relative">
-                <div class="port-dot port-in bg-teal-500" id="port-f-stable-follow-in"></div>
-                <div class="port-dot port-out bg-teal-500" id="port-f-stable-follow-out"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-semibold bg-teal-500/15 text-teal-400"
-                        data-vi="ĐIỀU KIỆN FOLLOW" data-en="FOLLOWER MILESTONE">ĐIỀU KIỆN FOLLOW</span>
-                </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="👥 Đạt Lượng Follow Nhất Định" data-en="👥 Reach Target Follower Count">👥 Đạt Lượng Follow Nhất Định</h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
-                   data-vi="Tích lũy cho đến khi kênh đạt được lượng người theo dõi nhất định."
-                   data-en="Accumulate audience until the channel reaches a specific follower threshold.">
-                  Tích lũy cho đến khi kênh đạt được lượng người theo dõi nhất định.
-                </p>
-              </div>
-
-              <div id="node-f-retain-hook" data-node="f-retain-hook" onclick="focusNode('f-retain-hook')"
-                   class="node-card cursor-pointer bg-[var(--background)] border border-cyan-500/40 hover:border-cyan-500 rounded-xl p-3.5 shadow-sm relative">
-                <div class="port-dot port-in bg-cyan-500" id="port-f-retain-hook-in"></div>
-                <div class="port-dot port-out bg-cyan-500" id="port-f-retain-hook-out"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-semibold bg-cyan-500/15 text-cyan-400"
-                        data-vi="TÁCH HOOK GIỮ CHÂN" data-en="HOOK EXTRACTION">TÁCH HOOK GIỮ CHÂN</span>
-                </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="✂️ Lấy Hook (Đầu Vài Giây)" data-en="✂️ Extract Hook (First Few Seconds)">✂️ Lấy Hook (Đầu Vài Giây)</h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
-                   data-vi="Cắt lấy phần mở đầu (vài giây đầu tiên) giữ chân người xem tốt nhất."
-                   data-en="Take the opening few seconds (the Hook) that proved to hold viewers longest.">
-                  Cắt lấy phần mở đầu (vài giây đầu tiên) giữ chân người xem tốt nhất.
-                </p>
-              </div>
-            </div>
-
-            <!-- Col 4: Output Conversion Goals -->
-            <div class="space-y-4">
-              <div id="node-f-viral-out" data-node="f-viral-out" onclick="focusNode('f-viral-out')"
-                   class="node-card cursor-pointer bg-[var(--background)] border-2 border-emerald-500/60 rounded-xl p-3.5 shadow-sm relative">
-                <div class="port-dot port-in bg-emerald-500" id="port-f-viral-out-in"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500 text-white"
-                        data-vi="ĐÍCH ĐẾN 1.1" data-en="GOAL 1.1">ĐÍCH ĐẾN 1.1</span>
-                  <span class="text-xs font-mono text-emerald-400">Traffic ➔ Page</span>
-                </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="🏠 Để Khách Vào Thăm Trang" data-en="🏠 Drive Customers to Visit Page">🏠 Để Khách Vào Thăm Trang</h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
-                   data-vi="Điều hướng khách hàng đang quan tâm bấm vào thăm trang & gian hàng."
-                   data-en="Lead interested viewers to visit the profile/storefront and browse products.">
-                  Điều hướng khách hàng đang quan tâm bấm vào thăm trang &amp; gian hàng.
-                </p>
-              </div>
-
-              <div id="node-f-stable-out" data-node="f-stable-out" onclick="focusNode('f-stable-out')"
-                   class="node-card cursor-pointer bg-[var(--background)] border-2 border-teal-500/60 rounded-xl p-3.5 shadow-sm relative">
-                <div class="port-dot port-in bg-teal-500" id="port-f-stable-out-in"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-bold bg-teal-500 text-white"
-                        data-vi="ĐÍCH ĐẾN 1.2" data-en="GOAL 1.2">ĐÍCH ĐẾN 1.2</span>
-                  <span class="text-xs font-mono text-teal-400">Channel Pivot</span>
-                </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="🛒 Chuyển Sang Kênh Bán Hàng" data-en="🛒 Convert into Sales Channel">🛒 Chuyển Sang Kênh Bán Hàng</h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
-                   data-vi="Chuyển đổi kênh đã đủ lượng follow sang mô hình kênh bán hàng."
-                   data-en="Transition the established follower base into a dedicated sales channel.">
-                  Chuyển đổi kênh đã đủ lượng follow sang mô hình kênh bán hàng.
-                </p>
-              </div>
-
-              <div id="node-f-retain-out" data-node="f-retain-out" onclick="focusNode('f-retain-out')"
-                   class="node-card cursor-pointer bg-[var(--background)] border-2 border-cyan-500 rounded-xl p-3.5 shadow-md relative">
-                <div class="port-dot port-in bg-cyan-500" id="port-f-retain-out-in"></div>
-                <div class="port-dot port-bottom bg-amber-500 ring-4 ring-amber-500/25" id="port-f-retain-out-bottom"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-bold bg-cyan-500 text-white"
-                        data-vi="TẠO VIDEO PAY ADS" data-en="BUILD PAID AD VIDEO">TẠO VIDEO PAY ADS</span>
-                  <span class="text-xs font-mono text-amber-400 font-semibold"
-                        data-vi="➔ Nối xuống Pay Ads" data-en="➔ Send to Paid Ads">➔ Nối xuống Pay Ads</span>
-                </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="🎯 Ghép Content Bán Hàng Đằng Sau" data-en="🎯 Append Sales Content Behind Hook">🎯 Ghép Content Bán Hàng Đằng Sau</h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
-                   data-vi="Ghép [Hook đầu vài giây] + [Content bán hàng đằng sau] để làm Video Pay Ads và đẩy thẳng xuống kênh Channel Pay Ads."
-                   data-en="Combine [First Few Seconds Hook] + [Sales Content Behind It] to create a Paid Ads video and feed it directly into Channel Paid Ads.">
-                  Ghép [Hook đầu vài giây] + [Content bán hàng đằng sau] để làm Video Pay Ads và đẩy thẳng xuống kênh Channel Pay Ads.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ==================== CORRIDOR BRIDGE ==================== -->
-        <div id="bridge-corridor" class="my-6 relative z-20 flex items-center justify-center">
-          <div class="px-4 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-400 border border-amber-500/40 shadow-sm backdrop-blur"
-               data-vi="⚡ Đưa Video [Hook giữ chân cao + Content bán hàng] xuống chạy Channel Pay Ads ⤵"
-               data-en="⚡ Feed [High-Retention Hook + Sales Content] Video directly into Channel Paid Ads ⤵">
-            ⚡ Đưa Video [Hook giữ chân cao + Content bán hàng] xuống chạy Channel Pay Ads ⤵
-          </div>
-        </div>
-
-        <!-- ==================== ROW 2: LUỒNG 02 - CHANNEL PAY ADS ==================== -->
-        <div id="section-paid" class="relative z-20">
-          
-          <!-- Full-Width Track Header (Pulled to the Left Head) -->
-          <div class="flex items-center gap-3 mb-4">
-            <span class="px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-amber-500/15 text-amber-400 border border-amber-500/30"
-                  data-vi="🚀 LUỒNG 02: CHANNEL PAY ADS (QUẢNG CÁO & BOOKING KOC)"
-                  data-en="🚀 FLOW 02: CHANNEL PAID ADS (ADS & KOC BOOKING)">
-              🚀 LUỒNG 02: CHANNEL PAY ADS (QUẢNG CÁO & BOOKING KOC)
-            </span>
-            <div class="h-px flex-1 bg-gradient-to-r from-amber-500/30 to-transparent"></div>
-          </div>
-
-          <div class="grid grid-cols-4 gap-6 items-center">
-            
-            <!-- Col 1: Channel Pay Ads (PERFECTLY ALIGNED UNDER Channel Free Traffic) -->
-            <div>
-              <div id="node-p-root" data-node="p-root"
-                   onclick="focusNode('p-root')"
-                   class="node-card cursor-pointer bg-[var(--background)] border-2 border-amber-500/80 rounded-xl p-4 shadow-md relative">
-                <div class="port-dot port-in bg-amber-500 ring-4 ring-amber-500/25" id="port-p-root-in"></div>
-                <div class="port-dot port-out bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-out"></div>
-                
-                <div class="flex items-center justify-between gap-1 mb-2">
-                  <span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-500/15 text-amber-400">CHANNEL 02</span>
-                  <span class="text-xs font-mono text-amber-400 font-semibold"
-                        data-vi="Nhận Hook" data-en="Receives Hook">Nhận Hook</span>
-                </div>
-                
-                <h3 class="text-base font-bold text-[var(--foreground)] mb-1"
-                    data-vi="🚀 Channel Pay Ads" data-en="🚀 Channel Paid Ads">🚀 Channel Pay Ads</h3>
-                <p class="text-xs text-[var(--muted-foreground)] leading-relaxed"
-                   data-vi="Nhận video bán hàng (từ Research &amp; nhánh ghép Hook giữ chân lâu) để chạy quảng cáo trả phí."
-                   data-en="Receives sales videos (from Research &amp; high-retention hook branch) for paid ad campaigns.">
-                  Nhận video bán hàng (từ Research &amp; nhánh ghép Hook giữ chân lâu) để chạy quảng cáo trả phí.
-                </p>
-              </div>
-            </div>
-
-            <!-- Col 2: Continuous Multi-format Testing (ALIGNED UNDER Content Branches) -->
-            <div>
-              <div id="node-p-test" data-node="p-test"
-                   onclick="focusNode('p-test')"
-                   class="node-card cursor-pointer bg-[var(--background)] border border-amber-500/50 hover:border-amber-500 rounded-xl p-4 shadow-sm relative">
-                <div class="port-dot port-in bg-amber-500" id="port-p-test-in"></div>
-                <div class="port-dot port-out bg-amber-500" id="port-p-test-out"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/15 text-amber-400"
-                        data-vi="TESTING LIÊN TỤC" data-en="CONTINUOUS TESTING">TESTING LIÊN TỤC</span>
-                </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="🧪 Lên Nhiều Dạng Content Bán Hàng & Testing Liên Tục"
-                    data-en="🧪 Launch Multiple Sales Formats & Test Continuously">
-                  🧪 Lên Nhiều Dạng Content Bán Hàng &amp; Testing Liên Tục
-                </h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1.5 leading-relaxed"
-                   data-vi="Chuyên lên nhiều dạng content bán hàng và testing liên tục để xem khách hàng thích content nào."
-                   data-en="Produce diverse sales content formats and run continuous tests to discover which content style customers like best.">
-                  Chuyên lên nhiều dạng content bán hàng và testing liên tục để xem khách hàng thích content nào.
-                </p>
-              </div>
-            </div>
-
-            <!-- Col 3: High CR + 3 Metrics Evaluation (ALIGNED UNDER Logic Branches) -->
-            <div>
-              <div id="node-p-metrics" data-node="p-metrics"
-                   onclick="focusNode('p-metrics')"
-                   class="node-card cursor-pointer bg-[var(--background)] border border-rose-500/50 hover:border-rose-500 rounded-xl p-4 shadow-sm relative">
-                <div class="port-dot port-in bg-rose-500" id="port-p-metrics-in"></div>
-                <div class="port-dot port-out bg-rose-500" id="port-p-metrics-out"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-semibold bg-rose-500/15 text-rose-400"
-                        data-vi="ĐÁNH GIÁ CHUYỂN ĐỔI" data-en="CONVERSION EVALUATION">ĐÁNH GIÁ CHUYỂN ĐỔI</span>
-                </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="📈 Lọc Tỷ Lệ Chuyển Đổi Cao & Đánh Giá Chỉ Số"
-                    data-en="📈 Filter High Conversion Rate & Evaluate Metrics">
-                  📈 Lọc Tỷ Lệ Chuyển Đổi Cao &amp; Đánh Giá Chỉ Số
-                </h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
-                   data-vi="Dựa vào tỷ lệ chuyển đổi cao rồi chạy đánh giá xem video có:"
-                   data-en="Based on high conversion rates, evaluate winning videos across 3 core metrics:">
-                  Dựa vào tỷ lệ chuyển đổi cao rồi chạy đánh giá xem video có:
-                </p>
-                <div class="mt-2.5 space-y-1.5 text-xs">
-                  <div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[var(--card)] border border-[var(--border)]">
-                    <span class="font-semibold text-[var(--foreground)]" data-vi="• Bao nhiêu lượt Click" data-en="• Total Clicks">• Bao nhiêu lượt Click</span>
-                    <span class="text-amber-500 font-mono">Clicks</span>
-                  </div>
-                  <div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[var(--card)] border border-[var(--border)]">
-                    <span class="font-semibold text-[var(--foreground)]" data-vi="• Chỉ số CTR" data-en="• Click-Through Rate">• Chỉ số CTR</span>
-                    <span class="text-rose-500 font-mono">CTR (%)</span>
-                  </div>
-                  <div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[var(--card)] border border-[var(--border)]">
-                    <span class="font-semibold text-[var(--foreground)]" data-vi="• Chuyển đổi mua hàng" data-en="• Purchase Conversions">• Chuyển đổi mua hàng</span>
-                    <span class="text-emerald-500 font-mono">Purchases</span>
+                <!-- Col 2: Channel Pay Ads Root (ALIGNED UNDER Channel Free Traffic) -->
+                <div>
+                  <div id="node-p-root" data-node="p-root"
+                       onclick="focusNode('p-root')"
+                       class="node-card cursor-pointer bg-[var(--background)] border-2 border-amber-500/80 rounded-xl p-4 shadow-sm relative">
+                    
+                    <!-- Port receiving from Research -->
+                    <div class="port-dot port-in bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-in" style="top: 32%;"></div>
+                    <!-- Port receiving from Bridge (Hook retention video) - from gap on left, bypassing header completely! -->
+                    <div class="port-dot port-in bg-cyan-500 ring-4 ring-cyan-500/20" id="port-p-root-bridge" style="top: 68%;"></div>
+                    <!-- Output port -->
+                    <div class="port-dot port-out bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-out"></div>
+                    
+                    <div class="flex items-center justify-between gap-1 mb-2">
+                      <span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-500/15 text-amber-400">CHANNEL 02</span>
+                      <span class="text-xs font-mono text-amber-400 font-semibold"
+                            data-vi="Nhận Hook" data-en="Receives Hook">Nhận Hook</span>
+                    </div>
+                    
+                    <h3 class="text-base font-bold text-[var(--foreground)] mb-1"
+                        data-vi="🚀 Channel Pay Ads" data-en="🚀 Channel Paid Ads">🚀 Channel Pay Ads</h3>
+                    <p class="text-xs text-[var(--muted-foreground)] leading-relaxed"
+                       data-vi="Nhận video bán hàng (từ Research &amp; nhánh ghép Hook giữ chân lâu) để chạy quảng cáo trả phí."
+                       data-en="Receives sales videos (from Research &amp; retention hook branch) for paid ad campaigns.">
+                      Nhận video bán hàng (từ Research &amp; nhánh ghép Hook giữ chân lâu) để chạy quảng cáo trả phí.
+                    </p>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <!-- Col 4: Hire & Book KOC (ALIGNED UNDER Output Branches) -->
-            <div>
-              <div id="node-p-koc" data-node="p-koc"
-                   onclick="focusNode('p-koc')"
-                   class="node-card cursor-pointer bg-[var(--background)] border-2 border-amber-500 rounded-xl p-4 shadow-md relative">
-                <div class="port-dot port-in bg-amber-500" id="port-p-koc-in"></div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-500 text-white"
-                        data-vi="NHÂN BẢN KOC" data-en="KOC SCALING">NHÂN BẢN KOC</span>
-                  <span class="text-xs font-mono text-amber-500 font-semibold">Scale Up</span>
+                <!-- Col 3: Continuous Multi-format Testing (ALIGNED UNDER Content Branches) -->
+                <div>
+                  <div id="node-p-test" data-node="p-test"
+                       onclick="focusNode('p-test')"
+                       class="node-card cursor-pointer bg-[var(--background)] border border-amber-500/50 hover:border-amber-500 rounded-xl p-4 shadow-sm relative">
+                    <div class="port-dot port-in bg-amber-500" id="port-p-test-in"></div>
+                    <div class="port-dot port-out bg-amber-500" id="port-p-test-out"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/15 text-amber-400"
+                            data-vi="TESTING LIÊN TỤC" data-en="CONTINUOUS TESTING">TESTING LIÊN TỤC</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="🧪 Lên Nhiều Dạng Content Bán Hàng & Testing Liên Tục"
+                        data-en="🧪 Launch Multiple Sales Formats & Test Continuously">
+                      🧪 Lên Nhiều Dạng Content Bán Hàng &amp; Testing Liên Tục
+                    </h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1.5 leading-relaxed"
+                       data-vi="Chuyên lên nhiều dạng content bán hàng và testing liên tục để xem khách hàng thích content nào."
+                       data-en="Produce diverse sales content formats and run continuous tests to discover which content style customers like best.">
+                      Chuyên lên nhiều dạng content bán hàng và testing liên tục để xem khách hàng thích content nào.
+                    </p>
+                  </div>
                 </div>
-                <h4 class="text-sm font-bold text-[var(--foreground)]"
-                    data-vi="🌟 Thuê Booking KOC Làm Theo Dạng Đó"
-                    data-en="🌟 Hire & Book KOCs to Replicate That Format">
-                  🌟 Thuê Booking KOC Làm Theo Dạng Đó
-                </h4>
-                <p class="text-xs text-[var(--muted-foreground)] mt-1.5 leading-relaxed"
-                   data-vi="Dựa trên dạng video đã thắng các chỉ số (Click + CTR + Chuyển đổi mua hàng) để thuê booking KOC làm theo đúng dạng đó."
-                   data-en="Use the winning video format (proven by Clicks + CTR + Purchases) to hire & book KOCs to create content following that exact format.">
-                  Dựa trên dạng video đã thắng các chỉ số (Click + CTR + Chuyển đổi mua hàng) để thuê booking KOC làm theo đúng dạng đó.
-                </p>
+
+                <!-- Col 4: High CR + 3 Metrics (ALIGNED UNDER Logic Steps) -->
+                <div>
+                  <div id="node-p-metrics" data-node="p-metrics"
+                       onclick="focusNode('p-metrics')"
+                       class="node-card cursor-pointer bg-[var(--background)] border border-rose-500/50 hover:border-rose-500 rounded-xl p-4 shadow-sm relative">
+                    <div class="port-dot port-in bg-rose-500" id="port-p-metrics-in"></div>
+                    <div class="port-dot port-out bg-rose-500" id="port-p-metrics-out"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-semibold bg-rose-500/15 text-rose-400"
+                            data-vi="ĐÁNH GIÁ CHUYỂN ĐỔI" data-en="CONVERSION EVALUATION">ĐÁNH GIÁ CHUYỂN ĐỔI</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="📈 Lọc Tỷ Lệ Chuyển Đổi Cao & Đánh Giá Chỉ Số"
+                        data-en="📈 Filter High Conversion Rate & Evaluate Metrics">
+                      📈 Lọc Tỷ Lệ Chuyển Đổi Cao &amp; Đánh Giá Chỉ Số
+                    </h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1 leading-relaxed"
+                       data-vi="Dựa vào tỷ lệ chuyển đổi cao rồi chạy đánh giá xem video có:"
+                       data-en="Based on high conversion rates, evaluate winning videos across 3 core metrics:">
+                      Dựa vào tỷ lệ chuyển đổi cao rồi chạy đánh giá xem video có:
+                    </p>
+                    <div class="mt-2.5 space-y-1.5 text-xs">
+                      <div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[var(--card)] border border-[var(--border)]">
+                        <span class="font-semibold text-[var(--foreground)]" data-vi="• Bao nhiêu lượt Click" data-en="• Total Clicks">• Bao nhiêu lượt Click</span>
+                        <span class="text-amber-500 font-mono">Clicks</span>
+                      </div>
+                      <div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[var(--card)] border border-[var(--border)]">
+                        <span class="font-semibold text-[var(--foreground)]" data-vi="• Chỉ số CTR" data-en="• Click-Through Rate">• Chỉ số CTR</span>
+                        <span class="text-rose-500 font-mono">CTR (%)</span>
+                      </div>
+                      <div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[var(--card)] border border-[var(--border)]">
+                        <span class="font-semibold text-[var(--foreground)]" data-vi="• Chuyển đổi mua hàng" data-en="• Purchase Conversions">• Chuyển đổi mua hàng</span>
+                        <span class="text-emerald-500 font-mono">Purchases</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Col 5: Scale KOC (ALIGNED UNDER Output Goals) -->
+                <div>
+                  <div id="node-p-koc" data-node="p-koc"
+                       onclick="focusNode('p-koc')"
+                       class="node-card cursor-pointer bg-[var(--background)] border-2 border-amber-500 rounded-xl p-4 shadow-sm relative">
+                    <div class="port-dot port-in bg-amber-500" id="port-p-koc-in"></div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-500 text-white"
+                            data-vi="NHÂN BẢN KOC" data-en="KOC SCALING">NHÂN BẢN KOC</span>
+                      <span class="text-xs font-mono text-amber-500 font-semibold">Scale Up</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-[var(--foreground)]"
+                        data-vi="🌟 Thuê Booking KOC Làm Theo Dạng Đó"
+                        data-en="🌟 Hire & Book KOCs to Replicate That Format">
+                      🌟 Thuê Booking KOC Làm Theo Dạng Đó
+                    </h4>
+                    <p class="text-xs text-[var(--muted-foreground)] mt-1.5 leading-relaxed"
+                       data-vi="Dựa trên dạng video đã thắng các chỉ số (Click + CTR + Chuyển đổi mua hàng) để thuê booking KOC làm theo đúng dạng đó."
+                       data-en="Use the winning video format (proven by Clicks + CTR + Purchases) to hire & book KOCs to create content following that exact format.">
+                      Dựa trên dạng video đã thắng các chỉ số (Click + CTR + Chuyển đổi mua hàng) để thuê booking KOC làm theo đúng dạng đó.
+                    </p>
+                  </div>
+                </div>
+
               </div>
             </div>
 
           </div>
+
         </div>
 
       </div>
@@ -616,11 +586,11 @@
     const CHAIN_RETAIN_TO_ADS = ['research', 'f-root', 'f-retain', 'f-retain-hook', 'f-retain-out', 'p-root', 'p-test', 'p-metrics', 'p-koc'];
 
     const EDGES = [
-      // Research to Free Traffic
-      { from: 'port-res-out-free', to: 'port-f-root-top', color: '#10b981', type: 'vertical', chain: ['research', 'f-root', 'f-viral', 'f-stable', 'f-retain'] },
+      // Research to Free Traffic (Col 1 to Col 2)
+      { from: 'port-res-out-free', to: 'port-f-root-in', color: '#10b981', type: 'bezier', chain: ['research', 'f-root', 'f-viral', 'f-stable', 'f-retain'] },
 
-      // Research to Pay Ads (down along left margin)
-      { from: 'port-res-out-paid', to: 'port-p-root-in', color: '#f59e0b', type: 'margin-left', chain: ['research', 'p-root', 'p-test', 'p-metrics', 'p-koc'] },
+      // Research to Pay Ads (Col 1 to Col 2)
+      { from: 'port-res-out-paid', to: 'port-p-root-in', color: '#f59e0b', type: 'bezier', chain: ['research', 'p-root', 'p-test', 'p-metrics', 'p-koc'] },
 
       // Free Traffic Branch 1 (Viral)
       { from: 'port-f-root-out', to: 'port-f-viral-in', color: '#10b981', type: 'bezier', chain: CHAIN_VIRAL },
@@ -632,13 +602,13 @@
       { from: 'port-f-stable-out', to: 'port-f-stable-follow-in', color: '#14b8a6', type: 'bezier', chain: CHAIN_STABLE },
       { from: 'port-f-stable-follow-out', to: 'port-f-stable-out-in', color: '#14b8a6', type: 'bezier', chain: CHAIN_STABLE },
 
-      // Free Traffic Branch 3 (Retention Hook -> Make Pay Ads Video)
+      // Free Traffic Branch 3 (Retention Hook -> Paid Ads Video)
       { from: 'port-f-root-out', to: 'port-f-retain-in', color: '#06b6d4', type: 'bezier', chain: CHAIN_RETAIN_TO_ADS },
       { from: 'port-f-retain-out', to: 'port-f-retain-hook-in', color: '#06b6d4', type: 'bezier', chain: CHAIN_RETAIN_TO_ADS },
       { from: 'port-f-retain-hook-out', to: 'port-f-retain-out-in', color: '#06b6d4', type: 'bezier', chain: CHAIN_RETAIN_TO_ADS },
 
-      // Bridge connecting Output 1.3 down into Channel Paid Ads (clean loop around left, zero header intersection!)
-      { from: 'port-f-retain-out-bottom', to: 'port-p-root-in', color: '#f59e0b', type: 'bridge', chain: CHAIN_RETAIN_TO_ADS },
+      // Bridge connecting Output 1.3 down into Channel Paid Ads (clean loop around left gap, zero header intersection!)
+      { from: 'port-f-retain-out-bottom', to: 'port-p-root-bridge', color: '#f59e0b', type: 'bridge', chain: CHAIN_RETAIN_TO_ADS },
 
       // Paid Ads Pipeline
       { from: 'port-p-root-out', to: 'port-p-test-in', color: '#f59e0b', type: 'bezier', chain: CHAIN_RETAIN_TO_ADS },
@@ -666,33 +636,18 @@
         midY = cr.top - wrapperRect.top + cr.height / 2;
       }
       
-      // Route left through corridor, past the node to the left margin, and enter port from outside left!
-      const leftMarginX = Math.max(p2.x - 42, 14);
-      const r = 18;
+      // Route left through corridor, past node-p-root to the open gap between Col 1 and Col 2
+      const leftX = p2.x - 24;
+      const r = 16;
 
       return [
         `M ${p1.x} ${p1.y}`,
         `L ${p1.x} ${midY - r}`,
         `Q ${p1.x} ${midY} ${p1.x - r} ${midY}`,
-        `L ${leftMarginX + r} ${midY}`,
-        `Q ${leftMarginX} ${midY} ${leftMarginX} ${midY + r}`,
-        `L ${leftMarginX} ${p2.y - r}`,
-        `Q ${leftMarginX} ${p2.y} ${leftMarginX + r} ${p2.y}`,
-        `L ${p2.x} ${p2.y}`
-      ].join(' ');
-    }
-
-    function buildMarginLeftPath(p1, p2, wrapperRect) {
-      const leftMarginX = Math.max(p2.x - 28, 12);
-      const r = 16;
-      return [
-        `M ${p1.x} ${p1.y}`,
-        `L ${p1.x} ${p1.y + 12}`,
-        `Q ${p1.x} ${p1.y + 24} ${p1.x - 12} ${p1.y + 24}`,
-        `L ${leftMarginX + r} ${p1.y + 24}`,
-        `Q ${leftMarginX} ${p1.y + 24} ${leftMarginX} ${p1.y + 24 + r}`,
-        `L ${leftMarginX} ${p2.y - r}`,
-        `Q ${leftMarginX} ${p2.y} ${leftMarginX + r} ${p2.y}`,
+        `L ${leftX + r} ${midY}`,
+        `Q ${leftX} ${midY} ${leftX} ${midY + r}`,
+        `L ${leftX} ${p2.y - r}`,
+        `Q ${leftX} ${p2.y} ${leftX + r} ${p2.y}`,
         `L ${p2.x} ${p2.y}`
       ].join(' ');
     }
@@ -714,11 +669,6 @@
         let d = '';
         if (edge.type === 'bridge') {
           d = buildBridgePath(p1, p2, wrapperRect);
-        } else if (edge.type === 'margin-left') {
-          d = buildMarginLeftPath(p1, p2, wrapperRect);
-        } else if (edge.type === 'vertical') {
-          const dy = Math.abs(p2.y - p1.y) * 0.5;
-          d = `M ${p1.x} ${p1.y} C ${p1.x} ${p1.y + dy}, ${p2.x} ${p2.y - dy}, ${p2.x} ${p2.y}`;
         } else {
           const dx = Math.abs(p2.x - p1.x) * 0.52;
           d = `M ${p1.x} ${p1.y} C ${p1.x + dx} ${p1.y}, ${p2.x - dx} ${p2.y}, ${p2.x} ${p2.y}`;
