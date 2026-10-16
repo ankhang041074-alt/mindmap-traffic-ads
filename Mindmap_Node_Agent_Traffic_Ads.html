@@ -178,31 +178,55 @@
               </h3>
               
               <p class="text-xs text-[var(--muted-foreground)] leading-relaxed mb-3"
-                 data-vi="Phân tích sâu 5 yếu tố cốt lõi từ các kênh làm tốt để làm nguyên liệu đầu vào cho toàn bộ hệ thống:"
-                 data-en="Deep analysis of 5 core factors from winning channels to feed downstream operations:">
-                Phân tích sâu 5 yếu tố cốt lõi từ các kênh làm tốt để làm nguyên liệu đầu vào cho toàn bộ hệ thống:
+                 data-vi="5 yếu tố cốt lõi làm nguyên liệu đầu vào:"
+                 data-en="5 core factors as foundation inputs:">
+                5 yếu tố cốt lõi làm nguyên liệu đầu vào:
               </p>
 
               <div class="space-y-2 text-xs">
-                <div class="px-3 py-2 rounded-xl bg-[var(--card)] border border-[var(--border)] font-medium flex items-center gap-2">
-                  <span class="text-sm">💡</span>
-                  <span data-vi="Phân tích Ý tưởng" data-en="Content Ideas">Phân tích Ý tưởng</span>
+                <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+                  <div class="flex items-center gap-1.5 font-bold text-[var(--foreground)]">
+                    <span>💡</span>
+                    <span data-vi="Ý Tưởng" data-en="Content Ideas">Ý Tưởng</span>
+                  </div>
+                  <div class="text-[11px] text-[var(--muted-foreground)] ml-5"
+                       data-vi="Chủ đề & góc nhìn viral" data-en="Viral topics & angles">Chủ đề &amp; góc nhìn viral</div>
                 </div>
-                <div class="px-3 py-2 rounded-xl bg-[var(--card)] border border-[var(--border)] font-medium flex items-center gap-2">
-                  <span class="text-sm">🎣</span>
-                  <span data-vi="Phân tích Hook (Mở đầu)" data-en="Opening Hooks">Phân tích Hook (Mở đầu)</span>
+
+                <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+                  <div class="flex items-center gap-1.5 font-bold text-[var(--foreground)]">
+                    <span>🎣</span>
+                    <span data-vi="Hook Mở Đầu" data-en="Opening Hook">Hook Mở Đầu</span>
+                  </div>
+                  <div class="text-[11px] text-[var(--muted-foreground)] ml-5"
+                       data-vi="3-5s đầu giữ chân người xem" data-en="3-5s retention hook">3-5s đầu giữ chân người xem</div>
                 </div>
-                <div class="px-3 py-2 rounded-xl bg-[var(--card)] border border-[var(--border)] font-medium flex items-center gap-2">
-                  <span class="text-sm">🎥</span>
-                  <span data-vi="Phân tích Góc quay" data-en="Camera Angles">Phân tích Góc quay</span>
+
+                <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+                  <div class="flex items-center gap-1.5 font-bold text-[var(--foreground)]">
+                    <span>🎥</span>
+                    <span data-vi="Góc Quay" data-en="Camera Angle">Góc Quay</span>
+                  </div>
+                  <div class="text-[11px] text-[var(--muted-foreground)] ml-5"
+                       data-vi="Bố cục khung hình & góc máy" data-en="Framing & shot composition">Bố cục khung hình &amp; góc máy</div>
                 </div>
-                <div class="px-3 py-2 rounded-xl bg-[var(--card)] border border-[var(--border)] font-medium flex items-center gap-2">
-                  <span class="text-sm">📖</span>
-                  <span data-vi="Cách kể chuyện" data-en="Storytelling">Cách kể chuyện</span>
+
+                <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+                  <div class="flex items-center gap-1.5 font-bold text-[var(--foreground)]">
+                    <span>📖</span>
+                    <span data-vi="Kể Chuyện" data-en="Storytelling">Kể Chuyện</span>
+                  </div>
+                  <div class="text-[11px] text-[var(--muted-foreground)] ml-5"
+                       data-vi="Mạch cảm xúc & nhịp độ" data-en="Narrative pacing & flow">Mạch cảm xúc &amp; nhịp độ</div>
                 </div>
-                <div class="px-3 py-2 rounded-xl bg-[var(--card)] border border-[var(--border)] font-medium flex items-center gap-2">
-                  <span class="text-sm">🛍️</span>
-                  <span data-vi="Cách giới thiệu sản phẩm" data-en="Product Pitch">Cách giới thiệu sản phẩm</span>
+
+                <div class="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)]">
+                  <div class="flex items-center gap-1.5 font-bold text-[var(--foreground)]">
+                    <span>🛍️</span>
+                    <span data-vi="Giới Thiệu SP" data-en="Product Pitch">Giới Thiệu SP</span>
+                  </div>
+                  <div class="text-[11px] text-[var(--muted-foreground)] ml-5"
+                       data-vi="Lồng ghép sản phẩm khéo léo" data-en="Natural product placement">Lồng ghép sản phẩm khéo léo</div>
                 </div>
               </div>
 
@@ -459,10 +483,10 @@
                        onclick="focusNode('p-root')"
                        class="node-card cursor-pointer bg-[var(--background)] border-2 border-amber-500/80 rounded-xl p-4 shadow-sm relative">
                     
-                    <!-- Port receiving from Research -->
-                    <div class="port-dot port-in bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-in" style="top: 32%;"></div>
-                    <!-- Port receiving from Bridge (Hook retention video) - from gap on left, bypassing header completely! -->
-                    <div class="port-dot port-in bg-cyan-500 ring-4 ring-cyan-500/20" id="port-p-root-bridge" style="top: 68%;"></div>
+                    <!-- Port receiving from Bridge (Hook retention video from above corridor) -->
+                    <div class="port-dot port-in bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-bridge" style="top: 32%;"></div>
+                    <!-- Port receiving from Research on the left -->
+                    <div class="port-dot port-in bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-in" style="top: 68%;"></div>
                     <!-- Output port -->
                     <div class="port-dot port-out bg-amber-500 ring-4 ring-amber-500/20" id="port-p-root-out"></div>
                     
