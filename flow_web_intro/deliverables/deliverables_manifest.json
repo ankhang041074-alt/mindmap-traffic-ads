@@ -1,0 +1,108 @@
+{
+  "sources": {
+    "shot1_v2": {
+      "video_src": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/videos/hd_1080p/shot1_v2_1080p.mp4",
+      "native_flow_1080p": true,
+      "width": 1920,
+      "height": 1080,
+      "has_audio": true
+    },
+    "shot2_v1": {
+      "video_src": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/videos/hd_1080p/shot2_v1_1080p.mp4",
+      "native_flow_1080p": true,
+      "width": 1920,
+      "height": 1080,
+      "has_audio": true
+    },
+    "shot3_v1": {
+      "video_src": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/videos/hd_1080p/shot3_v1_1080p.mp4",
+      "native_flow_1080p": true,
+      "width": 1920,
+      "height": 1080,
+      "has_audio": true
+    },
+    "shot4_v2": {
+      "video_src": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/videos/hd_1080p/shot4_v2_1080p.mp4",
+      "native_flow_1080p": true,
+      "width": 1920,
+      "height": 1080,
+      "has_audio": true
+    },
+    "shot5_v1": {
+      "video_src": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/videos/hd_1080p/shot5_v1_1080p.mp4",
+      "native_flow_1080p": true,
+      "width": 1920,
+      "height": 1080,
+      "has_audio": true
+    },
+    "shot6_v1": {
+      "video_src": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/videos/hd_1080p/shot6_v1_1080p.mp4",
+      "native_flow_1080p": true,
+      "width": 1920,
+      "height": 1080,
+      "has_audio": true
+    }
+  },
+  "deliverables": [
+    {
+      "filename": "WEB_INTRO_15S_MULTI_PRODUCT_16x9.mp4",
+      "path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_15S_MULTI_PRODUCT_16x9.mp4",
+      "brain_path": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_15S_MULTI_PRODUCT_16x9.mp4",
+      "muted_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_15S_MULTI_PRODUCT_16x9_MUTED.mp4",
+      "brain_muted_path": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_15S_MULTI_PRODUCT_16x9_MUTED.mp4",
+      "width": 1920,
+      "height": 1080,
+      "duration_sec": 15.167,
+      "size_bytes": 13939187,
+      "pix_fmt": "yuv420p",
+      "has_audio": true,
+      "contact_sheet_2fps": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_15S_MULTI_PRODUCT_16x9_contact_2fps.jpg",
+      "brain_contact_sheet_2fps": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_15S_MULTI_PRODUCT_16x9_contact_2fps.jpg"
+    },
+    {
+      "filename": "WEB_INTRO_10S_FASTCUT_16x9.mp4",
+      "path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_10S_FASTCUT_16x9.mp4",
+      "brain_path": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_10S_FASTCUT_16x9.mp4",
+      "muted_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_10S_FASTCUT_16x9_MUTED.mp4",
+      "brain_muted_path": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_10S_FASTCUT_16x9_MUTED.mp4",
+      "width": 1920,
+      "height": 1080,
+      "duration_sec": 10.068,
+      "size_bytes": 10183525,
+      "pix_fmt": "yuv420p",
+      "has_audio": true,
+      "contact_sheet_2fps": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_10S_FASTCUT_16x9_contact_2fps.jpg",
+      "brain_contact_sheet_2fps": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_10S_FASTCUT_16x9_contact_2fps.jpg"
+    },
+    {
+      "filename": "WEB_INTRO_PRODUCT1_DAISY_16x9.mp4",
+      "path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_PRODUCT1_DAISY_16x9.mp4",
+      "brain_path": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_PRODUCT1_DAISY_16x9.mp4",
+      "muted_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_PRODUCT1_DAISY_16x9_MUTED.mp4",
+      "brain_muted_path": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_PRODUCT1_DAISY_16x9_MUTED.mp4",
+      "width": 1920,
+      "height": 1080,
+      "duration_sec": 11.3,
+      "size_bytes": 8737628,
+      "pix_fmt": "yuv420p",
+      "has_audio": true,
+      "contact_sheet_2fps": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_PRODUCT1_DAISY_16x9_contact_2fps.jpg",
+      "brain_contact_sheet_2fps": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_PRODUCT1_DAISY_16x9_contact_2fps.jpg"
+    },
+    {
+      "filename": "WEB_INTRO_PRODUCT2_SUNFLOWER_ROSE_16x9.mp4",
+      "path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_PRODUCT2_SUNFLOWER_ROSE_16x9.mp4",
+      "brain_path": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_PRODUCT2_SUNFLOWER_ROSE_16x9.mp4",
+      "muted_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_PRODUCT2_SUNFLOWER_ROSE_16x9_MUTED.mp4",
+      "brain_muted_path": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_PRODUCT2_SUNFLOWER_ROSE_16x9_MUTED.mp4",
+      "width": 1920,
+      "height": 1080,
+      "duration_sec": 10.567,
+      "size_bytes": 11698885,
+      "pix_fmt": "yuv420p",
+      "has_audio": true,
+      "contact_sheet_2fps": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/deliverables/WEB_INTRO_PRODUCT2_SUNFLOWER_ROSE_16x9_contact_2fps.jpg",
+      "brain_contact_sheet_2fps": "/Users/dudumac5/.gemini/antigravity/brain/b5518d8f-8b2d-4488-85b7-420814826233/WEB_INTRO_PRODUCT2_SUNFLOWER_ROSE_16x9_contact_2fps.jpg"
+    }
+  ]
+}

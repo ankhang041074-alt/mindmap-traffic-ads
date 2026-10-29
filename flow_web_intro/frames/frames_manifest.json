@@ -1,0 +1,105 @@
+{
+  "shot1_end": {
+    "base_url": "https://flow-content.google/image/5212e1d7-7e38-4a50-b6f5-633dd6d90b3e",
+    "full_url": "https://flow-content.google/image/5212e1d7-7e38-4a50-b6f5-633dd6d90b3e?Expires=1793277090&KeyName=labs-flow-prod-cdn-key&Signature=vEAcT8i0Sy4mo7DL2UK0MLovF0M",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot1_end.jpg"
+  },
+  "shot1_start": {
+    "uuid": "2d2607ac-b30a-4016-896a-b9c59cff681f",
+    "base_url": "https://flow-content.google/image/2d2607ac-b30a-4016-896a-b9c59cff681f",
+    "full_url": "https://flow-content.google/image/2d2607ac-b30a-4016-896a-b9c59cff681f?Expires=1793277297&KeyName=labs-flow-prod-cdn-key&Signature=3RsnkINHs2DSIWhEMiLykJpcjck",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot1_start.jpg"
+  },
+  "shot2_end": {
+    "uuid": "2ab0976e-1a45-4035-854e-16dd848671cc",
+    "base_url": "https://flow-content.google/image/2ab0976e-1a45-4035-854e-16dd848671cc",
+    "full_url": "https://flow-content.google/image/2ab0976e-1a45-4035-854e-16dd848671cc?Expires=1793277330&KeyName=labs-flow-prod-cdn-key&Signature=dWMA6M312TWc4i96kYin6-51PXQ",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot2_end.jpg"
+  },
+  "shot3_end": {
+    "uuid": "7be05fd9-dc90-4591-8278-12fff4553525",
+    "base_url": "https://flow-content.google/image/7be05fd9-dc90-4591-8278-12fff4553525",
+    "full_url": "https://flow-content.google/image/7be05fd9-dc90-4591-8278-12fff4553525?Expires=1793277365&KeyName=labs-flow-prod-cdn-key&Signature=wqMHUiu4MS3jgYbVyI_RtZb21k0",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot3_end.jpg"
+  },
+  "shot4_end": {
+    "uuid": "ef3275f2-910e-48a6-9b53-139ddd6f57a6",
+    "base_url": "https://flow-content.google/image/ef3275f2-910e-48a6-9b53-139ddd6f57a6",
+    "full_url": "https://flow-content.google/image/ef3275f2-910e-48a6-9b53-139ddd6f57a6?Expires=1793277412&KeyName=labs-flow-prod-cdn-key&Signature=A26KEQBeyGzQyXpwK8sZnmdfJXE",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot4_end.jpg"
+  },
+  "shot2_start": {
+    "uuid": "f2047211-a2c9-4105-a766-a3a7283ff987",
+    "base_url": "https://flow-content.google/image/f2047211-a2c9-4105-a766-a3a7283ff987",
+    "full_url": "https://flow-content.google/image/f2047211-a2c9-4105-a766-a3a7283ff987?Expires=1793277529&KeyName=labs-flow-prod-cdn-key&Signature=Yyxv56cnaAHrW9mkhlnELfMy-Ps",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot2_start.jpg"
+  },
+  "shot3_start": {
+    "uuid": "e21f7c06-72c1-4eef-b56f-af99d76964b6",
+    "base_url": "https://flow-content.google/image/e21f7c06-72c1-4eef-b56f-af99d76964b6",
+    "full_url": "https://flow-content.google/image/e21f7c06-72c1-4eef-b56f-af99d76964b6?Expires=1793277564&KeyName=labs-flow-prod-cdn-key&Signature=lQl1-0MkvXgp9XIRUVh94SUA9P8",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot3_start.jpg"
+  },
+  "shot4_start": {
+    "uuid": "c17e9806-c1b2-4e5a-84a6-534db12d083e",
+    "base_url": "https://flow-content.google/image/c17e9806-c1b2-4e5a-84a6-534db12d083e",
+    "full_url": "https://flow-content.google/image/c17e9806-c1b2-4e5a-84a6-534db12d083e?Expires=1793277600&KeyName=labs-flow-prod-cdn-key&Signature=64Zqh4zSLVrLUJ5wqYUxkECqhqo",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot4_start.jpg"
+  },
+  "shot1_start_v2": {
+    "uuid": "a3d9ca01-9577-4e8f-adb1-741d46908785",
+    "base_url": "https://flow-content.google/image/a3d9ca01-9577-4e8f-adb1-741d46908785",
+    "full_url": "https://flow-content.google/image/a3d9ca01-9577-4e8f-adb1-741d46908785?Expires=1793285867&KeyName=labs-flow-prod-cdn-key&Signature=Bt97gCmmvYcHknQFG1YO7GLe3bc",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot1_start_v2.jpg"
+  },
+  "shot5_end": {
+    "uuid": "bc80c347-e811-428b-973f-8e4f241030c4",
+    "base_url": "https://flow-content.google/image/bc80c347-e811-428b-973f-8e4f241030c4",
+    "full_url": "https://flow-content.google/image/bc80c347-e811-428b-973f-8e4f241030c4?Expires=1793284321&KeyName=labs-flow-prod-cdn-key&Signature=UKYBhIpmJI1FHSpsJmzJnfeo920",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot5_end.jpg"
+  },
+  "shot6_end": {
+    "uuid": "e1d8d18c-4468-4a89-a12b-d449dfed4e9b",
+    "base_url": "https://flow-content.google/image/e1d8d18c-4468-4a89-a12b-d449dfed4e9b",
+    "full_url": "https://flow-content.google/image/e1d8d18c-4468-4a89-a12b-d449dfed4e9b?Expires=1793284442&KeyName=labs-flow-prod-cdn-key&Signature=9iV14GD4OxHdDET4ZAmdXxF-Xoo",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot6_end.jpg"
+  },
+  "shot5_start": {
+    "uuid": "888b9bfa-a7a4-459d-93d3-273a15c58797",
+    "base_url": "https://flow-content.google/image/888b9bfa-a7a4-459d-93d3-273a15c58797",
+    "full_url": "https://flow-content.google/image/888b9bfa-a7a4-459d-93d3-273a15c58797?Expires=1793285942&KeyName=labs-flow-prod-cdn-key&Signature=X_SeQuDRqsr9BcgWGJBs7nDEg2I",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot5_start.jpg"
+  },
+  "shot6_start": {
+    "uuid": "b86e87a4-b294-4077-b19e-5fca87ca12b0",
+    "base_url": "https://flow-content.google/image/b86e87a4-b294-4077-b19e-5fca87ca12b0",
+    "full_url": "https://flow-content.google/image/b86e87a4-b294-4077-b19e-5fca87ca12b0?Expires=1793286010&KeyName=labs-flow-prod-cdn-key&Signature=z1_uw3vnPMqAjZ_Spu25_G8daho",
+    "width": 1376,
+    "height": 768,
+    "local_path": "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/frames/shot6_start.jpg"
+  }
+}

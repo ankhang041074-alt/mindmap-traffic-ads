@@ -1,3 +1,18 @@
 .DS_Store
 Thumbs.db
 node_modules/
+
+# Browser session & cookie secrets (NEVER commit)
+flow_session*.json
+flow_cookies*.json
+.flow_profile/
+*cookies*.txt
+.env
+.env.*
+
+
+__pycache__/
+*.pyc
+flow_web_intro/videos/*.mp4
+flow_web_intro/videos/hd_1080p/shot1_v1_1080p.mp4
+
