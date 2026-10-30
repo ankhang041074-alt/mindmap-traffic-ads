@@ -5,14 +5,40 @@
 
 ---
 
-## ⏰ PHẦN 1: TRƯỚC KHI RỜI CÔNG TY LÚC 17H (CHỈ MẤT 10 GIÂY!)
+## ⏰ PHẦN 1: QUY TẮC CHỐNG VĂNG PHIÊN LOGIN GIỮA CÔNG TY <-> NHÀ (BẮT BUỘC ĐỌC!)
 
-Trước khi gập/tắt máy ở công ty, bạn làm đúng **1 thao tác** này để AdsPower đẩy phiên đăng nhập mới nhất lên đám mây:
-1. Mở ứng dụng **AdsPower Global** trên máy công ty.
-2. Ở dòng profile **`flow veo`**, bấm nút **`Close` (`Đóng`)** (hoặc tắt cửa sổ trình duyệt `SunBrowser` của profile đó).
-3. **Đợi 5–10 giây** cho nút chuyển lại thành **`Open` (`Mở`)** (lúc này AdsPower đã đồng bộ xong toàn bộ Cookie phiên Google Flow Ultra lên Cloud). Sau đó tắt máy đi về thoải mái!
+> **🔍 Nguyên nhân thật sự khiến sáng nay mở AdsPower bị kêu login lại (đã mổ xẻ từ log máy bạn):**
+> 1. Hôm qua lúc `17:01:52` ở công ty bạn bấm **`Close` (`Đóng`)** đúng cách -> AdsPower đẩy cookie lên Cloud (`1793268112`), nên tối về nhà máy nhà tải cookie đó xuống vào thẳng cực mượt!
+> 2. Trong lúc bạn làm ở nhà, Google tự động xoay vòng mã phiên ngầm (`__Secure-1PSIDTS` qua `RotateCookiesPage`) sang mã mới.
+> 3. **Tuy nhiên lúc nghỉ ở nhà tối qua**, máy nhà tắt/gập máy trước khi AdsPower kịp bấm `Close` đẩy mã mới lên Cloud -> sáng nay mở máy công ty, AdsPower thấy dấu thời gian cục bộ `cookie_updated_time` vẫn bằng `17:01` hôm qua nên kích hoạt **`USE_LOCAL_COOKIE`** (nạp lại mã cũ đã bị Google hủy tối qua) -> Google bắt đăng nhập lại!
 
-*(Lưu ý bảo mật: Toàn bộ file nhạy cảm `flow_session.json` và `flow_cookies_adspower.json` đã được khóa trong `.gitignore`, **tuyệt đối không bao giờ bị đẩy lên GitHub**).*
+### 🛡️ Combo 3 Lớp Bảo Hiểm Để Về Nhà KHÔNG BAO GIỜ Sợ Bị Hỏi Login Nữa:
+
+#### Lớp 1 — Cài đặt 1 lần trong AdsPower (làm ngay ở cả máy Công ty & máy Nhà):
+- Vào cột bên trái của app **AdsPower** -> mục **`Cài đặt toàn cục` (`Global Settings`)** -> phần **Đồng bộ dữ liệu (`Data Sync`)**:
+  - Bật **ON** cho: **`Đồng bộ Cookie` (`Sync Cookies`)** + **`LocalStorage`** + **`IndexedDB`** + **`Mật khẩu / Mở lại tab`**.
+
+#### Lớp 2 — Trước khi rời Công ty (hoặc trước khi tắt máy ở Nhà):
+1. **(Phao cứu sinh dự phòng — tốn 3 giây trước khi về nhà):** Khi trình duyệt AdsPower đang mở ở công ty, chạy lệnh này để trích xuất 53 cookies Google sống mới nhất ra file `flow_session.json`:
+   ```bash
+   python3 flow_web_intro/home_helper.py --save-session
+   ```
+   *(Gửi riêng file `flow_session.json` này vào **"Cloud của tôi" trên Zalo** hoặc chép USB đem về nhà — tuyệt đối không up file này lên GitHub công khai, `.gitignore` đã khóa sẵn).*
+2. Sau đó mở app **AdsPower Global** -> bấm nút **`Close` (`Đóng`)** ở dòng profile **`flow veo`** -> **CHỜ ĐỦ 5–10 GIÂY** cho chữ `Closing...` biến mất hẳn thành **`Open` (`Mở`)** rồi mới tắt máy! *(Làm y hệt bước bấm `Close` chờ 5–10s này ở máy Nhà trước khi đi ngủ để sáng hôm sau lên công ty cũng không bị văng!).*
+
+#### Lớp 3 — Khi về tới Nhà (Ép AdsPower tải Cookie Cloud mới nhất + Phao cứu sinh bơm Cookie):
+1. **Trước khi bấm `Open` (`Mở`) trong AdsPower ở máy nhà**, chạy lệnh này để xóa dấu thời gian cũ, ép AdsPower **100% tải Cookie mới nhất từ Cloud (`USE_SERVER_COOKIE`)**:
+   ```bash
+   git pull origin main
+   python3 flow_web_intro/home_helper.py --force-cloud-cookie
+   ```
+2. Sau đó bấm **`Open` (`Mở`)** profile `flow veo` trong AdsPower.
+3. **PHAO CỨU SINH KHẨN CẤP (nếu lỡ mở lên mà vẫn thấy màn hình bắt Sign-in ở nhà):**
+   Chỉ cần tải file `flow_session.json` bạn gửi trong Zalo "Cloud của tôi" bỏ vào thư mục gốc của repo ở nhà, rồi gõ đúng 1 lệnh:
+   ```bash
+   python3 flow_web_intro/home_helper.py --inject-session
+   ```
+   Tool sẽ **bơm thẳng 53 cookies sống của công ty ngược vào cửa sổ AdsPower đang mở** và tự chuyển thẳng vào project Veo 3 mà **không cần mật khẩu hay mã xác minh 2FA!**
 
 ---
 
