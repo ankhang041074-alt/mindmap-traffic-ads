@@ -7,13 +7,15 @@ import sys
 import urllib.request
 import websockets
 
-sys.path.insert(0, "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro")
+OUT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(OUT_DIR)
+sys.path.insert(0, os.path.join(REPO_ROOT, "flow_web_intro"))
 from gen_batch_images import FlowCDP
+from home_helper import discover_cdp_http_url
 from review_fix_keyframes_step1 import clear_composer_strict
 
-PORT = 49273
+PORT = int(os.environ.get("FLOW_CDP_PORT", "49273"))
 PROJECT_ID = "dfcf77a5-5374-4678-9f80-1c5ea7b5c305"
-OUT_DIR = "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/cedar_4ft_10s"
 
 # Exact verified UUIDs of all 10 generated 16:9 scenes in Project dfcf77a5-5374-4678-9f80-1c5ea7b5c305
 VIDEOS_10 = [
@@ -588,6 +590,7 @@ async def main():
     parser.add_argument("--phase", choices=["test2", "all10", "slice", "only"], default="all10")
     parser.add_argument("--start-index", type=int, default=0)
     parser.add_argument("--only-key", type=str, default="")
+    parser.add_argument("--port", type=int, default=None)
     args = parser.parse_args()
 
     videos = VIDEOS_10 if args.batch == "batch1" else VIDEOS_BATCH2_10
@@ -597,10 +600,11 @@ async def main():
         if not videos:
             raise ValueError(f"No video matching --only-key={args.only_key!r}")
 
-    tabs = json.loads(urllib.request.urlopen(f"http://127.0.0.1:{PORT}/json/list").read())
+    cdp_base = discover_cdp_http_url(f"http://127.0.0.1:{args.port}" if args.port else None)
+    tabs = json.loads(urllib.request.urlopen(f"{cdp_base}/json/list").read())
     t = next((x for x in tabs if PROJECT_ID in (x.get("url") or "")), None)
     if not t:
-        raise RuntimeError(f"Tab for {PROJECT_ID} not found!")
+        raise RuntimeError(f"Tab for {PROJECT_ID} not found on {cdp_base}!")
 
     async with websockets.connect(t["webSocketDebuggerUrl"], max_size=30 * 1024 * 1024) as ws:
         flow = FlowCDP(ws)

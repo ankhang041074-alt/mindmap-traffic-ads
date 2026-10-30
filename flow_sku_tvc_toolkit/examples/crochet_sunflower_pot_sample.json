@@ -1,0 +1,51 @@
+{
+  "slug": "crochet_sunflower_pot",
+  "prefix": "SUNFLOWER",
+  "preset": "crochet_decor",
+  "project_id": "dfcf77a5-5374-4678-9f80-1c5ea7b5c305",
+  "notes_vi": "Mẫu cấu hình chuẩn cho sản phẩm Crochet 3D (Chậu hoa hướng dương len móc cao ~22cm). Không lưu ảnh nặng lên Git — chạy build-plates local từ 1 ảnh gốc nền trắng.",
+  "exclude_uuids": [],
+  "scenes": [
+    {
+      "key": "C01_OAK_COFFEE_TABLE_MORNING_MUG",
+      "refs": [
+        "SUNFLOWER_PLATE_01_SINGLE_HERO_LEFT_62PCT_16x9.jpg",
+        "SUNFLOWER_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 tabletop product photograph (using the second 1024x1024 macro close-up reference image for exact handcrafted milk-cotton crochet yarn stitches, interlocking crochet loop geometry, petal/edge stitch count, and yarn fiber twist): treat the handmade crochet item in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single crochet stitch loop, scalloped yarn border, exact petal/motif count, yarn color, and outer contour 100% pixel-identical to the 16:9 plate without resizing, melting stitches, turning crochet loops into sweater knit ribs, or adding fuzzy stray wool hairs. Outpaint ONLY the pure white background with an 85mm live-action Kodak Vision3 250D sunlit artisan living-room coffee table scene: the handmade crochet potted flower rests on a warm solid European white-oak tabletop beside a 9.5cm matte stoneware latte cup set slightly farther back on the right to lock true 22cm tabletop scale, softly blurred foreground beige linen book corner bottom-right, warm golden morning window sunbeams raking across the oak grain and soft cream sofa bokeh behind, even clean natural daylight preserving every cotton yarn stitch, realistic soft yarn contact shadow under the pot base, zero text."
+    },
+    {
+      "key": "C02_WALNUT_STUDY_DESK_WINDOW_LEDGE",
+      "refs": [
+        "SUNFLOWER_PLATE_02_SINGLE_HERO_RIGHT_60PCT_16x9.jpg",
+        "SUNFLOWER_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 tabletop product photograph (using the second 1024x1024 macro close-up reference image for exact handcrafted milk-cotton crochet yarn stitches, interlocking crochet loop geometry, petal/edge stitch count, and yarn fiber twist): treat the handmade crochet item in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single crochet stitch loop, scalloped yarn border, exact petal/motif count, yarn color, and outer contour 100% pixel-identical to the 16:9 plate without resizing, melting stitches, turning crochet loops into sweater knit ribs, or adding fuzzy stray wool hairs. Outpaint ONLY the pure white background with an 85mm live-action Kodak Vision3 250D sunlit home-studio desk scene: the handmade crochet potted flower sits on a rich natural American walnut desk surface beside a closed 10cm stack of linen-bound notebooks and brass spectacles on the left, softly blurred foreground ceramic pen holder bottom-left, sunlit garden greenery bokeh outside a casement window behind, warm golden rim-light in the room with clean even natural daylight on the crochet yarn loops, realistic tabletop contact shadow, zero text."
+    },
+    {
+      "key": "C03_TRAVERTINE_CONSOLE_PAIR_SYMMETRIC",
+      "refs": [
+        "SUNFLOWER_PLATE_04_PAIR_SHELF_52PCT_16x9.jpg",
+        "SUNFLOWER_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 tabletop product photograph (using the second 1024x1024 macro close-up reference image for exact handcrafted milk-cotton crochet yarn stitches and interlocking loop detail): keep BOTH handmade crochet items 100% pixel-identical to the 16:9 plate in exact position, scale, stitch count, yarn loop texture, and outer contour without altering or blurring any yarn pixels. Outpaint ONLY the pure white background with a 50mm-85mm live-action Kodak Vision3 250D sunlit entryway console tabletop: both handmade crochet potted flowers frame a low 8cm travertine catch-all tray in the center on a warm honey-oak shelf against a warm clay-plaster wall, softly blurred foreground olive sprig bottom-left, diagonal afternoon sunbeams across the plaster wall, even clean natural daylight on both crochet items, realistic contact shadows, zero text."
+    }
+  ],
+  "videos": [
+    {
+      "key": "VC01_OAK_COFFEE_TABLE_MORNING_MUG_4S",
+      "scene_key": "C01_OAK_COFFEE_TABLE_MORNING_MUG",
+      "prompt": "Continuous, clearly visible 4-second 85mm lateral camera truck-left across the sunlit solid white-oak coffee table, so the softly blurred beige linen book corner in the bottom-right foreground sweeps visibly rightward across the frame in rich 3D optical parallax against the stoneware latte cup and handmade crochet potted flower. Subtle warm steam rises gently from the distant latte cup while preserving the exact solid shape, crisp interlocking milk-cotton crochet yarn stitches, and true colors of the crochet flower pot. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "VC02_WALNUT_STUDY_DESK_WINDOW_LEDGE_4S",
+      "scene_key": "C02_WALNUT_STUDY_DESK_WINDOW_LEDGE",
+      "prompt": "Continuous, clearly visible 4-second 85mm forward camera push-in across the warm walnut study desk, so the softly defocused ceramic pen holder in the bottom-left foreground glides outward past the frame edge in rich 3D optical parallax. Sunlit garden leaves outside the background window sway gently in the breeze while preserving the exact solid shape, crisp interlocking milk-cotton crochet yarn stitches, and true colors of the crochet flower pot. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "VC03_TRAVERTINE_CONSOLE_PAIR_SYMMETRIC_4S",
+      "scene_key": "C03_TRAVERTINE_CONSOLE_PAIR_SYMMETRIC",
+      "prompt": "Continuous, clearly visible 4-second 50mm lateral camera truck-right along the honey-oak entryway console shelf, so the softly blurred olive sprig in the bottom-left foreground sweeps visibly leftward past the lens in crisp 3D parallax against both handmade crochet flower pots and the travertine tray. Subtle golden dust motes float gently in the diagonal afternoon sunbeams while preserving the exact solid shape, crisp interlocking milk-cotton crochet yarn stitches, and true colors of both crochet items. No people, no camera equipment, zero morphing, zero text."
+    }
+  ]
+}

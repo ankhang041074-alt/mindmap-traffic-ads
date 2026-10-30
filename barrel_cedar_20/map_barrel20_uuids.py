@@ -5,8 +5,12 @@ import sys
 import urllib.request
 import websockets
 
-sys.path.insert(0, "/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro")
+OUT_DIR_LOCAL = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(OUT_DIR_LOCAL)
+sys.path.insert(0, OUT_DIR_LOCAL)
+sys.path.insert(0, os.path.join(REPO_ROOT, "flow_web_intro"))
 from gen_batch_images import FlowCDP
+from home_helper import discover_cdp_http_url
 from run_barrel20_images_silent import (
     OUT_DIR,
     PORT,
@@ -50,10 +54,11 @@ async def main():
         with open(UUID_CACHE_PATH, "r") as f:
             plate_uuids = set(json.load(f).values())
 
-    tabs = json.loads(urllib.request.urlopen(f"http://127.0.0.1:{PORT}/json/list").read())
+    cdp_base = discover_cdp_http_url()
+    tabs = json.loads(urllib.request.urlopen(f"{cdp_base}/json/list").read())
     t = next((x for x in tabs if PROJECT_ID in (x.get("url") or "")), None)
     if not t:
-        raise RuntimeError(f"Flow tab for project {PROJECT_ID} not found!")
+        raise RuntimeError(f"Flow tab for project {PROJECT_ID} not found on {cdp_base}!")
 
     async with websockets.connect(t["webSocketDebuggerUrl"], max_size=30 * 1024 * 1024) as ws:
         flow = FlowCDP(ws)

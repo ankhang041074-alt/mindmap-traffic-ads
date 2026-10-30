@@ -10,9 +10,47 @@ flow_cookies*.json
 .env
 .env.*
 
-
+# Python bytecode & test caches
 __pycache__/
 *.pyc
+.pytest_cache/
+
+# Temporary QA screenshots, download buffers & bulky local renders (keep GitHub clean!)
+**/qa_*.jpg
+**/qa_*.png
+**/qa/
+**/_dl_*
+**/_white_iso_uuid_cache.json
+**/*.crdownload
+**/verified_keyframes/
+**/renders_1080p/
+**/outputs/
+
+# Multi-SKU workspace: commit lightweight JSON configs/UUID maps/notes ONLY, never full image/video sets
+products/*/plates_2k/
+products/*/clean_refs/
+products/*/*.jpg
+products/*/*.jpeg
+products/*/*.png
+products/*/*.webp
+products/*/*.mp4
+products/*/*.mov
+
+# Existing video exclusions & untracked local draft/one-off scripts
 flow_web_intro/videos/*.mp4
 flow_web_intro/videos/hd_1080p/shot1_v1_1080p.mp4
-
+barrel_cedar_20/*.mp4
+barrel_cedar_20/fix_*.py
+barrel_cedar_20/retry_*.py
+cedar_4ft_10s/*.mp4
+cedar_4ft_10s/cedar_flow_gen.py
+cedar_4ft_10s/prompts_v2_cinematic.py
+cedar_4ft_10s/run_all_5_calibrated_tvc.py
+cedar_4ft_10s/run_batch_MBCD.py
+cedar_4ft_10s/run_live_visual_test.py
+cedar_4ft_10s/run_v4_exact_sku_fast.py
+cedar_4ft_10s/run_v5_true_1024_sku.py
+cedar_4ft_10s/clean_refs/CEDAR_REF_3_MACRO_HD1024.jpg
+cedar_4ft_10s/clean_refs/CEDAR_REF_PAIR_4FT_*.jpg
+cedar_4ft_10s/clean_refs/CEDAR_REF_SINGLE_4FT_*16x9.jpg
+cedar_4ft_10s/exact_sku_plates/PLATE_*.jpg

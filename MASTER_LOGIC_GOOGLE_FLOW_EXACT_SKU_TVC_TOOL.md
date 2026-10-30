@@ -156,19 +156,22 @@ sequenceDiagram
 ## 7. Bản Đồ Mã Nguồn & Quy Trình 4 Bước Chạy Sản Phẩm (SKU) Mới
 
 ### 7.1. Cấu Trúc Các File Cốt Lõi Trong Repository
+- **Bộ Toolkit Đóng Gói Dùng Chung Cho Mọi SKU Mới (`Cây`, `Crochet`, `Decor`):**
+  - [`flow_sku_tvc_toolkit/`](./flow_sku_tvc_toolkit) — CLI thống nhất (`init-sku`, `isolate-white`, `build-plates`, `validate`, `run-images`, `map-uuids`, `run-videos`, `download-1080p`) và sổ tay chuyển đổi ngành hàng [`PLAYBOOK_CAY_4FT_SANG_CROCHET_VA_FLOW_SOP.md`](./PLAYBOOK_CAY_4FT_SANG_CROCHET_VA_FLOW_SOP.md).
 - **Lõi điều khiển CDP dùng chung:**
-  - [gen_batch_images.py](file:///Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/gen_batch_images.py) — Lớp `FlowCDP` (`trusted_click`, `find_and_trusted_click`, `js`, `call`).
-  - [review_fix_keyframes_step1.py](file:///Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/review_fix_keyframes_step1.py) — Hàm `clear_composer_strict` dọn sạch chip & text ô nhập lệnh.
-  - [home_helper.py](file:///Users/dudumac5/Documents/antigravity/wonderful-lavoisier/flow_web_intro/home_helper.py) — Công cụ đồng bộ session và tự dò cổng CDP AdsPower khi chuyển giữa máy Công ty và máy Nhà.
+  - [gen_batch_images.py](./flow_web_intro/gen_batch_images.py) — Lớp `FlowCDP` (`trusted_click`, `find_and_trusted_click`, `js`, `call`).
+  - [review_fix_keyframes_step1.py](./flow_web_intro/review_fix_keyframes_step1.py) — Hàm `clear_composer_strict` dọn sạch chip & text ô nhập lệnh.
+  - [home_helper.py](./flow_web_intro/home_helper.py) — Công cụ đồng bộ session và tự dò cổng CDP AdsPower khi chuyển giữa máy Công ty và máy Nhà.
 - **Dự án SKU #1 (Cây Cedar `4ft` Chậu Vuông Đen — 20 Ảnh + 20 Video):**
-  - Thư mục [`cedar_4ft_10s/`](file:///Users/dudumac5/Documents/antigravity/wonderful-lavoisier/cedar_4ft_10s) & sổ tay [NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md](file:///Users/dudumac5/Documents/antigravity/wonderful-lavoisier/cedar_4ft_10s/NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md).
-- **Dự án SKU #2 (Cây Cedar `4ft+` Chậu Thùng Gỗ 3 Đai Sắt Đen — 20 Ảnh + 20 Video, phiên bản code mới nhất & cứng cáp nhất):**
-  - [run_barrel20_images_silent.py](file:///Users/dudumac5/Documents/antigravity/wonderful-lavoisier/barrel_cedar_20/run_barrel20_images_silent.py) — Toàn bộ pipeline upload ngầm + tạo 20 ảnh `16:9` với `STRICT_SINGLE_CUTOUT_LOCK` và chụp trang QA.
-  - [map_barrel20_uuids.py](file:///Users/dudumac5/Documents/antigravity/wonderful-lavoisier/barrel_cedar_20/map_barrel20_uuids.py) — Quét cuộn ảo lập bảng ánh xạ [barrel20_scene_uuids.json](file:///Users/dudumac5/Documents/antigravity/wonderful-lavoisier/barrel_cedar_20/barrel20_scene_uuids.json).
-  - [run_barrel20_veo4s_silent.py](file:///Users/dudumac5/Documents/antigravity/wonderful-lavoisier/barrel_cedar_20/run_barrel20_veo4s_silent.py) — Pipeline tạo 20 video `4 giây` `Veo 3.1 - Fast` hỗ trợ chạy toàn bộ (`--phase all20`), chạy tiếp từ giữa (`--phase slice --start-index N`), hoặc fix lẻ đúng 1 video (`--phase only --only-key VB20`).
+  - Thư mục [`cedar_4ft_10s/`](./cedar_4ft_10s) & sổ tay [NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md](./cedar_4ft_10s/NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md).
+- **Dự án SKU #2 (Cây Cedar `4ft+` Chậu Thùng Gỗ 3 Đai Sắt Đen — 20 Ảnh + 20 Video + Tải gộp `1080p`):**
+  - [run_barrel20_images_silent.py](./barrel_cedar_20/run_barrel20_images_silent.py) — Toàn bộ pipeline upload ngầm + tạo 20 ảnh `16:9` với `STRICT_SINGLE_CUTOUT_LOCK` và chụp trang QA.
+  - [map_barrel20_uuids.py](./barrel_cedar_20/map_barrel20_uuids.py) — Quét cuộn ảo lập bảng ánh xạ [barrel20_scene_uuids.json](./barrel_cedar_20/barrel20_scene_uuids.json).
+  - [run_barrel20_veo4s_silent.py](./barrel_cedar_20/run_barrel20_veo4s_silent.py) — Pipeline tạo 20 video `4 giây` `Veo 3.1 - Fast` hỗ trợ chạy toàn bộ (`--phase all20`), chạy tiếp từ giữa (`--phase slice --start-index N`), hoặc fix lẻ đúng 1 video (`--phase only --only-key VB20`).
+  - [download_and_merge_atf_9422_1080p.py](./barrel_cedar_20/download_and_merge_atf_9422_1080p.py) — Pipeline tự động hover tải 20 clip `1080p` từ tab `Video` (chống trùng mã băm SHA-256 + kiểm định `ffprobe` `1920x1080`) và nối file Master MP4.
 
 ### 7.2. Quy Trình 4 Bước Chuẩn Khi Bắt Đầu Một SKU Mới
-1. **Bước 1 (Chuẩn bị tài nguyên từ 1 ảnh gốc):** Tách sạch chữ/watermark trên nền trắng `#FFFFFF` (`1024x1024`), cắt thêm 1 ảnh `REF_2_CLOSEUP_1024x1024` zoom cận cảnh lá & chậu, và chạy script Pillow sinh bộ `6–8` tấm Plate `2560x1440` theo đúng bảng **Ma Trận Tỷ Lệ `% Khung Hình`** ở Mục 3.2.
-2. **Bước 2 (Test mẫu 1 ảnh đầu tiên):** Chạy `--phase check1` để hệ thống tự upload bộ Plate lên Project Google Flow, render thử cảnh số 1 và chụp ảnh QA kiểm tra tỷ lệ & độ nét lá.
-3. **Bước 3 (Chạy hàng loạt 19 ảnh còn lại & Map UUID):** Khi ảnh 1 đạt chuẩn, chạy `--phase rest19` (chạy ngầm theo từng đợt 3 ảnh/wave), sau đó chạy script `map_*_uuids.py` để khóa chính xác `20 UUID` vào file JSON.
-4. **Bước 4 (Chạy hàng loạt 20 Video `4s` & Soi QA):** Chạy `run_*_veo4s_silent.py --phase all20` (chạy ngầm 2 video/wave). Nếu có bất kỳ cảnh nào muốn tinh chỉnh lại tỷ lệ hoặc góc máy, chỉ cần sửa đúng cảnh đó và gọi `--phase only --only-key <MÃ_CẢNH>` để xuất bù đúng 1 video duy nhất lên đầu tab `Video`.
+1. **Bước 1 (Chuẩn bị tài nguyên từ 1 ảnh gốc):** Dùng `python3 -m flow_sku_tvc_toolkit isolate-white` (nếu ảnh gốc chưa có nền trắng) và `python3 -m flow_sku_tvc_toolkit build-plates` để tự động tách sạch nền trắng `#FFFFFF`, cắt ảnh `REF_2_CLOSEUP_1024` và sinh bộ Plate `2560x1440` đúng Preset tỷ lệ vật lý (`tree_4ft`, `crochet_coaster`, `crochet_decor`, `crochet_bag`).
+2. **Bước 2 (Test mẫu 1 ảnh đầu tiên):** Chạy `run-images --phase check1` để hệ thống tự upload bộ Plate lên Project Google Flow, render thử cảnh số 1 và chụp ảnh QA kiểm tra tỷ lệ & độ nét chi tiết.
+3. **Bước 3 (Chạy hàng loạt các ảnh còn lại & Map UUID):** Khi ảnh 1 đạt chuẩn, chạy `run-images --phase rest` (chạy ngầm theo từng đợt 3 ảnh/wave), sau đó chạy `map-uuids` để khóa chính xác `UUID` vào file JSON.
+4. **Bước 4 (Chạy hàng loạt Video `4s`, Soi QA & Tải `1080p`):** Chạy `run-videos --phase all` (2 video/wave), sửa lẻ bất kỳ cảnh nào bằng `--phase only --only-key <MÃ_CẢNH>`, và xuất gộp Master MP4 bằng `download-1080p`.
