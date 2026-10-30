@@ -58,3 +58,32 @@ Qua thực chiến QA trực tiếp 10 clip trên Flow, đây là **3 Luật S�
 2. Mở AdsPower profile `flow veo` → vào Project Flow `https://flow.google.com/project/dfcf77a5-5374-4678-9f80-1c5ea7b5c305` (nếu bị hỏi login thì dùng `python3 flow_web_intro/home_helper.py import` như hướng dẫn cũ).
 3. Nhắn cho AI trong Antigravity ở nhà đọc ngay file `cedar_4ft_10s/NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md` này rồi ra lệnh:
    > *"Đọc file `cedar_4ft_10s/NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md`, dùng đúng 6 tấm `batch40_plates` và logic Combo khóa khuôn + Video 4s Dynamic Parallax để chạy ngầm tiếp 20–30 bối cảnh mới trên AdsPower cho tôi."*
+
+
+---
+
+## 4. Danh Mục 20 Bối Cảnh Đã Hoàn Tất Chuẩn 100% SKU Trên Project Flow (`S01 → S20`)
+
+### Lô 1 (`S01 → S10` — Đã Xong 10 Ảnh `16:9` + 10 Video `4s`)
+- `S01` (`3d63c790-7d60-4f2d-bce6-05114ca84031`) — Hiên cửa chính gỗ óc chó `2.45m` & tường gạch kem (2 cây = `1/2` cửa)
+- `S02` (`5d275a3e-f828-4419-854f-a70ae267077a`) — Hiên biệt thự Mỹ gỗ trắng Hamptons góc xiên `3/4` (2 cây chiều sâu)
+- `S03` (`4f63712c-37c9-433d-8457-a47e3672cf34`) — Cửa đôi kính khung thép đen sân hiên đá Travertine (2 cây cận trung)
+- `S04` (`65f2c152-5db9-4ca7-8996-7dfd76b2ce9e`) — Sân hiên có mái ghế bành mây gỗ Teak & vườn nắng sớm (1 cây phải)
+- `S05` (`e89c5d87-3173-42d1-85ae-4a4edd69bb76`) — Lò sưởi đá vôi Pháp trần cao `3.4m` & gương vòm đồng (2 cây ngang kệ `1.22m`)
+- `S06` (`56d84fb5-e098-432f-89ad-3c2b54ae048c`) — Sảnh Foyer bàn Console gỗ sồi `85cm` & tranh lớn (2 cây đối xứng)
+- `S07` (`d81a1ece-9b49-4d8f-8576-510de683db46`) — Phòng khách tủ gỗ rãnh, rèm linen & ly gốm mờ bokeh (1 cây trái)
+- `S08` (`7a13b09d-c6cd-4dac-8732-d828f3a5429f`) — Phòng đọc sách bàn gỗ óc chó & kệ sách vòm vữa ấm (1 cây trái)
+- `S09` (`7ef37782-5c33-4d76-972c-49b87d27735b`) — Cầu thang gỗ sồi bay & vách kính sát trần nhìn ra vườn (1 cây phải)
+- `S10` (`ebc19d89-96d5-431c-bf48-65672b2852ec`) — Phòng ăn trần cao tủ Buffet gỗ sồi & nắng ban mai (1 cây đại cảnh)
+
+### Lô 2 (`S11 → S20` — Đã Xong 10 Ảnh `16:9` Đón Nắng Thực Tế Mới Nhất)
+- `S11` (`94476b2c-f110-4c1a-9c08-ee3d514ccc6c`) — Hiên vòm đá vôi biệt thự Santa Barbara & cửa đôi gỗ sồi `2.45m` nắng chiều bóng lá (2 cây = `1/2` cửa)
+- `S12` (`72972fcc-5a93-464b-8324-399a9185d9d2`) — Phòng kính Sunroom ngập nắng sớm & bệ ghế băng cửa sổ gỗ sồi `50cm` (1 cây Hero trái)
+- `S13` (`7cf09a22-e08a-4bb0-9634-ef73a6450557`) — Hành lang cột đá sân trong biệt thự nhìn ra hồ bơi xanh ngọc nắng vàng góc `3/4` (2 cây lệch tầng)
+- `S14` (`80fe0aac-30fb-4d56-9fc3-8cd36fdeeba0`) — Góc Đảo bếp đá cẩm thạch Calacatta & gỗ sồi rãnh `90cm` cạnh cửa kính trượt ra sân vườn (1 cây Hero phải)
+- `S15` (`c8560aa3-3ce7-401f-831e-7cee9e229b90`) — Cổng vòm thông phòng ốp phào chỉ `95cm` mở ra phòng khách ngập nắng phía sau (2 cây cận trung)
+- `S16` (`88270262-e787-4d12-809c-1c3fb0a01be9`) — Góc thư giãn Phòng ngủ Master rèm voan cửa ban công nắng sớm & ghế bành vải linen `72cm` (1 cây Hero trái)
+- `S17` (`255b13ff-e051-4f6b-8fc6-5de808f483de`) — Sân vườn đá Châu Âu đối xứng hai bên cửa sổ vòm gỗ sồi & bóng nắng đốm lá cây (2 cây cận trung)
+- `S18` (`357a083b-bb15-4391-8461-42c738a6d409`) — Góc khô ráo cạnh cửa sổ nắng trong phòng tắm Master Organic Spa & bồn tắm đá trắng `60cm` (1 cây Hero phải)
+- `S19` (`03731287-04a9-477e-a037-843e39e6cdf2`) — Ban công Penthouse sàn gỗ Teak lan can đá kính `1.10m` nắng hoàng hôn vàng rực góc `3/4` (2 cây chiều sâu)
+- `S20` (`2a636fef-0562-4470-ad3d-8ff399015f8f`) — Phòng khách đồi ven biển Malibu California trần xà gỗ nhìn ra biển nắng cuối chiều (1 cây đại cảnh)

@@ -141,52 +141,201 @@ SCENES_10 = [
     },
 ]
 
+SCENES_BATCH2_10 = [
+    {
+        "key": "S11_PORCH_LIMESTONE_ARCH_OAK_DOORS",
+        "refs": ["PLATE_01_PAIR_HALFDOOR_45PCT_16x9.jpg", "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg"],
+        "prompt": PAIR_LOCK + (
+            "a 35mm-50mm live-action Kodak Vision3 250D sunlit Santa Barbara Mediterranean villa front entrance: centered between both plants is a grand 2.45-meter arched natural white-oak "
+            "double front door set deep inside a carved warm-cream limestone archway, hand-forged matte-black ring door handles aligned strictly at plant-top height (1/2 door scale), "
+            "honed limestone porch threshold step with an unmarked woven jute doormat, softly blurred foreground olive-branch greenery bokeh bottom-left, warm late-afternoon raking golden sunlight "
+            "casting dappled tree-canopy shadows across the textured limestone masonry, clean natural daylight on both plants, realistic stone contact shadows under both planters, zero text."
+        ),
+    },
+    {
+        "key": "S12_SUNROOM_WINDOW_BENCH_TERRACOTTA",
+        "refs": ["PLATE_04_SINGLE_HERO_LEFT_68PCT_16x9.jpg", "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg"],
+        "prompt": SINGLE_LOCK + (
+            "a 50mm Hero live-action Kodak Vision3 250D sun-drenched architectural conservatory sunroom: extending to the right of the plant is a built-in 50cm natural white-oak window bench seat "
+            "topped with a cream linen cushion and neutral woven pillows (reaching well below mid-plant height to lock true 4ft scale), tall thin-framed white-oak mullioned windows behind "
+            "revealing softly blurred sunlit garden greenery outside, pale matte terracotta floor tiles with realistic planter contact shadow, softly blurred foreground woven rattan coffee table edge "
+            "bottom-right, crisp morning sunbeams slanting through the window mullions onto the bench and floor, clean natural daylight on the plant, zero text."
+        ),
+    },
+    {
+        "key": "S13_COURTYARD_LOGGIA_POOL_COLONNADE",
+        "refs": ["PLATE_03_PAIR_DIAGONAL_3Q_16x9.jpg", "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg"],
+        "prompt": PAIR_LOCK + (
+            "a 50mm live-action Kodak Vision3 250D luxury Mediterranean resort villa courtyard loggia viewed at a natural 20-degree three-quarter diagonal perspective matching the staggered depth "
+            "of the two plants: warm cream honed travertine terrace steps leading out toward a calm sunlit turquoise courtyard lap pool and low teak sun-loungers softly defocused in the background, "
+            "tall warm-ivory limewash plaster colonnade pillars flanking the walkway, warm golden-hour afternoon sunlight raking diagonally across the travertine paving with subtle shimmering water light "
+            "on the plaster pillars, clean natural daylight on both plants, realistic long floor contact shadows under both planters, zero text."
+        ),
+    },
+    {
+        "key": "S14_KITCHEN_MARBLE_ISLAND_SLIDING_GLASS",
+        "refs": ["PLATE_05_SINGLE_HERO_RIGHT_66PCT_16x9.jpg", "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg"],
+        "prompt": SINGLE_LOCK + (
+            "a 50mm Hero live-action Kodak Vision3 250D sunlit open-concept luxury kitchen corner: on the left sits the waterfall edge of a 90cm warm Calacatta-marble and fluted white-oak kitchen island "
+            "(reaching three-quarters up the plant) paired with a tan saddle-leather and oak counter stool, behind the plant is a tall slim black-steel sliding glass patio door continuing past the top edge "
+            "of the frame opening onto a sunlit stone garden terrace, wide-plank European white-oak floor with realistic planter contact shadow, softly blurred foreground oak breakfast table corner "
+            "with a matte ceramic pitcher bottom-left, warm afternoon sun-slashes raking across the oak floor, clean natural daylight on the plant, zero text."
+        ),
+    },
+    {
+        "key": "S15_GALLERY_ARCHWAY_WAINSCOTING_PORTAL",
+        "refs": ["PLATE_02_PAIR_MEDIUM_HERO_56PCT_16x9.jpg", "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg"],
+        "prompt": PAIR_LOCK + (
+            "a 50mm medium-shot live-action Kodak Vision3 250D sunlit modern-classic architectural interior gallery hallway: centered between both plants is a wide plastered arched interior doorway "
+            "whose upper arch extends past the top edge of the 16:9 frame, looking into a sun-drenched living room with tall casement windows and a cream linen sofa in soft background depth; "
+            "warm ivory walls finished with 95cm classic raised-panel wainscoting reaching three-quarters up both plants, French herringbone oak parquet floor, softly blurred foreground doorway casing edge "
+            "on the far right, bright afternoon window sunbeams streaming through the sunlit back room across the oak floor, clean daylight on both plants, realistic contact shadows under both planters, zero text."
+        ),
+    },
+    {
+        "key": "S16_BEDROOM_BALCONY_CURTAINS_LOUNGE_CHAIR",
+        "refs": ["PLATE_04_SINGLE_HERO_LEFT_68PCT_16x9.jpg", "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg"],
+        "prompt": SINGLE_LOCK + (
+            "a 50mm Hero live-action Kodak Vision3 250D serene sunlit primary bedroom sitting corner: behind the left side of the plant hang tall sheer warm-ivory linen curtains beside an open timber-framed "
+            "French balcony door continuing past the top edge of the frame, on the right sits a low 72cm oatmeal-linen upholstered accent lounge chair (reaching slightly above mid-plant height) "
+            "and a small solid-oak round side table over a handwoven cream wool rug and pale oak plank floor, softly blurred foreground linen bed-throw edge bottom-right, golden morning sunlight "
+            "filtering softly through the sheer curtains across the plaster wall and rug, realistic floor contact shadow under the planter, clean natural daylight on the plant, zero text."
+        ),
+    },
+    {
+        "key": "S17_COURTYARD_ARCHED_OAK_WINDOW_STONE",
+        "refs": ["PLATE_02_PAIR_MEDIUM_HERO_56PCT_16x9.jpg", "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg"],
+        "prompt": PAIR_LOCK + (
+            "a 50mm medium-shot live-action Kodak Vision3 250D sunlit European garden courtyard terrace: centered between both plants is a tall arched natural-oak mullioned casement window "
+            "set into warm honey-cream limestone masonry with a low 45cm carved stone sill aligned near planter-rim height, weathered natural limestone courtyard flagstones underfoot, "
+            "softly blurred foreground cream wrought-iron garden chair back bottom-left, warm late-afternoon dappled courtyard tree-canopy sunlight casting organic leaf-filtered light patterns "
+            "across the limestone wall and glass panes, clean natural daylight on both plants, realistic stone contact shadows under both planters, zero text."
+        ),
+    },
+    {
+        "key": "S18_SPA_BATHROOM_FREESTANDING_TUB_SUNLIGHT",
+        "refs": ["PLATE_05_SINGLE_HERO_RIGHT_66PCT_16x9.jpg", "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg"],
+        "prompt": SINGLE_LOCK + (
+            "a 50mm Hero live-action Kodak Vision3 250D sun-filled organic-modern luxury spa bathroom: the plant stands in a dry sunlit architectural corner beside a tall natural-oak framed window "
+            "continuing past the top edge of the frame revealing softly blurred sunlit olive-and-bamboo private courtyard greenery; on the left sits the curved end of a 60cm matte-white sculpted stone "
+            "freestanding soaking tub (reaching halfway up the 4ft plant) beside a small natural teak stool with folded white linen towels, warm sand-toned tadelakt plaster walls and honed travertine stone floor, "
+            "bright morning sunbeams slanting across the plaster wall and tub rim, realistic floor contact shadow under the planter, clean natural daylight on the plant, zero text."
+        ),
+    },
+    {
+        "key": "S19_ROOFTOP_TERRACE_TEAK_DECK_GOLDEN_HOUR",
+        "refs": ["PLATE_03_PAIR_DIAGONAL_3Q_16x9.jpg", "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg"],
+        "prompt": PAIR_LOCK + (
+            "a 50mm live-action Kodak Vision3 250D upscale sunlit hillside penthouse terrace balcony viewed at a natural 20-degree three-quarter diagonal perspective matching the staggered depth "
+            "of the two plants: warm natural teak wood decking underfoot, a 1.10-meter cream architectural stone-and-clear-glass balcony parapet running behind the two plants just below their top tips, "
+            "sunlit lush coastal hillside greenery glowing in soft golden-hour bokeh in the distance, softly blurred foreground outdoor cream linen sofa arm bottom-right, warm low late-afternoon golden sun "
+            "raking across the teak deck planks, clean natural daylight on both plants, realistic long floor contact shadows under both planters, zero text."
+        ),
+    },
+    {
+        "key": "S20_COASTAL_GREAT_ROOM_OCEAN_WINDOWS",
+        "refs": ["PLATE_06_SINGLE_WIDE_ROOM_50PCT_16x9.jpg", "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg"],
+        "prompt": SINGLE_LOCK + (
+            "a 35mm-50mm live-action Kodak Vision3 250D sunlit California coastal hillside living room with a 3.3-meter white-oak beamed ceiling: the plant stands naturally beside slim dark-bronze framed "
+            "panoramic windows overlooking sunlit coastal hillside greenery and a calm distant Pacific ocean horizon; on the left sits a generous 75cm cream linen sectional sofa and low solid-oak coffee table "
+            "resting on a woven natural jute rug over warm wide-plank oak flooring, consistent late-afternoon sunlight entering from the ocean-facing windows casting natural window-mullion light patterns "
+            "across the floor and sofa, realistic floor contact shadow under the planter, clean natural daylight on the plant, zero text."
+        ),
+    },
+]
 
-async def check_ingredient_exists(flow, query_stem):
-    await flow.js(f"""
-    (() => {{
-        const inp = document.querySelector('[aria-label="Tìm kiếm thành phần"]');
-        if (!inp) return;
-        const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-        setter.call(inp, {json.dumps(query_stem)});
-        inp.dispatchEvent(new Event('input', {{bubbles: true}}));
-    }})()
+FORBIDDEN_WORDS = ("cedar", "pine ", "pine,", "pine.", "topiary", "slender", "teardrop", "chartreuse", "conifer", "spruce", "cypress")
+for _sc in SCENES_10 + SCENES_BATCH2_10:
+    _low = _sc["prompt"].lower()
+    # Allow "spiky pine needles" inside the explicit negative lock "DO NOT redraw or alter the leaves into spiky pine needles"
+    _body = _low.replace("do not redraw or alter the leaves into spiky pine needles", "")
+    for _fw in FORBIDDEN_WORDS:
+        if _fw in _body:
+            raise ValueError(f"Forbidden word {_fw!r} found in {_sc['key']}!")
+
+
+KNOWN_PLATE_UUIDS = {
+    "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg": "96a57777-a359-4546-a363-756a1f5ccd73",
+    "PLATE_01_PAIR_HALFDOOR_45PCT_16x9.jpg": "5aae13ec-4112-4ba8-aede-fb6762e83210",
+    "PLATE_02_PAIR_MEDIUM_HERO_56PCT_16x9.jpg": "cc3942a3-2658-4ba9-82db-9ea5df94939f",
+    "PLATE_03_PAIR_DIAGONAL_3Q_16x9.jpg": "fac94f0b-7394-4520-8f36-41232fbf67a2",
+    "PLATE_04_SINGLE_HERO_LEFT_68PCT_16x9.jpg": "dc2fce54-5c3a-4179-9abc-c1670f98d6c0",
+    "PLATE_05_SINGLE_HERO_RIGHT_66PCT_16x9.jpg": "b1b5b5eb-f77b-4c1b-9b28-d29493285231",
+    "PLATE_06_SINGLE_WIDE_ROOM_50PCT_16x9.jpg": "af938552-9103-46c2-84c8-3bb0716f0140",
+}
+
+
+async def open_ingredient_modal(flow):
+    has_opts = await flow.js("document.querySelectorAll('[role=\"option\"]').length > 0")
+    if not has_opts:
+        await flow.find_and_trusted_click("aria === 'Thêm thành phần vào ô nhập câu lệnh'", "open '+' modal")
+        await asyncio.sleep(0.85)
+
+
+async def scan_all_project_options(flow, max_steps=30):
+    await open_ingredient_modal(flow)
+    await flow.js("""
+    (() => {
+        const vp = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"]') || document.querySelector('cdk-virtual-scroll-viewport');
+        if (vp) vp.scrollTop = 0;
+    })()
     """)
-    await asyncio.sleep(0.45)
-    names = await flow.js("""
-    Array.from(document.querySelectorAll('[role="option"]')).map(o => (o.innerText || '').trim())
-    """)
-    return any(query_stem in t for t in names)
+    await asyncio.sleep(0.35)
+    found = {}
+    for _ in range(max_steps):
+        items = await flow.js("""
+        Array.from(document.querySelectorAll('[role="option"]')).map(el => ({
+            txt: (el.innerText || '').trim().replace(/\\s+/g, ' '),
+            uuid: (el.querySelector('img')?.src || '').split('?')[0].split('/').pop()
+        }))
+        """)
+        for it in items:
+            if it["uuid"] and it["uuid"] not in found:
+                found[it["uuid"]] = it["txt"]
+        moved = await flow.js("""
+        (() => {
+            const vp = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"]') || document.querySelector('cdk-virtual-scroll-viewport');
+            if (!vp) return false;
+            const prev = vp.scrollTop;
+            vp.scrollTop += 320;
+            return vp.scrollTop > prev;
+        })()
+        """)
+        if not moved:
+            break
+        await asyncio.sleep(0.25)
+    return found
 
 
 async def upload_missing_plates(flow, ws):
     await flow.call("Input.dispatchKeyEvent", {"type": "keyDown", "key": "Escape", "code": "Escape"})
     await flow.call("Input.dispatchKeyEvent", {"type": "keyUp", "key": "Escape", "code": "Escape"})
     await asyncio.sleep(0.35)
-    await flow.js("""
-    (() => {
-        if (!document.querySelector('[role="option"]')) {
-            document.querySelector('[aria-label="Thêm thành phần vào ô nhập câu lệnh"]')?.click();
-        }
-    })()
-    """)
-    await asyncio.sleep(0.8)
+
+    all_opts = await scan_all_project_options(flow, max_steps=32)
+    await flow.call("Input.dispatchKeyEvent", {"type": "keyDown", "key": "Escape", "code": "Escape"})
+    await flow.call("Input.dispatchKeyEvent", {"type": "keyUp", "key": "Escape", "code": "Escape"})
+    await asyncio.sleep(0.35)
 
     required_files = [(REF_DIR, "CEDAR_REF_1_SINGLE_4FT_CLEAN.jpg")] + [(PLATE_DIR, p) for p in PLATES]
     missing = []
     for d, fname in required_files:
-        ok = await check_ingredient_exists(flow, fname.split(".")[0])
-        if not ok:
-            missing.append(os.path.join(d, fname))
+        stem = fname.split(".")[0]
+        known_u = KNOWN_PLATE_UUIDS.get(fname, "")
+        matched_u = next(
+            (u for u, txt in all_opts.items() if (known_u and known_u in u) or (stem in txt)),
+            None,
+        )
+        if matched_u:
+            KNOWN_PLATE_UUIDS[fname] = matched_u
+        else:
+            missing.append((fname, os.path.join(d, fname)))
 
-    await flow.call("Input.dispatchKeyEvent", {"type": "keyDown", "key": "Escape", "code": "Escape"})
-    await flow.call("Input.dispatchKeyEvent", {"type": "keyUp", "key": "Escape", "code": "Escape"})
-    await asyncio.sleep(0.35)
     if not missing:
-        print("All required reference & 6 plates already uploaded!")
+        print("All required reference & 6 plates verified with UUIDs!")
         return
 
-    print(f"Uploading {len(missing)} plates silently...")
+    print(f"Uploading {len(missing)} missing plate/ref file(s) silently: {[m[0] for m in missing]}...")
     await flow.call("Page.setInterceptFileChooserDialog", {"enabled": True})
     try:
         idx = 0
@@ -222,19 +371,19 @@ async def upload_missing_plates(flow, ws):
                 raise RuntimeError("fileChooserOpened did not fire!")
             mode = fc_ev["params"].get("mode", "")
             if mode == "selectMultiple":
-                batch_files = missing[idx:]
+                batch_entries = missing[idx:]
                 idx = len(missing)
             else:
-                batch_files = [missing[idx]]
+                batch_entries = [missing[idx]]
                 idx += 1
+            batch_files = [m[1] for m in batch_entries]
             print(f"  Setting {len(batch_files)} file(s) (mode={mode})...")
             await flow.call("DOM.setFileInputFiles", {
                 "files": batch_files,
                 "backendNodeId": fc_ev["params"]["backendNodeId"],
             })
-            # Wait until upload % indicators finish
             last_base = os.path.basename(batch_files[-1]).split(".")[0]
-            for _ in range(30):
+            for _ in range(35):
                 await asyncio.sleep(1.2)
                 pct = await flow.js("""
                 Array.from(document.querySelectorAll('div, span'))
@@ -252,46 +401,98 @@ async def upload_missing_plates(flow, ws):
     finally:
         await flow.call("Page.setInterceptFileChooserDialog", {"enabled": False})
 
+    await asyncio.sleep(1.0)
+    refreshed = await scan_all_project_options(flow, max_steps=12)
+    await flow.call("Input.dispatchKeyEvent", {"type": "keyDown", "key": "Escape", "code": "Escape"})
+    await flow.call("Input.dispatchKeyEvent", {"type": "keyUp", "key": "Escape", "code": "Escape"})
+    await asyncio.sleep(0.35)
+    for fname, _ in missing:
+        stem = fname.split(".")[0]
+        matched_u = next((u for u, txt in refreshed.items() if stem in txt), None)
+        if matched_u:
+            KNOWN_PLATE_UUIDS[fname] = matched_u
+            print(f"  📌 Registered UUID for {fname}: {matched_u}")
+
 
 async def attach_ingredient_exact(flow, filename):
     stem = filename.split(".")[0]
+    known_uuid = KNOWN_PLATE_UUIDS.get(filename, "")
+    await open_ingredient_modal(flow)
+
+    # Reset virtual scroll to top and scan downward in 280px steps matching either stem or known_uuid
     await flow.js("""
     (() => {
-        if (!document.querySelector('[role="option"]')) {
-            document.querySelector('[aria-label="Thêm thành phần vào ô nhập câu lệnh"]')?.click();
-        }
+        const vp = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"]') || document.querySelector('cdk-virtual-scroll-viewport');
+        if (vp) vp.scrollTop = 0;
     })()
     """)
-    await asyncio.sleep(0.8)
+    await asyncio.sleep(0.3)
 
-    await flow.js(f"""
-    (() => {{
-        const inp = document.querySelector('[aria-label="Tìm kiếm thành phần"]');
-        if (!inp) return;
-        const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-        setter.call(inp, {json.dumps(stem)});
-        inp.dispatchEvent(new Event('input', {{bubbles: true}}));
-    }})()
-    """)
-    await asyncio.sleep(0.55)
+    async def find_visible_match():
+        return await flow.js(f"""
+        (() => {{
+            const idStr = {json.dumps(stem)};
+            const ku = {json.dumps(known_uuid)};
+            const vp = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"]') || document.querySelector('cdk-virtual-scroll-viewport');
+            const vpRect = vp ? vp.getBoundingClientRect() : null;
+            const opts = Array.from(document.querySelectorAll('[role="option"]'));
+            for (const el of opts) {{
+                const txt = (el.innerText || '').trim();
+                const img = el.querySelector('img');
+                const src = img?.src || '';
+                const uuid = src.split('?')[0].split('/').pop();
+                if ((idStr && txt.includes(idStr)) || (ku && src.includes(ku))) {{
+                    if (vp && vpRect) {{
+                        const er = el.getBoundingClientRect();
+                        vp.scrollTop += (er.top + er.height / 2) - (vpRect.top + vpRect.height / 2);
+                    }}
+                    return {{matched: true, uuid}};
+                }}
+            }}
+            return {{matched: false, uuid: ''}};
+        }})()
+        """)
+
+    hit = False
+    for _ in range(38):
+        m = await find_visible_match()
+        if m["matched"]:
+            await asyncio.sleep(0.35)  # Allow lazy img.src & centered bounding rect to settle!
+            hit = True
+            break
+        moved = await flow.js("""
+        (() => {
+            const vp = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"]') || document.querySelector('cdk-virtual-scroll-viewport');
+            if (!vp) return false;
+            const prev = vp.scrollTop;
+            vp.scrollTop += 280;
+            return vp.scrollTop > prev;
+        })()
+        """)
+        if not moved:
+            break
+        await asyncio.sleep(0.26)
+
+    if not hit:
+        raise RuntimeError(f"Ingredient {filename!r} (uuid={known_uuid!r}) not found in virtual scroll list!")
 
     async def inspect_dialog():
         return await flow.js(f"""
         (() => {{
             const idStr = {json.dumps(stem)};
+            const ku = {json.dumps(known_uuid)};
             const opts = Array.from(document.querySelectorAll('[role="option"]'));
             let targetOpt = null;
             for (const el of opts) {{
                 const txt = (el.innerText || '').trim();
                 const img = el.querySelector('img');
                 const src = img?.src || '';
-                if (txt.includes(idStr) || src.includes(idStr)) {{
-                    el.scrollIntoView({{block: 'center'}});
-                    const r = (img || el).getBoundingClientRect();
+                if ((idStr && txt.includes(idStr)) || (ku && src.includes(ku))) {{
+                    const r = (img && img.getBoundingClientRect().width > 10 ? img : el).getBoundingClientRect();
                     targetOpt = {{
                         txt: txt.replace(/\\s+/g, ' ').slice(0, 70),
                         uuid: src.split('?')[0].split('/').pop(),
-                        cx: Math.round(r.x + r.width / 2),
+                        cx: Math.round(r.x + Math.min(r.width / 2, 45)),
                         cy: Math.round(r.y + r.height / 2),
                     }};
                     break;
@@ -308,31 +509,37 @@ async def attach_ingredient_exact(flow, filename):
                 }}
                 if (container) {{
                     previewSrcs = Array.from(container.querySelectorAll('img'))
-                        .filter(i => !i.closest('[role="option"]') && i.getBoundingClientRect().width > 120)
+                        .filter(i => !i.closest('[role="option"]'))
                         .map(i => (i.src || '').split('?')[0]);
                 }}
             }}
-            return {{targetOpt, hasAddBtn: Boolean(addBtn), previewSrcs, allOpts: opts.map(o => (o.innerText||'').trim().slice(0,50))}};
+            return {{targetOpt, hasAddBtn: Boolean(addBtn), previewSrcs}};
         }})()
         """)
 
     st = await inspect_dialog()
-    if not st["targetOpt"]:
-        raise RuntimeError(f"Ingredient {filename!r} not found! Visible: {st['allOpts']}")
+    if not st["targetOpt"] or not st["targetOpt"]["uuid"]:
+        raise RuntimeError(f"Ingredient {filename!r} matched but img.src uuid still empty: {st}")
 
     target_uuid = st["targetOpt"]["uuid"]
+    KNOWN_PLATE_UUIDS[filename] = target_uuid
+
     is_previewed = any(target_uuid in u for u in st["previewSrcs"]) and st["hasAddBtn"]
     if not is_previewed:
-        await asyncio.sleep(0.2)
-        st = await inspect_dialog()
-        await flow.trusted_click(st["targetOpt"]["cx"], st["targetOpt"]["cy"])
-        await asyncio.sleep(0.55)
-        st2 = await inspect_dialog()
-        if not any(target_uuid in u for u in st2["previewSrcs"]):
-            await flow.trusted_click(st["targetOpt"]["cx"] + 40, st["targetOpt"]["cy"])
-            await asyncio.sleep(0.55)
-            st2 = await inspect_dialog()
-        if not any(target_uuid in u for u in st2["previewSrcs"]):
+        for dx in (0, 55, 105):
+            st_cur = await inspect_dialog()
+            if not st_cur["targetOpt"]:
+                break
+            await flow.trusted_click(st_cur["targetOpt"]["cx"] + dx, st_cur["targetOpt"]["cy"])
+            for _ in range(6):
+                await asyncio.sleep(0.3)
+                st2 = await inspect_dialog()
+                if any(target_uuid in u for u in st2["previewSrcs"]) and st2["hasAddBtn"]:
+                    is_previewed = True
+                    break
+            if is_previewed:
+                break
+        if not is_previewed:
             raise RuntimeError(f"Could not preview {filename!r} ({target_uuid})")
 
     await flow.find_and_trusted_click("text === 'Thêm vào câu lệnh'", "Thêm vào câu lệnh")
@@ -345,6 +552,75 @@ async def attach_ingredient_exact(flow, filename):
     if target_uuid not in chip_uuids:
         raise RuntimeError(f"Chip mismatch for {filename}: expected {target_uuid} in {chip_uuids}")
     print(f"  + Attached {stem} ({target_uuid[:8]})")
+
+
+async def exit_edit_view_if_needed(flow):
+    href = await flow.js("window.location.href")
+    if "/edit/" in (href or ""):
+        await flow.find_and_trusted_click("aria === 'Nút quay lại để quay về trang trước'", "exit /edit/ view")
+        await asyncio.sleep(1.0)
+
+
+async def switch_gallery_to_images_once(flow):
+    await exit_edit_view_if_needed(flow)
+    img_tab = await flow.js("""
+    (() => {
+        const btns = Array.from(document.querySelectorAll('button, [role="tab"]')).filter(b => {
+            const r = b.getBoundingClientRect();
+            const txt = (b.innerText || '').trim();
+            return r.width > 0 && r.x < 260 && r.y > 60 && r.y < 260 && txt.includes('Hình ảnh');
+        });
+        if (!btns.length) return null;
+        const r = btns[0].getBoundingClientRect();
+        return {cx: Math.round(r.x + r.width / 2), cy: Math.round(r.y + r.height / 2)};
+    })()
+    """)
+    if img_tab:
+        await flow.trusted_click(img_tab["cx"], img_tab["cy"])
+        await asyncio.sleep(0.5)
+
+
+async def ensure_gallery_and_image_mode(flow):
+    await exit_edit_view_if_needed(flow)
+    await flow.call("Input.dispatchKeyEvent", {"type": "keyDown", "key": "Escape", "code": "Escape"})
+    await flow.call("Input.dispatchKeyEvent", {"type": "keyUp", "key": "Escape", "code": "Escape"})
+    await asyncio.sleep(0.25)
+
+    pill = await flow.js("(document.querySelector('[aria-label=\"Điều kiện kích hoạt cài đặt\"]')?.innerText || '').trim()")
+    has_plus = await flow.js("Boolean(document.querySelector('[aria-label=\"Thêm thành phần vào ô nhập câu lệnh\"]'))")
+    if "Nano Banana Pro" in pill and "crop_16_9" in pill and "x1" in pill and has_plus:
+        return
+
+    await switch_gallery_to_images_once(flow)
+
+    is_open = await flow.js("Boolean(document.querySelector('[role=\"radio\"]'))")
+    if not is_open:
+        await flow.find_and_trusted_click("aria === 'Điều kiện kích hoạt cài đặt'", "open settings pill")
+        await asyncio.sleep(0.45)
+
+    await flow.find_and_trusted_click("el.getAttribute('role') === 'radio' && text.includes('Hình ảnh')", "Hình ảnh radio")
+    await asyncio.sleep(0.4)
+    await flow.find_and_trusted_click("el.getAttribute('role') === 'radio' && text.includes('16:9')", "16:9 radio")
+    await asyncio.sleep(0.3)
+
+    already_pro = await flow.js("""
+    Array.from(document.querySelectorAll('button, [role="button"]')).some(b => {
+        const r = b.getBoundingClientRect();
+        return r.width > 0 && r.y > 480 && r.y < 820 && (b.innerText || '').includes('Nano Banana Pro');
+    })
+    """)
+    if not already_pro:
+        await flow.find_and_trusted_click("(text.includes('Nano Banana') || text.includes('Imagen')) && r.y > 480 && r.y < 820", "image model dropdown")
+        await asyncio.sleep(0.4)
+        await flow.find_and_trusted_click("el.getAttribute('role') === 'menuitem' && text.includes('Nano Banana Pro')", "Nano Banana Pro")
+        await asyncio.sleep(0.3)
+
+    await flow.find_and_trusted_click("el.getAttribute('role') === 'radio' && text === 'x1'", "x1 radio")
+    await asyncio.sleep(0.3)
+
+    if await flow.js("Boolean(document.querySelector('[role=\"radio\"]'))"):
+        await flow.find_and_trusted_click("aria === 'Điều kiện kích hoạt cài đặt'", "close settings pill")
+        await asyncio.sleep(0.4)
 
 
 async def get_rendered_uuids(flow):
@@ -363,7 +639,7 @@ async def submit_scene(flow, sc, wait_for_render=True):
     await asyncio.sleep(0.25)
     await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
     await asyncio.sleep(0.25)
-    await flow.ensure_image_16x9_pro()
+    await ensure_gallery_and_image_mode(flow)
     await clear_composer_strict(flow)
 
     before_uuids = await get_rendered_uuids(flow)
@@ -400,7 +676,7 @@ async def submit_scene(flow, sc, wait_for_render=True):
     print(f"  🚀 Queued {sc['key']}!")
 
     if not wait_for_render:
-        await asyncio.sleep(1.5)
+        await asyncio.sleep(1.8)
         return
 
     for step in range(45):
@@ -413,10 +689,58 @@ async def submit_scene(flow, sc, wait_for_render=True):
     print(f"  ⚠️ Timeout waiting for {sc['key']}, continuing...")
 
 
+async def run_waves(flow, scenes, tag):
+    for w_idx in range(0, len(scenes), 3):
+        wave = scenes[w_idx:w_idx + 3]
+        before_wave = await get_rendered_uuids(flow)
+        for sc in wave:
+            await submit_scene(flow, sc, wait_for_render=False)
+        print(f"  Waiting for {tag} wave {w_idx//3 + 1} ({len(wave)} images) to finish rendering...")
+        for step in range(60):
+            await asyncio.sleep(2.0)
+            await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
+            cur = await get_rendered_uuids(flow)
+            pcts = await flow.js("""
+            Array.from(document.querySelectorAll('div, span'))
+                .map(e => (e.innerText || '').trim())
+                .filter(t => /^\\d+%$/.test(t))
+            """)
+            done_n = len(cur - before_wave)
+            if done_n >= len(wave) and not pcts:
+                print(f"  ✅ Wave {w_idx//3 + 1} finished ({done_n}/{len(wave)}) in {(step+1)*2}s!")
+                break
+    await asyncio.sleep(5.0)
+    await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
+    await asyncio.sleep(1.0)
+    res = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 88})
+    p = os.path.join(OUT_DIR, f"qa_{tag}_top6.jpg")
+    with open(p, "wb") as f:
+        f.write(base64.b64decode(res["data"]))
+    await flow.js("""
+    (() => {
+        const scrollers = Array.from(document.querySelectorAll('div, main')).filter(el => el.scrollHeight > el.clientHeight + 200);
+        for (const s of scrollers) s.scrollTop = 520;
+        window.scrollTo(0, 520);
+    })()
+    """)
+    await asyncio.sleep(1.0)
+    res2 = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 88})
+    p2 = os.path.join(OUT_DIR, f"qa_{tag}_bot4.jpg")
+    with open(p2, "wb") as f:
+        f.write(base64.b64decode(res2["data"]))
+    await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
+    print(f"Saved final {tag} QA screenshots:", p, p2)
+
+
 async def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--phase", choices=["check1", "rest9", "all10"], default="check1")
+    parser.add_argument("--batch", choices=["batch1", "batch2"], default="batch2")
+    parser.add_argument("--phase", choices=["check1", "rest9", "all10", "slice"], default="all10")
+    parser.add_argument("--start-index", type=int, default=0)
     args = parser.parse_args()
+
+    scenes = SCENES_10 if args.batch == "batch1" else SCENES_BATCH2_10
+    tag = "batch10" if args.batch == "batch1" else "batch2_10"
 
     tabs = json.loads(urllib.request.urlopen(f"http://127.0.0.1:{PORT}/json/list").read())
     t = next((x for x in tabs if PROJECT_ID in (x.get("url") or "")), None)
@@ -430,55 +754,24 @@ async def main():
         await flow.call("DOM.enable")
         await flow.call("Emulation.setFocusEmulationEnabled", {"enabled": True})
 
+        await switch_gallery_to_images_once(flow)
+        await ensure_gallery_and_image_mode(flow)
         await upload_missing_plates(flow, ws)
 
         if args.phase == "check1":
-            await submit_scene(flow, SCENES_10[0], wait_for_render=True)
+            await submit_scene(flow, scenes[0], wait_for_render=True)
             await asyncio.sleep(1.5)
             res = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 85})
-            p = os.path.join(OUT_DIR, "qa_batch10_check1.jpg")
+            p = os.path.join(OUT_DIR, f"qa_{tag}_check1.jpg")
             with open(p, "wb") as f:
                 f.write(base64.b64decode(res["data"]))
             print("Saved check1 QA screenshot:", p)
         elif args.phase == "rest9":
-            # Submit in waves of 3 concurrent jobs so Google Flow Ultra renders 3x faster!
-            rest = SCENES_10[1:]
-            for w_idx in range(0, len(rest), 3):
-                wave = rest[w_idx:w_idx + 3]
-                before_wave = await get_rendered_uuids(flow)
-                for i, sc in enumerate(wave):
-                    await submit_scene(flow, sc, wait_for_render=False)
-                print(f"  Waiting for wave {w_idx//3 + 1} ({len(wave)} images) to finish rendering...")
-                for step in range(55):
-                    await asyncio.sleep(2.0)
-                    await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
-                    cur = await get_rendered_uuids(flow)
-                    done_n = len(cur - before_wave)
-                    if done_n >= len(wave):
-                        print(f"  ✅ Wave {w_idx//3 + 1} finished ({done_n}/{len(wave)}) in {(step+1)*2}s!")
-                        break
-            await asyncio.sleep(6.0)
-            await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
-            await asyncio.sleep(1.0)
-            res = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 88})
-            p = os.path.join(OUT_DIR, "qa_batch10_top6.jpg")
-            with open(p, "wb") as f:
-                f.write(base64.b64decode(res["data"]))
-            # Scroll main gallery container down by 520px to inspect the remaining 4 cards of the 10-image batch
-            await flow.js("""
-            (() => {
-                const scrollers = Array.from(document.querySelectorAll('div, main')).filter(el => el.scrollHeight > el.clientHeight + 200);
-                for (const s of scrollers) s.scrollTop = 520;
-                window.scrollTo(0, 520);
-            })()
-            """)
-            await asyncio.sleep(1.0)
-            res2 = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 88})
-            p2 = os.path.join(OUT_DIR, "qa_batch10_bot4.jpg")
-            with open(p2, "wb") as f:
-                f.write(base64.b64decode(res2["data"]))
-            await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
-            print("Saved final batch10 QA screenshots:", p, p2)
+            await run_waves(flow, scenes[1:], tag)
+        elif args.phase == "slice":
+            await run_waves(flow, scenes[args.start_index:], tag)
+        elif args.phase == "all10":
+            await run_waves(flow, scenes, tag)
 
 
 if __name__ == "__main__":
