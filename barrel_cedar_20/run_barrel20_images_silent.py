@@ -25,6 +25,8 @@ PLATES = [
     "BARREL_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg",
     "BARREL_PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9.jpg",
     "BARREL_PLATE_06_SINGLE_WIDE_55PCT_16x9.jpg",
+    "BARREL_PLATE_07_SINGLE_WIDE_RIGHT_36PCT_16x9.jpg",
+    "BARREL_PLATE_08_SINGLE_COASTAL_RIGHT_56PCT_16x9.jpg",
 ]
 
 PAIR_LOCK = (
@@ -190,11 +192,12 @@ SCENES_20 = [
     },
     {
         "key": "B15_DINING_OAK_SIDEBOARD_MORNING_SUN",
-        "refs": ["BARREL_PLATE_06_SINGLE_WIDE_55PCT_16x9.jpg", "BARREL_REF_1_SINGLE_CLEAN.jpg"],
+        "refs": ["BARREL_PLATE_07_SINGLE_WIDE_RIGHT_36PCT_16x9.jpg", "BARREL_REF_1_SINGLE_CLEAN.jpg"],
         "prompt": SINGLE_LOCK + (
-            "a 35mm-50mm live-action Kodak Vision3 250D high-ceilinged sunlit country-modern dining room: beside the plant on the left is an 85cm solid warm white-oak buffet sideboard "
-            "(reaching two-thirds up the plant), on the right a solid oak dining table with linen-and-oak chairs resting on a natural woven jute rug, tall paned casement windows "
-            "along the cream plaster back wall streaming golden morning sunbeams onto wide-plank oak flooring, realistic barrel contact shadow, clean natural daylight on the plant, zero text."
+            "a 35mm live-action Kodak Vision3 250D high-ceilinged sunlit country-modern dining room with a 3.2-meter white-oak beamed ceiling (DO NOT move or enlarge the plant — "
+            "keep its exact compact 4ft / 1.25m height on the right so its pointed tip reaches only ~40cm above the 85cm sideboard and stays well below mid-window height with over 1.9 meters "
+            "of open window and plaster wall above it up to the ceiling): on the left stands an 85cm solid warm white-oak buffet sideboard and an oak dining table with linen-and-oak chairs "
+            "resting on a woven jute rug, tall paned casement windows behind streaming golden morning sunbeams onto wide-plank oak flooring, realistic barrel contact shadow, clean daylight, zero text."
         ),
     },
     {
@@ -238,12 +241,13 @@ SCENES_20 = [
     },
     {
         "key": "B20_COASTAL_GREAT_ROOM_OCEAN_VIEW",
-        "refs": ["BARREL_PLATE_06_SINGLE_WIDE_55PCT_16x9.jpg", "BARREL_REF_1_SINGLE_CLEAN.jpg"],
+        "refs": ["BARREL_PLATE_08_SINGLE_COASTAL_RIGHT_56PCT_16x9.jpg", "BARREL_REF_1_SINGLE_CLEAN.jpg"],
         "prompt": SINGLE_LOCK + (
-            "a 35mm-50mm live-action Kodak Vision3 250D sunlit California coastal hillside living room with a 3.3-meter white-oak beamed ceiling: the plant stands naturally beside "
-            "slim dark-bronze framed panoramic windows overlooking sunlit coastal hillside greenery and a calm distant Pacific ocean horizon; on the left sits a generous 75cm cream linen "
-            "sectional sofa and low solid-oak coffee table on a woven natural jute rug over warm wide-plank oak flooring, consistent late-afternoon sunlight entering through the ocean-facing "
-            "windows casting natural window-mullion light patterns across the floor, realistic barrel contact shadow, clean natural daylight on the plant, zero text."
+            "a 50mm medium-wide live-action Kodak Vision3 250D sunlit California coastal hillside living room (DO NOT shrink, enlarge, or move the plant — "
+            "keep its exact 56% frame-height bounding box on the right so its pointed top tip stands ~50cm taller than the 78cm sofa backrest, reaching slightly above mid-window height "
+            "while leaving generous open panoramic glass and white-oak ceiling beams well above the plant tip): on the left sits a 78cm cream linen sectional sofa (whose backrest reaches "
+            "~60% up the plant) and a low solid-oak coffee table on a woven natural jute rug over warm wide-plank oak flooring, behind are tall slim dark-bronze framed panoramic ocean-view "
+            "windows overlooking sunlit coastal hillside greenery and a calm blue Pacific ocean horizon, warm late-afternoon sunlight across the oak floor, realistic barrel contact shadow, zero text."
         ),
     },
 ]
@@ -302,6 +306,10 @@ async def ensure_gallery_and_image_mode(flow):
     await flow.call("Input.dispatchKeyEvent", {"type": "keyDown", "key": "Escape", "code": "Escape"})
     await flow.call("Input.dispatchKeyEvent", {"type": "keyUp", "key": "Escape", "code": "Escape"})
     await asyncio.sleep(0.25)
+
+    if await flow.js("Boolean(document.querySelector('[aria-label=\"Chỉ dẫn cho tác nhân\"]'))"):
+        await flow.find_and_trusted_click("text === 'Tác nhân' && r.y > 780 && r.y < 920", "toggle OFF Tác nhân")
+        await asyncio.sleep(0.75)
 
     pill = await flow.js("(document.querySelector('[aria-label=\"Điều kiện kích hoạt cài đặt\"]')?.innerText || '').trim()")
     has_plus = await flow.js("Boolean(document.querySelector('[aria-label=\"Thêm thành phần vào ô nhập câu lệnh\"]'))")
@@ -598,10 +606,11 @@ async def attach_ingredient_exact(flow, filename):
         raise RuntimeError(f"Ingredient {filename!r} matched but uuid empty: {st}")
 
     target_uuid = st["targetOpt"]["uuid"]
-    KNOWN_UUIDS[filename] = target_uuid
+    target_core = target_uuid.split("=")[0][:48]
+    KNOWN_UUIDS[filename] = target_core
     save_uuid_cache(KNOWN_UUIDS)
 
-    is_previewed = any(target_uuid in u for u in st["previewSrcs"]) and st["hasAddBtn"]
+    is_previewed = any(target_core in u for u in st["previewSrcs"]) and st["hasAddBtn"]
     if not is_previewed:
         for dx in (0, 55, 105):
             st_cur = await inspect_dialog()
@@ -611,7 +620,7 @@ async def attach_ingredient_exact(flow, filename):
             for _ in range(7):
                 await asyncio.sleep(0.3)
                 st2 = await inspect_dialog()
-                if any(target_uuid in u for u in st2["previewSrcs"]) and st2["hasAddBtn"]:
+                if any(target_core in u for u in st2["previewSrcs"]) and st2["hasAddBtn"]:
                     is_previewed = True
                     break
             if is_previewed:
@@ -619,25 +628,32 @@ async def attach_ingredient_exact(flow, filename):
         if not is_previewed:
             raise RuntimeError(f"Could not preview {filename!r} ({target_uuid})")
 
+    before_chips = await flow.js("document.querySelectorAll('button[aria-label=\"Thành phần\"]').length")
     await flow.find_and_trusted_click("text === 'Thêm vào câu lệnh'", "Thêm vào câu lệnh")
-    await asyncio.sleep(0.55)
 
-    chip_uuids = await flow.js("""
-    Array.from(document.querySelectorAll('button[aria-label="Thành phần"] img'))
-        .map(i => (i.src || '').split('?')[0].split('/').pop())
-    """)
-    if target_uuid not in chip_uuids:
-        raise RuntimeError(f"Chip mismatch for {filename}: expected {target_uuid} in {chip_uuids}")
-    print(f"  + Attached {stem} ({target_uuid[:8]})")
+    chip_srcs = []
+    for _ in range(12):
+        await asyncio.sleep(0.3)
+        chip_srcs = await flow.js("""
+        Array.from(document.querySelectorAll('button[aria-label="Thành phần"] img'))
+            .map(i => (i.currentSrc || i.src || '').split('?')[0].split('/').pop())
+            .filter(Boolean)
+        """)
+        if len(chip_srcs) >= before_chips + 1:
+            break
+    if len(chip_srcs) < before_chips + 1:
+        raise RuntimeError(f"Chip count did not increment for {filename}: before={before_chips}, after={chip_srcs}")
+    print(f"  + Attached {stem} (chip={chip_srcs[-1][:14]})")
 
 
 async def get_rendered_uuids(flow):
     imgs = await flow.js("""
     Array.from(document.querySelectorAll('img'))
+        .filter(i => !i.closest('button[aria-label="Thành phần"]') && !i.closest('[role="option"]'))
         .map(i => ({src: i.currentSrc || i.src || '', nw: i.naturalWidth}))
-        .filter(i => i.src.includes('flow-content.google/image/') && i.nw >= 700)
+        .filter(i => (i.src.includes('flow-content.google/image/') || i.src.includes('/asb/') || i.src.includes('googleusercontent.com/')) && i.nw >= 600)
     """)
-    return {im["src"].split("?")[0] for im in imgs}
+    return {im["src"].split("?")[0].split("=")[0] for im in imgs}
 
 
 async def submit_scene(flow, sc, wait_for_render=True):

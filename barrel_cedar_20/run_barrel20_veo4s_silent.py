@@ -271,8 +271,8 @@ VIDEOS_BARREL_20 = [
         "title": "Cảnh B20 — Phòng Khách Đồi Ven Biển California Trần Xà Gỗ Sồi & Cửa Kính Đại Dương (1 Cây Đại Cảnh)",
         "move": "Forward Wide-to-Medium Push-In Across Coastal Great Room (Đẩy tiến mở tầm nhìn sofa kem & chân trời biển Thái Bình Dương)",
         "prompt": (
-            "Continuous, clearly visible 4-second 35mm forward camera push-in across the sunlit California coastal hillside living room, "
-            "advancing smoothly from a wide architectural view toward a closer medium composition so the low solid-oak coffee table, woven jute rug, and cream linen sectional sofa "
+            "Continuous, clearly visible 4-second 50mm forward camera push-in across the sunlit California coastal hillside living room, "
+            "advancing smoothly from a medium-wide architectural view toward a closer hero composition so the low solid-oak coffee table, woven jute rug, and cream linen sectional sofa "
             "on the left glide past in rich 3D parallax against the potted plant and panoramic ocean-view windows. Distant coastal greenery and calm ocean light shimmer softly "
             "while preserving the exact solid conical shape, weathered grey-brown wooden stave barrel planter with three horizontal black metal hoops, "
             "and dense green molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
@@ -313,6 +313,10 @@ async def ensure_veo31_fast_4s_16x9(flow):
     await flow.call("Input.dispatchKeyEvent", {"type": "keyDown", "key": "Escape", "code": "Escape"})
     await flow.call("Input.dispatchKeyEvent", {"type": "keyUp", "key": "Escape", "code": "Escape"})
     await asyncio.sleep(0.3)
+
+    if await flow.js("Boolean(document.querySelector('[aria-label=\"Chỉ dẫn cho tác nhân\"]'))"):
+        await flow.find_and_trusted_click("text === 'Tác nhân' && r.y > 780 && r.y < 920", "toggle OFF Tác nhân")
+        await asyncio.sleep(0.75)
 
     pill = await flow.js("(document.querySelector('[aria-label=\"Điều kiện kích hoạt cài đặt\"]')?.innerText || '').trim()")
     has_start_slot = await flow.js("""
@@ -399,6 +403,7 @@ async def clear_frame_slots_and_text(flow):
 
 
 async def _try_set_start_frame_once(flow, target_uuid):
+    target_uuid = target_uuid.split("=")[0][:48]
     await flow.call("Input.dispatchKeyEvent", {"type": "keyDown", "key": "Escape", "code": "Escape"})
     await flow.call("Input.dispatchKeyEvent", {"type": "keyUp", "key": "Escape", "code": "Escape"})
     await asyncio.sleep(0.35)
