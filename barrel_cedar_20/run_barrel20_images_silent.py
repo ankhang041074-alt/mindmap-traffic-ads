@@ -27,6 +27,7 @@ PLATES = [
     "BARREL_PLATE_06_SINGLE_WIDE_55PCT_16x9.jpg",
     "BARREL_PLATE_07_SINGLE_WIDE_RIGHT_36PCT_16x9.jpg",
     "BARREL_PLATE_08_SINGLE_COASTAL_RIGHT_56PCT_16x9.jpg",
+    "BARREL_PLATE_09_SINGLE_HERO_RIGHT_76PCT_16x9.jpg",
 ]
 
 PAIR_LOCK = (
@@ -38,14 +39,16 @@ PAIR_LOCK = (
     "Replace ONLY the pure white background with "
 )
 
-SINGLE_LOCK = (
-    "Edit this 16:9 product photograph (using the second 1024x1024 reference image for close-up molded leaf sprig and rustic wooden barrel planter detail): "
-    "keep the potted artificial plant and its weathered grey-brown wooden stave barrel planter with three horizontal riveted matte-black metal hoops "
-    "100% pixel-identical to the 16:9 plate in exact position, height, barrel width-to-height proportions, three black metal bands with rivets, "
-    "tall conical outer contour, and dense natural green molded plastic leaf texture — DO NOT change the wooden barrel planter into a plain pot, "
-    "DO NOT remove or alter the three black metal hoops, DO NOT widen or slim the plant silhouette, and DO NOT redraw or alter the leaves into spiky pine needles. "
-    "Replace ONLY the pure white background with "
+STRICT_SINGLE_CUTOUT_LOCK = (
+    "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact fine lacy flat-fan foliage sprigs, "
+    "delicate airy feathery outer branchlet tips, and weathered grey-brown wooden stave barrel planter detail): "
+    "treat the potted plant and wooden barrel in the 16:9 plate as an untouched locked foreground photograph cutout — "
+    "keep every single fine flat-fan leaf sprig, delicate lacy outer branch edge, smooth tapered conical contour, full foliage width, full barrel width and height, "
+    "and three horizontal riveted matte-black metal hoops 100% pixel-identical to the 16:9 plate without shrinking, narrowing, clumping, thickening, or redrawing any leaf or barrel pixels. "
+    "Outpaint ONLY the pure white background with "
 )
+
+SINGLE_LOCK = STRICT_SINGLE_CUTOUT_LOCK
 
 SCENES_20 = [
     {
@@ -202,11 +205,13 @@ SCENES_20 = [
     },
     {
         "key": "B16_STUDY_WALNUT_DESK_ARCHED_SHELVES",
-        "refs": ["BARREL_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg", "BARREL_REF_1_SINGLE_CLEAN.jpg"],
-        "prompt": SINGLE_LOCK + (
-            "a 50mm Hero live-action Kodak Vision3 250D sunlit luxury home study: built-in warm clay-plaster arched bookcases styled with neutral linen books and ceramic vessels behind "
-            "continuing past the top edge of the frame, wide-plank oak floor with realistic barrel contact shadow, a softly blurred foreground 75cm dark-walnut writing desk corner "
-            "with a closed unmarked tan-leather notebook and wooden chair edge bottom-right, warm afternoon window sunlight raking across the plaster shelves, clean daylight on the plant, zero text."
+        "refs": ["BARREL_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg", "BARREL_REF_2_CLOSEUP_LEAF_BARREL_1024.jpg"],
+        "prompt": STRICT_SINGLE_CUTOUT_LOCK + (
+            "a 50mm Hero live-action Kodak Vision3 250D sunlit luxury home study (preserve 100% of the fine lacy flat-fan foliage sprigs and delicate feathery outer branchlet tips "
+            "from the plate with even, clean natural daylight around the plant — DO NOT paint dark shadow bands over the plant or alter its leaf texture): "
+            "built-in warm clay-plaster arched bookcases styled with neutral linen books and matte ceramic vessels behind continuing past the top edge of the frame, "
+            "wide-plank European oak floor with a realistic contact shadow directly beneath the wooden barrel base, a softly blurred foreground 75cm dark-walnut writing desk corner "
+            "with a closed unmarked tan-leather notebook bottom-right, soft golden afternoon window sunlight illuminating the right-hand plaster shelves, zero text."
         ),
     },
     {
@@ -231,12 +236,14 @@ SCENES_20 = [
     },
     {
         "key": "B19_POOL_CABANA_TRAVERTINE_DAYBED",
-        "refs": ["BARREL_PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9.jpg", "BARREL_REF_1_SINGLE_CLEAN.jpg"],
-        "prompt": SINGLE_LOCK + (
-            "a 50mm Hero live-action Kodak Vision3 250D sunlit Mediterranean resort backyard pool cabana lounge: the plant stands on honed cream travertine stone under a timber-beam cabana "
-            "beside a low 70cm outdoor teak daybed sofa with white linen cushions on the left (reaching slightly above mid-plant height), calm sunlit turquoise pool water and olive trees "
-            "softly defocused in the bright background, blurred foreground travertine coffee table corner bottom-left, warm late-afternoon golden sun-streaks across the travertine floor, "
-            "clean natural daylight on the plant and wooden barrel, realistic floor contact shadow, zero text."
+        "refs": ["BARREL_PLATE_09_SINGLE_HERO_RIGHT_76PCT_16x9.jpg", "BARREL_REF_2_CLOSEUP_LEAF_BARREL_1024.jpg"],
+        "prompt": STRICT_SINGLE_CUTOUT_LOCK + (
+            "a 50mm Hero live-action Kodak Vision3 250D sunlit Mediterranean resort poolside travertine terrace (DO NOT shrink, slim, or narrow the plant or wooden barrel — "
+            "keep its full 76% frame-height and full lush width in the right foreground so it looks substantial and full-sized): "
+            "the plant stands prominently in the right foreground on honed cream travertine stone pavers; recessed ~1.4 meters further back on the left sits a low-profile 65cm "
+            "outdoor teak lounge daybed with white linen cushions (scaled proportionally in depth so its seat cushion aligns near the middle-to-upper black hoop of the wooden barrel "
+            "and its low white backrest cushion reaches ONLY halfway ~48% up the plant, with NO vertical timber post next to the plant and overhead pergola beams kept high near the top edge), "
+            "calm sunlit turquoise pool water and soft olive-tree garden bokeh behind, subtle low blurred travertine table edge at far bottom-left corner, warm golden sunlight across the stone, realistic barrel contact shadow, zero text."
         ),
     },
     {
@@ -400,7 +407,10 @@ async def upload_missing_plates(flow, ws):
     await flow.call("Input.dispatchKeyEvent", {"type": "keyUp", "key": "Escape", "code": "Escape"})
     await asyncio.sleep(0.35)
 
-    required_files = [(REF_DIR, "BARREL_REF_1_SINGLE_CLEAN.jpg")] + [(PLATE_DIR, p) for p in PLATES]
+    required_files = [
+        (REF_DIR, "BARREL_REF_1_SINGLE_CLEAN.jpg"),
+        (REF_DIR, "BARREL_REF_2_CLOSEUP_LEAF_BARREL_1024.jpg"),
+    ] + [(PLATE_DIR, p) for p in PLATES]
     missing = []
     for d, fname in required_files:
         stem = fname.split(".")[0]
@@ -467,8 +477,8 @@ async def upload_missing_plates(flow, ws):
                 "backendNodeId": fc_ev["params"]["backendNodeId"],
             })
             last_base = os.path.basename(batch_files[-1]).split(".")[0]
-            for _ in range(40):
-                await asyncio.sleep(1.3)
+            for up_step in range(30):
+                await asyncio.sleep(1.2)
                 pct = await flow.js("""
                 Array.from(document.querySelectorAll('div, span'))
                     .map(e => (e.innerText || '').trim())
@@ -479,7 +489,7 @@ async def upload_missing_plates(flow, ws):
                     .map(b => b.getAttribute('aria-label') || '')
                     .filter(a => a.includes({json.dumps(last_base)}))
                 """)
-                if cards and not pct:
+                if (cards or up_step >= 5) and not pct:
                     print(f"  ✅ Uploaded through {last_base}!")
                     break
     finally:

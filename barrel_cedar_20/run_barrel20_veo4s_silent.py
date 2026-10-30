@@ -223,7 +223,7 @@ VIDEOS_BARREL_20 = [
             "so the softly blurred dark-walnut writing desk corner and closed tan-leather notebook in the bottom-right foreground glide smoothly outward past the edge of the frame "
             "in rich 3D depth toward the potted plant and warm clay-plaster arched bookcases. Soft golden dust motes float in the raking afternoon window light "
             "while preserving the exact solid conical shape, weathered grey-brown wooden stave barrel planter with three horizontal black metal hoops, "
-            "and dense green molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+            "and fine lacy green flat-fan foliage of the plant. No people, no camera equipment, zero morphing, zero text."
         ),
     },
     {
@@ -258,11 +258,11 @@ VIDEOS_BARREL_20 = [
         "title": "Cảnh B19 — Cabana Hồ Bơi Resort Đá Travertine & Sofa Daybed Gỗ Teak (1 Cây Hero Phải)",
         "move": "Lateral Camera Truck-Right Past Foreground Travertine Table (Trượt phải qua bàn đá Travertine mờ tiền cảnh, nước hồ lấp lánh)",
         "prompt": (
-            "Continuous, clearly visible 4-second 50mm lateral camera truck-right across the sunlit Mediterranean backyard pool cabana lounge, "
-            "so the blurred travertine coffee table corner in the bottom-left foreground sweeps visibly leftward across the frame in dramatic 3D parallax "
-            "against the teak daybed sofa, the potted plant under timber cabana beams, and the bright backyard pool behind. Turquoise pool water ripples shimmer with golden sun reflections "
-            "while preserving the exact solid conical shape, weathered grey-brown wooden stave barrel planter with three horizontal black metal hoops, "
-            "and dense green molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+            "Continuous, clearly visible 4-second 50mm lateral camera truck-right across the sunlit Mediterranean poolside travertine terrace, "
+            "so the low blurred travertine table edge in the bottom-left corner sweeps visibly leftward across the frame in smooth 3D parallax "
+            "against the recessed low-profile teak lounge daybed on the left, the full-sized foreground potted plant on the right, and the bright backyard pool behind. "
+            "Turquoise pool water ripples shimmer with golden sun reflections while preserving the exact solid conical shape, weathered grey-brown wooden stave barrel planter "
+            "with three horizontal black metal hoops, and fine lacy green flat-fan foliage of the plant. No people, no camera equipment, zero morphing, zero text."
         ),
     },
     {
@@ -275,7 +275,7 @@ VIDEOS_BARREL_20 = [
             "advancing smoothly from a medium-wide architectural view toward a closer hero composition so the low solid-oak coffee table, woven jute rug, and cream linen sectional sofa "
             "on the left glide past in rich 3D parallax against the potted plant and panoramic ocean-view windows. Distant coastal greenery and calm ocean light shimmer softly "
             "while preserving the exact solid conical shape, weathered grey-brown wooden stave barrel planter with three horizontal black metal hoops, "
-            "and dense green molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+            "and fine lacy green flat-fan foliage of the plant. No people, no camera equipment, zero morphing, zero text."
         ),
     },
 ]
