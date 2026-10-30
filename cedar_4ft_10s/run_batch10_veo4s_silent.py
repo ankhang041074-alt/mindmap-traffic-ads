@@ -120,17 +120,162 @@ VIDEOS_10 = [
         "key": "V10_DINING_SUNROOM_OAK_SIDEBOARD_4S",
         "uuid": "ebc19d89-96d5-431c-bf48-65672b2852ec",
         "title": "Cảnh 10 — Phòng Ăn Trần Cao Tủ Buffet Gỗ Sồi & Nắng Ban Mai (1 Cây Đại Cảnh)",
-        "move": "Wide Architectural Push-In 6% (Đẩy chậm xuyên nắng sớm phòng ăn trần cao)",
+        "move": "Wide Architectural Push-In (Đẩy chậm xuyên nắng sớm phòng ăn trần cao)",
         "prompt": (
-            "4-second 35mm cinema gimbal slow push-in (6%) across the sunlit herringbone oak dining room floor between the warm oak buffet sideboard and oak dining table, framing the 4ft potted artificial plant "
-            "under tall morning-lit casement windows. Morning sunbeams hold steady while the matte-black square planter and dense two-tone green molded crown remain 100% still and unchanged. "
-            "No people, zero morphing, zero text."
+            "Continuous, clearly visible 4-second 35mm forward camera push-in across the sunlit herringbone oak dining room floor between the warm oak buffet sideboard and oak dining table, "
+            "moving smoothly from a wide view toward a closer medium framing of the 4ft potted plant under tall morning-lit casement windows. Subtle golden dust motes drift gently in the morning sunbeams "
+            "while preserving the exact solid shape, matte-black tapered square planter geometry, and dense two-tone green molded foliage of the plant. "
+            "No people, no camera equipment, zero morphing, zero text."
         ),
     },
 ]
 
+# Exact verified UUIDs of all 10 Batch 2 generated 16:9 scenes (S11 -> S20) in Project dfcf77a5-5374-4678-9f80-1c5ea7b5c305
+VIDEOS_BATCH2_10 = [
+    {
+        "key": "V11_PORCH_LIMESTONE_ARCH_OAK_DOORS_4S",
+        "uuid": "94476b2c-f110-4c1a-9c08-ee3d514ccc6c",
+        "title": "Cảnh 11 — Hiên Vòm Đá Vôi Santa Barbara & Cửa Đôi Gỗ Sồi 2.45m (2 Cây = 1/2 Cửa)",
+        "move": "Forward Camera Push-In Past Foreground Olive Foliage (Đẩy tiến xuyên cành ô-liu mờ tiền cảnh)",
+        "prompt": (
+            "Continuous, clearly visible 4-second 35mm forward camera push-in toward the sunlit carved limestone archway and arched white-oak double front doors, "
+            "so the blurred olive-branch leaves in the bottom-left foreground sweep outward across the edge of the frame in strong 3D optical parallax. "
+            "Dappled golden tree-canopy shadows sway gently across the textured limestone wall while preserving the exact solid shape, matte-black tapered square planter geometry, "
+            "and dense two-tone green molded foliage of both 4ft potted plants. No people, no camera equipment, zero morphing, zero text."
+        ),
+    },
+    {
+        "key": "V12_SUNROOM_WINDOW_BENCH_TERRACOTTA_4S",
+        "uuid": "72972fcc-5a93-464b-8324-399a9185d9d2",
+        "title": "Cảnh 12 — Phòng Kính Sunroom Ngập Nắng Sớm & Bệ Ghế Cửa Sổ Gỗ Sồi 50cm (1 Cây Hero Trái)",
+        "move": "Lateral Camera Truck-Right Across Conservatory (Trượt ngang sang phải mở chiều sâu bệ ghế & vườn nắng)",
+        "prompt": (
+            "Continuous, clearly visible 4-second 50mm lateral camera truck-right across the sun-drenched conservatory sunroom, gliding smoothly from left to right "
+            "to create rich three-dimensional architectural parallax between the foreground 4ft potted plant, the built-in white-oak window bench with linen pillows, "
+            "and the sunlit outdoor garden trees beyond the tall oak-framed glass windows. Subtle golden dust motes drift gently in the morning sunbeams "
+            "while preserving the exact solid shape, matte-black tapered square planter geometry, and dense two-tone green molded foliage of the plant. "
+            "No people, no camera equipment, zero morphing, zero text."
+        ),
+    },
+    {
+        "key": "V13_COURTYARD_LOGGIA_POOL_COLONNADE_4S",
+        "uuid": "7cf09a22-e08a-4bb0-9634-ef73a6450557",
+        "title": "Cảnh 13 — Hành Lang Cột Đá Sân Trong Nhìn Ra Hồ Bơi Xanh Ngọc Góc 3/4 (2 Cây Lệch Tầng)",
+        "move": "Lateral Camera Truck-Left Along Pool Colonnade (Trượt ngang qua hàng cột đá & mặt nước hồ bơi lấp lánh)",
+        "prompt": (
+            "Continuous, clearly visible 4-second 50mm lateral camera truck-left along the sunlit Mediterranean travertine colonnade terrace, creating dramatic multi-plane 3D parallax "
+            "between the tall warm-cream plaster pillars, the staggered pair of 4ft potted plants, and the sunlit courtyard lap pool behind. Turquoise pool water ripples shimmer "
+            "with golden afternoon reflections and distant garden bougainvillea sways softly in warm breeze while preserving the exact solid shape, matte-black tapered square planter geometry, "
+            "and dense two-tone green molded foliage of both plants. No people, no camera equipment, zero morphing, zero text."
+        ),
+    },
+    {
+        "key": "V14_KITCHEN_MARBLE_ISLAND_SLIDING_GLASS_4S",
+        "uuid": "80fe0aac-30fb-4d56-9fc3-8cd36fdeeba0",
+        "title": "Cảnh 14 — Góc Đảo Bếp Marble & Gỗ Sồi Rãnh Cạnh Cửa Kính Sân Vườn (1 Cây Hero Phải)",
+        "move": "Lateral Camera Truck-Right Past Foreground Ceramic Pitcher (Trượt phải qua bình gốm mờ tiền cảnh)",
+        "prompt": (
+            "Continuous, clearly visible 4-second 50mm lateral camera truck-right across the sunlit open-concept kitchen, so the blurred oak breakfast table and matte ceramic pitcher "
+            "in the bottom-left foreground sweep visibly leftward across the frame in strong 3D optical parallax against the marble-and-fluted-oak island, the 4ft potted plant, "
+            "and the sunlit stone garden terrace outside the black-framed glass doors. Subtle golden dust motes float in the afternoon sunbeams while preserving the exact solid shape, "
+            "matte-black tapered square planter geometry, and dense two-tone green molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+        ),
+    },
+    {
+        "key": "V15_GALLERY_ARCHWAY_WAINSCOTING_PORTAL_4S",
+        "uuid": "c8560aa3-3ce7-401f-831e-7cee9e229b90",
+        "title": "Cảnh 15 — Cổng Vòm Thông Phòng Ốp Phào Chỉ 95cm Mở Ra Phòng Khách Nắng (2 Cây Cận Trung)",
+        "move": "Forward Camera Push-In Past Right Doorframe Through Archway (Đẩy tiến xuyên khung cửa tiền cảnh vào vòm nắng)",
+        "prompt": (
+            "Continuous, clearly visible 4-second 50mm forward camera push-in along the French herringbone oak hallway toward the sunlit arched interior doorway, "
+            "so the blurred foreground doorway frame on the right sweeps past the edge of the lens in strong 3D architectural parallax, revealing deeper perspective "
+            "into the sun-drenched living room and cream linen sofa beyond. Soft golden dust motes drift gently in the afternoon window sunbeams while preserving the exact solid shape, "
+            "matte-black tapered square planter geometry, and dense two-tone green molded foliage of both 4ft potted plants. No people, no camera equipment, zero morphing, zero text."
+        ),
+    },
+    {
+        "key": "V16_BEDROOM_BALCONY_CURTAINS_LOUNGE_CHAIR_4S",
+        "uuid": "88270262-e787-4d12-809c-1c3fb0a01be9",
+        "title": "Cảnh 16 — Góc Thư Giãn Phòng Ngủ Master Rèm Voan Ban Công & Ghế Linen (1 Cây Hero Trái)",
+        "move": "Lateral Camera Truck-Left Past Foreground Bed Throw (Trượt trái qua mép giường linen tiền cảnh, rèm voan thở nhẹ)",
+        "prompt": (
+            "Continuous, clearly visible 4-second 50mm lateral camera truck-left across the sunlit primary bedroom sitting corner, so the softly defocused linen bed corner "
+            "in the bottom-right foreground glides visibly rightward across the frame in rich 3D optical parallax against the oatmeal lounge chair, the 4ft potted plant, "
+            "and the open French balcony doorway. The sheer warm-ivory linen curtains breathe very softly in a gentle morning breeze while preserving the exact solid shape, "
+            "matte-black tapered square planter geometry, and dense two-tone green molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+        ),
+    },
+    {
+        "key": "V17_COURTYARD_ARCHED_OAK_WINDOW_STONE_4S",
+        "uuid": "255b13ff-e051-4f6b-8fc6-5de808f483de",
+        "title": "Cảnh 17 — Sân Vườn Đá Châu Âu Cửa Sổ Vòm Gỗ Sồi & Bóng Nắng Đốm Lá (2 Cây Cận Trung)",
+        "move": "Lateral Camera Truck-Right Past Foreground Bistro Chair (Trượt phải qua lưng ghế sắt nghệ thuật mờ tiền cảnh)",
+        "prompt": (
+            "Continuous, clearly visible 4-second 50mm lateral camera truck-right across the sunlit European limestone courtyard, so the blurred cream wrought-iron garden chair back "
+            "in the bottom-left foreground sweeps visibly leftward across the frame in strong 3D parallax against the weathered stone flagstones, the twin 4ft potted plants, "
+            "and the arched natural-oak window. Warm dappled tree-canopy sun patterns shimmer gently across the honey-cream limestone masonry while preserving the exact solid shape, "
+            "matte-black tapered square planter geometry, and dense two-tone green molded foliage of both plants. No people, no camera equipment, zero morphing, zero text."
+        ),
+    },
+    {
+        "key": "V18_SPA_BATHROOM_FREESTANDING_TUB_SUNLIGHT_4S",
+        "uuid": "357a083b-bb15-4391-8461-42c738a6d409",
+        "title": "Cảnh 18 — Phòng Tắm Master Organic Spa Bồn Tắm Đá Trắng & Nắng Sớm (1 Cây Hero Phải)",
+        "move": "Forward Diagonal Push-In Past Teak Towel Stool & Tub (Đẩy tiến qua đôn khăn gỗ Teak & thành bồn tắm trắng)",
+        "prompt": (
+            "Continuous, clearly visible 4-second 50mm forward camera push-in with subtle rightward parallax across the sun-filled organic-modern spa bathroom, "
+            "so the teak towel stool and curved rim of the matte-white freestanding tub on the left sweep smoothly past the foreground in natural 3D depth toward the 4ft potted plant "
+            "beside the tall oak window. Outdoor olive-branch foliage beyond the window glass sways gently in morning sunlight while preserving the exact solid shape, "
+            "matte-black tapered square planter geometry, and dense two-tone green molded foliage of the indoor plant. No people, no camera equipment, zero morphing, zero text."
+        ),
+    },
+    {
+        "key": "V19_ROOFTOP_TERRACE_TEAK_DECK_GOLDEN_HOUR_4S",
+        "uuid": "03731287-04a9-477e-a037-843e39e6cdf2",
+        "title": "Cảnh 19 — Ban Công Penthouse Sàn Gỗ Teak Lan Can Kính Hoàng Hôn Góc 3/4 (2 Cây Chiều Sâu)",
+        "move": "Lateral Camera Truck-Left Past Foreground Outdoor Sofa Arm (Trượt trái qua tay sofa ngoài trời nắng hoàng hôn)",
+        "prompt": (
+            "Continuous, clearly visible 4-second 50mm lateral camera truck-left along the golden-hour penthouse teak terrace, so the cream outdoor linen sofa arm "
+            "in the bottom-right foreground sweeps visibly rightward across the frame in dramatic 3D parallax against the teak deck planks, the staggered pair of 4ft potted plants, "
+            "the glass terrace parapet, and the glowing sunlit hillside trees in the distance. Warm golden sun rays shimmer softly across the distant hillside canopy "
+            "while preserving the exact solid shape, matte-black tapered square planter geometry, and dense two-tone green molded foliage of both plants. "
+            "No people, no camera equipment, zero morphing, zero text."
+        ),
+    },
+    {
+        "key": "V20_COASTAL_GREAT_ROOM_OCEAN_WINDOWS_4S",
+        "uuid": "2a636fef-0562-4470-ad3d-8ff399015f8f",
+        "title": "Cảnh 20 — Phòng Khách Đồi Ven Biển Malibu Trần Xà Gỗ Nhìn Ra Biển (1 Cây Đại Cảnh)",
+        "move": "Forward Wide-to-Medium Push-In Across Coastal Great Room (Đẩy tiến mở tầm nhìn sofa kem & cửa kính biển)",
+        "prompt": (
+            "Continuous, clearly visible 4-second 35mm forward camera push-in across the sunlit California coastal hillside living room, advancing smoothly from a wide architectural view "
+            "toward a closer medium composition so the low oak coffee table, jute rug, and cream linen sectional sofa on the left glide past in rich 3D parallax against the 4ft potted plant "
+            "and the panoramic ocean-view windows. Distant coastal hillside brush and calm ocean horizon shimmer softly in late-afternoon sunlight while preserving the exact solid shape, "
+            "matte-black tapered square planter geometry, and dense two-tone green molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+        ),
+    },
+]
+
+FORBIDDEN_VIDEO_WORDS = (
+    "slider", "gimbal", "dolly", "tripod", "steadicam", "crane", " rig ", " rig.", " rig,",
+    "100% still", "stay still", "remain still", "motionless", "hold steady", "5%", "6%", "frozen", "static",
+)
+for _v in VIDEOS_BATCH2_10:
+    _low = _v["prompt"].lower()
+    for _fw in FORBIDDEN_VIDEO_WORDS:
+        if _fw in _low:
+            raise ValueError(f"Forbidden video word {_fw!r} found in {_v['key']}!")
+
+
+async def exit_edit_view_if_needed(flow):
+    href = await flow.js("window.location.href")
+    if "/edit/" in (href or ""):
+        await flow.find_and_trusted_click("aria === 'Nút quay lại để quay về trang trước'", "exit /edit/ view")
+        await asyncio.sleep(1.0)
+
 
 async def ensure_veo31_fast_4s_16x9(flow):
+    await exit_edit_view_if_needed(flow)
     await flow.call("Input.dispatchKeyEvent", {"type": "keyDown", "key": "Escape", "code": "Escape"})
     await flow.call("Input.dispatchKeyEvent", {"type": "keyUp", "key": "Escape", "code": "Escape"})
     await asyncio.sleep(0.3)
@@ -169,8 +314,9 @@ async def ensure_veo31_fast_4s_16x9(flow):
     await asyncio.sleep(0.25)
     await flow.find_and_trusted_click("el.getAttribute('role') === 'radio' && text === 'x1'", "x1")
     await asyncio.sleep(0.25)
-    await flow.find_and_trusted_click("aria === 'Điều kiện kích hoạt cài đặt'", "close settings")
-    await asyncio.sleep(0.4)
+    if await flow.js("Boolean(document.querySelector('[role=\"radio\"]'))"):
+        await flow.find_and_trusted_click("aria === 'Điều kiện kích hoạt cài đặt'", "close settings")
+        await asyncio.sleep(0.4)
 
 
 async def clear_frame_slots_and_text(flow):
@@ -230,29 +376,29 @@ async def set_start_frame_by_uuid(flow, target_uuid):
 
     # Scroll cdk-virtual-scroll-viewport until target_uuid appears in [role="option"]
     found_opt = None
-    for scroll_y in [0, 260, 520, 780, 1040, 1300, 1600, 1900, 2300, 2700]:
+    for scroll_y in range(0, 5800, 260):
         await flow.js(f"""
         (() => {{
             const lb = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]');
             if (lb) lb.scrollTop = {scroll_y};
         }})()
         """)
-        await asyncio.sleep(0.38)
+        await asyncio.sleep(0.34)
         opt = await flow.js(f"""
         (() => {{
             const uid = {json.dumps(target_uuid)};
+            const lb = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]');
+            const lbRect = lb ? lb.getBoundingClientRect() : null;
             const opts = Array.from(document.querySelectorAll('[role="option"]'));
             for (const el of opts) {{
                 const img = el.querySelector('img');
                 const src = img?.src || '';
                 if (src.includes(uid)) {{
-                    el.scrollIntoView({{block: 'center'}});
-                    const r = (img || el).getBoundingClientRect();
-                    return {{
-                        cx: Math.round(r.x + r.width / 2),
-                        cy: Math.round(r.y + r.height / 2),
-                        txt: (el.innerText || '').trim().replace(/\\s+/g, ' ').slice(0, 50)
-                    }};
+                    if (lb && lbRect) {{
+                        const er = el.getBoundingClientRect();
+                        lb.scrollTop += (er.top + er.height / 2) - (lbRect.top + 150);
+                    }}
+                    return {{matched: true, txt: (el.innerText || '').trim().replace(/\\s+/g, ' ').slice(0, 50)}};
                 }}
             }}
             return null;
@@ -265,36 +411,60 @@ async def set_start_frame_by_uuid(flow, target_uuid):
     if not found_opt:
         raise RuntimeError(f"Could not find image UUID {target_uuid} inside Bắt đầu picker!")
 
-    await asyncio.sleep(0.2)
-    found_opt = await flow.js(f"""
-    (() => {{
-        const uid = {json.dumps(target_uuid)};
-        const el = Array.from(document.querySelectorAll('[role="option"]')).find(e => (e.querySelector('img')?.src || '').includes(uid));
-        const r = (el.querySelector('img') || el).getBoundingClientRect();
-        return {{cx: Math.round(r.x + r.width / 2), cy: Math.round(r.y + r.height / 2)}};
-    }})()
-    """)
-    for click_dx in [0, 48]:
-        await flow.trusted_click(found_opt["cx"] + click_dx, found_opt["cy"])
-        await asyncio.sleep(0.75)
+    await asyncio.sleep(0.3)
 
-        has_add = await flow.js("""
-        Array.from(document.querySelectorAll('button')).some(
-            b => (b.innerText || '').trim() === 'Thêm vào câu lệnh' && b.getBoundingClientRect().width > 0
-        )
+    async def inspect_start_modal():
+        return await flow.js(f"""
+        (() => {{
+            const uid = {json.dumps(target_uuid)};
+            const el = Array.from(document.querySelectorAll('[role="option"]')).find(e => (e.querySelector('img')?.src || '').includes(uid));
+            let coords = null;
+            if (el) {{
+                const img = el.querySelector('img');
+                const r = (img && img.getBoundingClientRect().width > 10 ? img : el).getBoundingClientRect();
+                coords = {{cx: Math.round(r.x + Math.min(r.width / 2, 45)), cy: Math.round(r.y + r.height / 2)}};
+            }}
+            const addBtn = Array.from(document.querySelectorAll('button')).find(
+                b => (b.innerText || '').trim() === 'Thêm vào câu lệnh' && b.getBoundingClientRect().width > 0
+            );
+            let previewMatches = false;
+            if (addBtn) {{
+                let container = addBtn.parentElement;
+                while (container && !container.querySelector('[role="option"]') && container.parentElement) {{
+                    container = container.parentElement;
+                }}
+                if (container) {{
+                    const pSrcs = Array.from(container.querySelectorAll('img'))
+                        .filter(i => !i.closest('[role="option"]'))
+                        .map(i => (i.src || '').split('?')[0]);
+                    previewMatches = pSrcs.some(s => s.includes(uid));
+                }}
+            }}
+            return {{coords, hasAdd: Boolean(addBtn), previewMatches}};
+        }})()
         """)
-        if has_add:
-            await flow.find_and_trusted_click("text === 'Thêm vào câu lệnh'", "Thêm vào câu lệnh")
-            await asyncio.sleep(0.75)
 
-        slot_ok = await flow.js("""
-        (() => {
-            const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(b => b.getBoundingClientRect().y > 680 && b.getBoundingClientRect().width > 0);
-            const hasEmptyStart = btns.some(b => (b.innerText||'').trim() === 'Bắt đầu');
-            const hasEmptyEnd = btns.some(b => (b.innerText||'').trim().includes('Kết thúc'));
-            return !hasEmptyStart && hasEmptyEnd;
-        })()
-        """)
+    slot_ok = False
+    for click_dx in [0, 55, 105]:
+        st0 = await inspect_start_modal()
+        if st0["coords"] and not st0["previewMatches"]:
+            await flow.trusted_click(st0["coords"]["cx"] + click_dx, st0["coords"]["cy"])
+        for _ in range(7):
+            await asyncio.sleep(0.32)
+            st1 = await inspect_start_modal()
+            if st1["hasAdd"] and st1["previewMatches"]:
+                await flow.find_and_trusted_click("text === 'Thêm vào câu lệnh'", "Thêm vào câu lệnh")
+                await asyncio.sleep(0.65)
+            slot_ok = await flow.js("""
+            (() => {
+                const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(b => b.getBoundingClientRect().y > 680 && b.getBoundingClientRect().width > 0);
+                const hasEmptyStart = btns.some(b => (b.innerText||'').trim() === 'Bắt đầu');
+                const hasEmptyEnd = btns.some(b => (b.innerText||'').trim().includes('Kết thúc'));
+                return !hasEmptyStart && hasEmptyEnd;
+            })()
+            """)
+            if slot_ok:
+                break
         if slot_ok:
             break
     if not slot_ok:
@@ -378,10 +548,54 @@ async def wait_for_video_wave(flow, wave_label, max_steps=45):
             return
 
 
+async def run_video_waves(flow, videos, tag):
+    for w_i in range(0, len(videos), 2):
+        wave = videos[w_i:w_i + 2]
+        for it in wave:
+            await submit_veo_clip(flow, it)
+        await wait_for_video_wave(flow, f"{tag} Wave {w_i//2 + 1} ({len(wave)} clips)")
+    await asyncio.sleep(4.0)
+    try:
+        await flow.find_and_trusted_click("text.includes('Video') && r.x < 240", "Left sidebar Video tab")
+        await asyncio.sleep(1.2)
+    except Exception as e:
+        print("Video tab click note:", e)
+    await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
+    await asyncio.sleep(1.0)
+    res = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 88})
+    p = os.path.join(OUT_DIR, f"qa_veo4s_{tag}_top6.jpg")
+    with open(p, "wb") as f:
+        f.write(base64.b64decode(res["data"]))
+    await flow.js("""
+    (() => {
+        const scrollers = Array.from(document.querySelectorAll('div, main')).filter(el => el.scrollHeight > el.clientHeight + 200);
+        for (const s of scrollers) s.scrollTop = 520;
+        window.scrollTo(0, 520);
+    })()
+    """)
+    await asyncio.sleep(1.0)
+    res2 = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 88})
+    p2 = os.path.join(OUT_DIR, f"qa_veo4s_{tag}_bot4.jpg")
+    with open(p2, "wb") as f:
+        f.write(base64.b64decode(res2["data"]))
+    await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
+    print(f"Saved {tag} video QA screenshots:", p, p2)
+
+
 async def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--phase", choices=["test2", "rest8", "all10"], default="test2")
+    parser.add_argument("--batch", choices=["batch1", "batch2"], default="batch2")
+    parser.add_argument("--phase", choices=["test2", "all10", "slice", "only"], default="all10")
+    parser.add_argument("--start-index", type=int, default=0)
+    parser.add_argument("--only-key", type=str, default="")
     args = parser.parse_args()
+
+    videos = VIDEOS_10 if args.batch == "batch1" else VIDEOS_BATCH2_10
+    tag = "batch1" if args.batch == "batch1" else "batch2"
+    if args.phase == "only":
+        videos = [v for v in videos if args.only_key in v["key"]]
+        if not videos:
+            raise ValueError(f"No video matching --only-key={args.only_key!r}")
 
     tabs = json.loads(urllib.request.urlopen(f"http://127.0.0.1:{PORT}/json/list").read())
     t = next((x for x in tabs if PROJECT_ID in (x.get("url") or "")), None)
@@ -396,49 +610,19 @@ async def main():
         await flow.call("Emulation.setFocusEmulationEnabled", {"enabled": True})
 
         if args.phase == "test2":
-            for it in VIDEOS_10[:2]:
+            for it in videos[:2]:
                 await submit_veo_clip(flow, it)
-            await wait_for_video_wave(flow, "Test Wave (V01 + V07)")
+            await wait_for_video_wave(flow, f"{tag} Test2")
             await asyncio.sleep(2.0)
             res = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 86})
-            p = os.path.join(OUT_DIR, "qa_veo4s_test2.jpg")
+            p = os.path.join(OUT_DIR, f"qa_veo4s_{tag}_test2.jpg")
             with open(p, "wb") as f:
                 f.write(base64.b64decode(res["data"]))
             print("Saved test2 video QA screenshot:", p)
-        elif args.phase == "rest8":
-            rest = VIDEOS_10[6:]  # First 6 clips already rendered/queued; finish remaining 4 clips (2 + 2)!
-            for w_i in range(0, len(rest), 2):
-                wave = rest[w_i:w_i + 2]
-                for it in wave:
-                    await submit_veo_clip(flow, it)
-                await wait_for_video_wave(flow, f"Wave {w_i//3 + 1} ({len(wave)} clips)")
-            await asyncio.sleep(4.0)
-            # Switch to left-sidebar Video tab to capture clean 10-video QA grid
-            try:
-                await flow.find_and_trusted_click("text.includes('Video') && r.x < 220", "Left sidebar Video tab")
-                await asyncio.sleep(1.2)
-            except Exception as e:
-                print("Video tab click note:", e)
-            await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
-            await asyncio.sleep(1.0)
-            res = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 88})
-            p = os.path.join(OUT_DIR, "qa_veo4s_all10_top6.jpg")
-            with open(p, "wb") as f:
-                f.write(base64.b64decode(res["data"]))
-            await flow.js("""
-            (() => {
-                const scrollers = Array.from(document.querySelectorAll('div, main')).filter(el => el.scrollHeight > el.clientHeight + 200);
-                for (const s of scrollers) s.scrollTop = 520;
-                window.scrollTo(0, 520);
-            })()
-            """)
-            await asyncio.sleep(1.0)
-            res2 = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 88})
-            p2 = os.path.join(OUT_DIR, "qa_veo4s_all10_bot4.jpg")
-            with open(p2, "wb") as f:
-                f.write(base64.b64decode(res2["data"]))
-            await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
-            print("Saved all10 video QA screenshots:", p, p2)
+        elif args.phase == "slice":
+            await run_video_waves(flow, videos[args.start_index:], tag)
+        elif args.phase in ("all10", "only"):
+            await run_video_waves(flow, videos, tag)
 
 
 if __name__ == "__main__":
