@@ -12,23 +12,41 @@ into:
 from collections import deque
 import json
 import os
-from typing import Any, Dict, Iterable, Tuple
-from PIL import Image
+import statistics
+from typing import Any, Dict, Iterable, Optional, Tuple
+from PIL import Image, ImageOps
 
 from .presets import CategoryPreset, PlacementSpec, get_preset
 
 
-def composite_to_rgb_white(img: Image.Image) -> Tuple[Image.Image, bool]:
-    """Convert any PIL image mode to RGB, compositing alpha transparency onto pure #FFFFFF."""
+def _extract_alpha_channel_if_transparent(img: Image.Image) -> Optional[Image.Image]:
+    """Return an 'L' alpha mask ONLY if the image genuinely has transparent pixels (<250)."""
     has_transparency = (
         img.mode in ("RGBA", "LA")
         or (img.mode == "P" and "transparency" in img.info)
     )
-    if has_transparency:
+    if not has_transparency:
+        return None
+    alpha = img.convert("RGBA").getchannel("A")
+    extrema = alpha.getextrema()
+    if extrema and extrema[0] < 250:
+        return alpha
+    return None
+
+
+def composite_to_rgb_white(img: Image.Image) -> Tuple[Image.Image, bool]:
+    """Convert any PIL image mode to RGB, compositing genuine alpha transparency onto pure #FFFFFF."""
+    img = ImageOps.exif_transpose(img)
+    alpha = _extract_alpha_channel_if_transparent(img)
+    has_mode_alpha = (
+        img.mode in ("RGBA", "LA")
+        or (img.mode == "P" and "transparency" in img.info)
+    )
+    if has_mode_alpha:
         rgba = img.convert("RGBA")
         white_bg = Image.new("RGBA", rgba.size, (255, 255, 255, 255))
         composited = Image.alpha_composite(white_bg, rgba).convert("RGB")
-        return composited, True
+        return composited, alpha is not None
     return img.convert("RGB"), False
 
 
@@ -38,15 +56,23 @@ def extract_clean_white_cutout(
     max_chroma: int = 18,
     pad_px: int = 4,
     allow_nonwhite_bg: bool = False,
+    bg_tolerance: int = 12,
+    max_step: int = 5,
+    alpha_threshold: int = 12,
 ) -> Tuple[Image.Image, Tuple[int, int, int, int], Dict[str, Any]]:
     """
-    Flood-fill near-white studio background connected to the 4 outer borders of the image,
-    normalizing outer studio grey (#F0F0F0..#FEFEFE) to pure #FFFFFF (255,255,255) so
-    pasting onto a 2560x1440 #FFFFFF plate leaves zero visible rectangle seam — while
-    100% preserving internal white/cream details (e.g. white crochet petals, cream yarn,
-    enclosed highlights) inside the product contour.
+    Extract a zero-seam #FFFFFF-backed product cutout while preserving white/ivory/cream details:
+    1. If the input has genuine alpha transparency (e.g. PNG cutout of a pure-white crochet bunny/daisy),
+       use the alpha mask directly (`alpha > alpha_threshold`) so opaque white/cream yarn touching the
+       outer contour is NEVER eaten by RGB flood-fill.
+    2. Otherwise, measure the median studio-white color along the 4 image borders and run a
+       gradient-step-gated (`max_step`) + border-color-bounded (`bg_tolerance`) 4-border BFS flood-fill,
+       normalizing outer studio grey (#F0F0F0..#FEFEFE) to pure #FFFFFF while stopping cleanly at
+       ivory/cream/off-white crochet petal boundaries and preserving all enclosed white pixels.
     """
-    rgb, had_alpha = composite_to_rgb_white(img)
+    transposed = ImageOps.exif_transpose(img)
+    alpha_mask = _extract_alpha_channel_if_transparent(transposed)
+    rgb, had_alpha = composite_to_rgb_white(transposed)
     w, h = rgb.size
     if w < 16 or h < 16:
         raise ValueError(f"Input image is too small ({w}x{h}); expected at least 16x16.")
@@ -54,94 +80,147 @@ def extract_clean_white_cutout(
     raw = bytearray(rgb.tobytes())
     total_px = w * h
 
-    # Precompute candidate near-white mask (1 = candidate studio white, 0 = foreground/colored)
-    cand = bytearray(total_px)
-    for i in range(total_px):
-        off = i * 3
-        r = raw[off]
-        g = raw[off + 1]
-        b = raw[off + 2]
-        mn = r if r < g else g
-        if b < mn:
-            mn = b
-        if mn >= bg_threshold:
-            mx = r if r > g else g
-            if b > mx:
-                mx = b
-            if (mx - mn) <= max_chroma:
-                cand[i] = 1
+    if had_alpha and alpha_mask is not None:
+        a_bytes = alpha_mask.tobytes()
+        min_x, min_y = w, h
+        max_x, max_y = -1, -1
+        bg_count = 0
+        for idx in range(total_px):
+            if a_bytes[idx] <= alpha_threshold:
+                bg_count += 1
+                off = idx * 3
+                raw[off] = 255
+                raw[off + 1] = 255
+                raw[off + 2] = 255
+            else:
+                y, x = divmod(idx, w)
+                if x < min_x:
+                    min_x = x
+                if x > max_x:
+                    max_x = x
+                if y < min_y:
+                    min_y = y
+                if y > max_y:
+                    max_y = y
 
-    visited = bytearray(total_px)
-    q: deque[int] = deque()
+        if max_x < 0:
+            raise ValueError(
+                "Input image is completely blank/white — no product foreground pixels detected."
+            )
+        flooded_ratio = bg_count / float(total_px)
+    else:
+        # Precompute candidate near-white mask (1 = candidate studio white, 0 = clearly colored/dark)
+        cand = bytearray(total_px)
+        for i in range(total_px):
+            off = i * 3
+            r = raw[off]
+            g = raw[off + 1]
+            b = raw[off + 2]
+            mn = r if r < g else g
+            if b < mn:
+                mn = b
+            if mn >= bg_threshold:
+                mx = r if r > g else g
+                if b > mx:
+                    mx = b
+                if (mx - mn) <= max_chroma:
+                    cand[i] = 1
 
-    def try_seed(idx: int) -> None:
-        if cand[idx] and not visited[idx]:
-            visited[idx] = 1
-            q.append(idx)
+        border_indices = []
+        for x in range(w):
+            border_indices.append(x)
+            border_indices.append((h - 1) * w + x)
+        for y in range(1, h - 1):
+            row = y * w
+            border_indices.append(row)
+            border_indices.append(row + w - 1)
 
-    for x in range(w):
-        try_seed(x)
-        try_seed((h - 1) * w + x)
-    for y in range(1, h - 1):
-        row = y * w
-        try_seed(row)
-        try_seed(row + w - 1)
+        border_white_indices = [idx for idx in border_indices if cand[idx]]
+        visited = bytearray(total_px)
 
-    while q:
-        cur = q.popleft()
-        x = cur % w
-        if x > 0:
-            nb = cur - 1
-            if cand[nb] and not visited[nb]:
-                visited[nb] = 1
-                q.append(nb)
-        if x + 1 < w:
-            nb = cur + 1
-            if cand[nb] and not visited[nb]:
-                visited[nb] = 1
-                q.append(nb)
-        nb_up = cur - w
-        if nb_up >= 0 and cand[nb_up] and not visited[nb_up]:
-            visited[nb_up] = 1
-            q.append(nb_up)
-        nb_dn = cur + w
-        if nb_dn < total_px and cand[nb_dn] and not visited[nb_dn]:
-            visited[nb_dn] = 1
-            q.append(nb_dn)
+        if border_white_indices:
+            bg_r = int(statistics.median(raw[idx * 3] for idx in border_white_indices))
+            bg_g = int(statistics.median(raw[idx * 3 + 1] for idx in border_white_indices))
+            bg_b = int(statistics.median(raw[idx * 3 + 2] for idx in border_white_indices))
 
-    flooded_count = sum(visited)
-    if flooded_count >= total_px:
-        raise ValueError(
-            "Input image is completely blank/white — no product foreground pixels detected."
-        )
+            def within_bg_tol(idx: int) -> bool:
+                off = idx * 3
+                return (
+                    abs(raw[off] - bg_r) <= bg_tolerance
+                    and abs(raw[off + 1] - bg_g) <= bg_tolerance
+                    and abs(raw[off + 2] - bg_b) <= bg_tolerance
+                )
 
-    flooded_ratio = flooded_count / float(total_px)
-    if flooded_ratio < 0.02 and not had_alpha and not allow_nonwhite_bg:
-        raise ValueError(
-            f"Ảnh đầu vào chưa có nền trắng (#FFFFFF) hoặc nền PNG trong suốt "
-            f"(chỉ {flooded_ratio * 100:.2f}% viền ngoài là nền trắng).\n"
-            f"👉 Cách xử lý chuẩn: Chạy 'python3 -m flow_sku_tvc_toolkit isolate-white ...' "
-            f"để tách sản phẩm sang nền trắng tinh #FFFFFF (hoặc truyền ảnh PNG đã tách nền) trước khi dựng Plate 2K."
-        )
+            def step_ok(cur_idx: int, nb_idx: int) -> bool:
+                o1 = cur_idx * 3
+                o2 = nb_idx * 3
+                return (
+                    abs(raw[o1] - raw[o2]) <= max_step
+                    and abs(raw[o1 + 1] - raw[o2 + 1]) <= max_step
+                    and abs(raw[o1 + 2] - raw[o2 + 2]) <= max_step
+                )
 
-    min_x, min_y = w, h
-    max_x, max_y = -1, -1
-    for idx in range(total_px):
-        if visited[idx]:
-            off = idx * 3
-            raw[off] = 255
-            raw[off + 1] = 255
-            raw[off + 2] = 255
-        else:
-            y, x = divmod(idx, w)
-            if x < min_x:
-                min_x = x
-            if x > max_x:
-                max_x = x
-            if y < min_y:
-                min_y = y
-            if y > max_y:
-                max_y = y
+            q: deque[int] = deque()
+            for idx in border_white_indices:
+                if not visited[idx] and within_bg_tol(idx):
+                    visited[idx] = 1
+                    q.append(idx)
+
+            while q:
+                cur = q.popleft()
+                x = cur % w
+                if x > 0:
+                    nb = cur - 1
+                    if cand[nb] and not visited[nb] and within_bg_tol(nb) and step_ok(cur, nb):
+                        visited[nb] = 1
+                        q.append(nb)
+                if x + 1 < w:
+                    nb = cur + 1
+                    if cand[nb] and not visited[nb] and within_bg_tol(nb) and step_ok(cur, nb):
+                        visited[nb] = 1
+                        q.append(nb)
+                nb_up = cur - w
+                if nb_up >= 0 and cand[nb_up] and not visited[nb_up] and within_bg_tol(nb_up) and step_ok(cur, nb_up):
+                    visited[nb_up] = 1
+                    q.append(nb_up)
+                nb_dn = cur + w
+                if nb_dn < total_px and cand[nb_dn] and not visited[nb_dn] and within_bg_tol(nb_dn) and step_ok(cur, nb_dn):
+                    visited[nb_dn] = 1
+                    q.append(nb_dn)
+
+        flooded_count = sum(visited)
+        if flooded_count >= total_px:
+            raise ValueError(
+                "Input image is completely blank/white — no product foreground pixels detected."
+            )
+
+        flooded_ratio = flooded_count / float(total_px)
+        if flooded_ratio < 0.02 and not allow_nonwhite_bg:
+            raise ValueError(
+                f"Ảnh đầu vào chưa có nền trắng (#FFFFFF) hoặc nền PNG trong suốt "
+                f"(chỉ {flooded_ratio * 100:.2f}% viền ngoài là nền trắng).\n"
+                f"👉 Cách xử lý chuẩn: Chạy 'python3 -m flow_sku_tvc_toolkit isolate-white ...' "
+                f"để tách sản phẩm sang nền trắng tinh #FFFFFF (hoặc truyền ảnh PNG đã tách nền) trước khi dựng Plate 2K."
+            )
+
+        min_x, min_y = w, h
+        max_x, max_y = -1, -1
+        for idx in range(total_px):
+            if visited[idx]:
+                off = idx * 3
+                raw[off] = 255
+                raw[off + 1] = 255
+                raw[off + 2] = 255
+            else:
+                y, x = divmod(idx, w)
+                if x < min_x:
+                    min_x = x
+                if x > max_x:
+                    max_x = x
+                if y < min_y:
+                    min_y = y
+                if y > max_y:
+                    max_y = y
 
     cleaned_full = Image.frombytes("RGB", (w, h), bytes(raw))
     x0 = max(0, min_x - pad_px)

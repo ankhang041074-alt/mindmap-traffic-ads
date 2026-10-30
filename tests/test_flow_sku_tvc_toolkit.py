@@ -43,6 +43,56 @@ class TestPlateEngineAndWhiteCutout(unittest.TestCase):
         self.assertEqual(crop.getpixel((cx, cy)), (250, 246, 236))
         self.assertEqual(crop.getpixel((cx, cy - 32)), (255, 255, 255))
 
+    def test_transparent_rgba_white_crochet_bunny_preserves_outer_white_body(self):
+        # Regression test: opaque white/ivory crochet amigurumi on transparent PNG must NOT be eaten to its dark eyes
+        im = Image.new("RGBA", (300, 300), (0, 0, 0, 0))
+        d = ImageDraw.Draw(im)
+        d.ellipse((90, 60, 210, 250), fill=(252, 250, 246, 255))
+        d.ellipse((130, 110, 140, 120), fill=(35, 30, 28, 255))
+        d.ellipse((160, 110, 170, 120), fill=(35, 30, 28, 255))
+
+        crop, _bbox, stats = extract_clean_white_cutout(im, pad_px=4)
+        self.assertTrue(stats["had_alpha"])
+        self.assertEqual(stats["tight_bbox"], [90, 60, 211, 251])
+        self.assertEqual(crop.getpixel((0, 0)), (255, 255, 255))
+        # Mid-body ivory yarn pixel must remain intact (252, 250, 246), not erased to (255, 255, 255)
+        self.assertEqual(crop.getpixel((crop.width // 2, crop.height - 30)), (252, 250, 246))
+
+    def test_rgb_ivory_crochet_daisy_on_studio_white_preserves_outer_cream_petals(self):
+        # Regression test: unenclosed ivory/cream crochet petals touching studio white (#FCFCFC) must NOT be amputated
+        im = Image.new("RGB", (400, 400), (252, 252, 252))
+        d = ImageDraw.Draw(im)
+        for box in ((140, 50, 260, 190), (140, 210, 260, 350), (50, 140, 190, 260), (210, 140, 350, 260)):
+            d.ellipse(box, fill=(248, 245, 241))
+        d.ellipse((150, 150, 250, 250), fill=(225, 175, 45))
+
+        crop, _bbox, stats = extract_clean_white_cutout(im, pad_px=4)
+        self.assertEqual(stats["tight_bbox"], [50, 50, 351, 351])
+        self.assertEqual(crop.getpixel((0, 0)), (255, 255, 255))
+        # Top petal pixel at original (200, 90) -> inside padded crop at (200 - 46, 90 - 46) = (154, 44)
+        self.assertEqual(crop.getpixel((154, 44)), (248, 245, 241))
+
+    def test_exif_orientation_6_phone_photo_is_transposed_upright(self):
+        # Raw stored dimensions are landscape 320x200 with a horizontal bar (40..280, 70..130),
+        # tagged with EXIF Orientation=6 (90 deg CW) so upright view is tall portrait (W=61, H=241).
+        raw = Image.new("RGB", (320, 200), (255, 255, 255))
+        d = ImageDraw.Draw(raw)
+        d.rectangle((40, 70, 280, 130), fill=(60, 130, 80))
+        exif = raw.getexif()
+        exif[0x0112] = 6  # Orientation: Rotate 90 CW
+
+        with tempfile.TemporaryDirectory() as tmp:
+            src_jpg = os.path.join(tmp, "phone_exif6.jpg")
+            raw.save(src_jpg, "JPEG", quality=98, exif=exif.tobytes())
+            manifest = build_sku_plates_from_image(
+                input_path=src_jpg,
+                out_dir=os.path.join(tmp, "out"),
+                prefix="EXIFTEST",
+                preset_name="crochet_decor",
+            )
+            # Upright cutout must be tall (aspect W/H < 0.40), NOT sideways (> 2.5)!
+            self.assertLess(manifest["cutout_stats"]["aspect_ratio_w_over_h"], 0.40)
+
     def test_transparent_rgba_png_cutout(self):
         im = Image.new("RGBA", (240, 240), (0, 0, 0, 0))
         draw = ImageDraw.Draw(im)
@@ -114,7 +164,7 @@ class TestPlateEngineAndWhiteCutout(unittest.TestCase):
         self.assertEqual(plate.size, (2560, 1440))
 
         # Find bounding box of non-white pixels on rendered plate
-        _, bbox, stats = extract_clean_white_cutout(plate, pad_px=0)
+        _, _bbox, stats = extract_clean_white_cutout(plate, pad_px=0)
         rw = stats["tight_bbox"][2] - stats["tight_bbox"][0]
         rh = stats["tight_bbox"][3] - stats["tight_bbox"][1]
         # Must be capped at 2560 * 0.38 = 973px width, height = round(973 / 2.5) = 389px
@@ -148,6 +198,34 @@ class TestPromptGuardrailsAndCLI(unittest.TestCase):
             ),
             [],
         )
+
+    def test_guardrails_reject_video_missing_both_scene_key_and_uuid(self):
+        bad_cfg = {
+            "slug": "test_vid",
+            "prefix": "TVID",
+            "preset": "crochet_decor",
+            "project_id": "dfcf77a5-5374-4678-9f80-1c5ea7b5c305",
+            "scenes": [],
+            "videos": [
+                {
+                    "key": "V01_ORPHAN",
+                    "prompt": "Continuous 4-second 85mm lateral camera truck-right across warm oak table.",
+                }
+            ],
+        }
+        errs = validate_sku_config(bad_cfg)
+        self.assertTrue(any("must specify either 'scene_key' or explicit 'uuid'" in e for e in errs), errs)
+
+        bad_cfg2 = dict(bad_cfg)
+        bad_cfg2["videos"] = [
+            {
+                "key": "V01_DANGLING_SCENE",
+                "scene_key": "NON_EXISTENT_SCENE",
+                "prompt": "Continuous 4-second 85mm lateral camera truck-right across warm oak table.",
+            }
+        ]
+        errs2 = validate_sku_config(bad_cfg2)
+        self.assertTrue(any("unknown scene_key" in e for e in errs2), errs2)
 
     def test_crochet_sample_config_and_cli_workflow(self):
         sample_cfg = os.path.join(
@@ -197,6 +275,52 @@ class TestPromptGuardrailsAndCLI(unittest.TestCase):
 
 
 class TestRepoPortabilityAndSilentCDPInvariants(unittest.TestCase):
+    def test_flow_cdp_token_bridging_vietnamese_picker_regex_and_zero_import_side_effects(self):
+        from flow_sku_tvc_toolkit.cli import build_parser
+        from flow_sku_tvc_toolkit.flow_cdp import UPLOADED_EXT_RE, _token_matches_set
+
+        # Verify importing flow_cdp does NOT create stray flow_web_intro/videos/dl_1080p directory
+        stray_dir = os.path.join(REPO_ROOT, "flow_web_intro", "videos", "dl_1080p")
+        self.assertFalse(os.path.exists(stray_dir), f"Import side-effect created {stray_dir}")
+
+        # Verify Vietnamese Flow picker text ('<filename>.jpg Hình ảnh') is caught as an uploaded asset
+        self.assertIsNotNone(UPLOADED_EXT_RE.search("image raw_crochet_desk.jpg Hình ảnh"))
+        self.assertIsNotNone(UPLOADED_EXT_RE.search("BARREL_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.png Hình ảnh"))
+        self.assertIsNotNone(UPLOADED_EXT_RE.search("photo_clean.webp Hình ảnh"))
+        self.assertIsNone(
+            UPLOADED_EXT_RE.search("image Replace only the solid pure white background with an 85mm tabletop Hình ảnh")
+        )
+
+        # Verify 174-char /asb/ picker tokens match both 48-char cached plate tokens AND bridged 36-char UUIDs
+        full_asb = (
+            "ANqvLOZwEKmhz6Fx4Z50wc-xGqWYxQ9l9JWDZ6N2yShv5n37F19-3e7s7-m22-3N6G7B_yO4f6D052"
+            "e1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        )
+        short_48 = full_asb[:48]
+        perm_uuid = "8c5ae9c1-5afd-4a59-ac02-fe88e604d098"
+        self.assertTrue(_token_matches_set(full_asb, {short_48}))
+        self.assertTrue(_token_matches_set(full_asb, {perm_uuid}, asb_to_uuid={short_48: perm_uuid}))
+        self.assertFalse(_token_matches_set(full_asb, {"deadbeef-0000-4000-8000-000000000000"}, asb_to_uuid={short_48: perm_uuid}))
+
+        # Verify CLI map-uuids supports --only-key and --force-remap
+        parsed = build_parser().parse_args(["map-uuids", "--config", "sku_project.json", "--only-key", "B16", "--force-remap"])
+        self.assertEqual(parsed.only_key, "B16")
+        self.assertTrue(parsed.force_remap)
+
+        # Verify _decode_and_normalize_flow_image_bytes handles WebP + RGBA PNG bytes and rejects tiny error payloads
+        from flow_sku_tvc_toolkit.flow_cdp import _decode_and_normalize_flow_image_bytes
+
+        webp_buf = io.BytesIO()
+        Image.new("RGBA", (512, 512), (245, 210, 120, 255)).save(webp_buf, "WEBP")
+        norm_rgb = _decode_and_normalize_flow_image_bytes(webp_buf.getvalue())
+        self.assertEqual(norm_rgb.mode, "RGB")
+        self.assertEqual(norm_rgb.size, (512, 512))
+
+        tiny_buf = io.BytesIO()
+        Image.new("RGB", (64, 64), (255, 255, 255)).save(tiny_buf, "JPEG")
+        with self.assertRaisesRegex(RuntimeError, "too small"):
+            _decode_and_normalize_flow_image_bytes(tiny_buf.getvalue())
+
     def test_no_bring_to_front_and_no_hardcoded_user_paths_in_packaged_python(self):
         target_files = [
             os.path.join(REPO_ROOT, "flow_sku_tvc_toolkit", "__init__.py"),

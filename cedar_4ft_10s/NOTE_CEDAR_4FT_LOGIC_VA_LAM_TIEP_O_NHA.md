@@ -51,13 +51,13 @@ Qua thực chiến QA trực tiếp 10 clip trên Flow, đây là **3 Luật S�
 ---
 
 ## 3. Các Bước Về Nhà Mở Máy Làm Tiếp (Nhân Lên `30–40` Cảnh Tiếp Theo)
-1. Ở máy nhà, mở Terminal tại thư mục repo `wonderful-lavoisier` và kéo code + bộ Plate `2K` mới nhất về:
+1. Ở máy nhà, mở Terminal tại thư mục repo `wonderful-lavoisier` và kéo code + ảnh gốc `1K` nền trắng nhẹ (`clean_refs/`) + bảng UUID về (các bộ `plates_2k/` nặng không đẩy lên GitHub để tránh rối repo; khi cần tái tạo chỉ mất 2 giây bằng `python3 -m flow_sku_tvc_toolkit build-plates ...`, còn các tấm đã upload sẵn trên Project Flow sẽ được lấy trực tiếp từ thư viện mây Flow):
    ```bash
    git pull
    ```
-2. Mở AdsPower profile `flow veo` → vào Project Flow `https://flow.google.com/project/dfcf77a5-5374-4678-9f80-1c5ea7b5c305` (nếu bị hỏi login thì dùng `python3 flow_web_intro/home_helper.py import` như hướng dẫn cũ).
-3. Nhắn cho AI trong Antigravity ở nhà đọc ngay file `cedar_4ft_10s/NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md` này rồi ra lệnh:
-   > *"Đọc file `cedar_4ft_10s/NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md`, dùng đúng 6 tấm `batch40_plates` và logic Combo khóa khuôn + Video 4s Dynamic Parallax để chạy ngầm tiếp 20–30 bối cảnh mới trên AdsPower cho tôi."*
+2. Mở AdsPower profile `flow veo` → vào Project Flow `https://flow.google.com/project/dfcf77a5-5374-4678-9f80-1c5ea7b5c305` (nếu mở bằng Chrome/máy phụ bị hỏi login thì dùng `python3 flow_web_intro/home_helper.py --force-cloud-cookie` hoặc `--inject-session flow_web_intro/flow_session.json`).
+3. Nhắn cho AI trong Antigravity ở nhà đọc ngay file `cedar_4ft_10s/NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md` và `PLAYBOOK_CAY_4FT_SANG_CROCHET_VA_FLOW_SOP.md` rồi ra lệnh:
+   > *"Đọc file `cedar_4ft_10s/NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md`, dùng đúng các tấm Plate đã có trên Project Flow (hoặc chạy `flow_sku_tvc_toolkit`) cùng logic Combo khóa khuôn + Video 4s Dynamic Parallax để chạy ngầm tiếp các bối cảnh mới trên AdsPower cho tôi."*
 
 
 ---
@@ -93,20 +93,26 @@ Qua thực chiến QA trực tiếp 10 clip trên Flow, đây là **3 Luật S�
 
 ## 5. Sản Phẩm SKU #2 — Cây Giả Cedar `4ft+` Chậu Thùng Gỗ 3 Đai Sắt Đen (`B01 → B20`: Đã Xong 20 Ảnh `16:9` + 20 Video `4s` `VB01 → VB20`)
 
-### A. Tài Nguyên Chuẩn Trong Thư Mục `barrel_cedar_20/` (`git pull` Về Nhà Có Đủ 100%)
+### A. Tài Nguyên Chuẩn Trong Thư Mục `barrel_cedar_20/`
 - **Tỷ lệ vật lý chuẩn xác nhận từ video hãng `ATF-9421,9422.mp4`:** `~4ft+` (`~1.25m–1.30m`), ngọn nhọn cao **nhỉnh hơn tay nắm cửa chính ~15–20cm** và cao hơn mặt kệ lò sưởi ~12cm.
-- **Ảnh tham chiếu cận cảnh sạch nền trắng (`1024x1024`):** `barrel_cedar_20/clean_refs/BARREL_REF_1_SINGLE_CLEAN.jpg`
-- **6 tấm Plate `2K 16:9` (`2560x1440`) nền trắng `#FFFFFF` khóa sẵn chậu thùng gỗ 3 đai sắt đen (`barrel_cedar_20/plates_2k/`):**
+- **2 Ảnh tham chiếu `1K` sạch nền trắng (`1024x1024`) đã lưu trong Git (`barrel_cedar_20/clean_refs/`):**
+  - `BARREL_REF_1_SINGLE_CLEAN.jpg` — Ảnh tổng thể toàn cây nền trắng sạch.
+  - `BARREL_REF_2_CLOSEUP_LEAF_BARREL_1024.jpg` — Ảnh Macro đặc tả lá dẹp `flat-fan lacy foliage` + thùng gỗ 3 đai sắt đen (dùng để khóa chi tiết lá & vân gỗ `Dual-Lock` cho các cảnh đại cảnh `B15`, `B16`, `B19`, `B20`).
+- **9 tấm Plate `2K 16:9` (`2560x1440`) nền trắng `#FFFFFF` đã upload lên Project Flow (`barrel_cedar_20/barrel_plate_uuids.json`):**
   1. `BARREL_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg` (`52%` khung hình — 2 cây đối xứng cửa chính `2.4m` / lò sưởi)
   2. `BARREL_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg` (`62%` khung hình — 2 cây cận trung `50mm`)
   3. `BARREL_PLATE_03_PAIR_DIAGONAL_3Q_16x9.jpg` (2 cây lệch tầng góc xiên `3/4`: trái `64%`, phải `51%`)
   4. `BARREL_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg` (`72%` khung hình — 1 cây Hero bên trái)
   5. `BARREL_PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9.jpg` (`70%` khung hình — 1 cây Hero bên phải)
   6. `BARREL_PLATE_06_SINGLE_WIDE_55PCT_16x9.jpg` (`55%` khung hình — 1 cây đại cảnh phòng rộng trần cao)
-- **Bộ Script tự động chạy ngầm + map UUID chuẩn 1-1:**
+  7. `BARREL_PLATE_07_SINGLE_WIDE_RIGHT_36PCT_16x9.jpg` (`36%` khung hình — 1 cây đại cảnh trần cao `B15` chuẩn tỷ lệ `4ft` cạnh tủ Buffet `85cm`)
+  8. `BARREL_PLATE_08_SINGLE_COASTAL_RIGHT_56PCT_16x9.jpg` (`56%` khung hình — 1 cây đại cảnh phòng khách biển `B20` chuẩn tỷ lệ `4ft`)
+  9. `BARREL_PLATE_09_SINGLE_HERO_RIGHT_76PCT_16x9.jpg` (`76%` khung hình — 1 cây Hero tiền cảnh hồ bơi `B19`)
+- **Bộ Script tự động chạy ngầm + map UUID chuẩn 1-1 + tải/ghép Master `1080p`:**
   - `barrel_cedar_20/run_barrel20_images_silent.py` — Tạo 20 ảnh `16:9` (`Nano Banana Pro`) chạy ngầm.
   - `barrel_cedar_20/map_barrel20_uuids.py` — Quét danh sách cuộn ảo lấy chính xác 20 UUID lưu vào `barrel_cedar_20/barrel20_scene_uuids.json`.
-  - `barrel_cedar_20/run_barrel20_veo4s_silent.py` — Tạo 20 video `4 giây` (`Veo 3.1 - Fast`) kèm cơ chế tự căn tâm `lbRect.top + 150` và tự động retry khi danh sách cuộn ảo dịch chuyển.
+  - `barrel_cedar_20/run_barrel20_veo4s_silent.py` — Tạo 20 video `4 giây` (`Veo 3.1 - Fast`) kèm cầu nối `img[data-media-id] <-> /asb/` chống trượt token sau khi reload trình duyệt.
+  - `barrel_cedar_20/download_and_merge_atf_9422_1080p.py` — Tự động upscale/tải `1080p` (`1920x1080`), kiểm định SHA-256 + `ffprobe` và nối file Master `+faststart`.
 
 ### B. Danh Sách 20 Ảnh `16:9` & 20 Video `4s` Chậu Thùng Gỗ Đai Đen Trên Project Flow (`B01 → B20` / `VB01 → VB20`)
 #### Nhóm 10 Cảnh Đôi (`2 Cây` — `B01 → B10` + `VB01 → VB10`)
@@ -126,9 +132,10 @@ Qua thực chiến QA trực tiếp 10 clip trên Flow, đây là **3 Luật S�
 - `B12` / `VB12` (`07ca3cea-54d5-42f9-ac07-6cc00088d4db`) — Phòng khách tủ gỗ sồi rãnh `80cm`, rèm voan linen & ly gốm thủ công (1 cây Hero trái)
 - `B13` / `VB13` (`d6b74296-6f95-4ec4-8758-8f004aacdcf9`) — Phòng kính Sunroom bệ ghế cửa sổ gỗ sồi `50cm` & sàn gạch Terracotta (1 cây Hero trái)
 - `B14` / `VB14` (`97d7f5d6-a835-48d6-9f74-529ae38c8d6d`) — Góc đảo bếp đá Marble Calacatta & gỗ sồi rãnh cạnh cửa kính sân vườn (1 cây Hero phải)
-- `B15` / `VB15` (`4f03eb3e-7631-4fc5-8a4f-3e41ce67d028`) — Phòng ăn trần cao tủ Buffet gỗ sồi `85cm` & bàn ăn nắng ban mai (1 cây đại cảnh)
-- `B16` / `VB16` (`352b2bd0-e57d-4798-a51a-5e5de445ad69`) — Phòng đọc sách bàn gỗ óc chó, sổ da & kệ sách vòm vữa đất sét (1 cây Hero trái)
-- `B17` / `VB17` (`2c384643-3ea0-4a76-83be-3448d470258b`) — Cầu thang gỗ sồi lan can sắt đen & vách kính sát trần nhìn ra vườn (1 cây Hero phải)
-- `B18` / `VB18` (`da276718-80a1-49c8-9839-021b8c26f20b`) — Góc thư giãn Phòng ngủ Master rèm voan ban công & ghế bành linen (1 cây Hero trái)
-- `B19` / `VB19` (`65decb7f-22f5-4e95-8a95-c792e71a8814`) — Cabana hồ bơi Resort đá Travertine & sofa Daybed gỗ Teak (1 cây Hero phải)
-- `B20` / `VB20` (`36389dec-ef10-4bec-a7c4-04ed7e55df07`) — Phòng khách đồi ven biển California trần xà gỗ sồi & cửa kính đại dương (1 cây đại cảnh)
+- `B15` / `VB15` (`89fd32b4-b711-471d-88ad-7b6b01748713`) — Phòng ăn trần cao tủ Buffet gỗ sồi `85cm` & bàn ăn nắng ban mai (1 cây đại cảnh `PLATE_07` chuẩn `4ft`)
+- `B16` / `VB16` (`8c5ae9c1-5afd-4a59-ac02-fe88e604d098`) — Phòng đọc sách bàn gỗ óc chó, sổ da & kệ sách vòm vữa đất sét (1 cây Hero trái khóa `REF_2` lá dẹp)
+- `B19` / `VB19` & `B17..B20` theo thứ tự:
+  - `B17` / `VB17` (`2c384643-3ea0-4a76-83be-3448d470258b`) — Cầu thang gỗ sồi lan can sắt đen & vách kính sát trần nhìn ra vườn (1 cây Hero phải)
+  - `B18` / `VB18` (`da276718-80a1-49c8-9839-021b8c26f20b`) — Góc thư giãn Phòng ngủ Master rèm voan ban công & ghế bành linen (1 cây Hero trái)
+  - `B19` / `VB19` (`6a6f121c-f7b4-4bfd-ac72-25eee72808c5`) — Cabana hồ bơi Resort đá Travertine & sofa Daybed gỗ Teak (1 cây Hero tiền cảnh phải `PLATE_09` khóa `REF_2`)
+  - `B20` / `VB20` (`2df175d4-9486-46d6-9140-bf9043b8a131`) — Phòng khách đồi ven biển California trần xà gỗ sồi & cửa kính đại dương (1 cây đại cảnh `PLATE_08` chuẩn `4ft`)

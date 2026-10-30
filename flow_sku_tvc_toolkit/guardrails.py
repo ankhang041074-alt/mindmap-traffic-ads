@@ -156,11 +156,15 @@ def validate_sku_config(
             errors.append(f"Duplicate video key {vkey!r}.")
         video_keys.add(vkey)
 
-        skey = vd.get("scene_key", "")
-        if skey and scene_keys and skey not in scene_keys:
+        skey = (vd.get("scene_key") or "").strip()
+        explicit_uuid = (vd.get("uuid") or "").strip()
+        if not skey and not explicit_uuid:
+            errors.append(f"[{vkey}] Video entry must specify either 'scene_key' or explicit 'uuid'.")
+        elif skey and skey not in scene_keys and not explicit_uuid:
             errors.append(f"[{vkey}] References unknown scene_key {skey!r}.")
-        end_skey = vd.get("end_scene_key", "")
-        if end_skey and scene_keys and end_skey not in scene_keys:
+        end_skey = (vd.get("end_scene_key") or "").strip()
+        end_uuid = (vd.get("end_uuid") or "").strip()
+        if end_skey and end_skey not in scene_keys and not end_uuid:
             errors.append(f"[{vkey}] References unknown end_scene_key {end_skey!r}.")
 
         errors.extend(validate_video_prompt(vd.get("prompt", ""), preset_name=preset_name, video_key=vkey))

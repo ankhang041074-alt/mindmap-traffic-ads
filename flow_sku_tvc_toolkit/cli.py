@@ -212,7 +212,15 @@ def cmd_map_uuids(args: argparse.Namespace) -> int:
     from .flow_cdp import map_scene_uuids_pipeline
 
     cfg, proj_dir = _load_config(args.config)
-    asyncio.run(map_scene_uuids_pipeline(config=cfg, project_dir=proj_dir, port=args.port))
+    asyncio.run(
+        map_scene_uuids_pipeline(
+            config=cfg,
+            project_dir=proj_dir,
+            port=args.port,
+            only_key=args.only_key,
+            force_remap=args.force_remap,
+        )
+    )
     return 0
 
 
@@ -317,6 +325,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     sp_map = sub.add_parser("map-uuids", help="Map generated Flow images 1-to-1 to scene keys via CDK virtual scroll")
     sp_map.add_argument("--config", required=True)
+    sp_map.add_argument("--only-key", default="", help="Update only scene(s) matching this key substring after a single-scene re-render")
+    sp_map.add_argument("--force-remap", action="store_true", help="Allow full newest-first overwrite even when extra re-rendered images exist")
     sp_map.add_argument("--port", type=int, default=None)
     sp_map.set_defaults(func=cmd_map_uuids)
 

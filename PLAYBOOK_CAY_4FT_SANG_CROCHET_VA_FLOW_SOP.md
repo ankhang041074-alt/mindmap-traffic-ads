@@ -100,7 +100,7 @@ python3 -m flow_sku_tvc_toolkit map-uuids --config products/crochet_tulip_pot/sk
 # 3. Chạy ngầm toàn bộ dàn Video 4s Veo 3.1 - Fast (2 video / wave, tự căn tâm chống trôi cuộn ảo):
 python3 -m flow_sku_tvc_toolkit run-videos --config products/crochet_tulip_pot/sku_project.json --phase all
 ```
-*(Nếu soi QA muốn sửa lẻ đúng 1 ảnh hoặc 1 video nào đó, chỉ cần sửa prompt cảnh đó trong `sku_project.json` và chạy `--phase only --only-key <MÃ_CẢNH>` y như cách chúng ta fix lẻ `B16`, `B19`, `B20`, `VB02` hôm nay!).*
+*(Nếu soi QA muốn sửa lẻ đúng 1 ảnh hoặc 1 video nào đó, chỉ cần sửa prompt cảnh đó trong `sku_project.json` và chạy `run-images --phase only --only-key <MÃ_CẢNH>` — công cụ sẽ tự động cập nhật đúng UUID mới của riêng cảnh đó vào `<slug>_scene_uuids.json` mà không làm xô lệch các cảnh còn lại, hoặc dùng `map-uuids --only-key <MÃ_CẢNH>`, sau đó chạy `run-videos --phase only --only-key <MÃ_CẢNH>` y như cách fix lẻ `B16`, `B19`, `B20`, `VB02` hôm nay!).*
 
 ### Bước 5 — Tự Động Upscale / Tải Trọn Bộ `1080p` & Ghép File Master MP4
 ```bash

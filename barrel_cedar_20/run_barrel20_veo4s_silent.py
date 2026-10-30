@@ -404,14 +404,19 @@ async def clear_frame_slots_and_text(flow):
             break
 
 
-async def _try_set_start_frame_once(flow, target_uuid):
-    target_uuid = target_uuid.split("=")[0][:48]
+async def _try_set_start_frame_once(flow, target_uuid, alt_tokens=()):
+    cands = []
+    for raw in (target_uuid, *alt_tokens):
+        if raw:
+            c = raw.split("?")[0].split("=")[0][:48]
+            if c and c not in cands:
+                cands.append(c)
     await flow.call("Input.dispatchKeyEvent", {"type": "keyDown", "key": "Escape", "code": "Escape"})
     await flow.call("Input.dispatchKeyEvent", {"type": "keyUp", "key": "Escape", "code": "Escape"})
     await asyncio.sleep(0.35)
 
     await clear_frame_slots_and_text(flow)
-    await flow.find_and_trusted_click("text.includes('Bắt đầu') && !aria.includes('Bắt đầu tạo') && r.y > 660", "Bắt đầu slot")
+    await flow.find_and_trusted_click("text.includes('Bắt đầu') && !aria.includes('Bắt đầu tạo') && r.y > Math.max(180, window.innerHeight - 360)", "Bắt đầu slot")
     await asyncio.sleep(0.9)
 
     await flow.js("""
@@ -427,24 +432,24 @@ async def _try_set_start_frame_once(flow, target_uuid):
     await asyncio.sleep(0.35)
 
     found_opt = None
-    for scroll_y in range(0, 10400, 260):
+    for scroll_y in range(0, 12000, 260):
         await flow.js(f"""
         (() => {{
             const lb = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]');
             if (lb) lb.scrollTop = {scroll_y};
         }})()
         """)
-        await asyncio.sleep(0.32)
+        await asyncio.sleep(0.35)
         opt = await flow.js(f"""
         (() => {{
-            const uid = {json.dumps(target_uuid)};
+            const cands = {json.dumps(cands)};
             const lb = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]');
             const lbRect = lb ? lb.getBoundingClientRect() : null;
             const opts = Array.from(document.querySelectorAll('[role="option"]'));
             for (const el of opts) {{
                 const img = el.querySelector('img');
                 const src = img?.src || '';
-                if (src.includes(uid)) {{
+                if (cands.some(uid => src.includes(uid))) {{
                     if (lb && lbRect) {{
                         const er = el.getBoundingClientRect();
                         lb.scrollTop += (er.top + er.height / 2) - (lbRect.top + 150);
@@ -460,24 +465,24 @@ async def _try_set_start_frame_once(flow, target_uuid):
             break
 
     if not found_opt:
-        return False, f"UUID {target_uuid} not found in virtual scroll"
+        return False, f"Tokens {cands} not found in virtual scroll"
 
     await asyncio.sleep(0.35)
 
     async def recenter_and_inspect():
         return await flow.js(f"""
         (() => {{
-            const uid = {json.dumps(target_uuid)};
+            const cands = {json.dumps(cands)};
             const lb = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]');
             const lbRect = lb ? lb.getBoundingClientRect() : null;
-            let el = Array.from(document.querySelectorAll('[role="option"]')).find(e => (e.querySelector('img')?.src || '').includes(uid));
+            let el = Array.from(document.querySelectorAll('[role="option"]')).find(e => cands.some(uid => (e.querySelector('img')?.src || '').includes(uid)));
             if (el && lb && lbRect) {{
                 const er0 = el.getBoundingClientRect();
                 if (er0.top < lbRect.top + 60 || er0.bottom > lbRect.top + 280) {{
                     lb.scrollTop += (er0.top + er0.height / 2) - (lbRect.top + 150);
                 }}
             }}
-            el = Array.from(document.querySelectorAll('[role="option"]')).find(e => (e.querySelector('img')?.src || '').includes(uid));
+            el = Array.from(document.querySelectorAll('[role="option"]')).find(e => cands.some(uid => (e.querySelector('img')?.src || '').includes(uid)));
             let coords = null;
             if (el) {{
                 const img = el.querySelector('img');
@@ -498,7 +503,7 @@ async def _try_set_start_frame_once(flow, target_uuid):
                     pSrcs = Array.from(container.querySelectorAll('img'))
                         .filter(i => !i.closest('[role="option"]'))
                         .map(i => (i.src || '').split('?')[0]);
-                    previewMatches = pSrcs.some(s => s.includes(uid));
+                    previewMatches = pSrcs.some(s => cands.some(uid => s.includes(uid)));
                 }}
             }}
             return {{coords, hasAdd: Boolean(addBtn), previewMatches, pSrcs}};
@@ -517,7 +522,8 @@ async def _try_set_start_frame_once(flow, target_uuid):
                 await asyncio.sleep(0.65)
             slot_ok = await flow.js("""
             (() => {
-                const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(b => b.getBoundingClientRect().y > 680 && b.getBoundingClientRect().width > 0);
+                const minY = Math.max(180, window.innerHeight - 340);
+                const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(b => b.getBoundingClientRect().y > minY && b.getBoundingClientRect().width > 0);
                 const hasEmptyStart = btns.some(b => (b.innerText||'').trim() === 'Bắt đầu');
                 const hasEmptyEnd = btns.some(b => (b.innerText||'').trim().includes('Kết thúc'));
                 return !hasEmptyStart && hasEmptyEnd;
@@ -529,10 +535,10 @@ async def _try_set_start_frame_once(flow, target_uuid):
     return False, f"preview did not lock: {st_last}"
 
 
-async def set_start_frame_by_uuid(flow, target_uuid):
+async def set_start_frame_by_uuid(flow, target_uuid, alt_tokens=()):
     last_reason = ""
     for attempt in range(1, 4):
-        ok, info = await _try_set_start_frame_once(flow, target_uuid)
+        ok, info = await _try_set_start_frame_once(flow, target_uuid, alt_tokens=alt_tokens)
         if ok:
             print(f"  + Verified Start Frame [{target_uuid[:8]}] populated in Bắt đầu slot (attempt {attempt})!")
             return
@@ -544,13 +550,13 @@ async def set_start_frame_by_uuid(flow, target_uuid):
     raise RuntimeError(f"Start Frame slot did not populate cleanly for {target_uuid} after 3 attempts! ({last_reason})")
 
 
-async def submit_veo_clip(flow, item, target_uuid):
+async def submit_veo_clip(flow, item, target_uuid, alt_tokens=()):
     print(f"\n=== QUEUEING 4S VEO 3.1 CLIP: {item['key']} (img={target_uuid[:8]}) ===")
     await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
     await asyncio.sleep(0.25)
     await ensure_veo31_fast_4s_16x9(flow)
     await clear_frame_slots_and_text(flow)
-    await set_start_frame_by_uuid(flow, target_uuid)
+    await set_start_frame_by_uuid(flow, target_uuid, alt_tokens=alt_tokens)
 
     ed_rect = await flow.js("""
     (() => {
@@ -656,14 +662,71 @@ async def capture_video_qa_pages(flow):
     await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
 
 
+async def _build_gallery_uuid_bridge(flow):
+    await exit_edit_view_if_needed(flow)
+    img_tab = await flow.js("""
+    (() => {
+        const btns = Array.from(document.querySelectorAll('button, [role="tab"]')).filter(b => {
+            const r = b.getBoundingClientRect();
+            const txt = (b.innerText || '').trim();
+            return r.width > 0 && r.x < 300 && r.y > 40 && r.y < 320 && txt.includes('Hình ảnh');
+        });
+        if (!btns.length) return null;
+        const r = btns[0].getBoundingClientRect();
+        return {cx: Math.round(r.x + r.width / 2), cy: Math.round(r.y + r.height / 2)};
+    })()
+    """)
+    if img_tab:
+        await flow.trusted_click(img_tab["cx"], img_tab["cy"])
+        await asyncio.sleep(0.8)
+    await flow.js("""
+    (() => {
+        const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+        if (sc) sc.scrollTop = 0;
+    })()
+    """)
+    await asyncio.sleep(0.35)
+    uuid_to_asb = {}
+    for _ in range(28):
+        pairs = await flow.js("""
+        Array.from(document.querySelectorAll('img[data-media-id]')).map(i => ({
+            mid: (i.getAttribute('data-media-id') || '').trim(),
+            tok: ((i.currentSrc || i.src || '').split('?')[0].split('/').pop() || '').split('=')[0]
+        })).filter(x => x.mid && x.tok)
+        """)
+        for p in pairs or []:
+            uuid_to_asb[p["mid"]] = p["tok"][:48]
+        moved = await flow.js("""
+        (() => {
+            const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+            if (!sc) return false;
+            const prev = sc.scrollTop;
+            sc.scrollTop += 680;
+            return sc.scrollTop > prev;
+        })()
+        """)
+        if not moved:
+            break
+        await asyncio.sleep(0.24)
+    await flow.js("""
+    (() => {
+        const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+        if (sc) sc.scrollTop = 0;
+    })()
+    """)
+    return uuid_to_asb
+
+
 async def run_video_waves(flow, videos, scene_uuids):
+    uuid_to_asb = await _build_gallery_uuid_bridge(flow)
     for w_i in range(0, len(videos), 2):
         wave = videos[w_i:w_i + 2]
         for it in wave:
             uid = scene_uuids.get(it["scene_key"], "")
             if not uid:
                 raise RuntimeError(f"Missing scene UUID for {it['scene_key']} in {SCENE_UUIDS_PATH}!")
-            await submit_veo_clip(flow, it, uid)
+            alts = [uuid_to_asb[uid]] if uid in uuid_to_asb else []
+            await submit_veo_clip(flow, it, uid, alt_tokens=alts)
         await wait_for_video_wave(flow, f"Barrel20 Veo Wave {w_i//2 + 1} ({len(wave)} clips)")
     await asyncio.sleep(4.0)
     await capture_video_qa_pages(flow)

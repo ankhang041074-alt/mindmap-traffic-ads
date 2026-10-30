@@ -16,8 +16,10 @@ import asyncio
 import base64
 import glob
 import hashlib
+import io
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -25,6 +27,7 @@ import urllib.parse
 import urllib.request
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
+from PIL import Image, ImageOps
 import websockets
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,13 +37,15 @@ if FLOW_WEB_INTRO_DIR not in sys.path:
 
 from gen_batch_images import FlowCDP  # noqa: E402
 from home_helper import discover_cdp_http_url  # noqa: E402
-from review_fix_keyframes_step1 import clear_composer_strict  # noqa: E402
 
 from .guardrails import validate_sku_config  # noqa: E402
+from .plate_engine import composite_to_rgb_white  # noqa: E402
 from .presets import get_preset  # noqa: E402
 
 FFMPEG = "/opt/homebrew/bin/ffmpeg" if os.path.exists("/opt/homebrew/bin/ffmpeg") else "ffmpeg"
 FFPROBE = "/opt/homebrew/bin/ffprobe" if os.path.exists("/opt/homebrew/bin/ffprobe") else "ffprobe"
+UUID_RE = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", re.IGNORECASE)
+UPLOADED_EXT_RE = re.compile(r"\.(?:jpe?g|png|webp)\b", re.IGNORECASE)
 
 
 def resolve_cdp_base_url(port: Optional[int] = None, cdp_url: Optional[str] = None) -> str:
@@ -100,6 +105,36 @@ async def press_escape(flow: FlowCDP, wait_s: float = 0.3) -> None:
     await asyncio.sleep(wait_s)
 
 
+async def clear_composer_strict(flow: FlowCDP) -> None:
+    """Clear all attached ingredient chips and prompt text without importing legacy scratch modules."""
+    await press_escape(flow, 0.3)
+    for _ in range(3):
+        remaining = await flow.js("""
+        (() => {
+            const clearAll = document.querySelector('button[aria-label="Xoá câu lệnh"]');
+            if (clearAll && clearAll.getBoundingClientRect().width > 0) {
+                clearAll.click();
+            }
+            const chips = Array.from(document.querySelectorAll('button[aria-label="Thành phần"]'));
+            for (const c of chips) {
+                if (c.getBoundingClientRect().width > 0) {
+                    c.click();
+                }
+            }
+            const el = document.querySelector('[aria-label="Bạn muốn tạo những gì?"], [aria-label="Bạn muốn tạo gì?"], [contenteditable="true"]');
+            if (el && (el.innerText || '').trim().length > 0) {
+                el.focus();
+                document.execCommand('selectAll', false, null);
+                document.execCommand('delete', false, null);
+            }
+            return document.querySelectorAll('button[aria-label="Thành phần"]').length;
+        })()
+        """)
+        await asyncio.sleep(0.32)
+        if remaining == 0:
+            break
+
+
 async def exit_edit_view_if_needed(flow: FlowCDP) -> None:
     href = await flow.js("window.location.href")
     if "/edit/" in (href or ""):
@@ -108,9 +143,12 @@ async def exit_edit_view_if_needed(flow: FlowCDP) -> None:
 
 
 async def disable_agent_mode_if_active(flow: FlowCDP) -> None:
-    """Turn OFF Flow's post-reload 'Tác nhân' mode so manual Nano Banana / Veo controls appear."""
+    """Turn OFF Flow's post-reload 'Tác nhân' mode across any browser window height."""
     if await flow.js("Boolean(document.querySelector('[aria-label=\"Chỉ dẫn cho tác nhân\"]'))"):
-        await flow.find_and_trusted_click("text === 'Tác nhân' && r.y > 760 && r.y < 940", "toggle OFF Tác nhân")
+        await flow.find_and_trusted_click(
+            "text === 'Tác nhân' && r.y > Math.max(200, window.innerHeight - 280)",
+            "toggle OFF Tác nhân",
+        )
         await asyncio.sleep(0.75)
 
 
@@ -124,7 +162,7 @@ async def switch_gallery_tab(flow: FlowCDP, tab_label: str) -> None:
         const btns = Array.from(document.querySelectorAll('button, [role="tab"]')).filter(b => {{
             const r = b.getBoundingClientRect();
             const txt = (b.innerText || '').trim();
-            return r.width > 0 && r.x < 280 && r.y > 60 && r.y < 260 && txt.includes(label);
+            return r.width > 0 && r.x < 360 && r.y > 40 && r.y < 280 && txt.includes(label);
         }});
         if (!btns.length) return null;
         const r = btns[0].getBoundingClientRect();
@@ -165,12 +203,12 @@ async def ensure_image_mode(flow: FlowCDP, aspect_ratio: str = "16:9") -> None:
     already_pro = await flow.js("""
     Array.from(document.querySelectorAll('button, [role="button"]')).some(b => {
         const r = b.getBoundingClientRect();
-        return r.width > 0 && r.y > 480 && r.y < 820 && (b.innerText || '').includes('Nano Banana Pro');
+        return r.width > 0 && r.y > Math.max(120, window.innerHeight - 560) && r.y < window.innerHeight - 60 && (b.innerText || '').includes('Nano Banana Pro');
     })
     """)
     if not already_pro:
         await flow.find_and_trusted_click(
-            "(text.includes('Nano Banana') || text.includes('Imagen')) && r.y > 480 && r.y < 820",
+            "(text.includes('Nano Banana') || text.includes('Imagen')) && r.y > Math.max(120, window.innerHeight - 560) && r.y < window.innerHeight - 60",
             "image model dropdown",
         )
         await asyncio.sleep(0.4)
@@ -199,7 +237,7 @@ async def ensure_veo31_fast_4s_16x9(flow: FlowCDP) -> None:
     Array.from(document.querySelectorAll('button, [role="button"]')).some(b => {
         const r = b.getBoundingClientRect();
         const txt = (b.innerText || '').trim();
-        return r.y > 660 && r.width > 0 && (txt.includes('Bắt đầu') || txt.includes('Kết thúc') || (b.getAttribute('aria-label')||'').includes('Hoán đổi khung hình'));
+        return r.y > Math.max(180, window.innerHeight - 340) && r.width > 0 && (txt.includes('Bắt đầu') || txt.includes('Kết thúc') || (b.getAttribute('aria-label')||'').includes('Hoán đổi khung hình'));
     })
     """)
     if "Video" in pill and "4 giây" in pill and "crop_16_9" in pill and "x1" in pill and has_start_slot:
@@ -221,13 +259,16 @@ async def ensure_veo31_fast_4s_16x9(flow: FlowCDP) -> None:
         const el = document.querySelector('[aria-label="Chọn nhóm mô hình"]')
             || Array.from(document.querySelectorAll('button, [role="button"]')).find(b => {
                 const r = b.getBoundingClientRect();
-                return r.width > 0 && r.y > 480 && r.y < 820 && (b.innerText || '').includes('Veo');
+                return r.width > 0 && r.y > Math.max(120, window.innerHeight - 560) && r.y < window.innerHeight - 60 && (b.innerText || '').includes('Veo');
             });
         return (el?.innerText || '').trim();
     })()
     """)
     if "Veo 3.1 - Fast" not in model_txt:
-        await flow.find_and_trusted_click("(aria === 'Chọn nhóm mô hình' || text.includes('Veo')) && r.y > 480 && r.y < 820", "model dropdown")
+        await flow.find_and_trusted_click(
+            "(aria === 'Chọn nhóm mô hình' || text.includes('Veo')) && r.y > Math.max(120, window.innerHeight - 560) && r.y < window.innerHeight - 60",
+            "model dropdown",
+        )
         await asyncio.sleep(0.45)
         await flow.find_and_trusted_click("el.getAttribute('role') === 'menuitem' && text.includes('Veo 3.1 - Fast')", "Veo 3.1 - Fast")
         await asyncio.sleep(0.4)
@@ -242,13 +283,125 @@ async def ensure_veo31_fast_4s_16x9(flow: FlowCDP) -> None:
         await asyncio.sleep(0.4)
 
 
+async def _wait_visible_option_thumbnails(flow: FlowCDP, max_polls: int = 5) -> None:
+    """Wait briefly for lazy-loaded <img class='asset-thumbnail-image'> inside visible [role='option'] rows."""
+    for _ in range(max_polls):
+        pending = await flow.js("""
+        Array.from(document.querySelectorAll('[role="option"]')).filter(el => {
+            const r = el.getBoundingClientRect();
+            if (r.width <= 0 || r.bottom < 0 || r.top > window.innerHeight) return false;
+            const txt = (el.innerText || '').trim();
+            if (txt.endsWith('Video') || txt.startsWith('videocam')) return false;
+            const img = el.querySelector('img');
+            return !img || !(img.currentSrc || img.src || '');
+        }).length
+        """)
+        if not pending:
+            return
+        await asyncio.sleep(0.22)
+
+
 async def open_ingredient_modal(flow: FlowCDP) -> None:
     if not await flow.js("document.querySelectorAll('[role=\"option\"]').length > 0"):
         await flow.find_and_trusted_click("aria === 'Thêm thành phần vào ô nhập câu lệnh'", "open '+' modal")
         await asyncio.sleep(0.85)
+    await _wait_visible_option_thumbnails(flow)
 
 
-async def scan_all_project_options(flow: FlowCDP, max_steps: int = 22) -> List[Dict[str, str]]:
+async def build_gallery_media_bridge(flow: FlowCDP, max_steps: int = 28) -> Tuple[Dict[str, str], Dict[str, str]]:
+    """
+    Walk the 'Hình ảnh' gallery virtual scroller collecting <img data-media-id='<UUID>' src='.../asb/ANqvLO...'>
+    so permanent 36-char UUIDs stored in Git map 1-to-1 to post-reload /asb/ANqvLO... tokens and vice versa.
+    """
+    await switch_gallery_tab(flow, "Hình ảnh")
+    prev_sy = await flow.js("""
+    (() => {
+        const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+        if (!sc) return 0;
+        const p = sc.scrollTop;
+        sc.scrollTop = 0;
+        return p;
+    })()
+    """)
+    await asyncio.sleep(0.35)
+
+    uuid_to_asb: Dict[str, str] = {}
+    asb_to_uuid: Dict[str, str] = {}
+    for _ in range(max(max_steps, 40)):
+        for _ in range(4):
+            ready = await flow.js("""
+            (() => {
+                const vis = Array.from(document.querySelectorAll('img[data-media-id]')).filter(i => {
+                    const r = i.getBoundingClientRect();
+                    return r.bottom > 0 && r.top < window.innerHeight;
+                });
+                return vis.length > 0 && vis.every(i => Boolean(i.currentSrc || i.src));
+            })()
+            """)
+            if ready:
+                break
+            await asyncio.sleep(0.1)
+
+        rows = await flow.js("""
+        Array.from(document.querySelectorAll('img[data-media-id]')).map(i => ({
+            mediaId: (i.getAttribute('data-media-id') || '').trim(),
+            tok: (i.currentSrc || i.src || '').split('?')[0].split('/').pop().split('=')[0]
+        }))
+        """)
+        for row in rows:
+            mid = row["mediaId"]
+            tok = row["tok"]
+            if mid and tok:
+                core = tok[:48]
+                uuid_to_asb[mid] = core
+                asb_to_uuid[core] = mid
+                asb_to_uuid[tok] = mid
+
+        moved = await flow.js("""
+        (() => {
+            const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+            if (!sc) return false;
+            const prev = sc.scrollTop;
+            sc.scrollTop += 480;
+            return sc.scrollTop > prev;
+        })()
+        """)
+        if not moved:
+            break
+        await asyncio.sleep(0.2)
+
+    await flow.js(f"""
+    (() => {{
+        const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+        if (sc) sc.scrollTop = {int(prev_sy or 0)};
+    }})()
+    """)
+    await asyncio.sleep(0.2)
+    return uuid_to_asb, asb_to_uuid
+
+
+def _token_matches_set(tok: str, known_set: Set[str], asb_to_uuid: Optional[Dict[str, str]] = None) -> bool:
+    """Match a picker token against a set of full /asb/ tokens, 48-char cores, or permanent 36-char UUIDs."""
+    if not tok:
+        return False
+    clean = tok.split("?")[0].split("=")[0]
+    core = clean[:48]
+    if clean in known_set or core in known_set:
+        return True
+    if asb_to_uuid:
+        mapped_uuid = asb_to_uuid.get(clean) or asb_to_uuid.get(core)
+        if mapped_uuid and mapped_uuid in known_set:
+            return True
+    for k in known_set:
+        if not k:
+            continue
+        k_clean = k.split("?")[0].split("=")[0]
+        if len(k_clean) >= 24 and (clean.startswith(k_clean[:48]) or k_clean.startswith(core)):
+            return True
+    return False
+
+
+async def scan_all_project_options(flow: FlowCDP, max_steps: int = 24) -> List[Dict[str, str]]:
     """Walk CDK virtual-scroll picker top-to-bottom returning ordered [{txt, src, token}]."""
     await open_ingredient_modal(flow)
     await flow.js("""
@@ -260,8 +413,9 @@ async def scan_all_project_options(flow: FlowCDP, max_steps: int = 22) -> List[D
     await asyncio.sleep(0.35)
 
     ordered: List[Dict[str, str]] = []
-    seen: Set[str] = set()
+    seen_keys: Set[str] = set()
     for _ in range(max_steps):
+        await _wait_visible_option_thumbnails(flow)
         items = await flow.js("""
         Array.from(document.querySelectorAll('[role="option"]'))
             .map(el => {
@@ -278,15 +432,16 @@ async def scan_all_project_options(flow: FlowCDP, max_steps: int = 22) -> List[D
         """)
         for it in items:
             tok = it["token"]
-            if tok and tok not in seen:
-                seen.add(tok)
+            dedupe_key = tok[:48] if tok else f"txt:{it['txt']}"
+            if dedupe_key and dedupe_key not in seen_keys:
+                seen_keys.add(dedupe_key)
                 ordered.append(it)
         moved = await flow.js("""
         (() => {
             const vp = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"]') || document.querySelector('cdk-virtual-scroll-viewport');
             if (!vp) return false;
             const prev = vp.scrollTop;
-            vp.scrollTop += 280;
+            vp.scrollTop += 260;
             return vp.scrollTop > prev;
         })()
         """)
@@ -305,19 +460,23 @@ async def upload_missing_files_silent(
 ) -> Dict[str, str]:
     """Silently upload missing plate/ref files via intercepted fileChooser + DOM.setFileInputFiles."""
     await press_escape(flow, 0.3)
-    existing_opts = await scan_all_project_options(flow, max_steps=18)
+    existing_opts = await scan_all_project_options(flow, max_steps=20)
     await press_escape(flow, 0.3)
 
     missing: List[Tuple[str, str]] = []
     for fname, fpath in file_entries:
         stem = os.path.splitext(fname)[0]
-        known_u = uuid_cache.get(fname, "")
-        hit = next(
-            (it["token"] for it in existing_opts if (known_u and known_u in it["src"]) or (stem in it["txt"])),
+        known_u = uuid_cache.get(fname, "").split("=")[0][:48]
+        matched_opt = next(
+            (
+                it for it in existing_opts
+                if (known_u and known_u in (it.get("src") or "")) or (stem in (it.get("txt") or ""))
+            ),
             None,
         )
-        if hit:
-            uuid_cache[fname] = hit[:48]
+        if matched_opt is not None:
+            if matched_opt.get("token"):
+                uuid_cache[fname] = matched_opt["token"][:48]
         else:
             if not os.path.isfile(fpath):
                 raise FileNotFoundError(f"Required ingredient file missing on disk: {fpath}")
@@ -399,11 +558,11 @@ async def upload_missing_files_silent(
         await flow.call("Page.setInterceptFileChooserDialog", {"enabled": False})
 
     await asyncio.sleep(1.2)
-    refreshed = await scan_all_project_options(flow, max_steps=18)
+    refreshed = await scan_all_project_options(flow, max_steps=20)
     await press_escape(flow, 0.3)
     for fname, _ in missing:
         stem = os.path.splitext(fname)[0]
-        hit = next((it["token"] for it in refreshed if stem in it["txt"]), None)
+        hit = next((it["token"] for it in refreshed if stem in it["txt"] and it.get("token")), None)
         if hit:
             uuid_cache[fname] = hit[:48]
             print(f"  Registered token for {fname}: {uuid_cache[fname]}")
@@ -418,9 +577,9 @@ async def attach_ingredient_verified(
     uuid_cache: Dict[str, str],
     uuid_cache_path: Optional[str] = None,
 ) -> None:
-    """Attach 1 ingredient in '+' modal, verifying chip count increments by +1."""
+    """Attach 1 ingredient in '+' modal, tolerating lazy-loaded thumbnails and verifying chip +1."""
     stem = os.path.splitext(filename)[0]
-    known_uuid = uuid_cache.get(filename, "")
+    known_uuid = uuid_cache.get(filename, "").split("=")[0][:48]
     await open_ingredient_modal(flow)
 
     await flow.js("""
@@ -432,7 +591,8 @@ async def attach_ingredient_verified(
     await asyncio.sleep(0.3)
 
     hit = False
-    for _ in range(35):
+    for _ in range(36):
+        await _wait_visible_option_thumbnails(flow, max_polls=3)
         m = await flow.js(f"""
         (() => {{
             const idStr = {json.dumps(stem)};
@@ -455,6 +615,7 @@ async def attach_ingredient_verified(
         """)
         if m:
             await asyncio.sleep(0.35)
+            await _wait_visible_option_thumbnails(flow, max_polls=5)
             hit = True
             break
         moved = await flow.js("""
@@ -486,7 +647,7 @@ async def attach_ingredient_verified(
                 if ((idStr && txt.includes(idStr)) || (ku && src.includes(ku))) {{
                     const r = (img && img.getBoundingClientRect().width > 10 ? img : el).getBoundingClientRect();
                     targetOpt = {{
-                        token: src.split('?')[0].split('/').pop().split('=')[0],
+                        token: src ? src.split('?')[0].split('/').pop().split('=')[0] : '',
                         cx: Math.round(r.x + Math.min(r.width / 2, 45)),
                         cy: Math.round(r.y + r.height / 2),
                     }};
@@ -513,26 +674,42 @@ async def attach_ingredient_verified(
         """)
 
     st = await inspect_dialog()
-    if not st["targetOpt"] or not st["targetOpt"]["token"]:
-        raise RuntimeError(f"Ingredient {filename!r} matched but token empty: {st}")
+    if not st["targetOpt"]:
+        raise RuntimeError(f"Ingredient {filename!r} disappeared from viewport during inspection.")
 
-    target_core = st["targetOpt"]["token"][:48]
-    uuid_cache[filename] = target_core
-    if uuid_cache_path:
-        with open(uuid_cache_path, "w", encoding="utf-8") as f:
-            json.dump(uuid_cache, f, indent=2)
+    target_core = (st["targetOpt"]["token"] or known_uuid)[:48]
+    if st["targetOpt"]["token"]:
+        uuid_cache[filename] = target_core
+        if uuid_cache_path:
+            with open(uuid_cache_path, "w", encoding="utf-8") as f:
+                json.dump(uuid_cache, f, indent=2)
 
-    is_previewed = any(target_core in u for u in st["previewSrcs"]) and st["hasAddBtn"]
+    def _matches_preview(st_obj: Dict[str, Any], core: str) -> bool:
+        if not st_obj.get("hasAddBtn"):
+            return False
+        if not core:
+            return len(st_obj.get("previewSrcs") or []) > 0
+        return any(core in u for u in (st_obj.get("previewSrcs") or []))
+
+    is_previewed = _matches_preview(st, target_core)
     if not is_previewed:
         for dx in (0, 55, 105):
             st_cur = await inspect_dialog()
             if not st_cur["targetOpt"]:
                 break
+            if st_cur["targetOpt"]["token"] and not target_core:
+                target_core = st_cur["targetOpt"]["token"][:48]
             await flow.trusted_click(st_cur["targetOpt"]["cx"] + dx, st_cur["targetOpt"]["cy"])
             for _ in range(7):
                 await asyncio.sleep(0.3)
                 st2 = await inspect_dialog()
-                if any(target_core in u for u in st2["previewSrcs"]) and st2["hasAddBtn"]:
+                if st2["targetOpt"] and st2["targetOpt"]["token"]:
+                    target_core = st2["targetOpt"]["token"][:48]
+                    uuid_cache[filename] = target_core
+                    if uuid_cache_path:
+                        with open(uuid_cache_path, "w", encoding="utf-8") as f:
+                            json.dump(uuid_cache, f, indent=2)
+                if _matches_preview(st2, target_core):
                     is_previewed = True
                     break
             if is_previewed:
@@ -554,15 +731,105 @@ async def attach_ingredient_verified(
     print(f"  + Attached {stem} (chips={after_chips})")
 
 
-async def get_rendered_gallery_urls(flow: FlowCDP) -> List[str]:
+async def get_rendered_gallery_items(flow: FlowCDP) -> List[Dict[str, str]]:
+    """Return top-to-bottom rendered gallery images [{src, base, media_id}]."""
     imgs = await flow.js("""
     Array.from(document.querySelectorAll('img'))
         .filter(i => !i.closest('button[aria-label="Thành phần"]') && !i.closest('[role="option"]'))
-        .map(i => ({src: i.currentSrc || i.src || '', nw: i.naturalWidth, top: i.getBoundingClientRect().top}))
+        .map(i => ({
+            src: i.currentSrc || i.src || '',
+            mediaId: (i.getAttribute('data-media-id') || '').trim(),
+            nw: i.naturalWidth,
+            top: i.getBoundingClientRect().top
+        }))
         .filter(i => (i.src.includes('flow-content.google/image/') || i.src.includes('/asb/') || i.src.includes('googleusercontent.com/')) && i.nw >= 512)
         .sort((a, b) => a.top - b.top)
     """)
-    return [im["src"] for im in imgs]
+    out: List[Dict[str, str]] = []
+    for im in imgs:
+        src = im["src"]
+        base = src.split("?")[0].split("=")[0]
+        mid = im["mediaId"]
+        if not mid and "flow-content.google/image/" in base:
+            cand = base.split("/")[-1]
+            if UUID_RE.match(cand):
+                mid = cand
+        out.append({"src": src, "base": base, "media_id": mid})
+    return out
+
+
+async def get_rendered_gallery_urls(flow: FlowCDP) -> List[str]:
+    return [it["src"] for it in await get_rendered_gallery_items(flow)]
+
+
+async def _fetch_flow_image_bytes(flow: FlowCDP, img_url: str) -> bytes:
+    """
+    Download full-resolution image bytes from Google Flow without triggering cross-origin CORS errors:
+    - Upgrades same-origin '/asb/...=s1600-rw' FIFE URLs to '=s0' (uncompressed original JPEG)
+    - Uses credentials='same-origin' for flow.google.com and credentials='omit' for cross-origin
+      signed URLs (flow-content.google / googleusercontent.com, where credentials='include' fails CORS!)
+    - Validates HTTP 200 status & byte length, falling back to an offscreen <canvas> capture if needed.
+    """
+    b64_data = await flow.js(f"""
+    (async () => {{
+        const origUrl = {json.dumps(img_url)};
+        const candidates = [];
+        if (origUrl.includes('/asb/') && /=s\\d+[^?]*$/.test(origUrl)) {{
+            candidates.push(origUrl.replace(/=s\\d+[^?]*$/, '=s0'));
+        }}
+        candidates.push(origUrl);
+
+        const toB64 = (buf) => {{
+            let binary = '';
+            const bytes = new Uint8Array(buf);
+            const chunk = 0x8000;
+            for (let i = 0; i < bytes.length; i += chunk) {{
+                binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+            }}
+            return btoa(binary);
+        }};
+
+        let lastErr = '';
+        for (const u of candidates) {{
+            try {{
+                const sameOrigin = u.startsWith(window.location.origin + '/');
+                const resp = await fetch(u, {{credentials: sameOrigin ? 'same-origin' : 'omit'}});
+                if (!resp.ok) {{
+                    lastErr = 'HTTP ' + resp.status + ' for ' + u.slice(0, 70);
+                    continue;
+                }}
+                const buf = await resp.arrayBuffer();
+                if (buf.byteLength < 1024) {{
+                    lastErr = 'Payload too small (' + buf.byteLength + 'B)';
+                    continue;
+                }}
+                return toB64(buf);
+            }} catch (e) {{
+                lastErr = String(e);
+            }}
+        }}
+
+        // Fallback: draw matching loaded DOM <img> onto an offscreen canvas if CORS allows
+        const baseTarget = origUrl.split('?')[0].split('=')[0];
+        const domImg = Array.from(document.querySelectorAll('img')).find(
+            i => (i.currentSrc || i.src || '').includes(baseTarget) && i.naturalWidth >= 512
+        );
+        if (domImg) {{
+            try {{
+                const c = document.createElement('canvas');
+                c.width = domImg.naturalWidth;
+                c.height = domImg.naturalHeight;
+                c.getContext('2d').drawImage(domImg, 0, 0);
+                const dataUrl = c.toDataURL('image/png');
+                return dataUrl.split(',')[1];
+            }} catch (e) {{
+                lastErr += ' | canvas: ' + String(e);
+            }}
+        }}
+        throw new Error('Failed to fetch rendered Flow image bytes: ' + lastErr);
+    }})()
+    """)
+    return base64.b64decode(b64_data)
 
 
 async def _click_retry_if_failed_card(flow: FlowCDP, label: str) -> bool:
@@ -571,9 +838,9 @@ async def _click_retry_if_failed_card(flow: FlowCDP, label: str) -> bool:
         return False
     retry_btn = await flow.js("""
     (() => {
-        const cards = Array.from(document.querySelectorAll('div')).filter(d => {
+        const cards = Array.from(document.querySelectorAll('div, flow-grid-tile-container')).filter(d => {
             const r = d.getBoundingClientRect();
-            return r.width > 300 && r.width < 560 && r.height > 180 && r.height < 420 && (d.innerText || '').includes('Không thành công');
+            return r.width > 240 && r.width < 680 && r.height > 140 && r.height < 480 && (d.innerText || '').includes('Không thành công');
         });
         if (!cards.length) return null;
         const btns = Array.from(cards[0].querySelectorAll('button'));
@@ -590,6 +857,16 @@ async def _click_retry_if_failed_card(flow: FlowCDP, label: str) -> bool:
     return False
 
 
+def _decode_and_normalize_flow_image_bytes(raw_bytes: bytes) -> Image.Image:
+    """Decode JPEG/WebP/PNG Flow image bytes, apply EXIF transpose, composite alpha onto #FFFFFF, and verify size."""
+    with Image.open(io.BytesIO(raw_bytes)) as decoded:
+        transposed = ImageOps.exif_transpose(decoded)
+        clean_rgb, _had_alpha = composite_to_rgb_white(transposed)
+    if clean_rgb.size[0] < 256 or clean_rgb.size[1] < 256:
+        raise RuntimeError(f"Decoded Flow image too small: {clean_rgb.size}")
+    return clean_rgb
+
+
 async def isolate_white_on_flow(
     input_image_path: str,
     output_white_path: str,
@@ -601,7 +878,7 @@ async def isolate_white_on_flow(
     """
     Stage 0: Upload a raw messy-background product photo (e.g. crochet item on a wooden desk)
     to Google Flow Nano Banana Pro (1:1), isolate it onto pure #FFFFFF white background,
-    and save the clean 1024x1024 JPG locally for build-plates.
+    and save a validated full-resolution RGB image locally for build-plates.
     """
     if not os.path.isfile(input_image_path):
         raise FileNotFoundError(f"Raw input image not found: {input_image_path}")
@@ -614,7 +891,8 @@ async def isolate_white_on_flow(
     uuid_cache: Dict[str, str] = {}
     if os.path.isfile(tmp_cache_path):
         with open(tmp_cache_path, "r", encoding="utf-8") as f:
-            uuid_cache = json.load(f)
+            raw_cache = json.load(f)
+            uuid_cache = {str(k): str(v) for k, v in raw_cache.items() if isinstance(v, str)}
 
     ws_url = get_project_ws_url(project_id, port=port, auto_open=True)
     async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
@@ -624,7 +902,8 @@ async def isolate_white_on_flow(
         await upload_missing_files_silent(flow, ws, [(fname, os.path.abspath(input_image_path))], uuid_cache, tmp_cache_path)
 
         await clear_composer_strict(flow)
-        before_urls = {u.split("?")[0].split("=")[0] for u in await get_rendered_gallery_urls(flow)}
+        before_items = await get_rendered_gallery_items(flow)
+        before_bases = {it["base"] for it in before_items}
         await attach_ingredient_verified(flow, fname, uuid_cache, tmp_cache_path)
 
         ed_rect = await flow.js("""
@@ -641,43 +920,52 @@ async def isolate_white_on_flow(
         await flow.find_and_trusted_click("aria === 'Bắt đầu tạo' && !el.disabled", "submit 1:1 white isolation")
         print("  Submitted 1:1 white-background studio isolation on Flow...")
 
-        new_full_url = ""
-        for step in range(50):
+        new_item: Optional[Dict[str, str]] = None
+        for step in range(55):
             await asyncio.sleep(2.0)
+            await flow.js("""
+            (() => {
+                const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+                if (sc) sc.scrollTop = 0;
+                window.scrollTo(0, 0);
+            })()
+            """)
             await _click_retry_if_failed_card(flow, "white-isolation")
-            cur_urls = await get_rendered_gallery_urls(flow)
-            for u in cur_urls:
-                base_u = u.split("?")[0].split("=")[0]
-                if base_u not in before_urls:
-                    new_full_url = u
+            cur_items = await get_rendered_gallery_items(flow)
+            for it in cur_items:
+                if it["base"] not in before_bases:
+                    new_item = it
                     break
             pcts = await flow.js("""
             Array.from(document.querySelectorAll('div, span'))
                 .map(e => (e.innerText || '').trim())
                 .filter(t => /^\\d+%$/.test(t))
             """)
-            if new_full_url and not pcts and step >= 5:
+            if new_item and not pcts and step >= 5:
                 break
 
-        if not new_full_url:
+        if not new_item:
             raise RuntimeError("Timed out waiting for 1:1 white-background isolation render on Google Flow.")
 
-        b64_data = await flow.js(f"""
-        (async () => {{
-            const resp = await fetch({json.dumps(new_full_url)}, {{credentials: 'include'}});
-            const buf = await resp.arrayBuffer();
-            let binary = '';
-            const bytes = new Uint8Array(buf);
-            const chunk = 0x8000;
-            for (let i = 0; i < bytes.length; i += chunk) {{
-                binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
-            }}
-            return btoa(binary);
-        }})()
-        """)
-        with open(output_white_path, "wb") as f:
-            f.write(base64.b64decode(b64_data))
-        print(f"Saved clean white-background SKU master -> {output_white_path}")
+        raw_bytes = await _fetch_flow_image_bytes(flow, new_item["src"])
+        clean_rgb = _decode_and_normalize_flow_image_bytes(raw_bytes)
+
+        out_base = os.path.basename(output_white_path)
+        if output_white_path.lower().endswith(".png"):
+            clean_rgb.save(output_white_path, "PNG")
+        else:
+            clean_rgb.save(output_white_path, "JPEG", quality=96, subsampling=0)
+
+        # Record generated 1:1 isolation render tokens so map-uuids never confuses it with a 16:9 TVC scene
+        iso_tok = new_item["base"].split("/")[-1][:48]
+        if iso_tok:
+            uuid_cache[f"__isolated_render__:{out_base}:token"] = iso_tok
+        if new_item.get("media_id"):
+            uuid_cache[f"__isolated_render__:{out_base}:media_id"] = new_item["media_id"]
+        with open(tmp_cache_path, "w", encoding="utf-8") as f:
+            json.dump(uuid_cache, f, indent=2)
+
+        print(f"Saved clean white-background SKU master ({clean_rgb.size[0]}x{clean_rgb.size[1]}) -> {output_white_path}")
     return output_white_path
 
 
@@ -687,15 +975,22 @@ async def submit_single_image_scene(
     uuid_cache: Dict[str, str],
     uuid_cache_path: str,
     wait_for_render: bool = True,
-) -> None:
+) -> Optional[str]:
     print(f"\n=== SUBMITTING IMAGE SCENE: {scene['key']} ===")
     await press_escape(flow, 0.25)
-    await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
+    await flow.js("""
+    (() => {
+        const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+        if (sc) sc.scrollTop = 0;
+        window.scrollTo(0, 0);
+    })()
+    """)
     await asyncio.sleep(0.25)
     await ensure_image_mode(flow, aspect_ratio="16:9")
     await clear_composer_strict(flow)
 
-    before_bases = {u.split("?")[0].split("=")[0] for u in await get_rendered_gallery_urls(flow)}
+    before_items = await get_rendered_gallery_items(flow)
+    before_bases = {it["base"] for it in before_items}
     for ref_name in scene["refs"]:
         await attach_ingredient_verified(flow, ref_name, uuid_cache, uuid_cache_path)
 
@@ -729,12 +1024,18 @@ async def submit_single_image_scene(
 
     if not wait_for_render:
         await asyncio.sleep(1.8)
-        return
+        return None
 
     saw_pct = False
-    for step in range(52):
+    for step in range(55):
         await asyncio.sleep(2.0)
-        await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
+        await flow.js("""
+        (() => {
+            const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+            if (sc) sc.scrollTop = 0;
+            window.scrollTo(0, 0);
+        })()
+        """)
         if await _click_retry_if_failed_card(flow, scene["key"]):
             continue
         pcts = await flow.js("""
@@ -744,11 +1045,19 @@ async def submit_single_image_scene(
         """)
         if pcts:
             saw_pct = True
-        cur_bases = {u.split("?")[0].split("=")[0] for u in await get_rendered_gallery_urls(flow)}
-        if not pcts and (saw_pct or step >= 7) and len(cur_bases - before_bases) >= 1:
-            print(f"  Rendered {scene['key']} in {(step + 1) * 2}s!")
-            return
+        cur_items = await get_rendered_gallery_items(flow)
+        new_items = [it for it in cur_items if it["base"] not in before_bases]
+        if not pcts and (saw_pct or step >= 7) and new_items:
+            newest = new_items[0]
+            rendered_id = newest.get("media_id") or ""
+            if not rendered_id:
+                tok_cand = newest["base"].split("/")[-1][:48]
+                _, asb_to_uuid = await build_gallery_media_bridge(flow, max_steps=6)
+                rendered_id = asb_to_uuid.get(tok_cand, tok_cand)
+            print(f"  Rendered {scene['key']} in {(step + 1) * 2}s! (id={rendered_id})")
+            return rendered_id
     print(f"  Warning: timeout waiting for {scene['key']}, continuing...")
+    return None
 
 
 async def capture_qa_pages(flow: FlowCDP, qa_dir: str, prefix: str, tab_label: str) -> None:
@@ -757,8 +1066,13 @@ async def capture_qa_pages(flow: FlowCDP, qa_dir: str, prefix: str, tab_label: s
     for idx, sy in enumerate((0, 540, 1080, 1620)):
         await flow.js(f"""
         (() => {{
-            const scrollers = Array.from(document.querySelectorAll('div, main')).filter(el => el.scrollHeight > el.clientHeight + 200);
-            for (const s of scrollers) s.scrollTop = {sy};
+            const primary = document.querySelector('.cdk-virtual-scrollable.page-container');
+            if (primary) {{
+                primary.scrollTop = {sy};
+            }} else {{
+                const scrollers = Array.from(document.querySelectorAll('div, main')).filter(el => el.scrollHeight > el.clientHeight + 200);
+                for (const s of scrollers) s.scrollTop = {sy};
+            }}
             window.scrollTo(0, {sy});
         }})()
         """)
@@ -768,7 +1082,13 @@ async def capture_qa_pages(flow: FlowCDP, qa_dir: str, prefix: str, tab_label: s
         with open(out_p, "wb") as f:
             f.write(base64.b64decode(res["data"]))
         print("Saved local QA screenshot:", out_p)
-    await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
+    await flow.js("""
+    (() => {
+        const primary = document.querySelector('.cdk-virtual-scrollable.page-container');
+        if (primary) primary.scrollTop = 0;
+        window.scrollTo(0, 0);
+    })()
+    """)
 
 
 async def run_images_pipeline(
@@ -800,7 +1120,11 @@ async def run_images_pipeline(
     elif phase == "slice":
         scenes = scenes[start_index:]
 
-    # Collect unique required files across active scenes
+    if not scenes:
+        print(f"No remaining scenes to render for phase={phase!r}.")
+        return
+
+    # Collect unique required files across config scenes
     needed_files: List[Tuple[str, str]] = []
     seen_f: Set[str] = set()
     for sc in config.get("scenes", []):
@@ -827,7 +1151,18 @@ async def run_images_pipeline(
         await upload_missing_files_silent(flow, ws, needed_files, uuid_cache, uuid_cache_path)
 
         if len(scenes) == 1:
-            await submit_single_image_scene(flow, scenes[0], uuid_cache, uuid_cache_path, wait_for_render=True)
+            new_uuid = await submit_single_image_scene(flow, scenes[0], uuid_cache, uuid_cache_path, wait_for_render=True)
+            if new_uuid:
+                scene_uuids_path = os.path.join(project_dir, f"{slug}_scene_uuids.json")
+                scene_uuids: Dict[str, str] = {}
+                if os.path.isfile(scene_uuids_path):
+                    with open(scene_uuids_path, "r", encoding="utf-8") as f:
+                        scene_uuids = json.load(f)
+                scene_uuids[scenes[0]["key"]] = new_uuid
+                with open(scene_uuids_path, "w", encoding="utf-8") as f:
+                    json.dump(scene_uuids, f, indent=2)
+                print(f"  Updated {os.path.basename(scene_uuids_path)}[{scenes[0]['key']!r}] -> {new_uuid}")
+
             os.makedirs(qa_dir, exist_ok=True)
             await asyncio.sleep(1.5)
             res = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 86})
@@ -846,7 +1181,13 @@ async def run_images_pipeline(
             zero_streak = 0
             for step in range(60):
                 await asyncio.sleep(2.2)
-                await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
+                await flow.js("""
+                (() => {
+                    const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+                    if (sc) sc.scrollTop = 0;
+                    window.scrollTo(0, 0);
+                })()
+                """)
                 await _click_retry_if_failed_card(flow, f"wave-{w_idx // 3 + 1}")
                 pcts = await flow.js("""
                 Array.from(document.querySelectorAll('div, span'))
@@ -870,56 +1211,101 @@ async def map_scene_uuids_pipeline(
     config: Dict[str, Any],
     project_dir: str,
     port: Optional[int] = None,
+    only_key: str = "",
+    force_remap: bool = False,
 ) -> Dict[str, str]:
-    """Stage 2: Walk virtual-scroll picker newest-first and lock 1-to-1 scene_key -> token."""
+    """
+    Stage 2: Bridge gallery permanent 36-char data-media-id UUIDs <-> /asb/ picker tokens,
+    filter out uploaded plates/raws/videos/exclusions, and lock 1-to-1 scene_key -> permanent UUID.
+    """
     slug = config["slug"]
     prefix = config["prefix"].upper()
-    scenes = config.get("scenes", [])
+    scenes = list(config.get("scenes", []))
     if not scenes:
         raise ValueError("No scenes defined in SKU config.")
 
-    uuid_cache_path = os.path.join(project_dir, f"{slug}_plate_uuids.json")
-    plate_tokens: Set[str] = set()
-    if os.path.isfile(uuid_cache_path):
-        with open(uuid_cache_path, "r", encoding="utf-8") as f:
-            plate_tokens = set(json.load(f).values())
-    exclude_tokens = set(config.get("exclude_uuids", []))
+    target_scenes = scenes
+    if only_key:
+        target_scenes = [s for s in scenes if only_key in s["key"]]
+        if not target_scenes:
+            raise ValueError(f"No scene matching --only-key={only_key!r}")
+
+    excluded_all: Set[str] = set(str(x) for x in config.get("exclude_uuids", []) if x)
+    cache_candidates = [
+        os.path.join(project_dir, f"{slug}_plate_uuids.json"),
+        os.path.join(project_dir, "_white_iso_uuid_cache.json"),
+        os.path.join(project_dir, "clean_refs", "_white_iso_uuid_cache.json"),
+    ]
+    for cp in cache_candidates:
+        if os.path.isfile(cp):
+            with open(cp, "r", encoding="utf-8") as f:
+                raw_d = json.load(f)
+            for v in raw_d.values():
+                if isinstance(v, str) and v:
+                    excluded_all.add(v)
+                elif isinstance(v, list):
+                    excluded_all.update(str(x) for x in v if x)
 
     ws_url = get_project_ws_url(config["project_id"], port=port, auto_open=True)
     async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
         flow = await init_silent_flow_session(ws)
         await exit_edit_view_if_needed(flow)
         await press_escape(flow, 0.3)
+        _, asb_to_uuid = await build_gallery_media_bridge(flow, max_steps=32)
         await ensure_image_mode(flow, aspect_ratio="16:9")
-        ordered = await scan_all_project_options(flow, max_steps=30)
+        ordered = await scan_all_project_options(flow, max_steps=36)
         await press_escape(flow, 0.3)
 
-    filtered = [
-        it for it in ordered
-        if it["token"] not in plate_tokens
-        and it["token"] not in exclude_tokens
-        and not it["txt"].lower().endswith(".jpg")
-        and not it["txt"].lower().endswith(".png")
-        and f"{prefix}_PLATE_" not in it["txt"]
-        and f"{prefix}_REF_" not in it["txt"]
-        and "Video" not in it["txt"]
-    ]
-    if len(filtered) < len(scenes):
+    filtered: List[Dict[str, str]] = []
+    seen_norm: Set[str] = set()
+    for it in ordered:
+        raw_tok = (it.get("token") or "").strip()
+        txt = (it.get("txt") or "").strip()
+        if not raw_tok:
+            continue
+        if UPLOADED_EXT_RE.search(txt):
+            continue
+        if txt.endswith(" Video") or txt.lower().startswith("videocam"):
+            continue
+        if f"{prefix}_PLATE_" in txt or f"{prefix}_REF_" in txt:
+            continue
+        if _token_matches_set(raw_tok, excluded_all, asb_to_uuid):
+            continue
+        norm_tok = asb_to_uuid.get(raw_tok) or asb_to_uuid.get(raw_tok[:48]) or raw_tok
+        if norm_tok in seen_norm:
+            continue
+        seen_norm.add(norm_tok)
+        filtered.append({"token": norm_tok, "raw_token": raw_tok, "txt": txt})
+
+    if len(filtered) < len(target_scenes):
         raise RuntimeError(
-            f"Expected at least {len(scenes)} generated images for {slug}, found only {len(filtered)}."
+            f"Expected at least {len(target_scenes)} generated image(s) for {slug}, found only {len(filtered)}."
         )
 
-    newest_n = filtered[:len(scenes)]
+    out_path = os.path.join(project_dir, f"{slug}_scene_uuids.json")
+    existing_mapping: Dict[str, str] = {}
+    if os.path.isfile(out_path):
+        with open(out_path, "r", encoding="utf-8") as f:
+            existing_mapping = json.load(f)
+
+    if not only_key and len(existing_mapping) >= len(scenes) and len(filtered) > len(scenes) and not force_remap:
+        raise RuntimeError(
+            f"Found {len(filtered)} generated images for {len(scenes)} scenes while {os.path.basename(out_path)} "
+            f"already has {len(existing_mapping)} locked entries (likely after single-scene re-renders). "
+            f"Use `map-uuids --only-key <SCENE_KEY>` to update just the re-rendered scene, or pass "
+            f"`--force-remap` to overwrite all {len(scenes)} scenes newest-first."
+        )
+
+    newest_n = filtered[:len(target_scenes)]
     oldest_to_newest = list(reversed(newest_n))
-    mapping: Dict[str, str] = {}
-    for sc, it in zip(scenes, oldest_to_newest):
+    mapping: Dict[str, str] = dict(existing_mapping) if only_key else {}
+    for sc, it in zip(target_scenes, oldest_to_newest):
         mapping[sc["key"]] = it["token"]
         print(f"  {sc['key']:40s} -> {it['token']} | {it['txt'][:60]}")
 
-    out_path = os.path.join(project_dir, f"{slug}_scene_uuids.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(mapping, f, indent=2)
-    print(f"Saved {len(mapping)} scene UUIDs -> {out_path}")
+    print(f"Saved {len(mapping)} scene UUID(s) -> {out_path}")
     return mapping
 
 
@@ -928,7 +1314,10 @@ async def clear_frame_slots_and_text(flow: FlowCDP) -> None:
     for _ in range(4):
         has_empty_both = await flow.js("""
         (() => {
-            const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(b => b.getBoundingClientRect().y > 680 && b.getBoundingClientRect().width > 0);
+            const minY = Math.max(180, window.innerHeight - 340);
+            const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(
+                b => b.getBoundingClientRect().y > minY && b.getBoundingClientRect().width > 0
+            );
             const s = btns.some(b => (b.innerText || '').trim().includes('Bắt đầu') && !(b.getAttribute('aria-label') || '').includes('Bắt đầu tạo'));
             const e = btns.some(b => (b.innerText || '').trim().includes('Kết thúc'));
             return s && e;
@@ -938,12 +1327,16 @@ async def clear_frame_slots_and_text(flow: FlowCDP) -> None:
             break
         clicked_x = await flow.js("""
         (() => {
+            const minY = Math.max(180, window.innerHeight - 310);
+            const maxY = window.innerHeight - 35;
             const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(b => {
                 const r = b.getBoundingClientRect();
-                if (r.width <= 0 || r.y < 740 || r.y > 880 || r.x < 620 || r.x > 880) return false;
+                if (r.width <= 0 || r.width > 48 || r.height > 48 || r.y < minY || r.y > maxY) return false;
+                if (b.closest('[role="dialog"]')) return false;
                 const txt = (b.innerText || '').trim().toLowerCase();
                 const aria = (b.getAttribute('aria-label') || '').toLowerCase();
-                return txt === 'close' || txt === 'clear' || txt === '×' || txt === '✕' || aria.includes('xoá') || aria.includes('xóa') || aria.includes('đóng') || r.width < 48;
+                if (aria.includes('bắt đầu tạo') || aria.includes('thêm nội dung') || aria.includes('thành phần')) return false;
+                return txt === 'close' || txt === 'clear' || txt === '×' || txt === '✕' || aria.includes('xoá') || aria.includes('xóa') || aria.includes('đóng') || aria.includes('khung hình');
             });
             if (!btns.length) return null;
             const r = btns[0].getBoundingClientRect();
@@ -957,14 +1350,31 @@ async def clear_frame_slots_and_text(flow: FlowCDP) -> None:
             break
 
 
-async def _populate_frame_slot_by_token(flow: FlowCDP, slot_label: str, target_token: str) -> None:
-    """Populate either 'Bắt đầu' or 'Kết thúc' frame slot with virtual-scroll re-centering + 3 retries."""
-    tok = target_token.split("=")[0][:48]
+async def _populate_frame_slot_by_token(
+    flow: FlowCDP,
+    slot_label: str,
+    target_token: str,
+    alt_tokens: Sequence[str] = (),
+) -> None:
+    """
+    Populate either 'Bắt đầu' or 'Kết thúc' frame slot with virtual-scroll re-centering + 3 retries.
+    Matches permanent 36-char UUIDs AND bridged '/asb/ANqvLO...' picker tokens seamlessly.
+    """
+    cand_tokens: List[str] = []
+    for raw in (target_token, *alt_tokens):
+        if not raw:
+            continue
+        c = raw.split("?")[0].split("=")[0][:48]
+        if c and c not in cand_tokens:
+            cand_tokens.append(c)
+    if not cand_tokens:
+        raise ValueError(f"Empty token passed to _populate_frame_slot_by_token for {slot_label!r}")
+
     last_err = ""
     for attempt in range(1, 4):
         await press_escape(flow, 0.3)
         await flow.find_and_trusted_click(
-            f"text.includes({json.dumps(slot_label)}) && !aria.includes('Bắt đầu tạo') && r.y > 660",
+            f"text.includes({json.dumps(slot_label)}) && !aria.includes('Bắt đầu tạo') && r.y > Math.max(180, window.innerHeight - 360)",
             f"{slot_label} slot",
         )
         await asyncio.sleep(0.85)
@@ -982,22 +1392,23 @@ async def _populate_frame_slot_by_token(flow: FlowCDP, slot_label: str, target_t
         await asyncio.sleep(0.3)
 
         found = False
-        for scroll_y in range(0, 10400, 260):
+        for scroll_y in range(0, 12000, 260):
             await flow.js(f"""
             (() => {{
                 const lb = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]');
                 if (lb) lb.scrollTop = {scroll_y};
             }})()
             """)
-            await asyncio.sleep(0.3)
+            await asyncio.sleep(0.28)
+            await _wait_visible_option_thumbnails(flow, max_polls=3)
             hit = await flow.js(f"""
             (() => {{
-                const uid = {json.dumps(tok)};
+                const cands = {json.dumps(cand_tokens)};
                 const lb = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]');
                 const lbRect = lb ? lb.getBoundingClientRect() : null;
                 for (const el of Array.from(document.querySelectorAll('[role="option"]'))) {{
                     const src = el.querySelector('img')?.src || '';
-                    if (src.includes(uid)) {{
+                    if (cands.some(uid => src.includes(uid))) {{
                         if (lb && lbRect) {{
                             const er = el.getBoundingClientRect();
                             lb.scrollTop += (er.top + er.height / 2) - (lbRect.top + 150);
@@ -1013,25 +1424,30 @@ async def _populate_frame_slot_by_token(flow: FlowCDP, slot_label: str, target_t
                 break
 
         if not found:
-            last_err = f"token {tok} not found in virtual scroll"
+            last_err = f"tokens {cand_tokens} not found in virtual scroll"
             continue
 
         await asyncio.sleep(0.35)
+        await _wait_visible_option_thumbnails(flow, max_polls=4)
 
         async def recenter_and_inspect():
             return await flow.js(f"""
             (() => {{
-                const uid = {json.dumps(tok)};
+                const cands = {json.dumps(cand_tokens)};
                 const lb = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]');
                 const lbRect = lb ? lb.getBoundingClientRect() : null;
-                let el = Array.from(document.querySelectorAll('[role="option"]')).find(e => (e.querySelector('img')?.src || '').includes(uid));
+                let el = Array.from(document.querySelectorAll('[role="option"]')).find(
+                    e => cands.some(uid => (e.querySelector('img')?.src || '').includes(uid))
+                );
                 if (el && lb && lbRect) {{
                     const er0 = el.getBoundingClientRect();
                     if (er0.top < lbRect.top + 60 || er0.bottom > lbRect.top + 280) {{
                         lb.scrollTop += (er0.top + er0.height / 2) - (lbRect.top + 150);
                     }}
                 }}
-                el = Array.from(document.querySelectorAll('[role="option"]')).find(e => (e.querySelector('img')?.src || '').includes(uid));
+                el = Array.from(document.querySelectorAll('[role="option"]')).find(
+                    e => cands.some(uid => (e.querySelector('img')?.src || '').includes(uid))
+                );
                 let coords = null;
                 if (el) {{
                     const img = el.querySelector('img');
@@ -1051,7 +1467,7 @@ async def _populate_frame_slot_by_token(flow: FlowCDP, slot_label: str, target_t
                         const pSrcs = Array.from(container.querySelectorAll('img'))
                             .filter(i => !i.closest('[role="option"]'))
                             .map(i => (i.src || '').split('?')[0]);
-                        previewMatches = pSrcs.some(s => s.includes(uid));
+                        previewMatches = pSrcs.some(s => cands.some(uid => s.includes(uid)));
                     }}
                 }}
                 return {{coords, hasAdd: Boolean(addBtn), previewMatches}};
@@ -1072,7 +1488,10 @@ async def _populate_frame_slot_by_token(flow: FlowCDP, slot_label: str, target_t
                 slot_filled = await flow.js(f"""
                 (() => {{
                     const lbl = {json.dumps(slot_label)};
-                    const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(b => b.getBoundingClientRect().y > 680 && b.getBoundingClientRect().width > 0);
+                    const minY = Math.max(180, window.innerHeight - 340);
+                    const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(
+                        b => b.getBoundingClientRect().y > minY && b.getBoundingClientRect().width > 0
+                    );
                     return !btns.some(b => (b.innerText || '').trim() === lbl);
                 }})()
                 """)
@@ -1082,12 +1501,12 @@ async def _populate_frame_slot_by_token(flow: FlowCDP, slot_label: str, target_t
             if locked:
                 break
         if locked:
-            print(f"  + Locked {slot_label} frame [{tok[:10]}] (attempt {attempt})")
+            print(f"  + Locked {slot_label} frame [{cand_tokens[0][:10]}] (attempt {attempt})")
             return
         last_err = f"slot {slot_label!r} did not lock on attempt {attempt}"
         await press_escape(flow, 0.8)
 
-    raise RuntimeError(f"Failed to populate {slot_label!r} slot for {tok}: {last_err}")
+    raise RuntimeError(f"Failed to populate {slot_label!r} slot for {cand_tokens}: {last_err}")
 
 
 async def run_videos_pipeline(
@@ -1119,12 +1538,19 @@ async def run_videos_pipeline(
     elif phase == "slice":
         videos = videos[start_index:]
 
+    if phase != "qa-only" and not videos:
+        print(f"No remaining videos to render for phase={phase!r}.")
+        return
+
     ws_url = get_project_ws_url(config["project_id"], port=port, auto_open=True)
     async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
         flow = await init_silent_flow_session(ws)
         if phase == "qa-only":
             await capture_qa_pages(flow, qa_dir, f"{slug}_veo", "Video")
             return
+
+        # Bridge permanent 36-char UUIDs -> post-reload '/asb/ANqvLO...' picker tokens before queueing clips
+        uuid_to_asb, _ = await build_gallery_media_bridge(flow, max_steps=32)
 
         for w_i in range(0, len(videos), 2):
             wave = videos[w_i:w_i + 2]
@@ -1136,12 +1562,15 @@ async def run_videos_pipeline(
                     scene_uuids.get(item["end_scene_key"], "") if item.get("end_scene_key") else ""
                 )
 
+                start_alts = [uuid_to_asb[start_tok]] if start_tok in uuid_to_asb else []
+                end_alts = [uuid_to_asb[end_tok]] if end_tok and end_tok in uuid_to_asb else []
+
                 print(f"\n=== QUEUEING 4S VEO 3.1 CLIP: {item['key']} ===")
                 await ensure_veo31_fast_4s_16x9(flow)
                 await clear_frame_slots_and_text(flow)
-                await _populate_frame_slot_by_token(flow, "Bắt đầu", start_tok)
+                await _populate_frame_slot_by_token(flow, "Bắt đầu", start_tok, alt_tokens=start_alts)
                 if end_tok:
-                    await _populate_frame_slot_by_token(flow, "Kết thúc", end_tok)
+                    await _populate_frame_slot_by_token(flow, "Kết thúc", end_tok, alt_tokens=end_alts)
 
                 ed_rect = await flow.js("""
                 (() => {
@@ -1154,14 +1583,32 @@ async def run_videos_pipeline(
                 await asyncio.sleep(0.15)
                 await flow.call("Input.insertText", {"text": item["prompt"]})
                 await asyncio.sleep(0.4)
-                await flow.find_and_trusted_click("aria === 'Bắt đầu tạo' && !el.disabled", f"submit {item['key']}")
+
+                btns = await flow.js("""
+                Array.from(document.querySelectorAll('[aria-label="Bắt đầu tạo"]')).map(el => {
+                    const r = el.getBoundingClientRect();
+                    const cx = Math.round(r.x + r.width / 2);
+                    const cy = Math.round(r.y + r.height / 2);
+                    const topEl = document.elementFromPoint(cx, cy);
+                    const hit = Boolean(topEl && (el === topEl || el.contains(topEl)));
+                    return {cx, cy, hit, disabled: el.disabled};
+                })
+                """)
+                target = next((b for b in btns if b["hit"] and not b["disabled"]), None)
+                if target:
+                    await flow.trusted_click(target["cx"], target["cy"])
+                else:
+                    await flow.find_and_trusted_click("aria === 'Bắt đầu tạo' && !el.disabled", f"submit {item['key']}")
 
                 for _ in range(18):
                     await asyncio.sleep(0.5)
                     reset_done = await flow.js("""
-                    Array.from(document.querySelectorAll('button, [role="button"]'))
-                        .filter(b => b.getBoundingClientRect().y > 680 && b.getBoundingClientRect().width > 0)
-                        .some(b => (b.innerText || '').trim() === 'Bắt đầu')
+                    (() => {
+                        const minY = Math.max(180, window.innerHeight - 340);
+                        return Array.from(document.querySelectorAll('button, [role="button"]'))
+                            .filter(b => b.getBoundingClientRect().y > minY && b.getBoundingClientRect().width > 0)
+                            .some(b => (b.innerText || '').trim() === 'Bắt đầu');
+                    })()
                     """)
                     if reset_done:
                         break
@@ -1171,9 +1618,16 @@ async def run_videos_pipeline(
             print(f"  Waiting for {wave_label}...")
             saw_pct = False
             zero_streak = 0
-            for step in range(50):
+            for step in range(55):
                 await asyncio.sleep(3.0)
-                await flow.js("window.scrollTo(0, 0); document.querySelectorAll('*').forEach(el => { if (el.scrollTop > 0 && !el.closest('[role=\"dialog\"]')) el.scrollTop = 0; });")
+                await flow.js("""
+                (() => {
+                    const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+                    if (sc) sc.scrollTop = 0;
+                    window.scrollTo(0, 0);
+                })()
+                """)
+                await _click_retry_if_failed_card(flow, wave_label)
                 pcts = await flow.js("""
                 Array.from(document.querySelectorAll('div, span'))
                     .map(e => (e.innerText || '').trim())
@@ -1215,6 +1669,121 @@ def _sha256_file(path: str) -> str:
     return h.hexdigest()
 
 
+async def _index_gallery_tiles_responsive(flow: FlowCDP, max_needed_idx: int) -> List[Dict[str, Any]]:
+    """
+    Walk '.cdk-virtual-scrollable.page-container' from scrollTop=0 downward and index unique
+    '<flow-grid-tile-container>' cards in reading order (rowTop, colLeft).
+    Works across any window width, column count (1..4), sidebar state, or mixed row heights.
+    """
+    await flow.js("""
+    (() => {
+        const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+        if (sc) sc.scrollTop = 0;
+    })()
+    """)
+    await asyncio.sleep(0.45)
+
+    tiles_by_key: Dict[str, Dict[str, Any]] = {}
+    max_steps = max(18, (max_needed_idx // 2) + 14)
+    for _ in range(max_steps):
+        batch = await flow.js("""
+        (() => {
+            const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+            if (!sc) return {sy: 0, items: []};
+            const sr = sc.getBoundingClientRect();
+            const rawTiles = Array.from(document.querySelectorAll('flow-grid-tile-container'));
+            const items = rawTiles.map(el => {
+                const r = el.getBoundingClientRect();
+                if (r.width < 160 || r.height < 100) return null;
+                const m = el.querySelector('video, img');
+                const docTop = Math.round(r.top - sr.top + sc.scrollTop);
+                const docLeft = Math.round(r.left - sr.left);
+                const mid = (m?.getAttribute('data-media-id') || '').trim();
+                const posKey = (Math.round(docTop / 24) * 24) + ':' + (Math.round(docLeft / 24) * 24);
+                return {key: mid || posKey, mid, docTop, docLeft, w: Math.round(r.width), h: Math.round(r.height)};
+            }).filter(Boolean);
+            return {sy: sc.scrollTop, items};
+        })()
+        """)
+        for it in batch.get("items") or []:
+            k = it["key"]
+            if k not in tiles_by_key:
+                tiles_by_key[k] = it
+
+        sorted_now = sorted(tiles_by_key.values(), key=lambda t: (round(t["docTop"] / 24), t["docLeft"]))
+        if len(sorted_now) > max_needed_idx + 2 and (batch.get("sy") or 0) > sorted_now[max_needed_idx]["docTop"] + 320:
+            break
+
+        moved = await flow.js("""
+        (() => {
+            const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+            if (!sc) return false;
+            const prev = sc.scrollTop;
+            sc.scrollTop += 520;
+            return sc.scrollTop > prev;
+        })()
+        """)
+        if not moved:
+            break
+        await asyncio.sleep(0.28)
+
+    return sorted(tiles_by_key.values(), key=lambda t: (round(t["docTop"] / 24), t["docLeft"]))
+
+
+async def _scroll_to_indexed_tile(flow: FlowCDP, tile_meta: Dict[str, Any]) -> Optional[Dict[str, int]]:
+    """Scroll target indexed tile into clear viewport range and return its live bounding box."""
+    target_sy = max(0, int(tile_meta["docTop"]) - 130)
+    await flow.js(f"""
+    (() => {{
+        const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+        if (sc) sc.scrollTop = {target_sy};
+    }})()
+    """)
+    await asyncio.sleep(0.55)
+    return await flow.js(f"""
+    (() => {{
+        const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+        if (!sc) return null;
+        const sr = sc.getBoundingClientRect();
+        const targetMid = {json.dumps(tile_meta.get("mid") or "")};
+        const expTop = {int(tile_meta["docTop"])};
+        const expLeft = {int(tile_meta["docLeft"])};
+
+        let best = null;
+        let bestDist = 1e9;
+        for (const el of Array.from(document.querySelectorAll('flow-grid-tile-container'))) {{
+            const r = el.getBoundingClientRect();
+            if (r.width < 160 || r.height < 100) continue;
+            const m = el.querySelector('video, img');
+            const mid = (m?.getAttribute('data-media-id') || '').trim();
+            const docTop = Math.round(r.top - sr.top + sc.scrollTop);
+            const docLeft = Math.round(r.left - sr.left);
+            if (targetMid && mid === targetMid) {{
+                best = m || el;
+                bestDist = 0;
+                break;
+            }}
+            const dist = Math.abs(docTop - expTop) + Math.abs(docLeft - expLeft);
+            if (dist < 75 && dist < bestDist) {{
+                best = m || el;
+                bestDist = dist;
+            }}
+        }}
+        if (!best) return null;
+        const r = best.getBoundingClientRect();
+        if (r.bottom < 70 || r.top > window.innerHeight - 90) return null;
+        return {{
+            x: Math.round(r.x),
+            y: Math.round(r.y),
+            w: Math.round(r.width),
+            h: Math.round(r.height),
+            cx: Math.round(r.x + r.width / 2),
+            cy: Math.round(r.y + Math.min(r.height / 2, 110)),
+        }};
+    }})()
+    """)
+
+
 async def download_and_merge_1080p_pipeline(
     project_id: str,
     card_index_to_slug: Sequence[Tuple[int, str]],
@@ -1226,6 +1795,9 @@ async def download_and_merge_1080p_pipeline(
     Stage 4: Silently hover Video-tab cards -> Tuỳ chọn khác -> Tải xuống -> 1080p,
     verify 1920x1080 via ffprobe + SHA-256 dedupe, and merge into +faststart 1080p master MP4.
     """
+    if not card_index_to_slug:
+        raise ValueError("card_index_to_slug must contain at least one (card_index, slug) pair.")
+
     clips_dir = os.path.join(target_dir, "clips_1080p")
     dl_tmp = os.path.join(target_dir, "_dl_1080p_tmp")
     master_mp4 = os.path.join(target_dir, master_filename)
@@ -1241,153 +1813,138 @@ async def download_and_merge_1080p_pipeline(
         except Exception:
             pass
 
-    ws_url = get_project_ws_url(project_id, port=port, auto_open=True)
     ordered_clip_paths: List[str] = []
-    async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
-        flow = await init_silent_flow_session(ws)
-        try:
-            await flow.call("Browser.setDownloadBehavior", {"behavior": "allow", "downloadPath": dl_tmp, "eventsEnabled": True})
-        except Exception:
-            await flow.call("Page.setDownloadBehavior", {"behavior": "allow", "downloadPath": dl_tmp})
-
-        await switch_gallery_tab(flow, "Video")
-
-        for card_idx, slug in card_index_to_slug:
-            out_mp4 = os.path.join(clips_dir, f"{slug}_1080p.mp4")
-            ordered_clip_paths.append(out_mp4)
-            if os.path.exists(out_mp4):
-                try:
-                    inf = _probe_video(out_mp4)
-                    if int(inf["width"]) >= 1900 and int(inf["height"]) >= 1060:
-                        print(f"Skipping already verified 1080p clip: {os.path.basename(out_mp4)}")
-                        continue
-                except Exception:
-                    os.remove(out_mp4)
-
-            print(f"[{slug}] Downloading Video-tab card #{card_idx} in native 1080p...")
-            saved = False
-            for attempt in range(1, 4):
-                for stale in glob.glob(os.path.join(dl_tmp, "*")):
-                    try:
-                        os.remove(stale)
-                    except OSError:
-                        pass
-
-                await press_escape(flow, 0.3)
-                await flow.js("""
-                (() => {
-                    const b = Array.from(document.querySelectorAll('button')).find(el => (el.innerText || '').trim() === 'Đóng');
-                    if (b) b.click();
-                })()
-                """)
-
-                row = card_idx // 2
-                col = card_idx % 2
-                target_sy = max(0, round(row * 270.25 - 100))
-                await flow.js(f"""
-                (() => {{
-                    for (const el of Array.from(document.querySelectorAll('*'))) {{
-                        if (el.scrollHeight > el.clientHeight + 200 && el.getBoundingClientRect().width > 500) {{
-                            el.scrollTop = {target_sy};
-                        }}
-                    }}
-                }})()
-                """)
-                await asyncio.sleep(0.55)
-                card = await flow.js(f"""
-                (() => {{
-                    const sc = Array.from(document.querySelectorAll('*')).find(el => el.scrollTop > 0 && el.getBoundingClientRect().width > 500);
-                    const actualSy = sc ? sc.scrollTop : 0;
-                    const expX = {248 if col == 0 else 716};
-                    const expY = 76 + {row} * 270.25 - actualSy;
-                    const media = Array.from(document.querySelectorAll('img, video')).filter(m => {{
-                        const r = m.getBoundingClientRect();
-                        return Math.abs(r.x - expX) < 35 && Math.abs(r.y - expY) < 50 && r.width > 380;
-                    }});
-                    if (!media.length) return null;
-                    const r = media[0].getBoundingClientRect();
-                    return {{
-                        x: Math.round(r.x), y: Math.round(r.y),
-                        w: Math.round(r.width), h: Math.round(r.height),
-                        cx: Math.round(r.x + r.width / 2),
-                        cy: Math.round(r.y + Math.min(r.height / 2, 110)),
-                    }};
-                }})()
-                """)
-                if not card:
-                    await switch_gallery_tab(flow, "Video")
+    pending_downloads: List[Tuple[int, str, str]] = []
+    for card_idx, slug in card_index_to_slug:
+        out_mp4 = os.path.join(clips_dir, f"{slug}_1080p.mp4")
+        ordered_clip_paths.append(out_mp4)
+        if os.path.exists(out_mp4):
+            try:
+                inf = _probe_video(out_mp4)
+                if int(inf["width"]) >= 1900 and int(inf["height"]) >= 1060:
+                    print(f"Skipping already verified 1080p clip: {os.path.basename(out_mp4)}")
                     continue
+            except Exception:
+                os.remove(out_mp4)
+        pending_downloads.append((card_idx, slug, out_mp4))
 
-                await flow.call("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": 110, "y": 320})
-                await asyncio.sleep(0.2)
-                await flow.call("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": card["cx"], "y": card["cy"]})
-                await asyncio.sleep(0.65)
+    if pending_downloads:
+        max_card_idx = max(idx for idx, _, _ in pending_downloads)
+        ws_url = get_project_ws_url(project_id, port=port, auto_open=True)
+        async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
+            flow = await init_silent_flow_session(ws)
+            try:
+                await flow.call("Browser.setDownloadBehavior", {"behavior": "allow", "downloadPath": dl_tmp, "eventsEnabled": True})
+            except Exception:
+                await flow.call("Page.setDownloadBehavior", {"behavior": "allow", "downloadPath": dl_tmp})
 
-                more_btn = await flow.js(f"""
-                (() => {{
-                    const btns = Array.from(document.querySelectorAll('button[aria-label="Tuỳ chọn khác"]'))
-                        .map(b => {{
-                            const r = b.getBoundingClientRect();
-                            return {{cx: Math.round(r.x + r.width/2), cy: Math.round(r.y + r.height/2), x: r.x, y: r.y, w: r.width}};
-                        }})
-                        .filter(b => b.w > 0 && b.x >= {card['x'] - 20} && b.x <= {card['x'] + card['w'] + 20} && b.y >= {card['y'] - 20} && b.y <= {card['y'] + card['h'] + 20});
-                    return btns[0] || null;
-                }})()
-                """)
-                if not more_btn:
-                    continue
-                await flow.trusted_click(more_btn["cx"], more_btn["cy"])
-                await asyncio.sleep(0.55)
+            await switch_gallery_tab(flow, "Video")
+            indexed_tiles = await _index_gallery_tiles_responsive(flow, max_card_idx)
+            if len(indexed_tiles) <= max_card_idx:
+                raise RuntimeError(
+                    f"Requested Video-tab card #{max_card_idx}, but only {len(indexed_tiles)} video tile(s) exist in project {project_id}."
+                )
 
-                dl_item = await flow.js("""
-                (() => {
-                    const m = Array.from(document.querySelectorAll('[role="menuitem"]')).find(e => (e.innerText || '').includes('Tải xuống'));
-                    if (!m) return null;
-                    const r = m.getBoundingClientRect();
-                    return {cx: Math.round(r.x + r.width/2), cy: Math.round(r.y + r.height/2)};
-                })()
-                """)
-                if not dl_item:
-                    continue
-                await flow.call("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": dl_item["cx"], "y": dl_item["cy"]})
-                await asyncio.sleep(0.75)
+            for card_idx, slug, out_mp4 in pending_downloads:
+                print(f"[{slug}] Downloading Video-tab card #{card_idx} in native 1080p...")
+                saved = False
+                for attempt in range(1, 4):
+                    for stale in glob.glob(os.path.join(dl_tmp, "*")):
+                        try:
+                            os.remove(stale)
+                        except OSError:
+                            pass
 
-                rect_1080 = await flow.js("""
-                (() => {
-                    const m = Array.from(document.querySelectorAll('[role="menuitem"]')).find(e => (e.innerText || '').includes('1080p'));
-                    if (!m) return null;
-                    const r = m.getBoundingClientRect();
-                    return {cx: Math.round(r.x + r.width/2), cy: Math.round(r.y + r.height/2)};
-                })()
-                """)
-                if not rect_1080:
-                    continue
-                await flow.trusted_click(rect_1080["cx"], rect_1080["cy"])
+                    await press_escape(flow, 0.3)
+                    await flow.js("""
+                    (() => {
+                        const b = Array.from(document.querySelectorAll('button')).find(el => (el.innerText || '').trim() === 'Đóng');
+                        if (b) b.click();
+                    })()
+                    """)
 
-                for _ in range(85):
-                    await asyncio.sleep(1.0)
-                    files = glob.glob(os.path.join(dl_tmp, "*"))
-                    mp4s = [f for f in files if f.endswith(".mp4") and not f.endswith(".crdownload") and os.path.getsize(f) > 200_000]
-                    crs = [f for f in files if f.endswith(".crdownload")]
-                    if mp4s and not crs:
-                        cand = mp4s[0]
-                        h = _sha256_file(cand)
-                        if h in seen_hashes:
-                            os.remove(cand)
+                    if card_idx >= len(indexed_tiles):
+                        await switch_gallery_tab(flow, "Video")
+                        indexed_tiles = await _index_gallery_tiles_responsive(flow, max_card_idx)
+                        if card_idx >= len(indexed_tiles):
                             continue
-                        inf = _probe_video(cand)
-                        if int(inf["width"]) < 1900 or int(inf["height"]) < 1060:
-                            os.remove(cand)
+
+                    card = await _scroll_to_indexed_tile(flow, indexed_tiles[card_idx])
+                    if not card:
+                        await switch_gallery_tab(flow, "Video")
+                        indexed_tiles = await _index_gallery_tiles_responsive(flow, max_card_idx)
+                        continue
+
+                    await flow.call("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": 40, "y": 240})
+                    await asyncio.sleep(0.2)
+                    await flow.call("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": card["cx"], "y": card["cy"]})
+                    await asyncio.sleep(0.65)
+
+                    more_btn = await flow.js(f"""
+                    (() => {{
+                        const btns = Array.from(document.querySelectorAll('button[aria-label="Tuỳ chọn khác"]'))
+                            .map(b => {{
+                                const r = b.getBoundingClientRect();
+                                return {{cx: Math.round(r.x + r.width/2), cy: Math.round(r.y + r.height/2), x: r.x, y: r.y, w: r.width}};
+                            }})
+                            .filter(b => b.w > 0 && b.x >= {card['x'] - 24} && b.x <= {card['x'] + card['w'] + 24} && b.y >= {card['y'] - 24} && b.y <= {card['y'] + card['h'] + 24});
+                        return btns[0] || null;
+                    }})()
+                    """)
+                    if not more_btn:
+                        continue
+                    await flow.trusted_click(more_btn["cx"], more_btn["cy"])
+                    await asyncio.sleep(0.55)
+
+                    dl_item = await flow.js("""
+                    (() => {
+                        const m = Array.from(document.querySelectorAll('[role="menuitem"]')).find(e => (e.innerText || '').includes('Tải xuống'));
+                        if (!m) return null;
+                        const r = m.getBoundingClientRect();
+                        return {cx: Math.round(r.x + r.width/2), cy: Math.round(r.y + r.height/2)};
+                    })()
+                    """)
+                    if not dl_item:
+                        continue
+                    await flow.call("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": dl_item["cx"], "y": dl_item["cy"]})
+                    await asyncio.sleep(0.75)
+
+                    rect_1080 = await flow.js("""
+                    (() => {
+                        const m = Array.from(document.querySelectorAll('[role="menuitem"]')).find(e => (e.innerText || '').includes('1080p'));
+                        if (!m) return null;
+                        const r = m.getBoundingClientRect();
+                        return {cx: Math.round(r.x + r.width/2), cy: Math.round(r.y + r.height/2)};
+                    })()
+                    """)
+                    if not rect_1080:
+                        continue
+                    await flow.trusted_click(rect_1080["cx"], rect_1080["cy"])
+
+                    for _ in range(85):
+                        await asyncio.sleep(1.0)
+                        files = glob.glob(os.path.join(dl_tmp, "*"))
+                        mp4s = [f for f in files if f.endswith(".mp4") and not f.endswith(".crdownload") and os.path.getsize(f) > 200_000]
+                        crs = [f for f in files if f.endswith(".crdownload")]
+                        if mp4s and not crs:
+                            cand = mp4s[0]
+                            h = _sha256_file(cand)
+                            if h in seen_hashes:
+                                os.remove(cand)
+                                continue
+                            inf = _probe_video(cand)
+                            if int(inf["width"]) < 1900 or int(inf["height"]) < 1060:
+                                os.remove(cand)
+                                break
+                            seen_hashes.add(h)
+                            shutil.move(cand, out_mp4)
+                            print(f"  Saved {os.path.basename(out_mp4)} ({inf['width']}x{inf['height']})")
+                            saved = True
                             break
-                        seen_hashes.add(h)
-                        shutil.move(cand, out_mp4)
-                        print(f"  Saved {os.path.basename(out_mp4)} ({inf['width']}x{inf['height']})")
-                        saved = True
+                    if saved:
                         break
-                if saved:
-                    break
-            if not saved:
-                raise RuntimeError(f"Failed to download 1080p clip for card #{card_idx} ({slug})")
+                if not saved:
+                    raise RuntimeError(f"Failed to download 1080p clip for card #{card_idx} ({slug})")
 
     concat_txt = os.path.join(dl_tmp, "concat.txt")
     with open(concat_txt, "w", encoding="utf-8") as f:
