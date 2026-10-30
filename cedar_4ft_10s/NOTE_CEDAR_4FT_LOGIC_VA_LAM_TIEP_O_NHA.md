@@ -87,3 +87,48 @@ Qua thực chiến QA trực tiếp 10 clip trên Flow, đây là **3 Luật S�
 - `S18` (`357a083b-bb15-4391-8461-42c738a6d409`) — Góc khô ráo cạnh cửa sổ nắng trong phòng tắm Master Organic Spa & bồn tắm đá trắng `60cm` (1 cây Hero phải)
 - `S19` (`03731287-04a9-477e-a037-843e39e6cdf2`) — Ban công Penthouse sàn gỗ Teak lan can đá kính `1.10m` nắng hoàng hôn vàng rực góc `3/4` (2 cây chiều sâu)
 - `S20` (`2a636fef-0562-4470-ad3d-8ff399015f8f`) — Phòng khách đồi ven biển Malibu California trần xà gỗ nhìn ra biển nắng cuối chiều (1 cây đại cảnh)
+
+
+---
+
+## 5. Sản Phẩm SKU #2 — Cây Giả Cedar `4ft+` Chậu Thùng Gỗ 3 Đai Sắt Đen (`B01 → B20`: Đã Xong 20 Ảnh `16:9` + 20 Video `4s` `VB01 → VB20`)
+
+### A. Tài Nguyên Chuẩn Trong Thư Mục `barrel_cedar_20/` (`git pull` Về Nhà Có Đủ 100%)
+- **Tỷ lệ vật lý chuẩn xác nhận từ video hãng `ATF-9421,9422.mp4`:** `~4ft+` (`~1.25m–1.30m`), ngọn nhọn cao **nhỉnh hơn tay nắm cửa chính ~15–20cm** và cao hơn mặt kệ lò sưởi ~12cm.
+- **Ảnh tham chiếu cận cảnh sạch nền trắng (`1024x1024`):** `barrel_cedar_20/clean_refs/BARREL_REF_1_SINGLE_CLEAN.jpg`
+- **6 tấm Plate `2K 16:9` (`2560x1440`) nền trắng `#FFFFFF` khóa sẵn chậu thùng gỗ 3 đai sắt đen (`barrel_cedar_20/plates_2k/`):**
+  1. `BARREL_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg` (`52%` khung hình — 2 cây đối xứng cửa chính `2.4m` / lò sưởi)
+  2. `BARREL_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg` (`62%` khung hình — 2 cây cận trung `50mm`)
+  3. `BARREL_PLATE_03_PAIR_DIAGONAL_3Q_16x9.jpg` (2 cây lệch tầng góc xiên `3/4`: trái `64%`, phải `51%`)
+  4. `BARREL_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg` (`72%` khung hình — 1 cây Hero bên trái)
+  5. `BARREL_PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9.jpg` (`70%` khung hình — 1 cây Hero bên phải)
+  6. `BARREL_PLATE_06_SINGLE_WIDE_55PCT_16x9.jpg` (`55%` khung hình — 1 cây đại cảnh phòng rộng trần cao)
+- **Bộ Script tự động chạy ngầm + map UUID chuẩn 1-1:**
+  - `barrel_cedar_20/run_barrel20_images_silent.py` — Tạo 20 ảnh `16:9` (`Nano Banana Pro`) chạy ngầm.
+  - `barrel_cedar_20/map_barrel20_uuids.py` — Quét danh sách cuộn ảo lấy chính xác 20 UUID lưu vào `barrel_cedar_20/barrel20_scene_uuids.json`.
+  - `barrel_cedar_20/run_barrel20_veo4s_silent.py` — Tạo 20 video `4 giây` (`Veo 3.1 - Fast`) kèm cơ chế tự căn tâm `lbRect.top + 150` và tự động retry khi danh sách cuộn ảo dịch chuyển.
+
+### B. Danh Sách 20 Ảnh `16:9` & 20 Video `4s` Chậu Thùng Gỗ Đai Đen Trên Project Flow (`B01 → B20` / `VB01 → VB20`)
+#### Nhóm 10 Cảnh Đôi (`2 Cây` — `B01 → B10` + `VB01 → VB10`)
+- `B01` / `VB01` (`6db60962-6415-4f60-8eb5-9e7d4b0e0adc`) — Hiên cửa xám than `2.4m` tay nắm đồng & cột đá vôi kem (2 cây cao hơn tay nắm ~18cm)
+- `B02` / `VB02` (`b79f4640-6f8c-4dd6-9480-1f45c2ec382b`) — Hiên Farmhouse Mỹ vách gỗ trắng `board-and-batten` & cửa gỗ sồi kính góc xiên `3/4`
+- `B03` / `VB03` (`c4943dff-0e78-4809-b4a6-0d28cdf55d05`) — Phòng khách trần cao `3.3m` lò sưởi đá vôi chạm khắc & gương vòm đồng cổ
+- `B04` / `VB04` (`dc6353ce-f24f-4054-869f-f829945e28d5`) — Cửa đôi kính khung thép đen & sân đá phiến tự nhiên nắng chiều
+- `B05` / `VB05` (`c464825d-04db-47cb-af20-db42f90ff9ed`) — Sân trong Villa Địa Trung Hải đài phun nước đá & vòm ô-liu góc xiên `3/4`
+- `B06` / `VB06` (`7cfd4143-d2cf-4275-b8cb-153506086a44`) — Sảnh Foyer bàn Console gỗ sồi tự nhiên `85cm` & tranh linen tối giản
+- `B07` / `VB07` (`738d4df5-4d78-4ee0-81df-9ef226dc63df`) — Vòm đá vôi dinh thự Châu Âu & cửa đôi gỗ óc chó `2.45m` bóng nắng đốm lá
+- `B08` / `VB08` (`a1ec88a7-8f1d-4326-aab1-818bc07e5f67`) — Sân vườn đá Napa Valley & cửa sổ vòm gỗ sồi cạnh ghế sắt tiền cảnh
+- `B09` / `VB09` (`5c0e6841-b2a9-46ee-a1d7-44e3a1edbb5e`) — Sàn gỗ Teak giàn Pergola nắng chiều vườn sau góc xiên `3/4`
+- `B10` / `VB10` (`280418e1-6063-4c53-8fbb-193b61070b93`) — Cổng vòm nội thất phào chỉ cổ điển `90cm` mở ra phòng khách ngập nắng
+
+#### Nhóm 10 Cảnh Đơn Hero & Đại Cảnh (`1 Cây` — `B11 → B20` + `VB11 → VB20`)
+- `B11` / `VB11` (`94bd79f0-ec26-434c-a49d-b16244374267`) — Hiên vườn có mái ghế bành gỗ Teak đan mây & vườn nắng sớm (1 cây Hero phải)
+- `B12` / `VB12` (`07ca3cea-54d5-42f9-ac07-6cc00088d4db`) — Phòng khách tủ gỗ sồi rãnh `80cm`, rèm voan linen & ly gốm thủ công (1 cây Hero trái)
+- `B13` / `VB13` (`d6b74296-6f95-4ec4-8758-8f004aacdcf9`) — Phòng kính Sunroom bệ ghế cửa sổ gỗ sồi `50cm` & sàn gạch Terracotta (1 cây Hero trái)
+- `B14` / `VB14` (`97d7f5d6-a835-48d6-9f74-529ae38c8d6d`) — Góc đảo bếp đá Marble Calacatta & gỗ sồi rãnh cạnh cửa kính sân vườn (1 cây Hero phải)
+- `B15` / `VB15` (`4f03eb3e-7631-4fc5-8a4f-3e41ce67d028`) — Phòng ăn trần cao tủ Buffet gỗ sồi `85cm` & bàn ăn nắng ban mai (1 cây đại cảnh)
+- `B16` / `VB16` (`352b2bd0-e57d-4798-a51a-5e5de445ad69`) — Phòng đọc sách bàn gỗ óc chó, sổ da & kệ sách vòm vữa đất sét (1 cây Hero trái)
+- `B17` / `VB17` (`2c384643-3ea0-4a76-83be-3448d470258b`) — Cầu thang gỗ sồi lan can sắt đen & vách kính sát trần nhìn ra vườn (1 cây Hero phải)
+- `B18` / `VB18` (`da276718-80a1-49c8-9839-021b8c26f20b`) — Góc thư giãn Phòng ngủ Master rèm voan ban công & ghế bành linen (1 cây Hero trái)
+- `B19` / `VB19` (`65decb7f-22f5-4e95-8a95-c792e71a8814`) — Cabana hồ bơi Resort đá Travertine & sofa Daybed gỗ Teak (1 cây Hero phải)
+- `B20` / `VB20` (`36389dec-ef10-4bec-a7c4-04ed7e55df07`) — Phòng khách đồi ven biển California trần xà gỗ sồi & cửa kính đại dương (1 cây đại cảnh)
