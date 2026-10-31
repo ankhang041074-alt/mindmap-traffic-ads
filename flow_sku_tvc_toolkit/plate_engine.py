@@ -13,8 +13,8 @@ from collections import deque
 import json
 import os
 import statistics
-from typing import Any, Dict, Iterable, Optional, Tuple
-from PIL import Image, ImageOps
+from typing import Any, Dict, Iterable, List, Optional, Tuple
+from PIL import Image, ImageChops, ImageOps, ImageStat
 
 from .presets import CategoryPreset, PlacementSpec, get_preset
 
@@ -50,6 +50,139 @@ def composite_to_rgb_white(img: Image.Image) -> Tuple[Image.Image, bool]:
     return img.convert("RGB"), False
 
 
+def _maybe_isolate_first_twin_unit(
+    cleaned_full: Image.Image,
+    fg_mask: bytearray,
+    tight_bbox: Tuple[int, int, int, int],
+) -> Optional[Tuple[Tuple[int, int, int, int], int]]:
+    """
+    Detect 'Set of 2 / 3 / 4' side-by-side identical twin product listing photos on white background.
+    Returns (first_unit_tight_bbox, pack_count) ONLY when:
+      1. [x0..x1) splits cleanly into 2..4 horizontal foreground islands separated by near-empty
+         vertical corridors (>= max(6px, 1.5% of total bbox width) where each column has at most
+         <= max(2px, 1.5% of bbox height) sparse touching leaf tips or JPEG dust),
+      2. Every island matches island 0 in width (±8%), height (±6%), and top/bottom alignment (±6%),
+         and occupies substantial vertical fill (>20%) so hollow frames/rings never split,
+      3. Every sibling island matches island 0 photometrically on a 24x36 RGB template (mean L1 <= 16/255,
+         allowing direct or horizontal-mirror symmetry).
+    Single products and multi-piece unequal sets (e.g. teapot + small cup) return None untouched.
+    """
+    w, _h = cleaned_full.size
+    bx0, by0, bx1, by1 = tight_bbox
+    total_w = bx1 - bx0
+    total_h = by1 - by0
+    if total_w < 64 or total_h < 32:
+        return None
+
+    col_fg_count = [0] * total_w
+    for y in range(by0, by1):
+        row_off = y * w
+        for dx in range(total_w):
+            if fg_mask[row_off + bx0 + dx]:
+                col_fg_count[dx] += 1
+
+    max_corridor_fg_px = max(2, round(total_h * 0.015))
+    col_has_fg = [cnt > max_corridor_fg_px for cnt in col_fg_count]
+
+    min_gap = max(6, round(total_w * 0.015))
+    raw_runs: List[Tuple[int, int]] = []
+    idx = 0
+    while idx < total_w:
+        if not col_has_fg[idx]:
+            idx += 1
+            continue
+        start = idx
+        while idx < total_w and col_has_fg[idx]:
+            idx += 1
+        raw_runs.append((bx0 + start, bx0 + idx))
+
+    if len(raw_runs) < 2:
+        return None
+
+    # Merge tiny sub-threshold column gaps (e.g. thin airy leaf gaps) while keeping true full-corridor splits
+    merged: List[Tuple[int, int]] = [raw_runs[0]]
+    for rx0, rx1 in raw_runs[1:]:
+        prev_x0, prev_x1 = merged[-1]
+        if (rx0 - prev_x1) < min_gap:
+            merged[-1] = (prev_x0, rx1)
+        else:
+            merged.append((rx0, rx1))
+
+    if not (2 <= len(merged) <= 4):
+        return None
+
+    island_boxes: List[Tuple[int, int, int, int]] = []
+    for i_idx, (ix0, ix1) in enumerate(merged):
+        # Expand island bounds up to the minimum-density midpoint of adjacent corridors so untrimmed outer tips stay intact
+        left_bound = bx0 if i_idx == 0 else (merged[i_idx - 1][1] + ix0) // 2
+        right_bound = bx1 if i_idx == len(merged) - 1 else (ix1 + merged[i_idx + 1][0]) // 2
+        if i_idx == 0 and len(merged) > 1:
+            corr_start = ix1 - bx0
+            corr_end = merged[1][0] - bx0
+            if corr_end > corr_start:
+                min_cnt = min(col_fg_count[corr_start:corr_end])
+                # Pick rightmost zero/min column closest to midpoint so unit 0 keeps all its own outer leaf tips
+                best_dx = min(
+                    range(corr_start, corr_end),
+                    key=lambda d: (col_fg_count[d], abs(d - (corr_start + corr_end) // 2)),
+                )
+                right_bound = bx0 + best_dx
+
+        actual_x0 = right_bound
+        actual_x1 = left_bound - 1
+        iy0 = by1
+        iy1 = by0 - 1
+        fg_area = 0
+        for y in range(by0, by1):
+            row_off = y * w
+            row_hit = False
+            for x in range(left_bound, right_bound):
+                if fg_mask[row_off + x]:
+                    fg_area += 1
+                    row_hit = True
+                    if x < actual_x0:
+                        actual_x0 = x
+                    if x > actual_x1:
+                        actual_x1 = x
+            if row_hit:
+                if y < iy0:
+                    iy0 = y
+                if y > iy1:
+                    iy1 = y
+        if iy1 < iy0 or actual_x1 < actual_x0:
+            return None
+        iw = (actual_x1 + 1) - actual_x0
+        ih = (iy1 + 1) - iy0
+        if iw < 24 or ih < 24:
+            return None
+        if fg_area / float(iw * ih) < 0.20:
+            return None
+        island_boxes.append((actual_x0, iy0, actual_x1 + 1, iy1 + 1))
+
+    x0_0, y0_0, x1_0, y1_0 = island_boxes[0]
+    w0 = x1_0 - x0_0
+    h0 = y1_0 - y0_0
+    thumb0 = cleaned_full.crop((x0_0, y0_0, x1_0, y1_0)).resize((24, 36), Image.Resampling.BILINEAR)
+
+    for ix0, iy0, ix1, iy1 in island_boxes[1:]:
+        iw = ix1 - ix0
+        ih = iy1 - iy0
+        if abs(iw - w0) / float(max(iw, w0)) > 0.08:
+            return None
+        if abs(ih - h0) / float(max(ih, h0)) > 0.06:
+            return None
+        if abs(iy0 - y0_0) / float(h0) > 0.06 or abs(iy1 - y1_0) / float(h0) > 0.06:
+            return None
+
+        thumb_i = cleaned_full.crop((ix0, iy0, ix1, iy1)).resize((24, 36), Image.Resampling.BILINEAR)
+        l1_direct = sum(ImageStat.Stat(ImageChops.difference(thumb0, thumb_i)).mean) / 3.0
+        l1_mirror = sum(ImageStat.Stat(ImageChops.difference(thumb0, ImageOps.mirror(thumb_i))).mean) / 3.0
+        if min(l1_direct, l1_mirror) > 16.0:
+            return None
+
+    return island_boxes[0], len(island_boxes)
+
+
 def extract_clean_white_cutout(
     img: Image.Image,
     bg_threshold: int = 240,
@@ -59,6 +192,7 @@ def extract_clean_white_cutout(
     bg_tolerance: int = 12,
     max_step: int = 5,
     alpha_threshold: int = 12,
+    auto_split_twin_pair: bool = True,
 ) -> Tuple[Image.Image, Tuple[int, int, int, int], Dict[str, Any]]:
     """
     Extract a zero-seam #FFFFFF-backed product cutout while preserving white/ivory/cream details:
@@ -69,6 +203,8 @@ def extract_clean_white_cutout(
        gradient-step-gated (`max_step`) + border-color-bounded (`bg_tolerance`) 4-border BFS flood-fill,
        normalizing outer studio grey (#F0F0F0..#FEFEFE) to pure #FFFFFF while stopping cleanly at
        ivory/cream/off-white crochet petal boundaries and preserving all enclosed white pixels.
+    3. When `auto_split_twin_pair=True`, automatically isolates 1 single unit if the source image is a
+       'Set of 2/3/4' side-by-side identical twin product listing photo separated by pure white background.
     """
     transposed = ImageOps.exif_transpose(img)
     alpha_mask = _extract_alpha_channel_if_transparent(transposed)
@@ -79,6 +215,7 @@ def extract_clean_white_cutout(
 
     raw = bytearray(rgb.tobytes())
     total_px = w * h
+    fg_mask = bytearray(total_px)
 
     if had_alpha and alpha_mask is not None:
         a_bytes = alpha_mask.tobytes()
@@ -93,6 +230,7 @@ def extract_clean_white_cutout(
                 raw[off + 1] = 255
                 raw[off + 2] = 255
             else:
+                fg_mask[idx] = 1
                 y, x = divmod(idx, w)
                 if x < min_x:
                     min_x = x
@@ -212,6 +350,7 @@ def extract_clean_white_cutout(
                 raw[off + 1] = 255
                 raw[off + 2] = 255
             else:
+                fg_mask[idx] = 1
                 y, x = divmod(idx, w)
                 if x < min_x:
                     min_x = x
@@ -223,17 +362,35 @@ def extract_clean_white_cutout(
                     max_y = y
 
     cleaned_full = Image.frombytes("RGB", (w, h), bytes(raw))
-    x0 = max(0, min_x - pad_px)
-    y0 = max(0, min_y - pad_px)
-    x1 = min(w, max_x + 1 + pad_px)
-    y1 = min(h, max_y + 1 + pad_px)
+    tight_x0, tight_y0, tight_x1, tight_y1 = min_x, min_y, max_x + 1, max_y + 1
+    twin_pack_count = 1
+
+    if auto_split_twin_pair:
+        twin_res = _maybe_isolate_first_twin_unit(
+            cleaned_full,
+            fg_mask,
+            (tight_x0, tight_y0, tight_x1, tight_y1),
+        )
+        if twin_res is not None:
+            (tight_x0, tight_y0, tight_x1, tight_y1), twin_pack_count = twin_res
+            # Whiten everything outside the isolated single unit so padded margins stay 100% pure #FFFFFF
+            isolated_canvas = Image.new("RGB", (w, h), (255, 255, 255))
+            unit_patch = cleaned_full.crop((tight_x0, tight_y0, tight_x1, tight_y1))
+            isolated_canvas.paste(unit_patch, (tight_x0, tight_y0))
+            cleaned_full = isolated_canvas
+
+    x0 = max(0, tight_x0 - pad_px)
+    y0 = max(0, tight_y0 - pad_px)
+    x1 = min(w, tight_x1 + pad_px)
+    y1 = min(h, tight_y1 + pad_px)
     crop = cleaned_full.crop((x0, y0, x1, y1))
 
     stats = {
         "source_size": [w, h],
         "had_alpha": had_alpha,
         "flooded_bg_ratio": round(flooded_ratio, 4),
-        "tight_bbox": [min_x, min_y, max_x + 1, max_y + 1],
+        "auto_split_twin_pack_count": twin_pack_count,
+        "tight_bbox": [tight_x0, tight_y0, tight_x1, tight_y1],
         "padded_bbox": [x0, y0, x1, y1],
         "cutout_size": [crop.width, crop.height],
         "aspect_ratio_w_over_h": round(crop.width / float(crop.height), 6),
@@ -336,6 +493,7 @@ def build_sku_plates_from_image(
     bg_threshold: int = 240,
     max_chroma: int = 18,
     allow_nonwhite_bg: bool = False,
+    auto_split_twin_pair: bool = True,
     jpeg_quality: int = 95,
 ) -> Dict[str, Any]:
     """
@@ -364,6 +522,7 @@ def build_sku_plates_from_image(
             bg_threshold=bg_threshold,
             max_chroma=max_chroma,
             allow_nonwhite_bg=allow_nonwhite_bg,
+            auto_split_twin_pair=auto_split_twin_pair,
         )
 
     ref1_name = f"{clean_prefix}_REF_1_SINGLE_CLEAN.jpg"

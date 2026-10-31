@@ -169,4 +169,30 @@ def validate_sku_config(
 
         errors.extend(validate_video_prompt(vd.get("prompt", ""), preset_name=preset_name, video_key=vkey))
 
+    custom_indices = config.get("video_card_indices")
+    if custom_indices is not None:
+        if not isinstance(custom_indices, list) or len(custom_indices) != len(videos):
+            errors.append(
+                f"video_card_indices must be a list of length {len(videos)} matching 'videos', "
+                f"got {len(custom_indices) if isinstance(custom_indices, list) else type(custom_indices).__name__}."
+            )
+        else:
+            seen_cidx = set()
+            seen_cslugs = set()
+            for item in custom_indices:
+                if not isinstance(item, dict) or "card_index" not in item or not item.get("slug"):
+                    errors.append(f"Invalid video_card_indices entry {item!r}; expected {{'card_index': int, 'slug': str}}.")
+                    continue
+                cidx = item["card_index"]
+                cslug = str(item["slug"]).strip()
+                if not isinstance(cidx, int) or isinstance(cidx, bool) or cidx < 0:
+                    errors.append(f"video_card_indices card_index must be a non-negative integer, got {cidx!r}.")
+                elif cidx in seen_cidx:
+                    errors.append(f"Duplicate card_index {cidx} in video_card_indices.")
+                else:
+                    seen_cidx.add(cidx)
+                if cslug in seen_cslugs:
+                    errors.append(f"Duplicate slug {cslug!r} in video_card_indices.")
+                seen_cslugs.add(cslug)
+
     return errors

@@ -1,0 +1,122 @@
+{
+  "prefix": "SQPOT3",
+  "preset": "tree_4ft",
+  "preset_label_vi": "Cây cảnh / Cây giả đặt sàn ~4ft (1.20m – 1.30m)",
+  "source_image": "media_1793410151644_f3645dd6.jpg",
+  "cutout_stats": {
+    "source_size": [
+      1024,
+      1024
+    ],
+    "had_alpha": false,
+    "flooded_bg_ratio": 0.5515,
+    "auto_split_twin_pack_count": 2,
+    "tight_bbox": [
+      95,
+      2,
+      503,
+      1020
+    ],
+    "padded_bbox": [
+      91,
+      0,
+      507,
+      1024
+    ],
+    "cutout_size": [
+      416,
+      1024
+    ],
+    "aspect_ratio_w_over_h": 0.40625
+  },
+  "clean_refs": [
+    "SQPOT3_REF_1_SINGLE_CLEAN.jpg",
+    "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+  ],
+  "plates_2k": [
+    {
+      "code": "01",
+      "filename": "SQPOT3_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg",
+      "description_vi": "2 cây đối xứng cửa chính 2.4m / lò sưởi trần cao 3.3m (52% chiều cao khung)",
+      "count": 2,
+      "heights_pct": [
+        0.52,
+        0.52
+      ]
+    },
+    {
+      "code": "02",
+      "filename": "SQPOT3_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg",
+      "description_vi": "2 cây đối xứng cận trung 50mm: bàn Console 85cm, cửa đôi Pháp, cổng vòm (62%)",
+      "count": 2,
+      "heights_pct": [
+        0.62,
+        0.62
+      ]
+    },
+    {
+      "code": "03",
+      "filename": "SQPOT3_PLATE_03_PAIR_DIAGONAL_3Q_16x9.jpg",
+      "description_vi": "2 cây lệch tầng góc xiên 3/4 chuẩn tiêu cự 50mm (cây gần trái 60%, cây xa phải 56% — giữ đúng cỡ 4ft đồng đều trên ban công/view biển)",
+      "count": 2,
+      "heights_pct": [
+        0.6,
+        0.56
+      ]
+    },
+    {
+      "code": "04",
+      "filename": "SQPOT3_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg",
+      "description_vi": "1 cây Hero bên trái 50mm: phòng khách, phòng đọc sách, sunroom (72%)",
+      "count": 1,
+      "heights_pct": [
+        0.72
+      ]
+    },
+    {
+      "code": "05",
+      "filename": "SQPOT3_PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9.jpg",
+      "description_vi": "1 cây Hero bên phải 50mm: hiên nhà, đảo bếp, cầu thang kính (70%)",
+      "count": 1,
+      "heights_pct": [
+        0.7
+      ]
+    },
+    {
+      "code": "06",
+      "filename": "SQPOT3_PLATE_06_SINGLE_WIDE_55PCT_16x9.jpg",
+      "description_vi": "1 cây trung-đại cảnh bên trái: phòng rộng có nội thất trung cảnh (55%)",
+      "count": 1,
+      "heights_pct": [
+        0.55
+      ]
+    },
+    {
+      "code": "07",
+      "filename": "SQPOT3_PLATE_07_SINGLE_WIDE_RIGHT_36PCT_16x9.jpg",
+      "description_vi": "1 cây đại cảnh 35mm trần cao 3.2m thấy trọn bàn ăn & tủ buffet 85cm (36%)",
+      "count": 1,
+      "heights_pct": [
+        0.36
+      ]
+    },
+    {
+      "code": "08",
+      "filename": "SQPOT3_PLATE_08_SINGLE_COASTAL_RIGHT_56PCT_16x9.jpg",
+      "description_vi": "1 cây Goldilocks 56% bên phải: phòng khách rộng nhìn ra biển / vườn lớn",
+      "count": 1,
+      "heights_pct": [
+        0.56
+      ]
+    },
+    {
+      "code": "09",
+      "filename": "SQPOT3_PLATE_09_SINGLE_HERO_RIGHT_76PCT_16x9.jpg",
+      "description_vi": "1 cây Hero cận nổi khối tiền cảnh bên phải (hồ bơi / daybed lùi sau 1.3m, 76%)",
+      "count": 1,
+      "heights_pct": [
+        0.76
+      ]
+    }
+  ]
+}

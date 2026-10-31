@@ -139,3 +139,41 @@ Qua thực chiến QA trực tiếp 10 clip trên Flow, đây là **3 Luật S�
   - `B18` / `VB18` (`da276718-80a1-49c8-9839-021b8c26f20b`) — Góc thư giãn Phòng ngủ Master rèm voan ban công & ghế bành linen (1 cây Hero trái)
   - `B19` / `VB19` (`6a6f121c-f7b4-4bfd-ac72-25eee72808c5`) — Cabana hồ bơi Resort đá Travertine & sofa Daybed gỗ Teak (1 cây Hero tiền cảnh phải `PLATE_09` khóa `REF_2`)
   - `B20` / `VB20` (`2df175d4-9486-46d6-9140-bf9043b8a131`) — Phòng khách đồi ven biển California trần xà gỗ sồi & cửa kính đại dương (1 cây đại cảnh `PLATE_08` chuẩn `4ft`)
+
+---
+
+## 6. Lô 3 SKU #1 — Cây Giả `4ft` Lá Đúc PE 2 Tông Xanh Chậu Vuông Đen Cao Vát Đáy (`S21 → S40` & `V21 → V40`: 20 Ảnh `16:9` + 20 Video `4s`)
+
+### A. Cấu Hình Chuẩn Hóa Trên `flow_sku_tvc_toolkit` (`products/cedar_sqpot_batch3_20/`)
+- **Tự động tách 1 cây chuẩn từ ảnh Listing `Set of 2`:** `plate_engine.py` tự nhận diện ảnh đôi đồng kích thước trên nền `#FFFFFF` và tách riêng 1 cây sạch (`416x1024`, `W/H = 0.40625`) để dựng trọn bộ **9 tấm Plate `2K 16:9` (`SQPOT3_PLATE_01..09`)** + **Ảnh Macro `1.65x` (`SQPOT3_REF_2_CLOSEUP_1024.jpg`)** khóa khấc miệng chậu vuông âm & cọng lá đúc PE 2 tông xanh.
+- **File cấu hình & bảng khóa 20 UUID vĩnh viễn lưu gọn trong Git:**
+  - `products/cedar_sqpot_batch3_20/sku_project.json` — Trọn bộ 20 bối cảnh kiến trúc/nội thất mới (`S21 → S40`) + 20 kịch bản chuyển động máy 3D-Parallax `4 giây` (`V21 → V40`) + danh sách `exclude_uuids` cách ly toàn bộ tài nguyên cũ trên Project Flow.
+  - `products/cedar_sqpot_batch3_20/cedar_sqpot_batch3_20_scene_uuids.json` — 20 UUID `data-media-id` chuẩn 1-1 cho `S21 → S40`.
+  - `products/cedar_sqpot_batch3_20/cedar_sqpot_batch3_20_plate_uuids.json` — Token 10 tấm Plate & Macro `SQPOT3_*` đã upload sẵn trên Project Flow.
+
+### B. Danh Sách 20 Ảnh `16:9` & 20 Video `4s` Mới Nhất Trên Project Flow (`S21 → S40` / `V21 → V40`)
+
+#### Nhóm 10 Cảnh Đôi (`2 Cây` — `S21 → S30` + `V21 → V30`)
+- `S21` / `V21` (`23460d2f-3988-441d-bd00-e5b482079f3a`) — Mặt tiền dinh thự Georgian cửa đôi đen satin `2.4m` tay gõ đồng & cột đá vôi rãnh (`PLATE_01` `52%`)
+- `S22` / `V22` (`08aeac9a-4b9c-4a6d-bfeb-97f99bf3d972`) — Cổng sắt mỹ thuật kính vòm sân trong Villa Tuscany đá Travertine & bậc thềm nắng chiều góc `3/4` cân bằng `60%/56%` đồng cỡ `4ft` (`PLATE_03B`)
+- `S23` / `V23` (`8facbd9d-41ed-4ea7-861b-e6105fcfe46c`) — Sảnh biệt thự hiện đại cửa trục xoay Pivot đồng sẫm & kính sọc kiến trúc `2.45m` (`PLATE_01` `52%`)
+- `S24` / `V24` (`d6587f20-8cb3-4a03-b550-cd6c9d500d00`) — Phòng khách hiện đại lò sưởi đá Roman Travertine rãnh cao `1.18m` & đôn vải linen (`PLATE_02` `62%`)
+- `S25` / `V25` (`cf869a1f-27f9-4b21-9bc3-b982ff2e372b`) — Sân hiên lan can con tiện đá vôi `1.00m` biệt thự ven hồ nước xanh ngọc núi tuyết góc `3/4` cân bằng `60%/56%` đồng cỡ `4ft` (`PLATE_03B`)
+- `S26` / `V26` (`77397d83-7177-4f63-94cd-91fa438561b3`) — Sảnh khách sạn Boutique 5 sao tường vữa Marmorino & bàn Console đá Travertine chân đồng `85cm` (`PLATE_02` `62%`)
+- `S27` / `V27` (`dc6751d8-652d-43dd-9745-be4b0d20b5ac`) — Nhà kính Orangery dinh thự Châu Âu cửa đôi vòm thép đen chia ô kính `2.45m` (`PLATE_01` `52%`)
+- `S28` / `V28` (`4b1a1f00-40eb-4590-8b36-a3946e0e8af7`) — Phòng ăn sang trọng cửa đôi kính khung đồng hầm rượu phát sáng ấm & sàn gỗ xương cá (`PLATE_02` `62%`)
+- `S29` / `V29` (`dad27022-42da-4de1-b4fb-ee742ec5e3b1`) — Sân thượng Montecito California lò sưởi ngoài trời vữa trắng dầm gỗ sồi `1.18m` dưới giàn Pergola nắng sọc (`PLATE_01` `52%`)
+- `S30` / `V30` (`11292166-35de-4d99-ae5d-d76497805bba`) — Tiền sảnh thang máy riêng Penthouse cửa đồng Champagne, vách gỗ sồi rãnh & đá cẩm thạch (`PLATE_02` `62%`)
+
+#### Nhóm 10 Cảnh Đơn Hero & Đại Cảnh (`1 Cây` — `S31 → S40` + `V31 → V40`)
+- `S31` / `V31` (`7cc2af5f-e98c-496a-bcfd-a2843f697679`) — Phòng nhạc Salon ngập nắng rèm voan cao & đàn Đại dương cầm Grand Piano lùi hậu cảnh `1.4m` (`PLATE_04` `72%` trái)
+- `S32` / `V32` (`c07b522c-3f59-4e77-beae-2f20eb4f2392`) — Poolhouse Cabana đá Travertine hồ bơi vô cực & giường nghỉ gỗ Teak lùi hậu cảnh `1.35m` (`PLATE_09` `76%` phải)
+- `S33` / `V33` (`b78f69b3-e533-42a1-a231-d7a84fa931d9`) — Góc ăn sáng Breakfast Nook ghế băng vòng cung gỗ sồi rãnh bọc Bouclé & bàn tròn đá Travertine (`PLATE_04` `72%` trái)
+- `S34` / `V34` (`eb701e7f-4e31-4fe0-90d3-ea782e9ebad4`) — Hành lang gỗ Hinoki phong cách Japandi mở cửa trượt ra vườn sỏi trắng thiền & bồn đá nước (`PLATE_05` `70%` phải)
+- `S35` / `V35` (`06567b61-f4c6-4e6d-b69d-df625851431d`) — Đại cảnh phòng ăn & khách trần xà gỗ sồi cao `3.3m`, bàn ăn dài `2.6m` & tủ Sideboard rãnh `85cm` (`PLATE_07` `36%` phải)
+- `S36` / `V36` (`91933026-b81b-4025-9d18-5161d3a1591b`) — Phòng Lounge thư viện ghế bành da bò Cognac `76cm` & hệ kệ gỗ sồi trưng bày sách nghệ thuật (`PLATE_04` `72%` trái)
+- `S37` / `V37` (`e64cb883-4cf1-4360-b805-05d0c2cba273`) — Phòng thay đồ Master Dressing Suite tủ áo gỗ sồi rãnh, gương vòm đồng & ghế đôn Bouclé `46cm` (`PLATE_05` `70%` phải)
+- `S38` / `V38` (`5b47ac76-1bc3-48f2-b3d3-2b14385383e1`) — Hành lang vòm đá cổ Provence Pháp ghế đá chạm `48cm` mở ra vườn hoa Oải hương & Ô-liu nắng vàng (`PLATE_06` `55%` trái)
+- `S39` / `V39` (`1354fa6a-f9b9-4b85-b4a5-3b55aefec7fb`) — Phòng khách biệt thự ven hồ núi hiện đại mở trọn cửa kính trượt ra sàn gỗ & mặt hồ lấp lánh (`PLATE_08` `56%` phải)
+- `S40` / `V40` (`aef8080a-6555-44c1-b699-c479d300d140`) — Sảnh thông tầng Atrium cầu thang xoắn ốc điêu khắc vữa trắng Venetian & bậc gỗ sồi đón nắng giếng trời (`PLATE_05` `70%` phải)
+

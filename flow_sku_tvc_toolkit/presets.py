@@ -73,10 +73,10 @@ TREE_4FT_PRESET = CategoryPreset(
         PlateTemplate(
             code="03",
             suffix="PLATE_03_PAIR_DIAGONAL_3Q_16x9",
-            description_vi="2 cây lệch tầng góc xiên 3/4 (cây gần trái 64%, cây xa phải 51%)",
+            description_vi="2 cây lệch tầng góc xiên 3/4 chuẩn tiêu cự 50mm (cây gần trái 60%, cây xa phải 56% — giữ đúng cỡ 4ft đồng đều trên ban công/view biển)",
             placements=(
-                PlacementSpec(height_pct=0.64, center_x_pct=0.28, bottom_margin_pct=0.045, max_width_pct=0.36),
-                PlacementSpec(height_pct=0.51, center_x_pct=0.70, bottom_margin_pct=0.115, max_width_pct=0.32),
+                PlacementSpec(height_pct=0.60, center_x_pct=0.28, bottom_margin_pct=0.050, max_width_pct=0.36),
+                PlacementSpec(height_pct=0.56, center_x_pct=0.70, bottom_margin_pct=0.082, max_width_pct=0.34),
             ),
         ),
         PlateTemplate(

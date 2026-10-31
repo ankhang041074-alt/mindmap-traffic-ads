@@ -27,7 +27,7 @@ import urllib.parse
 import urllib.request
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
-from PIL import Image, ImageOps
+from PIL import Image, ImageChops, ImageOps, ImageStat
 import websockets
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -66,7 +66,7 @@ def get_project_ws_url(
     cdp_url: Optional[str] = None,
     auto_open: bool = True,
 ) -> str:
-    """Find (or silently open) the Google Flow project tab WebSocket debugger URL."""
+    """Find (or silently reuse/open) the Google Flow project tab WebSocket debugger URL."""
     base = resolve_cdp_base_url(port=port, cdp_url=cdp_url)
     with urllib.request.urlopen(f"{base}/json/list", timeout=4.0) as resp:
         tabs = json.loads(resp.read().decode("utf-8"))
@@ -76,6 +76,13 @@ def get_project_ws_url(
             return tab["webSocketDebuggerUrl"]
 
     if auto_open:
+        # Prefer silently navigating an already-open idle flow.google.com home tab over PUT /json/new
+        for tab in tabs:
+            u = tab.get("url") or ""
+            if tab.get("type") == "page" and "flow.google.com" in u and "/project/" not in u:
+                if "webSocketDebuggerUrl" in tab:
+                    return tab["webSocketDebuggerUrl"]
+
         project_url = f"https://flow.google.com/project/{project_id}"
         encoded = urllib.parse.quote(project_url, safe=":/?=&-")
         req = urllib.request.Request(f"{base}/json/new?{encoded}", method="PUT")
@@ -90,12 +97,17 @@ def get_project_ws_url(
     )
 
 
-async def init_silent_flow_session(ws) -> FlowCDP:
+async def init_silent_flow_session(ws, project_id: Optional[str] = None) -> FlowCDP:
     """Initialize FlowCDP with silent background focus emulation (zero window focus stealing)."""
     flow = FlowCDP(ws)
     await flow.call("Page.enable")
     await flow.call("DOM.enable")
     await flow.call("Emulation.setFocusEmulationEnabled", {"enabled": True})
+    if project_id:
+        cur_href = await flow.js("window.location.href") or ""
+        if project_id not in cur_href:
+            await flow.call("Page.navigate", {"url": f"https://flow.google.com/project/{project_id}"})
+            await asyncio.sleep(5.0)
     return flow
 
 
@@ -136,9 +148,9 @@ async def clear_composer_strict(flow: FlowCDP) -> None:
 
 
 async def exit_edit_view_if_needed(flow: FlowCDP) -> None:
-    href = await flow.js("window.location.href")
-    if "/edit/" in (href or ""):
-        await flow.find_and_trusted_click("aria === 'Nút quay lại để quay về trang trước'", "exit /edit/ view")
+    href = await flow.js("window.location.href") or ""
+    if "/edit/" in href or "/trash" in href:
+        await flow.find_and_trusted_click("aria === 'Nút quay lại để quay về trang trước'", "exit /edit/ or /trash view")
         await asyncio.sleep(1.0)
 
 
@@ -308,7 +320,7 @@ async def open_ingredient_modal(flow: FlowCDP) -> None:
     await _wait_visible_option_thumbnails(flow)
 
 
-async def build_gallery_media_bridge(flow: FlowCDP, max_steps: int = 28) -> Tuple[Dict[str, str], Dict[str, str]]:
+async def build_gallery_media_bridge(flow: FlowCDP, max_steps: int = 65) -> Tuple[Dict[str, str], Dict[str, str]]:
     """
     Walk the 'Hình ảnh' gallery virtual scroller collecting <img data-media-id='<UUID>' src='.../asb/ANqvLO...'>
     so permanent 36-char UUIDs stored in Git map 1-to-1 to post-reload /asb/ANqvLO... tokens and vice versa.
@@ -327,7 +339,7 @@ async def build_gallery_media_bridge(flow: FlowCDP, max_steps: int = 28) -> Tupl
 
     uuid_to_asb: Dict[str, str] = {}
     asb_to_uuid: Dict[str, str] = {}
-    for _ in range(max(max_steps, 40)):
+    for _ in range(max(max_steps, 60)):
         for _ in range(4):
             ready = await flow.js("""
             (() => {
@@ -401,7 +413,7 @@ def _token_matches_set(tok: str, known_set: Set[str], asb_to_uuid: Optional[Dict
     return False
 
 
-async def scan_all_project_options(flow: FlowCDP, max_steps: int = 24) -> List[Dict[str, str]]:
+async def scan_all_project_options(flow: FlowCDP, max_steps: int = 65) -> List[Dict[str, str]]:
     """Walk CDK virtual-scroll picker top-to-bottom returning ordered [{txt, src, token}]."""
     await open_ingredient_modal(flow)
     await flow.js("""
@@ -460,7 +472,7 @@ async def upload_missing_files_silent(
 ) -> Dict[str, str]:
     """Silently upload missing plate/ref files via intercepted fileChooser + DOM.setFileInputFiles."""
     await press_escape(flow, 0.3)
-    existing_opts = await scan_all_project_options(flow, max_steps=20)
+    existing_opts = await scan_all_project_options(flow, max_steps=65)
     await press_escape(flow, 0.3)
 
     missing: List[Tuple[str, str]] = []
@@ -558,7 +570,7 @@ async def upload_missing_files_silent(
         await flow.call("Page.setInterceptFileChooserDialog", {"enabled": False})
 
     await asyncio.sleep(1.2)
-    refreshed = await scan_all_project_options(flow, max_steps=20)
+    refreshed = await scan_all_project_options(flow, max_steps=65)
     await press_escape(flow, 0.3)
     for fname, _ in missing:
         stem = os.path.splitext(fname)[0]
@@ -591,7 +603,7 @@ async def attach_ingredient_verified(
     await asyncio.sleep(0.3)
 
     hit = False
-    for _ in range(36):
+    for _ in range(75):
         await _wait_visible_option_thumbnails(flow, max_polls=3)
         m = await flow.js(f"""
         (() => {{
@@ -896,7 +908,7 @@ async def isolate_white_on_flow(
 
     ws_url = get_project_ws_url(project_id, port=port, auto_open=True)
     async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
-        flow = await init_silent_flow_session(ws)
+        flow = await init_silent_flow_session(ws, project_id=project_id)
         await switch_gallery_tab(flow, "Hình ảnh")
         await ensure_image_mode(flow, aspect_ratio="1:1")
         await upload_missing_files_silent(flow, ws, [(fname, os.path.abspath(input_image_path))], uuid_cache, tmp_cache_path)
@@ -1110,7 +1122,8 @@ async def run_images_pipeline(
         raise ValueError("No scenes defined in SKU config.")
 
     if phase == "only":
-        scenes = [s for s in scenes if only_key and only_key in s["key"]]
+        only_tokens = [tok.strip() for tok in (only_key or "").split(",") if tok.strip()]
+        scenes = [s for s in scenes if only_tokens and any(tok in s["key"] for tok in only_tokens)]
         if not scenes:
             raise ValueError(f"No scene matching --only-key={only_key!r}")
     elif phase == "check1":
@@ -1145,7 +1158,7 @@ async def run_images_pipeline(
     qa_dir = os.path.join(project_dir, "qa")
     ws_url = get_project_ws_url(config["project_id"], port=port, auto_open=True)
     async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
-        flow = await init_silent_flow_session(ws)
+        flow = await init_silent_flow_session(ws, project_id=config["project_id"])
         await switch_gallery_tab(flow, "Hình ảnh")
         await ensure_image_mode(flow, aspect_ratio="16:9")
         await upload_missing_files_silent(flow, ws, needed_files, uuid_cache, uuid_cache_path)
@@ -1174,12 +1187,21 @@ async def run_images_pipeline(
 
         for w_idx in range(0, len(scenes), 3):
             wave = scenes[w_idx:w_idx + 3]
+            await flow.js("""
+            (() => {
+                const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+                if (sc) sc.scrollTop = 0;
+                window.scrollTo(0, 0);
+            })()
+            """)
+            await asyncio.sleep(0.3)
+            wave_before_bases = {it["base"] for it in await get_rendered_gallery_items(flow)}
             for sc in wave:
                 await submit_single_image_scene(flow, sc, uuid_cache, uuid_cache_path, wait_for_render=False)
             print(f"  Waiting for {slug} wave {w_idx // 3 + 1} ({len(wave)} images)...")
             saw_pct = False
             zero_streak = 0
-            for step in range(60):
+            for step in range(75):
                 await asyncio.sleep(2.2)
                 await flow.js("""
                 (() => {
@@ -1188,19 +1210,24 @@ async def run_images_pipeline(
                     window.scrollTo(0, 0);
                 })()
                 """)
-                await _click_retry_if_failed_card(flow, f"wave-{w_idx // 3 + 1}")
+                if await _click_retry_if_failed_card(flow, f"wave-{w_idx // 3 + 1}"):
+                    saw_pct = True
+                    zero_streak = 0
+                    continue
                 pcts = await flow.js("""
                 Array.from(document.querySelectorAll('div, span'))
                     .map(e => (e.innerText || '').trim())
                     .filter(t => /^\\d+%$/.test(t))
                 """)
+                cur_items = await get_rendered_gallery_items(flow)
+                new_wave_items = [it for it in cur_items if it["base"] not in wave_before_bases]
                 if pcts:
                     saw_pct = True
                     zero_streak = 0
-                elif saw_pct or step >= 6:
+                elif (len(new_wave_items) >= len(wave) and (saw_pct or step >= 5)) or step >= 55:
                     zero_streak += 1
                 if zero_streak >= 2:
-                    print(f"  Wave {w_idx // 3 + 1} finished!")
+                    print(f"  Wave {w_idx // 3 + 1} finished ({len(new_wave_items)}/{len(wave)} new rendered cards ready)!")
                     break
 
         await asyncio.sleep(3.5)
@@ -1226,7 +1253,11 @@ async def map_scene_uuids_pipeline(
 
     target_scenes = scenes
     if only_key:
-        target_scenes = [s for s in scenes if only_key in s["key"]]
+        only_tokens = [tok.strip() for tok in (only_key or "").split(",") if tok.strip()]
+        target_scenes = [
+            s for s in scenes
+            if only_tokens and any(tok in s["key"] for tok in only_tokens)
+        ]
         if not target_scenes:
             raise ValueError(f"No scene matching --only-key={only_key!r}")
 
@@ -1248,12 +1279,12 @@ async def map_scene_uuids_pipeline(
 
     ws_url = get_project_ws_url(config["project_id"], port=port, auto_open=True)
     async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
-        flow = await init_silent_flow_session(ws)
+        flow = await init_silent_flow_session(ws, project_id=config["project_id"])
         await exit_edit_view_if_needed(flow)
         await press_escape(flow, 0.3)
-        _, asb_to_uuid = await build_gallery_media_bridge(flow, max_steps=32)
+        _, asb_to_uuid = await build_gallery_media_bridge(flow, max_steps=65)
         await ensure_image_mode(flow, aspect_ratio="16:9")
-        ordered = await scan_all_project_options(flow, max_steps=36)
+        ordered = await scan_all_project_options(flow, max_steps=75)
         await press_escape(flow, 0.3)
 
     filtered: List[Dict[str, str]] = []
@@ -1316,7 +1347,7 @@ async def clear_frame_slots_and_text(flow: FlowCDP) -> None:
         (() => {
             const minY = Math.max(180, window.innerHeight - 340);
             const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(
-                b => b.getBoundingClientRect().y > minY && b.getBoundingClientRect().width > 0
+                b => !b.closest('[data-media-id]') && b.getBoundingClientRect().y > minY && b.getBoundingClientRect().width > 0
             );
             const s = btns.some(b => (b.innerText || '').trim().includes('Bắt đầu') && !(b.getAttribute('aria-label') || '').includes('Bắt đầu tạo'));
             const e = btns.some(b => (b.innerText || '').trim().includes('Kết thúc'));
@@ -1330,13 +1361,13 @@ async def clear_frame_slots_and_text(flow: FlowCDP) -> None:
             const minY = Math.max(180, window.innerHeight - 310);
             const maxY = window.innerHeight - 35;
             const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(b => {
+                if (b.closest('[data-media-id]') || b.closest('[role="dialog"]')) return false;
                 const r = b.getBoundingClientRect();
-                if (r.width <= 0 || r.width > 48 || r.height > 48 || r.y < minY || r.y > maxY) return false;
-                if (b.closest('[role="dialog"]')) return false;
+                if (r.width <= 0 || r.width > 64 || r.height > 64 || r.y < minY || r.y > maxY) return false;
                 const txt = (b.innerText || '').trim().toLowerCase();
                 const aria = (b.getAttribute('aria-label') || '').toLowerCase();
-                if (aria.includes('bắt đầu tạo') || aria.includes('thêm nội dung') || aria.includes('thành phần')) return false;
-                return txt === 'close' || txt === 'clear' || txt === '×' || txt === '✕' || aria.includes('xoá') || aria.includes('xóa') || aria.includes('đóng') || aria.includes('khung hình');
+                if (aria.includes('bắt đầu tạo') || aria.includes('thêm nội dung') || aria === 'thành phần') return false;
+                return txt === 'close' || txt === 'clear' || txt.includes('cancel') || txt === '×' || txt === '✕' || aria.includes('xoá') || aria.includes('xóa') || aria.includes('đóng') || aria.includes('khung hình') || aria.includes('thành phần tạo hình ảnh');
             });
             if (!btns.length) return null;
             const r = btns[0].getBoundingClientRect();
@@ -1371,13 +1402,38 @@ async def _populate_frame_slot_by_token(
         raise ValueError(f"Empty token passed to _populate_frame_slot_by_token for {slot_label!r}")
 
     last_err = ""
-    for attempt in range(1, 4):
-        await press_escape(flow, 0.3)
-        await flow.find_and_trusted_click(
-            f"text.includes({json.dumps(slot_label)}) && !aria.includes('Bắt đầu tạo') && r.y > Math.max(180, window.innerHeight - 360)",
-            f"{slot_label} slot",
-        )
+    for attempt in range(1, 6):
+        await press_escape(flow, 0.35)
+        slot_rect = await flow.js(f"""
+        (() => {{
+            const lbl = {json.dumps(slot_label)};
+            const minY = Math.max(180, window.innerHeight - 360);
+            const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(el => {{
+                if (el.closest('[data-media-id]') || el.closest('[role="dialog"]')) return false;
+                const r = el.getBoundingClientRect();
+                if (r.width <= 0 || r.height <= 0 || r.y <= minY) return false;
+                const text = (el.innerText || el.textContent || '').trim().replace(/\\s+/g, ' ');
+                const aria = el.getAttribute('aria-label') || '';
+                return text.includes(lbl) && !aria.includes('Bắt đầu tạo');
+            }});
+            if (!btns.length) return null;
+            const r = btns[btns.length - 1].getBoundingClientRect();
+            return {{cx: Math.round(r.x + r.width / 2), cy: Math.round(r.y + r.height / 2)}};
+        }})()
+        """)
+        if not slot_rect:
+            last_err = f"composer slot button {slot_label!r} not visible on attempt {attempt}"
+            await asyncio.sleep(0.6)
+            continue
+        await flow.trusted_click(slot_rect["cx"], slot_rect["cy"])
         await asyncio.sleep(0.85)
+
+        has_lb = await flow.js(
+            "Boolean(document.querySelector('cdk-virtual-scroll-viewport[role=\"listbox\"], [role=\"listbox\"]'))"
+        )
+        if not has_lb:
+            last_err = f"picker listbox did not open for {slot_label!r} on attempt {attempt}"
+            continue
 
         await flow.js("""
         (() => {
@@ -1389,17 +1445,17 @@ async def _populate_frame_slot_by_token(
             }
         })()
         """)
-        await asyncio.sleep(0.3)
+        await asyncio.sleep(0.25)
 
         found = False
-        for scroll_y in range(0, 12000, 260):
+        for scroll_y in range(0, 24000, 260):
             await flow.js(f"""
             (() => {{
                 const lb = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]');
                 if (lb) lb.scrollTop = {scroll_y};
             }})()
             """)
-            await asyncio.sleep(0.28)
+            await asyncio.sleep(0.26)
             await _wait_visible_option_thumbnails(flow, max_polls=3)
             hit = await flow.js(f"""
             (() => {{
@@ -1411,7 +1467,7 @@ async def _populate_frame_slot_by_token(
                     if (cands.some(uid => src.includes(uid))) {{
                         if (lb && lbRect) {{
                             const er = el.getBoundingClientRect();
-                            lb.scrollTop += (er.top + er.height / 2) - (lbRect.top + 150);
+                            lb.scrollTop += (er.top + er.height / 2) - (lbRect.top + lbRect.height / 2);
                         }}
                         return true;
                     }}
@@ -1427,38 +1483,57 @@ async def _populate_frame_slot_by_token(
             last_err = f"tokens {cand_tokens} not found in virtual scroll"
             continue
 
-        await asyncio.sleep(0.35)
+        await asyncio.sleep(0.32)
         await _wait_visible_option_thumbnails(flow, max_polls=4)
 
         async def recenter_and_inspect():
-            return await flow.js(f"""
+            scrolled = await flow.js(f"""
             (() => {{
                 const cands = {json.dumps(cand_tokens)};
                 const lb = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]');
                 const lbRect = lb ? lb.getBoundingClientRect() : null;
-                let el = Array.from(document.querySelectorAll('[role="option"]')).find(
+                const el = Array.from(document.querySelectorAll('[role="option"]')).find(
                     e => cands.some(uid => (e.querySelector('img')?.src || '').includes(uid))
                 );
                 if (el && lb && lbRect) {{
                     const er0 = el.getBoundingClientRect();
-                    if (er0.top < lbRect.top + 60 || er0.bottom > lbRect.top + 280) {{
-                        lb.scrollTop += (er0.top + er0.height / 2) - (lbRect.top + 150);
+                    if (er0.top < lbRect.top + 28 || er0.bottom > lbRect.bottom - 28) {{
+                        lb.scrollTop += (er0.top + er0.height / 2) - (lbRect.top + lbRect.height / 2);
+                        return true;
                     }}
                 }}
-                el = Array.from(document.querySelectorAll('[role="option"]')).find(
+                return false;
+            }})()
+            """)
+            if scrolled:
+                await asyncio.sleep(0.28)
+            return await flow.js(f"""
+            (() => {{
+                const cands = {json.dumps(cand_tokens)};
+                const el = Array.from(document.querySelectorAll('[role="option"]')).find(
                     e => cands.some(uid => (e.querySelector('img')?.src || '').includes(uid))
                 );
                 let coords = null;
+                let isSelected = false;
                 if (el) {{
+                    const r = el.getBoundingClientRect();
                     const img = el.querySelector('img');
-                    const r = (img && img.getBoundingClientRect().width > 10 ? img : el).getBoundingClientRect();
-                    coords = {{cx: Math.round(r.x + Math.min(r.width / 2, 45)), cy: Math.round(r.y + r.height / 2)}};
+                    const ir = img ? img.getBoundingClientRect() : null;
+                    const baseX = (ir && ir.width > 10) ? ir.x : r.x;
+                    coords = {{cx: Math.round(baseX + 24), cy: Math.round(r.y + r.height / 2), optWidth: Math.round(r.width)}};
+                    isSelected = (
+                        el.getAttribute('aria-selected') === 'true'
+                        || el.classList.contains('asset-item-active')
+                    );
                 }}
                 const addBtn = Array.from(document.querySelectorAll('button')).find(
-                    b => (b.innerText || '').trim() === 'Thêm vào câu lệnh' && b.getBoundingClientRect().width > 0
+                    b => (b.innerText || '').trim() === 'Thêm vào câu lệnh' && b.getBoundingClientRect().width > 0 && !b.disabled
                 );
+                let addCoords = null;
                 let previewMatches = false;
                 if (addBtn) {{
+                    const ar = addBtn.getBoundingClientRect();
+                    addCoords = {{cx: Math.round(ar.x + ar.width / 2), cy: Math.round(ar.y + ar.height / 2)}};
                     let container = addBtn.parentElement;
                     while (container && !container.querySelector('[role="option"]') && container.parentElement) {{
                         container = container.parentElement;
@@ -1470,34 +1545,71 @@ async def _populate_frame_slot_by_token(
                         previewMatches = pSrcs.some(s => cands.some(uid => s.includes(uid)));
                     }}
                 }}
-                return {{coords, hasAdd: Boolean(addBtn), previewMatches}};
+                return {{coords, isSelected, hasAdd: Boolean(addBtn), addCoords, previewMatches}};
             }})()
             """)
 
+        async def check_slot_filled() -> bool:
+            return bool(await flow.js(f"""
+            (() => {{
+                const lbl = {json.dumps(slot_label)};
+                const hasLb = Boolean(document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]'));
+                if (hasLb) return false;
+                const minY = Math.max(180, window.innerHeight - 340);
+                const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(
+                    b => !b.closest('[data-media-id]') && b.getBoundingClientRect().y > minY && b.getBoundingClientRect().width > 0
+                );
+                return !btns.some(b => (b.innerText || '').trim() === lbl);
+            }})()
+            """))
+
         locked = False
-        for click_dx in (0, 55, 110, 160):
+        for click_dx in (0, 55, 110):
             st0 = await recenter_and_inspect()
-            if st0["coords"] and not st0["previewMatches"]:
-                await flow.trusted_click(st0["coords"]["cx"] + click_dx, st0["coords"]["cy"])
-            for _ in range(8):
-                await asyncio.sleep(0.32)
-                st1 = await recenter_and_inspect()
-                if st1["hasAdd"] and st1["previewMatches"]:
-                    await flow.find_and_trusted_click("text === 'Thêm vào câu lệnh'", "Thêm vào câu lệnh")
-                    await asyncio.sleep(0.65)
-                slot_filled = await flow.js(f"""
-                (() => {{
-                    const lbl = {json.dumps(slot_label)};
-                    const minY = Math.max(180, window.innerHeight - 340);
-                    const btns = Array.from(document.querySelectorAll('button, [role="button"]')).filter(
-                        b => b.getBoundingClientRect().y > minY && b.getBoundingClientRect().width > 0
-                    );
-                    return !btns.some(b => (b.innerText || '').trim() === lbl);
-                }})()
-                """)
-                if slot_filled:
+            if st0["coords"] and not (st0["previewMatches"] or st0["isSelected"]):
+                max_dx = max(0, st0["coords"].get("optWidth", 180) - 48)
+                dx = min(click_dx, max_dx)
+                await flow.trusted_click(st0["coords"]["cx"] + dx, st0["coords"]["cy"])
+                await asyncio.sleep(0.22)
+                st_post = await recenter_and_inspect()
+                if not (st_post["previewMatches"] or st_post["isSelected"]) and click_dx > 0:
+                    await flow.js(f"""
+                    (() => {{
+                        const cands = {json.dumps(cand_tokens)};
+                        const el = Array.from(document.querySelectorAll('[role="option"]')).find(
+                            e => cands.some(uid => (e.querySelector('img')?.src || '').includes(uid))
+                        );
+                        if (el) el.click();
+                    }})()
+                    """)
+                    await asyncio.sleep(0.22)
+
+            clicked_add = False
+            for poll_i in range(10):
+                if await check_slot_filled():
                     locked = True
                     break
+                st1 = await recenter_and_inspect()
+                if st1["hasAdd"] and (st1["previewMatches"] or st1["isSelected"]):
+                    if not clicked_add:
+                        await flow.trusted_click(st1["addCoords"]["cx"], st1["addCoords"]["cy"])
+                        clicked_add = True
+                        await asyncio.sleep(0.55)
+                        continue
+                    elif poll_i >= 5:
+                        await flow.js("""
+                        (() => {
+                            const b = Array.from(document.querySelectorAll('button')).find(
+                                x => (x.innerText || '').trim() === 'Thêm vào câu lệnh' && x.getBoundingClientRect().width > 0 && !x.disabled
+                            );
+                            if (b) b.click();
+                        })()
+                        """)
+                        await asyncio.sleep(0.55)
+                        continue
+                elif not clicked_add and poll_i >= 2:
+                    break
+                await asyncio.sleep(0.28)
             if locked:
                 break
         if locked:
@@ -1532,7 +1644,11 @@ async def run_videos_pipeline(
 
     videos = list(config.get("videos", []))
     if phase == "only":
-        videos = [v for v in videos if only_key and (only_key in v["key"] or only_key in v.get("scene_key", ""))]
+        only_tokens = [tok.strip() for tok in (only_key or "").split(",") if tok.strip()]
+        videos = [
+            v for v in videos
+            if only_tokens and any(tok in v["key"] or tok in v.get("scene_key", "") for tok in only_tokens)
+        ]
         if not videos:
             raise ValueError(f"No video matching --only-key={only_key!r}")
     elif phase == "slice":
@@ -1544,13 +1660,13 @@ async def run_videos_pipeline(
 
     ws_url = get_project_ws_url(config["project_id"], port=port, auto_open=True)
     async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
-        flow = await init_silent_flow_session(ws)
+        flow = await init_silent_flow_session(ws, project_id=config["project_id"])
         if phase == "qa-only":
             await capture_qa_pages(flow, qa_dir, f"{slug}_veo", "Video")
             return
 
         # Bridge permanent 36-char UUIDs -> post-reload '/asb/ANqvLO...' picker tokens before queueing clips
-        uuid_to_asb, _ = await build_gallery_media_bridge(flow, max_steps=32)
+        uuid_to_asb, _ = await build_gallery_media_bridge(flow, max_steps=65)
 
         for w_i in range(0, len(videos), 2):
             wave = videos[w_i:w_i + 2]
@@ -1612,13 +1728,13 @@ async def run_videos_pipeline(
                     """)
                     if reset_done:
                         break
-                await asyncio.sleep(0.6)
+                await asyncio.sleep(2.4)
 
             wave_label = f"{slug} Veo Wave {w_i // 2 + 1} ({len(wave)} clips)"
             print(f"  Waiting for {wave_label}...")
             saw_pct = False
             zero_streak = 0
-            for step in range(55):
+            for step in range(65):
                 await asyncio.sleep(3.0)
                 await flow.js("""
                 (() => {
@@ -1627,7 +1743,10 @@ async def run_videos_pipeline(
                     window.scrollTo(0, 0);
                 })()
                 """)
-                await _click_retry_if_failed_card(flow, wave_label)
+                if await _click_retry_if_failed_card(flow, wave_label):
+                    saw_pct = True
+                    zero_streak = 0
+                    continue
                 pcts = await flow.js("""
                 Array.from(document.querySelectorAll('div, span'))
                     .map(e => (e.innerText || '').trim())
@@ -1784,6 +1903,231 @@ async def _scroll_to_indexed_tile(flow: FlowCDP, tile_meta: Dict[str, Any]) -> O
     """)
 
 
+async def resolve_video_card_indices_by_start_frame(
+    config: Dict[str, Any],
+    project_dir: str,
+    port: Optional[int] = None,
+    max_match_l1: float = 24.0,
+) -> List[Tuple[int, str]]:
+    """
+    Automatically resolve live Video-tab card indices (0..M-1) to config 'videos' entries
+    by matching each Video-tab card's t=0.0s/0.1s start-frame thumbnail against the locked
+    scene UUID images on the 'Hình ảnh' tab. Prevents single-clip ('--phase only') re-renders
+    from shifting positional card indices during 1080p batch export.
+    """
+    slug = config["slug"]
+    project_id = config["project_id"]
+    videos = list(config.get("videos", []))
+    if not videos:
+        raise ValueError("No videos defined in SKU config.")
+
+    uuid_path = os.path.join(project_dir, f"{slug}_scene_uuids.json")
+    scene_uuid_map: Dict[str, str] = {}
+    if os.path.isfile(uuid_path):
+        with open(uuid_path, "r", encoding="utf-8") as f:
+            scene_uuid_map = json.load(f)
+
+    target_uuid_by_vidx: Dict[int, str] = {}
+    needed_uuids: Set[str] = set()
+    for i, v in enumerate(videos):
+        u = (v.get("uuid") or "").strip() or (scene_uuid_map.get(v.get("scene_key", "")) or "").strip()
+        if not u:
+            raise RuntimeError(
+                f"Cannot auto-resolve Video-tab card order: video {v.get('key')!r} has no locked scene UUID in {uuid_path}."
+            )
+        target_uuid_by_vidx[i] = u
+        needed_uuids.add(u)
+
+    def _mean_l1(im1: Image.Image, im2: Image.Image) -> float:
+        return sum(ImageStat.Stat(ImageChops.difference(im1, im2)).mean) / 3.0
+
+    ws_url = get_project_ws_url(project_id, port=port, auto_open=True)
+    async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
+        flow = await init_silent_flow_session(ws, project_id=project_id)
+        await exit_edit_view_if_needed(flow)
+        await press_escape(flow, 0.25)
+
+        # 1. Extract 160x90 RGB templates for all target scene UUIDs from the 'Hình ảnh' tab
+        await switch_gallery_tab(flow, "Hình ảnh")
+        await flow.js("""
+        (() => {
+            const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+            if (sc) sc.scrollTop = 0;
+        })()
+        """)
+        await asyncio.sleep(0.35)
+
+        uuid_thumbs: Dict[str, Image.Image] = {}
+        wanted_list = list(needed_uuids)
+        for _ in range(65):
+            rows = await flow.js(f"""
+            (() => {{
+                const wanted = new Set({json.dumps(wanted_list)});
+                const out = [];
+                for (const img of Array.from(document.querySelectorAll('img[data-media-id]'))) {{
+                    const mid = (img.getAttribute('data-media-id') || '').trim();
+                    if (!wanted.has(mid) || !img.complete || img.naturalWidth < 64) continue;
+                    try {{
+                        const c = document.createElement('canvas');
+                        c.width = 160;
+                        c.height = 90;
+                        c.getContext('2d').drawImage(img, 0, 0, 160, 90);
+                        out.push({{mid, du: c.toDataURL('image/jpeg', 0.90)}});
+                    }} catch (e) {{}}
+                }}
+                return out;
+            }})()
+            """)
+            for row in rows or []:
+                mid = row["mid"]
+                if mid not in uuid_thumbs and (row.get("du") or "").startswith("data:image/"):
+                    b64 = row["du"].split(",", 1)[1]
+                    uuid_thumbs[mid] = Image.open(io.BytesIO(base64.b64decode(b64))).convert("RGB")
+            if len(uuid_thumbs) >= len(needed_uuids):
+                break
+            moved = await flow.js("""
+            (() => {
+                const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+                if (!sc) return false;
+                const p = sc.scrollTop;
+                sc.scrollTop += 480;
+                return sc.scrollTop > p;
+            })()
+            """)
+            if not moved:
+                break
+            await asyncio.sleep(0.22)
+
+        if len(uuid_thumbs) < len(needed_uuids):
+            missing_u = sorted(needed_uuids - set(uuid_thumbs.keys()))
+            raise RuntimeError(f"Could not locate {len(missing_u)} scene image(s) on 'Hình ảnh' tab: {missing_u[:5]}")
+
+        # 2. Scan top Video-tab cards and capture each card's clean t=0.0s/0.08s start frame
+        await switch_gallery_tab(flow, "Video")
+        await flow.call("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": 16, "y": 240})
+        scan_limit = len(videos) + 8
+        tiles = await _index_gallery_tiles_responsive(flow, scan_limit)
+        card_thumbs: List[Tuple[int, Image.Image]] = []
+
+        for card_idx in range(min(scan_limit, len(tiles))):
+            tm = tiles[card_idx]
+            target_sy = max(0, int(tm["docTop"]) - 105)
+            await flow.js(f"""
+            (() => {{
+                const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+                if (sc) sc.scrollTop = {target_sy};
+            }})()
+            """)
+            await asyncio.sleep(0.24)
+            clip_info = await flow.js(f"""
+            (async () => {{
+                const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+                if (!sc) return null;
+                const sr = sc.getBoundingClientRect();
+                let best = null, bestD = 1e9;
+                for (const el of Array.from(document.querySelectorAll('flow-grid-tile-container'))) {{
+                    const r = el.getBoundingClientRect();
+                    if (r.width < 140 || r.height < 90) continue;
+                    const dt = Math.round(r.top - sr.top + sc.scrollTop);
+                    const dl = Math.round(r.left - sr.left);
+                    const d = Math.abs(dt - {int(tm["docTop"])}) + Math.abs(dl - {int(tm["docLeft"])});
+                    if (d < 80 && d < bestD) {{ best = el; bestD = d; }}
+                }}
+                if (!best) return null;
+                const txt = (best.innerText || '').trim();
+                if (txt.includes('Không thành công')) return null;
+                const v = best.querySelector('video');
+                if (v && (v.currentSrc || v.src) && v.readyState >= 2 && v.currentTime > 0.25) {{
+                    v.pause();
+                    await new Promise((resolve) => {{
+                        let done = false;
+                        const fin = () => {{ if (!done) {{ done = true; resolve(); }} }};
+                        v.addEventListener('seeked', fin, {{once: true}});
+                        setTimeout(fin, 600);
+                        v.currentTime = 0.08;
+                    }});
+                    await new Promise(r => setTimeout(r, 40));
+                }}
+                best.setAttribute('data-resolve-tile', '1');
+                for (const ch of Array.from(best.querySelectorAll('button, [role="button"]'))) {{
+                    ch.setAttribute('data-prev-vis-r', ch.style.visibility || '');
+                    ch.style.visibility = 'hidden';
+                }}
+                for (const ov of Array.from(document.querySelectorAll('.cdk-overlay-container, mat-snack-bar-container'))) {{
+                    ov.setAttribute('data-prev-vis-ov', ov.style.visibility || '');
+                    ov.style.visibility = 'hidden';
+                }}
+                const ed = document.querySelector('[aria-label="Bạn muốn tạo những gì?"], [aria-label="Bạn muốn tạo gì?"], [contenteditable="true"]');
+                if (ed) {{
+                    let comp = ed.parentElement;
+                    while (comp && comp.parentElement && !comp.contains(sc) && comp.getBoundingClientRect().height < 340) {{
+                        comp = comp.parentElement;
+                    }}
+                    if (comp && !comp.contains(sc)) {{
+                        comp.setAttribute('data-prev-vis-ov', comp.style.visibility || '');
+                        comp.style.visibility = 'hidden';
+                    }}
+                }}
+                const r = best.getBoundingClientRect();
+                return {{x: Math.round(r.x) + 4, y: Math.round(r.y) + 4, width: Math.round(r.width) - 8, height: Math.round(r.height) - 8, scale: 1}};
+            }})()
+            """)
+            if not clip_info:
+                continue
+            try:
+                shot = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 86, "clip": clip_info})
+                im = Image.open(io.BytesIO(base64.b64decode(shot["data"]))).convert("RGB").resize((160, 90), Image.Resampling.BILINEAR)
+                card_thumbs.append((card_idx, im))
+            finally:
+                await flow.js("""
+                (() => {
+                    const t = document.querySelector('[data-resolve-tile="1"]');
+                    if (t) {
+                        for (const ch of Array.from(t.querySelectorAll('[data-prev-vis-r]'))) {
+                            ch.style.visibility = ch.getAttribute('data-prev-vis-r') || '';
+                            ch.removeAttribute('data-prev-vis-r');
+                        }
+                        t.removeAttribute('data-resolve-tile');
+                    }
+                    for (const ov of Array.from(document.querySelectorAll('[data-prev-vis-ov]'))) {
+                        ov.style.visibility = ov.getAttribute('data-prev-vis-ov') || '';
+                        ov.removeAttribute('data-prev-vis-ov');
+                    }
+                })()
+                """)
+
+        await flow.js("""
+        (() => {
+            const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+            if (sc) sc.scrollTop = 0;
+        })()
+        """)
+
+    # 3. Assign newest matching Video-tab card (lowest card_idx) to each video entry without collisions
+    used_cards: Set[int] = set()
+    resolved_pairs: List[Tuple[int, str]] = []
+    for i, v in enumerate(videos):
+        u = target_uuid_by_vidx[i]
+        ref_thumb = uuid_thumbs[u]
+        candidates = [
+            (cidx, _mean_l1(cth, ref_thumb))
+            for cidx, cth in card_thumbs
+            if cidx not in used_cards
+        ]
+        if not candidates:
+            raise RuntimeError(f"Ran out of Video-tab cards while matching {v['key']!r}.")
+        best_cidx, best_l1 = min(candidates, key=lambda kv: (kv[1], kv[0]))
+        if best_l1 > max_match_l1:
+            raise RuntimeError(
+                f"Could not match video {v['key']!r} (UUID {u}) to any Video-tab card (closest card #{best_cidx} had L1={best_l1:.2f} > {max_match_l1})."
+            )
+        used_cards.add(best_cidx)
+        resolved_pairs.append((best_cidx, f"{i + 1:02d}_{v['key']}"))
+        print(f"  [Auto-Match] {i + 1:02d}_{v['key']:36s} -> Video card #{best_cidx:02d} (L1={best_l1:.2f})")
+
+    return resolved_pairs
+
+
 async def download_and_merge_1080p_pipeline(
     project_id: str,
     card_index_to_slug: Sequence[Tuple[int, str]],
@@ -1832,7 +2176,7 @@ async def download_and_merge_1080p_pipeline(
         max_card_idx = max(idx for idx, _, _ in pending_downloads)
         ws_url = get_project_ws_url(project_id, port=port, auto_open=True)
         async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
-            flow = await init_silent_flow_session(ws)
+            flow = await init_silent_flow_session(ws, project_id=project_id)
             try:
                 await flow.call("Browser.setDownloadBehavior", {"behavior": "allow", "downloadPath": dl_tmp, "eventsEnabled": True})
             except Exception:

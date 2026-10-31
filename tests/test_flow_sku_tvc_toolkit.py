@@ -171,6 +171,53 @@ class TestPlateEngineAndWhiteCutout(unittest.TestCase):
         self.assertLessEqual(rw, round(2560 * 0.38) + 1)
         self.assertAlmostEqual(rw / float(rh), 2.5, delta=0.02)
 
+    def test_twin_pair_listing_photo_auto_isolates_single_unit_without_splitting_unequal_sets(self):
+        pair_photo = os.path.join(
+            REPO_ROOT,
+            "cedar_4ft_10s",
+            "clean_refs",
+            "CEDAR_REF_2_PAIR_4FT_CLEAN.jpg",
+        )
+        self.assertTrue(os.path.isfile(pair_photo))
+        with Image.open(pair_photo) as im:
+            crop, _bbox, stats = extract_clean_white_cutout(im)
+        self.assertEqual(stats["auto_split_twin_pack_count"], 2)
+        self.assertAlmostEqual(stats["aspect_ratio_w_over_h"], 0.408, delta=0.03)
+        self.assertEqual(crop.getpixel((crop.width - 1, crop.height // 2)), (255, 255, 255))
+
+        # Unequal multi-piece set (large teapot + small cup separated by white corridor) must NOT split
+        unequal = Image.new("RGB", (500, 360), (255, 255, 255))
+        d = ImageDraw.Draw(unequal)
+        d.rectangle((50, 60, 230, 300), fill=(150, 95, 70))
+        d.rectangle((300, 190, 410, 300), fill=(70, 120, 155))
+        _c2, _b2, stats2 = extract_clean_white_cutout(unequal)
+        self.assertEqual(stats2["auto_split_twin_pack_count"], 1)
+        self.assertEqual(stats2["tight_bbox"], [50, 60, 411, 301])
+
+        # Twin pair with sparse touching leaf sprigs (3px green bridge across middle corridor) MUST still isolate 1 unit
+        with Image.open(pair_photo) as im_touch:
+            touching = im_touch.convert("RGB")
+        dt = ImageDraw.Draw(touching)
+        dt.rectangle((490, 520, 540, 523), fill=(48, 92, 40))
+        crop_touch, _bt, stats_touch = extract_clean_white_cutout(touching)
+        self.assertEqual(stats_touch["auto_split_twin_pack_count"], 2)
+        self.assertAlmostEqual(stats_touch["aspect_ratio_w_over_h"], 0.408, delta=0.03)
+        self.assertEqual(crop_touch.getpixel((crop_touch.width - 1, 521)), (255, 255, 255))
+
+        # Hollow rectangular picture frame / ring must NEVER split in half
+        frame = Image.new("RGB", (400, 500), (255, 255, 255))
+        df = ImageDraw.Draw(frame)
+        df.rectangle((60, 50, 340, 450), outline=(45, 45, 45), width=22)
+        _cf, _bf, stats_frame = extract_clean_white_cutout(frame)
+        self.assertEqual(stats_frame["auto_split_twin_pack_count"], 1)
+        self.assertEqual(stats_frame["tight_bbox"], [60, 50, 341, 451])
+
+        # Explicit opt-out (auto_split_twin_pair=False) keeps genuine 2-piece pair SKUs together
+        with Image.open(pair_photo) as im_keep:
+            _ck, _bk, stats_keep = extract_clean_white_cutout(im_keep, auto_split_twin_pair=False)
+        self.assertEqual(stats_keep["auto_split_twin_pack_count"], 1)
+        self.assertGreater(stats_keep["aspect_ratio_w_over_h"], 0.75)
+
 
 class TestPromptGuardrailsAndCLI(unittest.TestCase):
     def test_guardrails_block_forbidden_words_and_allow_safe_substrings(self):
@@ -226,6 +273,48 @@ class TestPromptGuardrailsAndCLI(unittest.TestCase):
         ]
         errs2 = validate_sku_config(bad_cfg2)
         self.assertTrue(any("unknown scene_key" in e for e in errs2), errs2)
+
+    def test_guardrails_validate_video_card_indices_and_cli_no_split_flag(self):
+        cfg = {
+            "slug": "test_order",
+            "prefix": "TORD",
+            "preset": "tree_4ft",
+            "project_id": "dfcf77a5-5374-4678-9f80-1c5ea7b5c305",
+            "scenes": [],
+            "videos": [
+                {"key": "V01", "uuid": "11111111-1111-1111-1111-111111111111", "prompt": "Continuous 4-second lateral camera truck-right."},
+                {"key": "V02", "uuid": "22222222-2222-2222-2222-222222222222", "prompt": "Continuous 4-second lateral camera truck-left."},
+            ],
+            "video_card_indices": [
+                {"card_index": 0, "slug": "01_V01"},
+                {"card_index": 0, "slug": "02_V02"},
+            ],
+        }
+        errs = validate_sku_config(cfg)
+        self.assertTrue(any("Duplicate card_index 0" in e for e in errs), errs)
+
+        cfg["video_card_indices"] = [
+            {"card_index": 1, "slug": "01_V01"},
+            {"card_index": 0, "slug": "02_V02"},
+        ]
+        self.assertEqual(validate_sku_config(cfg), [])
+
+        pair_photo = os.path.join(REPO_ROOT, "cedar_4ft_10s", "clean_refs", "CEDAR_REF_2_PAIR_4FT_CLEAN.jpg")
+        with tempfile.TemporaryDirectory() as tmp:
+            buf = io.StringIO()
+            with redirect_stdout(buf):
+                rc = cli_main([
+                    "build-plates",
+                    "--input", pair_photo,
+                    "--out-dir", tmp,
+                    "--prefix", "KEEPPAIR",
+                    "--preset", "tree_4ft",
+                    "--no-split-twin-pair",
+                ])
+            self.assertEqual(rc, 0)
+            with open(os.path.join(tmp, "plate_manifest.json"), "r", encoding="utf-8") as f:
+                mf = json.load(f)
+            self.assertEqual(mf["cutout_stats"]["auto_split_twin_pack_count"], 1)
 
     def test_crochet_sample_config_and_cli_workflow(self):
         sample_cfg = os.path.join(
@@ -353,6 +442,31 @@ class TestRepoPortabilityAndSilentCDPInvariants(unittest.TestCase):
                         f"Forbidden Page.bringToFront call found in {fpath}",
                     )
 
+    def test_checked_in_product_configs_and_uuid_maps_are_valid(self):
+        batch3_dir = os.path.join(REPO_ROOT, "products", "cedar_sqpot_batch3_20")
+        cfg_path = os.path.join(batch3_dir, "sku_project.json")
+        uuid_path = os.path.join(batch3_dir, "cedar_sqpot_batch3_20_scene_uuids.json")
+        self.assertTrue(os.path.isfile(cfg_path))
+        self.assertTrue(os.path.isfile(uuid_path))
+
+        with open(cfg_path, "r", encoding="utf-8") as f:
+            cfg = json.load(f)
+        with open(uuid_path, "r", encoding="utf-8") as f:
+            uuid_map = json.load(f)
+
+        self.assertEqual(validate_sku_config(cfg, project_dir=batch3_dir, require_local_plates=False), [])
+        self.assertEqual(len(cfg["scenes"]), 20)
+        self.assertEqual(len(cfg["videos"]), 20)
+        self.assertEqual(len(uuid_map), 20)
+        self.assertEqual(len(set(uuid_map.values())), 20)
+
+        excluded = set(cfg.get("exclude_uuids", []))
+        for sc in cfg["scenes"]:
+            uid = uuid_map.get(sc["key"], "")
+            self.assertRegex(uid, r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            self.assertNotIn(uid, excluded)
+
 
 if __name__ == "__main__":
     unittest.main()
+

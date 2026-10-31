@@ -150,6 +150,7 @@ def cmd_build_plates(args: argparse.Namespace) -> int:
         bg_threshold=args.bg_threshold,
         max_chroma=args.max_chroma,
         allow_nonwhite_bg=args.allow_nonwhite_bg,
+        auto_split_twin_pair=not args.no_split_twin_pair,
     )
     print(f"Generated {len(manifest['clean_refs'])} clean refs + {len(manifest['plates_2k'])} 2K 16:9 plates in {out_dir}")
     print(f"  Cutout bbox : {manifest['cutout_stats']['tight_bbox']} (aspect W/H = {manifest['cutout_stats']['aspect_ratio_w_over_h']})")
@@ -242,17 +243,26 @@ def cmd_run_videos(args: argparse.Namespace) -> int:
 
 
 def cmd_download_1080p(args: argparse.Namespace) -> int:
-    from .flow_cdp import download_and_merge_1080p_pipeline
+    from .flow_cdp import download_and_merge_1080p_pipeline, resolve_video_card_indices_by_start_frame
 
     cfg, proj_dir = _load_config(args.config)
     videos = cfg.get("videos", [])
     if not videos:
         raise ValueError("No videos defined in SKU config.")
 
-    # Default newest-first grid order on Flow Video tab: index 0 = last submitted clip, index N-1 = first submitted clip
     custom_map = cfg.get("video_card_indices")
+    uuid_path = os.path.join(proj_dir, f"{cfg['slug']}_scene_uuids.json")
     if custom_map:
         pairs = [(int(item["card_index"]), str(item["slug"])) for item in custom_map]
+    elif os.path.isfile(uuid_path) or all((v.get("uuid") or "").strip() for v in videos):
+        print("Auto-resolving Video-tab card indices by start-frame visual match (handles out-of-order re-renders)...")
+        pairs = asyncio.run(
+            resolve_video_card_indices_by_start_frame(
+                config=cfg,
+                project_dir=proj_dir,
+                port=args.port,
+            )
+        )
     else:
         n = len(videos)
         pairs = [((n - 1) - i, f"{i + 1:02d}_{v['key']}") for i, v in enumerate(videos)]
@@ -308,6 +318,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp_plates.add_argument("--bg-threshold", type=int, default=240, help="Near-white border flood min RGB threshold (default 240)")
     sp_plates.add_argument("--max-chroma", type=int, default=18, help="Max RGB channel spread for studio white border (default 18)")
     sp_plates.add_argument("--allow-nonwhite-bg", action="store_true", help="Bypass <2%% white-border safety guard")
+    sp_plates.add_argument("--no-split-twin-pair", action="store_true", help="Keep side-by-side twin pairs together as 1 SKU cutout")
     sp_plates.set_defaults(func=cmd_build_plates)
 
     sp_val = sub.add_parser("validate", help="Offline guardrail check on all image & Veo 4s prompts in sku_project.json")

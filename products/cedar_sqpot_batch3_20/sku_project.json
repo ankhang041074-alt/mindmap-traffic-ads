@@ -1,0 +1,450 @@
+{
+  "slug": "cedar_sqpot_batch3_20",
+  "prefix": "SQPOT3",
+  "preset": "tree_4ft",
+  "project_id": "dfcf77a5-5374-4678-9f80-1c5ea7b5c305",
+  "notes_vi": "Lô 3 (S21 -> S40 & V21 -> V40): 20 ảnh TVC 16:9 Nano Banana Pro + 20 video 4s Veo 3.1 - Fast 3D-Parallax cho cây giả 4ft lá đúc PE 2 tông xanh chậu vuông đen cao vát đáy (SKU #1). Chỉ commit JSON cấu hình & UUID; plates_2k/, clean_refs/, qa/ được ignore trong .gitignore.",
+  "exclude_uuids": [
+    "8c5ae9c1-5afd-4a59-ac02-fe88e604d098",
+    "6a6f121c-f7b4-4bfd-ac72-25eee72808c5",
+    "d9746c27-b134-48c5-bacf-3daa6acd519c",
+    "375cef84-4a76-46e4-9520-f25d019f2b06",
+    "2df175d4-9486-46d6-9140-bf9043b8a131",
+    "052eb69a-1a78-4eff-94bd-cb2f3d00e712",
+    "6c1f831e-6e4e-48d1-83f3-4986a90269c3",
+    "d6c29380-f83b-44ec-a6eb-f18116ee6286",
+    "495713f0-ea9d-4f6a-b754-db910889e5f2",
+    "8eaa1323-1f70-4314-85d1-faa1e5cfaf00",
+    "a39c8412-0522-4873-86d2-66ce43e75962",
+    "d8be70c1-b597-46be-9fda-cf1ae71061cc",
+    "279ac2a3-8b4f-422c-8c46-b6555a5308fa",
+    "1849c255-3663-45b4-a56b-3eaae1cc105e",
+    "667ca12c-611e-4472-8a5a-2669560300dd",
+    "f0d9ce0a-b705-46a3-b8f1-7aa9ddc4cd74",
+    "36389dec-ef10-4bec-a7c4-04ed7e55df07",
+    "65decb7f-22f5-4e95-8a95-c792e71a8814",
+    "da276718-80a1-49c8-9839-021b8c26f20b",
+    "2c384643-3ea0-4a76-83be-3448d470258b",
+    "352b2bd0-e57d-4798-a51a-5e5de445ad69",
+    "4f03eb3e-7631-4fc5-8a4f-3e41ce67d028",
+    "97d7f5d6-a835-48d6-9f74-529ae38c8d6d",
+    "d6b74296-6f95-4ec4-8758-8f004aacdcf9",
+    "07ca3cea-54d5-42f9-ac07-6cc00088d4db",
+    "94bd79f0-ec26-434c-a49d-b16244374267",
+    "280418e1-6063-4c53-8fbb-193b61070b93",
+    "5c0e6841-b2a9-46ee-a1d7-44e3a1edbb5e",
+    "a1ec88a7-8f1d-4326-aab1-818bc07e5f67",
+    "738d4df5-4d78-4ee0-81df-9ef226dc63df",
+    "7cfd4143-d2cf-4275-b8cb-153506086a44",
+    "c464825d-04db-47cb-af20-db42f90ff9ed",
+    "dc6353ce-f24f-4054-869f-f829945e28d5",
+    "c4943dff-0e78-4809-b4a6-0d28cdf55d05",
+    "b79f4640-6f8c-4dd6-9480-1f45c2ec382b",
+    "6db60962-6415-4f60-8eb5-9e7d4b0e0adc",
+    "1fc44fdf-158c-4d96-9e6e-552666fbf317",
+    "c5066b1a-0b95-4254-9bd6-cc4000362e59",
+    "404748ee-d746-49d5-8989-1b563972d632",
+    "f5277936-2ba7-4928-af1d-85398594f1bf",
+    "1a5e9d5c-017a-48c9-b9f6-6f08eaf1c019",
+    "c7ae3e32-37bf-414a-b516-ef72bf2352cf",
+    "b79e164b-e012-4687-adcd-56e3fc92c8a8",
+    "2a636fef-0562-4470-ad3d-8ff399015f8f",
+    "03731287-04a9-477e-a037-843e39e6cdf2",
+    "357a083b-bb15-4391-8461-42c738a6d409",
+    "255b13ff-e051-4f6b-8fc6-5de808f483de",
+    "88270262-e787-4d12-809c-1c3fb0a01be9",
+    "c8560aa3-3ce7-401f-831e-7cee9e229b90",
+    "80fe0aac-30fb-4d56-9fc3-8cd36fdeeba0",
+    "7cf09a22-e08a-4bb0-9634-ef73a6450557",
+    "72972fcc-5a93-464b-8324-399a9185d9d2",
+    "94476b2c-f110-4c1a-9c08-ee3d514ccc6c",
+    "5aae13ec-4112-4ba8-aede-fb6762e83210",
+    "96a57777-a359-4546-a363-756a1f5ccd73",
+    "ebc19d89-96d5-431c-bf48-65672b2852ec",
+    "7ef37782-5c33-4d76-972c-49b87d27735b",
+    "7a13b09d-c6cd-4dac-8732-d828f3a5429f",
+    "d81a1ece-9b49-4d8f-8576-510de683db46",
+    "56d84fb5-e098-432f-89ad-3c2b54ae048c",
+    "e89c5d87-3173-42d1-85ae-4a4edd69bb76",
+    "65f2c152-5db9-4ca7-8996-7dfd76b2ce9e",
+    "4f63712c-37c9-433d-8457-a47e3672cf34",
+    "5d275a3e-f828-4419-854f-a70ae267077a",
+    "3d63c790-7d60-4f2d-bce6-05114ca84031",
+    "af938552-9103-46c2-84c8-3bb0716f0140",
+    "b1b5b5eb-f77b-4c1b-9b28-d29493285231",
+    "fac94f0b-7394-4520-8f36-41232fbf67a2",
+    "dc2fce54-5c3a-4179-9abc-c1670f98d6c0",
+    "1e5c2fb2-baaa-41cd-a55d-ae1531610e88",
+    "cc3942a3-2658-4ba9-82db-9ea5df94939f",
+    "c2ecf29f-3def-4f68-93b4-71942bf88429",
+    "f918c19e-5ea1-4e50-9722-1c3afcaa5ee7",
+    "e342a771-5936-4100-a265-5a6687d792dd",
+    "f76d33ac-c9a7-4208-96f7-e7f7fbc8ea34",
+    "dd71ddb9-8726-43a9-a9aa-ab500a0c0834",
+    "c9038ef2-9203-4dd9-a562-d94f528c0b65",
+    "bc75f939-fb80-43f9-92ab-a8adfb3201cb",
+    "838b3534-67d4-4c24-8d5f-dd91cddd7fc2",
+    "e0c58070-7f5e-4b1e-bd33-5659aabaaab5",
+    "22733993-1e6c-4f1c-9d9e-04afe80a5fc8",
+    "f706d759-6258-483a-a112-48535bf42628",
+    "438224a8-3e66-42ee-a196-82493ee574bc",
+    "caac9a86-2541-43b1-a595-ec8b9f9f698f",
+    "286e457a-99b8-47ce-8838-42008a55b481",
+    "04655b2d-afff-44c5-8988-5b93d99c610d",
+    "ca79a6e9-70cc-4e1b-9259-5f514e47c49a",
+    "58bb6e45-5002-448b-91d4-cf18c82d8d6c",
+    "741a9ca3-0132-4a93-9632-bdfe35d376dc",
+    "d6e81524-6233-4051-b3d7-1bbfa557393a",
+    "4f0cb3ba-3938-4dfe-93ba-bcce84136073",
+    "0f106923-e78a-48a0-b1d4-9c4996ef1fd1",
+    "524b9c25-d5fa-4970-af95-a250e5059423",
+    "63a076cf-f43b-4f8b-8fd7-a4ac6bce59fc",
+    "9cc132d1-61b8-455f-9e95-65ef124964b3"
+  ],
+  "scenes": [
+    {
+      "key": "S21_GEORGIAN_EBONY_DOOR_LIMESTONE_PILASTERS",
+      "refs": [
+        "SQPOT3_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat BOTH potted artificial plants and their tall matte-black tapered square planters in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and planters 100% pixel-identical to the 16:9 plate in exact position, height, square planter width-to-height taper, recessed square inner top rim, plump symmetrical rounded-cone outer contour, and dense two-tone deep-green and fresh-green feathery molded foliage texture without slimming the pots, pinching the waist above the pot rim, shrinking, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 35mm-50mm live-action Kodak Vision3 250D sunlit classical Georgian townhouse grand entrance: centered between both plants is a tall 2.4-meter satin-ebony 8-panel double front door with a semicircular fanlight glass transom above and unlacquered polished-brass central ring knockers and lever handles positioned ~16cm below the pointed top tips of both plants (locking true 1/2-door 4ft physical scale), framed by carved fluted cream Portland limestone pilasters and smooth ashlar stonework walls, checkered honed limestone-and-slate portico steps with a plain unmarked natural coir mat, softly blurred foreground wrought-iron stair handrail finial bottom-left, warm late-afternoon golden sunbeams slanting across the fluted stone columns, clean natural daylight on both plants, realistic stone contact shadows under both matte-black square planters, zero text."
+    },
+    {
+      "key": "S22_TUSCAN_TRAVERTINE_GARDEN_GATE_3Q",
+      "refs": [
+        "SQPOT3_PLATE_03B_PAIR_BALANCED_3Q_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat BOTH potted artificial plants and their tall matte-black tapered square planters in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and planters 100% pixel-identical to the 16:9 plate in exact position, height, square planter width-to-height taper, recessed square inner top rim, plump symmetrical rounded-cone outer contour, and dense two-tone deep-green and fresh-green feathery molded foliage texture without slimming the pots, pinching the waist above the pot rim, shrinking, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm live-action Kodak Vision3 250D sunlit Tuscan villa courtyard entrance viewed at a gentle 14-degree three-quarter diagonal perspective matching the subtle floor depth between the left plant and right plant so BOTH plants read as an identical equal-height 4ft pair: between the two plants stands an ornate tall 2.45-meter arched charcoal wrought-iron and clear-glass courtyard gate whose aged-bronze latch bar sits ~16cm below the pointed top tips of BOTH the left plant and the right plant, flanked by matching warm honey-beige Roman travertine stone piers receding gently along the same diagonal floor plane, wide travertine garden flagstones, softly blurred foreground terracotta balustrade corner bottom-left, warm golden-hour Mediterranean sunlight casting delicate ironwork shadows across the stone steps with sunlit olive-grove courtyard bokeh behind the glass gate, clean natural daylight on both plants, realistic stone contact shadows under both matte-black square planters, zero text."
+    },
+    {
+      "key": "S23_ARCHITECTURAL_BRONZE_PIVOT_ENTRY",
+      "refs": [
+        "SQPOT3_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat BOTH potted artificial plants and their tall matte-black tapered square planters in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and planters 100% pixel-identical to the 16:9 plate in exact position, height, square planter width-to-height taper, recessed square inner top rim, plump symmetrical rounded-cone outer contour, and dense two-tone deep-green and fresh-green feathery molded foliage texture without slimming the pots, pinching the waist above the pot rim, shrinking, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 35mm-50mm live-action Kodak Vision3 250D contemporary billionaire architectural villa entry pavilion: centered between both plants is a monumental 2.45-meter brushed dark-bronze and fluted architectural ribbed-glass pivot front door whose long vertical champagne-brass pull bar mid-latch aligns ~15cm below the top tips of both plants (strictly locking true 4ft scale), flanked by warm board-formed travertine concrete walls and a warm slatted white-oak soffit ceiling overhead, large-format honed basalt entry slabs, softly blurred foreground travertine architectural bench corner bottom-right, warm raking afternoon sun-slashes across the textured stone wall, even natural daylight on both plants, crisp floor contact shadows under both matte-black square planters, zero text."
+    },
+    {
+      "key": "S24_FLUTED_TRAVERTINE_HEARTH_LOUNGE",
+      "refs": [
+        "SQPOT3_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat BOTH potted artificial plants and their tall matte-black tapered square planters in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and planters 100% pixel-identical to the 16:9 plate in exact position, height, square planter width-to-height taper, recessed square inner top rim, plump symmetrical rounded-cone outer contour, and dense two-tone deep-green and fresh-green feathery molded foliage texture without slimming the pots, pinching the waist above the pot rim, shrinking, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm medium-shot live-action Kodak Vision3 250D sunlit modern architectural living room: centered between both plants is a wide fluted warm-ivory Roman travertine fireplace surround with a clean floating stone mantel ledge at 1.18m height sitting just slightly below the top tips of both plants, warm minimalist plaster chimney breast extending past the top frame edge, wide-plank European pale white-oak parquet flooring, softly blurred foreground oatmeal linen lounge ottoman corner with a ceramic tray bottom-left, warm diagonal afternoon window sunbeams illuminating subtle plaster texture behind, clean natural daylight on both plants, realistic oak-floor contact shadows under both matte-black square planters, zero text."
+    },
+    {
+      "key": "S25_LAKESIDE_LIMESTONE_BALUSTRADE_VERANDAH_3Q",
+      "refs": [
+        "SQPOT3_PLATE_03B_PAIR_BALANCED_3Q_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat BOTH potted artificial plants and their tall matte-black tapered square planters in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and planters 100% pixel-identical to the 16:9 plate in exact position, height, square planter width-to-height taper, recessed square inner top rim, plump symmetrical rounded-cone outer contour, and dense two-tone deep-green and fresh-green feathery molded foliage texture without slimming the pots, pinching the waist above the pot rim, shrinking, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm live-action Kodak Vision3 250D luxury European lakefront villa stone verandah viewed at a gentle 14-degree three-quarter diagonal perspective matching the subtle floor depth between the left plant and right plant so BOTH plants clearly read as an identical equal-height 4ft pair: running continuously behind the two plants along the same diagonal floor line is a carved 1.00-meter cream limestone balustrade railing angled gently into depth so BOTH the left plant tip and the right plant tip rise equally ~20cm ABOVE the limestone balustrade top rail directly behind each plant, opening onto shimmering sunlit turquoise-blue alpine lake water and distant misty mountains in soft optical bokeh, honed cream limestone terrace pavers, softly blurred foreground teak deck chair armrest corner at the far bottom-left edge, warm late-afternoon golden sunlight skimming across the carved stone balusters, even natural daylight on both plants, realistic stone contact shadows under both matte-black square planters, zero text."
+    },
+    {
+      "key": "S26_BOUTIQUE_HOTEL_MARMORINO_LOBBY_CONSOLE",
+      "refs": [
+        "SQPOT3_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat BOTH potted artificial plants and their tall matte-black tapered square planters in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and planters 100% pixel-identical to the 16:9 plate in exact position, height, square planter width-to-height taper, recessed square inner top rim, plump symmetrical rounded-cone outer contour, and dense two-tone deep-green and fresh-green feathery molded foliage texture without slimming the pots, pinching the waist above the pot rim, shrinking, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm medium-shot live-action Kodak Vision3 250D five-star boutique luxury hotel lobby salon: centered between both plants is a sculptural 85cm honed-travertine and brushed-brass console table (reaching ~70% of the 4ft plant height) styled with an artisan alabaster vessel, warm Venetian cream marmorino plaster wall behind featuring subtle architectural wall paneling and warm brass picture-light sconces high above, polished cream terrazzo stone floor with subtle brass inlay strips, softly blurred foreground velvet lounge chair corner bottom-right, warm afternoon skylight sunbeams slanting across the marmorino wall, clean natural daylight on both plants, realistic floor contact shadows under both matte-black square planters, zero text."
+    },
+    {
+      "key": "S27_ORANGERY_GLASSHOUSE_ARCHED_STEEL_DOORS",
+      "refs": [
+        "SQPOT3_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat BOTH potted artificial plants and their tall matte-black tapered square planters in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and planters 100% pixel-identical to the 16:9 plate in exact position, height, square planter width-to-height taper, recessed square inner top rim, plump symmetrical rounded-cone outer contour, and dense two-tone deep-green and fresh-green feathery molded foliage texture without slimming the pots, pinching the waist above the pot rim, shrinking, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 35mm-50mm live-action Kodak Vision3 250D sunlit European estate conservatory orangery entrance: centered between both plants are soaring 2.45-meter arched charcoal-steel and divided-light clear glass conservatory double doors with aged-brass cremone bolt handles positioned ~16cm below the pointed top tips of both plants (locking true 1/2-door 4ft scale), warm pale-cream limestone orangery facade piers, weathered herringbone limestone brick terrace floor, softly blurred foreground limestone garden table corner with a folded linen napkin bottom-left, warm afternoon sun rays streaming across the glass panes and stone piers, clean natural daylight on both plants, realistic terrace contact shadows under both matte-black square planters, zero text."
+    },
+    {
+      "key": "S28_BRONZED_GLASS_WINE_GALLERY_PORTAL",
+      "refs": [
+        "SQPOT3_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat BOTH potted artificial plants and their tall matte-black tapered square planters in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and planters 100% pixel-identical to the 16:9 plate in exact position, height, square planter width-to-height taper, recessed square inner top rim, plump symmetrical rounded-cone outer contour, and dense two-tone deep-green and fresh-green feathery molded foliage texture without slimming the pots, pinching the waist above the pot rim, shrinking, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm medium-shot live-action Kodak Vision3 250D luxury architectural dining salon: centered between both plants are custom bronzed-metal and clear-glass double wine-gallery doors (horizontal brushed-brass door handles positioned at 1.05m, ~18cm below the 4ft plant tops) revealing warm backlit white-oak wine display racks softly glowing inside, warm ivory plaster walls on both sides, chevron natural white-oak hardwood floor, softly blurred foreground marble dining table corner with a crystal water carafe bottom-right, warm late-afternoon window sunbeams across the chevron oak floor, clean natural daylight on both plants, realistic floor contact shadows under both matte-black square planters, zero text."
+    },
+    {
+      "key": "S29_CALIFORNIA_PERGOLA_OUTDOOR_FIREPLACE_3Q",
+      "refs": [
+        "SQPOT3_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat BOTH potted artificial plants and their tall matte-black tapered square planters in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and planters 100% pixel-identical to the 16:9 plate in exact position, height, square planter width-to-height taper, recessed square inner top rim, plump symmetrical rounded-cone outer contour, and dense two-tone deep-green and fresh-green feathery molded foliage texture without slimming the pots, pinching the waist above the pot rim, shrinking, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 35mm-50mm live-action Kodak Vision3 250D sunlit Montecito California luxury outdoor living terrace beneath a high 3.2-meter warm white-oak timber pergola: centered symmetrically between both 4ft plants is a tall smooth warm-white limewash plaster architectural outdoor fireplace chimney breast (rising past the top edge of the frame) with a firebox opening at floor hearth level and a horizontal solid white-oak mantel beam mounted at 1.18m height aligned strictly level with the pointed top tips of both plants (locking true 4ft physical scale), flanked by clean warm cream plaster courtyard walls on the left and right edges, honed sand-beige limestone patio pavers, softly blurred foreground woven outdoor coffee table corner bottom-left, striped golden afternoon pergola sunbeams slanting across the plaster chimney and stone floor, even natural daylight on both plants, realistic stone contact shadows under both matte-black square planters, zero text."
+    },
+    {
+      "key": "S30_PENTHOUSE_CHAMPAGNE_BRONZE_ELEVATOR_FOYER",
+      "refs": [
+        "SQPOT3_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat BOTH potted artificial plants and their tall matte-black tapered square planters in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and planters 100% pixel-identical to the 16:9 plate in exact position, height, square planter width-to-height taper, recessed square inner top rim, plump symmetrical rounded-cone outer contour, and dense two-tone deep-green and fresh-green feathery molded foliage texture without slimming the pots, pinching the waist above the pot rim, shrinking, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm medium-shot live-action Kodak Vision3 250D private luxury Manhattan penthouse elevator vestibule foyer: centered between both plants are brushed champagne-bronze architectural double vestibule doors framed by fluted warm natural white-oak wall paneling and honed Calacatta Viola marble surround molding (call-panel trim at 1.05m height, clearly below the 4ft plant tops), honed cream limestone slab floor, softly blurred foreground sculptural oak bench corner bottom-left, warm afternoon floor-to-ceiling window sunbeams raking diagonally across the fluted oak panels, clean natural daylight on both plants, realistic limestone contact shadows under both matte-black square planters, zero text."
+    },
+    {
+      "key": "S31_MUSIC_SALON_GRAND_PIANO_LEFT",
+      "refs": [
+        "SQPOT3_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat the potted artificial plant and its tall matte-black tapered square planter in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet edge, plump symmetrical rounded-cone contour, full foliage width, snug recessed square inner top rim, and full matte-black tapered square planter geometry 100% pixel-identical to the 16:9 plate without slimming the pot, pinching the waist above the pot rim, shrinking, narrowing, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D sunlit architectural music salon: the 4ft plant stands in the left foreground beside tall sheer ivory linen floor-to-ceiling curtains, while set back 1.4 meters in the right midground sits a sleek satin-ebony parlor grand piano (closed lid height 1.00m appearing naturally lower than the foreground 4ft plant) with a warm walnut leather piano bench on herringbone natural white-oak parquet flooring, warm cream plaster walls with classic panel molding, softly blurred foreground travertine side-table corner bottom-right, warm afternoon golden window sunbeams streaming across the oak parquet, even natural daylight on the plant, realistic floor contact shadow under the matte-black square planter, zero text."
+    },
+    {
+      "key": "S32_POOLHOUSE_CABANA_TEAK_DAYBED_HERO_RIGHT",
+      "refs": [
+        "SQPOT3_PLATE_09_SINGLE_HERO_RIGHT_76PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat the potted artificial plant and its tall matte-black tapered square planter in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet edge, plump symmetrical rounded-cone contour, full foliage width, snug recessed square inner top rim, and full matte-black tapered square planter geometry 100% pixel-identical to the 16:9 plate without slimming the pot, pinching the waist above the pot rim, shrinking, narrowing, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm Hero foreground-focus live-action Kodak Vision3 250D sunlit Mediterranean resort poolhouse cabana: the 4ft plant stands prominently on the right foreground honed-travertine deck, while set back 1.35 meters in the left midground sits a low 72cm solid-teak outdoor daybed lounge with cream linen cushions beneath a shaded cream plaster cabana colonnade, sparkling sunlit turquoise infinity pool water shimmering softly in the background optical bokeh, softly blurred foreground travertine drink plinth corner with a clear glass tumbler bottom-left, warm late-afternoon golden sun-streaks across the travertine deck tiles, clean natural daylight on the plant, crisp stone contact shadow under the matte-black square planter, zero text."
+    },
+    {
+      "key": "S33_CALIFORNIA_CURVED_OAK_BREAKFAST_NOOK_LEFT",
+      "refs": [
+        "SQPOT3_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat the potted artificial plant and its tall matte-black tapered square planter in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet edge, plump symmetrical rounded-cone contour, full foliage width, snug recessed square inner top rim, and full matte-black tapered square planter geometry 100% pixel-identical to the 16:9 plate without slimming the pot, pinching the waist above the pot rim, shrinking, narrowing, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D sunlit California organic-modern breakfast nook: next to the 4ft plant on the right curves a built-in 84cm warm fluted white-oak window banquette seat upholstered in oatmeal bouclé cushions paired with a round 75cm honed-travertine pedestal breakfast table (both clearly ~35-45cm lower than the 4ft plant top), tall casement windows behind bathed in warm morning sunlight with soft garden bokeh outside, wide-plank pale oak flooring, softly blurred foreground ceramic pitcher on a counter edge bottom-right, warm morning sunbeams across the travertine tabletop and oak floor, clean natural daylight on the plant, realistic floor contact shadow under the matte-black square planter, zero text."
+    },
+    {
+      "key": "S34_JAPANDI_HINOKI_ENGAWA_COURTYARD_RIGHT",
+      "refs": [
+        "SQPOT3_PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat the potted artificial plant and its tall matte-black tapered square planter in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet edge, plump symmetrical rounded-cone contour, full foliage width, snug recessed square inner top rim, and full matte-black tapered square planter geometry 100% pixel-identical to the 16:9 plate without slimming the pot, pinching the waist above the pot rim, shrinking, narrowing, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D serene luxury Japandi architectural courtyard engawa gallery: the 4ft plant rests on the right on wide warm hinoki-oak timber floorboards, beside open sliding shoji-inspired warm white-oak and clear-glass floor-to-ceiling doors on the left opening onto a tranquil sunlit raked white-pebble zen courtyard with mossy boulders and a low 45cm carved granite water basin in soft midground bokeh, warm clay-lime plaster wall edge on the far right, softly blurred foreground low hinoki tea-table corner with a stoneware teacup bottom-left, warm slanting morning sunbeams across the timber deck, clean natural daylight on the plant, realistic wood-floor contact shadow under the matte-black square planter, zero text."
+    },
+    {
+      "key": "S35_SOARING_OAK_BEAM_DINING_SALON_WIDE_36PCT",
+      "refs": [
+        "SQPOT3_PLATE_07_SINGLE_WIDE_RIGHT_36PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat the potted artificial plant and its tall matte-black tapered square planter in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet edge, plump symmetrical rounded-cone contour, full foliage width, snug recessed square inner top rim, and full matte-black tapered square planter geometry 100% pixel-identical to the 16:9 plate without slimming the pot, pinching the waist above the pot rim, shrinking, narrowing, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 35mm wide architectural live-action Kodak Vision3 250D soaring 3.3-meter high-ceilinged modern European dining and living salon: the 4ft plant stands naturally on the right beside an 85cm long fluted natural white-oak sideboard credenza (credenza reaching ~70% of the 4ft plant height to lock exact real-world proportions), while on the left sits a sculptural 2.6-meter solid white-oak dining table surrounded by low wishbone oak chairs beneath exposed warm oak ceiling beams and tall arched steel-framed windows, wide-plank European oak flooring, softly blurred foreground linen sofa backrest edge bottom-left, dramatic morning golden sunbeams slanting across the entire room, clean natural daylight on the plant, realistic floor contact shadow under the matte-black square planter, zero text."
+    },
+    {
+      "key": "S36_COGNAC_LEATHER_LOUNGE_LIBRARY_LEFT",
+      "refs": [
+        "SQPOT3_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat the potted artificial plant and its tall matte-black tapered square planter in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet edge, plump symmetrical rounded-cone contour, full foliage width, snug recessed square inner top rim, and full matte-black tapered square planter geometry 100% pixel-identical to the 16:9 plate without slimming the pot, pinching the waist above the pot rim, shrinking, narrowing, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D sunlit architectural collector lounge and library: on the right beside the 4ft plant sits a low 76cm mid-century cognac saddle-leather and walnut lounge armchair with a small brushed-brass drink table (armchair back reaching ~62% of the 4ft plant height), warm limewash plaster wall and custom natural white-oak display shelving styled with art books and ceramic sculptures behind, herringbone oak parquet floor, softly blurred foreground walnut coffee-table corner with a hardcover art book bottom-right, warm late-afternoon diagonal sunbeams across the limewash wall and leather chair, clean natural daylight on the plant, realistic floor contact shadow under the matte-black square planter, zero text."
+    },
+    {
+      "key": "S37_BOUTIQUE_DRESSING_SUITE_BRASS_MIRROR_RIGHT",
+      "refs": [
+        "SQPOT3_PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat the potted artificial plant and its tall matte-black tapered square planter in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet edge, plump symmetrical rounded-cone contour, full foliage width, snug recessed square inner top rim, and full matte-black tapered square planter geometry 100% pixel-identical to the 16:9 plate without slimming the pot, pinching the waist above the pot rim, shrinking, narrowing, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D sunlit luxury master dressing suite boutique: the 4ft plant stands on the right beside bespoke floor-to-ceiling fluted warm-oak wardrobe cabinetry with slim brushed-brass pulls, while on the left sits a low 46cm cream bouclé dressing ottoman bench in front of a tall arched brushed-brass leaner mirror reflecting soft sunlit sheer-curtained windows, warm ivory wool-silk rug border and wide-plank pale oak floor, softly blurred foreground travertine vanity corner bottom-left, warm morning golden sunlight streaming across the oak floor and bouclé bench, clean natural daylight on the plant, realistic floor contact shadow under the matte-black square planter, zero text."
+    },
+    {
+      "key": "S38_PROVENCE_LIMESTONE_GARDEN_LOGGIA_WIDE_LEFT",
+      "refs": [
+        "SQPOT3_PLATE_06_SINGLE_WIDE_55PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat the potted artificial plant and its tall matte-black tapered square planter in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet edge, plump symmetrical rounded-cone contour, full foliage width, snug recessed square inner top rim, and full matte-black tapered square planter geometry 100% pixel-identical to the 16:9 plate without slimming the pot, pinching the waist above the pot rim, shrinking, narrowing, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 35mm-50mm medium-wide live-action Kodak Vision3 250D sunlit Provence French limestone garden loggia: the 4ft plant stands on the left on weathered tumbled-limestone pavers beside a carved 48cm antique cream-limestone garden bench and a tall arched limestone loggia colonnade opening onto a sunlit lavender-and-olive courtyard garden in soft optical bokeh on the right, warm honey-cream stone masonry walls, softly blurred foreground wrought-iron bistro table rim with a ceramic cup bottom-right, warm golden-hour afternoon sunbeams slanting through the stone arches across the limestone floor, clean natural daylight on the plant, realistic stone contact shadow under the matte-black square planter, zero text."
+    },
+    {
+      "key": "S39_MODERN_LAKEHOUSE_DECK_LIVING_WIDE_RIGHT",
+      "refs": [
+        "SQPOT3_PLATE_08_SINGLE_COASTAL_RIGHT_56PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat the potted artificial plant and its tall matte-black tapered square planter in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet edge, plump symmetrical rounded-cone contour, full foliage width, snug recessed square inner top rim, and full matte-black tapered square planter geometry 100% pixel-identical to the 16:9 plate without slimming the pot, pinching the waist above the pot rim, shrinking, narrowing, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 35mm-50mm medium-wide Goldilocks live-action Kodak Vision3 250D sunlit modern architectural lakehouse living room: the 4ft plant stands on the right beside retracted floor-to-ceiling black-aluminum glass sliding doors opening onto a warm white-oak timber sun deck and shimmering sunlit blue mountain-lake water view, while on the left sits a low 75cm oatmeal-linen modular sectional sofa and travertine slab coffee table beneath a warm white-oak plank ceiling, wide-plank oak floor, softly blurred foreground oak side-table edge bottom-left, warm late-afternoon golden sunbeams stretching across the living room floor, clean natural daylight on the plant, realistic floor contact shadow under the matte-black square planter, zero text."
+    },
+    {
+      "key": "S40_SCULPTURAL_PLASTER_HELICAL_STAIR_ATRIUM_RIGHT",
+      "refs": [
+        "SQPOT3_PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9.jpg",
+        "SQPOT3_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone green fine feathery flat-fan molded leaf sprigs, snug recessed square inner top rim, and tall matte-black tapered square planter detail): treat the potted artificial plant and its tall matte-black tapered square planter in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet edge, plump symmetrical rounded-cone contour, full foliage width, snug recessed square inner top rim, and full matte-black tapered square planter geometry 100% pixel-identical to the 16:9 plate without slimming the pot, pinching the waist above the pot rim, shrinking, narrowing, clumping, or redrawing any leaf or planter pixels. Outpaint ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D sunlit double-height architectural residence atrium: the 4ft plant stands on the right at the base of a sweeping sculptural curved warm-white Venetian-plaster helical staircase with solid natural white-oak treads rising gracefully up to the left, honed cream travertine slab atrium flooring, softly blurred foreground low oak gallery bench corner bottom-left, dramatic afternoon skylight sunbeams casting curved architectural light ribbons across the smooth plaster stair balustrade, clean natural daylight on the plant, realistic stone contact shadow under the matte-black square planter, zero text."
+    }
+  ],
+  "videos": [
+    {
+      "key": "V21_GEORGIAN_EBONY_DOOR_4S",
+      "scene_key": "S21_GEORGIAN_EBONY_DOOR_LIMESTONE_PILASTERS",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward camera push-in toward the sunlit Georgian satin-ebony double front door, so the softly blurred foreground wrought-iron stair handrail sweeps outward past the bottom-left frame edge in rich 3D optical parallax against the fluted limestone pilasters. Warm late-afternoon golden sunbeams and subtle floating dust motes shimmer gently in the porch air while preserving the exact solid shape, tall matte-black tapered square planter geometry, recessed square top rim, and dense two-tone green feathery molded foliage of both plants. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V22_TUSCAN_TRAVERTINE_GATE_4S",
+      "scene_key": "S22_TUSCAN_TRAVERTINE_GARDEN_GATE_3Q",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward diagonal camera push-in along the sunlit Tuscan travertine courtyard steps, so the softly blurred foreground terracotta balustrade ledge glides outward past the bottom-left frame edge in strong 3D optical parallax between the nearer left plant and farther right plant. Distant sunlit olive leaves beyond the wrought-iron glass gate rustle very softly in the warm golden breeze while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of both plants. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V23_BRONZE_PIVOT_ENTRY_4S",
+      "scene_key": "S23_ARCHITECTURAL_BRONZE_PIVOT_ENTRY",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle forward camera push-in toward the sunlit dark-bronze and fluted ribbed-glass pivot front door at a low level-horizon framing that keeps the honed basalt entry floor slabs and the entire tall matte-black tapered square planters from top rim to bottom floor base completely visible inside the frame, while the softly blurred foreground travertine bench corner on the bottom-right sweeps outward past the bottom-right frame edge in crisp 3D optical parallax. Warm raking afternoon sunbeams gleam naturally across the travertine concrete wall and champagne-brass pull bar while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of both plants. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V24_FLUTED_TRAVERTINE_HEARTH_4S",
+      "scene_key": "S24_FLUTED_TRAVERTINE_HEARTH_LOUNGE",
+      "prompt": "Continuous, clearly visible 4-second 50mm lateral camera truck-right across the sunlit modern architectural living room, gliding decisively rightward across the room so the softly blurred foreground oatmeal linen ottoman and ceramic tray on the bottom-left sweep strongly leftward toward the left frame edge in vivid 3D optical parallax against the fluted Roman travertine fireplace behind, keeping both potted plants and their tall matte-black tapered square planters in full head-to-toe view on the pale white-oak parquet floor. Clean natural afternoon window sunlight illuminates the minimalist plaster wall and oak floor grain while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of both plants. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V25_LAKESIDE_VERANDAH_3Q_4S",
+      "scene_key": "S25_LAKESIDE_LIMESTONE_BALUSTRADE_VERANDAH_3Q",
+      "prompt": "Continuous, clearly visible 4-second 50mm lateral camera truck-right along the sunlit lakeside limestone verandah, gliding smoothly rightward past the foreground deck chair so the softly blurred teak chair armrest on the bottom-left sweeps leftward out of the left frame edge in deep 3D optical parallax without crossing in front of the left planter, leaving BOTH staggered potted plants and their entire tall matte-black tapered square planters completely unobstructed head-to-toe on the limestone pavers. Sparkling turquoise alpine lake water shimmers gently with sunlit ripples beyond the carved stone balustrade while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of both plants. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V26_BOUTIQUE_HOTEL_LOBBY_4S",
+      "scene_key": "S26_BOUTIQUE_HOTEL_MARMORINO_LOBBY_CONSOLE",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward diagonal camera push-in across the sunlit boutique hotel lobby toward the travertine-and-brass console table, so the softly blurred foreground velvet lounge chair corner glides outward past the bottom-right frame edge in rich 3D optical parallax. Subtle golden skylight dust motes drift gently across the warm Venetian marmorino plaster wall while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of both plants. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V27_ORANGERY_ARCHED_DOORS_4S",
+      "scene_key": "S27_ORANGERY_GLASSHOUSE_ARCHED_STEEL_DOORS",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward camera push-in toward the arched charcoal-steel glass conservatory double doors, so the softly blurred foreground limestone garden table corner and linen napkin sweep outward past the bottom-left frame edge in crisp 3D optical parallax. Warm afternoon sunbeams and subtle sunlit reflections shimmer softly across the conservatory glass panes while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of both plants. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V28_WINE_GALLERY_PORTAL_4S",
+      "scene_key": "S28_BRONZED_GLASS_WINE_GALLERY_PORTAL",
+      "prompt": "Continuous, clearly visible 4-second 50mm lateral camera truck-left with gentle forward push across the sunlit chevron-oak dining salon, so the softly blurred foreground marble dining table corner and crystal water carafe sweep across the bottom-right foreground in rich 3D optical parallax against the bronzed-glass wine gallery doors. Warm afternoon window light glints subtly across the crystal carafe and brass handles while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of both plants. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V29_PERGOLA_OUTDOOR_FIREPLACE_4S",
+      "scene_key": "S29_CALIFORNIA_PERGOLA_OUTDOOR_FIREPLACE_3Q",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward camera push-in across the sunlit Montecito California pergola terrace toward the warm-white limewash outdoor fireplace, so the softly blurred foreground woven coffee table corner sweeps outward past the bottom-left frame edge in rich 3D optical parallax against the limestone patio pavers. Warm striped golden pergola sunbeams and subtle floating outdoor dust motes shimmer softly in the afternoon air while preserving the exact solid shape, tall matte-black tapered square planter geometry, recessed square top rim, and dense two-tone green feathery molded foliage of both plants. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V30_PENTHOUSE_ELEVATOR_FOYER_4S",
+      "scene_key": "S30_PENTHOUSE_CHAMPAGNE_BRONZE_ELEVATOR_FOYER",
+      "prompt": "Continuous, clearly visible 4-second 50mm lateral camera truck-right across the sunlit Manhattan penthouse elevator foyer, gliding smoothly rightward at constant distance from the elevator wall so the softly blurred foreground sculptural oak bench corner on the bottom-left sweeps leftward out of frame in crisp 3D optical parallax while keeping BOTH potted plants, their entire tall matte-black tapered square planters from top rim to bottom base, and their limestone floor contact shadows completely visible head-to-toe flanking the champagne-bronze elevator doors. Warm afternoon window light gleams subtly across the brushed bronze doors and fluted white-oak panels while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of ONLY these two plants. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V31_MUSIC_SALON_GRAND_PIANO_4S",
+      "scene_key": "S31_MUSIC_SALON_GRAND_PIANO_LEFT",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward diagonal camera push-in across the sunlit music salon, so the softly blurred foreground travertine side-table corner sweeps outward past the bottom-right frame edge while the left foreground plant separates in deep 3D optical parallax from the setback parlor grand piano behind. Tall sheer ivory linen curtains breathe very softly in the warm afternoon window breeze and golden dust motes drift in the sunbeams while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V32_POOLHOUSE_CABANA_HERO_4S",
+      "scene_key": "S32_POOLHOUSE_CABANA_TEAK_DAYBED_HERO_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward camera push-in across the sunlit travertine poolhouse cabana, so the softly blurred foreground travertine drink plinth and glass tumbler glide outward past the bottom-left frame edge while the right foreground plant separates in rich 3D optical parallax from the setback teak daybed. Sparkling turquoise infinity-pool water shimmers with gentle sunlit ripples in the background bokeh while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V33_CURVED_OAK_BREAKFAST_NOOK_4S",
+      "scene_key": "S33_CALIFORNIA_CURVED_OAK_BREAKFAST_NOOK_LEFT",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward diagonal camera push-in toward the sunlit California curved white-oak breakfast nook, so the softly blurred foreground ceramic pitcher and counter edge sweep outward past the bottom-right frame edge in smooth 3D optical parallax against the travertine pedestal table and left plant. Soft morning garden light and subtle dust motes shimmer gently through the casement windows while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V34_JAPANDI_HINOKI_ENGAWA_4S",
+      "scene_key": "S34_JAPANDI_HINOKI_ENGAWA_COURTYARD_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward diagonal camera push-in along the sunlit Japandi hinoki-oak engawa gallery, so the softly blurred foreground low hinoki tea-table corner and stoneware teacup glide outward past the bottom-left frame edge in tranquil 3D optical parallax toward the right plant and zen pebble courtyard. Soft morning sunbeams and gentle water surface reflections in the courtyard granite basin shimmer subtly while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V35_SOARING_DINING_SALON_WIDE_4S",
+      "scene_key": "S35_SOARING_OAK_BEAM_DINING_SALON_WIDE_36PCT",
+      "prompt": "Continuous, clearly visible 4-second 35mm forward camera push-in across the soaring oak-beamed European dining and living salon, so the softly blurred foreground linen sofa backrest sweeps outward past the bottom-left frame edge in expansive 3D optical parallax toward the oak dining table, fluted sideboard, and right plant. Golden morning sunbeams stream through the tall arched steel windows with subtle floating dust motes while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V36_COGNAC_LEATHER_LIBRARY_4S",
+      "scene_key": "S36_COGNAC_LEATHER_LOUNGE_LIBRARY_LEFT",
+      "prompt": "Continuous, clearly visible 4-second 50mm lateral camera truck-left with gentle forward push across the sunlit collector lounge library, so the softly blurred foreground walnut coffee-table corner and hardcover art book glide across the bottom-right foreground in rich 3D optical parallax past the cognac leather armchair and left plant. Subtle golden dust motes drift gently in the late-afternoon sunbeams across the limewash wall while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V37_BOUTIQUE_DRESSING_SUITE_4S",
+      "scene_key": "S37_BOUTIQUE_DRESSING_SUITE_BRASS_MIRROR_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward diagonal camera push-in across the sunlit luxury dressing suite, so the softly blurred foreground travertine vanity corner sweeps outward past the bottom-left frame edge in refined 3D optical parallax toward the bouclé ottoman, arched brass mirror, and right plant. Reflected sheer window curtains breathe very softly in the warm morning sunlight while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V38_PROVENCE_GARDEN_LOGGIA_4S",
+      "scene_key": "S38_PROVENCE_LIMESTONE_GARDEN_LOGGIA_WIDE_LEFT",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward diagonal camera push-in through the sunlit Provence limestone garden loggia, so the softly blurred foreground wrought-iron bistro table rim and ceramic cup sweep outward past the bottom-right frame edge in warm 3D optical parallax toward the carved stone bench and left plant. Sunlit courtyard olive and lavender bokeh sways very gently in the golden-hour breeze beyond the stone arches while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V39_MODERN_LAKEHOUSE_LIVING_4S",
+      "scene_key": "S39_MODERN_LAKEHOUSE_DECK_LIVING_WIDE_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 50mm lateral camera truck-right across the sunlit modern lakehouse living room, gliding smoothly rightward so the foreground oak side-table corner on the bottom-left sweeps leftward out of frame in rich 3D optical parallax while bringing the entire right-side potted plant and its tall matte-black tapered square planter closer toward the right-center of the 16:9 frame in full head-to-toe view. Sunlit blue mountain-lake water shimmers softly with gentle ripples outside on the horizon while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of the plant. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "V40_SCULPTURAL_HELICAL_STAIR_4S",
+      "scene_key": "S40_SCULPTURAL_PLASTER_HELICAL_STAIR_ATRIUM_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 50mm forward diagonal camera push-in across the sunlit double-height atrium toward the curved Venetian-plaster helical staircase, so the softly blurred foreground oak gallery bench corner sweeps outward past the bottom-left frame edge in dramatic architectural 3D optical parallax toward the right plant. Subtle golden skylight dust motes drift gently through the curved sunbeam ribbons across the smooth plaster balustrade while preserving the exact solid shape, tall matte-black tapered square planter geometry, and dense two-tone green feathery molded foliage of the plant. No people, no camera equipment, zero morphing, zero text."
+    }
+  ],
+  "video_card_indices": [
+    {
+      "card_index": 19,
+      "slug": "01_V21_GEORGIAN_EBONY_DOOR_4S"
+    },
+    {
+      "card_index": 2,
+      "slug": "02_V22_TUSCAN_TRAVERTINE_GATE_4S"
+    },
+    {
+      "card_index": 0,
+      "slug": "03_V23_BRONZE_PIVOT_ENTRY_4S"
+    },
+    {
+      "card_index": 5,
+      "slug": "04_V24_FLUTED_TRAVERTINE_HEARTH_4S"
+    },
+    {
+      "card_index": 1,
+      "slug": "05_V25_LAKESIDE_VERANDAH_3Q_4S"
+    },
+    {
+      "card_index": 18,
+      "slug": "06_V26_BOUTIQUE_HOTEL_LOBBY_4S"
+    },
+    {
+      "card_index": 17,
+      "slug": "07_V27_ORANGERY_ARCHED_DOORS_4S"
+    },
+    {
+      "card_index": 16,
+      "slug": "08_V28_WINE_GALLERY_PORTAL_4S"
+    },
+    {
+      "card_index": 15,
+      "slug": "09_V29_PERGOLA_OUTDOOR_FIREPLACE_4S"
+    },
+    {
+      "card_index": 4,
+      "slug": "10_V30_PENTHOUSE_ELEVATOR_FOYER_4S"
+    },
+    {
+      "card_index": 14,
+      "slug": "11_V31_MUSIC_SALON_GRAND_PIANO_4S"
+    },
+    {
+      "card_index": 13,
+      "slug": "12_V32_POOLHOUSE_CABANA_HERO_4S"
+    },
+    {
+      "card_index": 12,
+      "slug": "13_V33_CURVED_OAK_BREAKFAST_NOOK_4S"
+    },
+    {
+      "card_index": 11,
+      "slug": "14_V34_JAPANDI_HINOKI_ENGAWA_4S"
+    },
+    {
+      "card_index": 10,
+      "slug": "15_V35_SOARING_DINING_SALON_WIDE_4S"
+    },
+    {
+      "card_index": 9,
+      "slug": "16_V36_COGNAC_LEATHER_LIBRARY_4S"
+    },
+    {
+      "card_index": 8,
+      "slug": "17_V37_BOUTIQUE_DRESSING_SUITE_4S"
+    },
+    {
+      "card_index": 7,
+      "slug": "18_V38_PROVENCE_GARDEN_LOGGIA_4S"
+    },
+    {
+      "card_index": 3,
+      "slug": "19_V39_MODERN_LAKEHOUSE_LIVING_4S"
+    },
+    {
+      "card_index": 6,
+      "slug": "20_V40_SCULPTURAL_HELICAL_STAIR_4S"
+    }
+  ]
+}
