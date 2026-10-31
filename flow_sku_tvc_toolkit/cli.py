@@ -51,23 +51,24 @@ def _build_starter_config(slug: str, prefix: str, preset_name: str, project_id: 
             "even clean natural daylight preserving every cotton crochet stitch, soft realistic yarn contact shadow on the oak surface, zero text."
         )
         sample_video_prompt = (
-            "Continuous, clearly visible 4-second 85mm lateral camera truck-right across the sunlit solid white-oak table, "
-            "so the softly blurred foreground linen napkin corner sweeps visibly leftward past the frame edge in rich 3D optical parallax "
-            "against the ceramic mug and handmade crochet piece. Subtle morning dust motes drift gently in the warm window light "
+            "Continuous, clearly visible 4-second 85mm gentle forward diagonal camera push-in across the sunlit solid white-oak table "
+            "with natural 3D optical depth perspective while all tabletop objects, the ceramic mug, linen napkin, and handmade crochet piece "
+            "remain 100% stationary anchored on the oak surface. Warm morning window sunbeams softly illuminate the wood grain "
             "while preserving the exact solid shape, crisp interlocking milk-cotton crochet yarn stitches, and true colors of the crochet item. "
             "No people, no camera equipment, zero morphing, zero text."
         )
     else:
         sample_scene_tail = (
-            "a 50mm live-action Kodak Vision3 250D sunlit architectural interior scene with natural scale-locking furniture, "
-            "softly blurred foreground table corner bottom-left for 3D depth, warm afternoon diagonal window sunbeams on the plaster wall behind, "
+            "a 50mm live-action Kodak Vision3 250D sunlit architectural interior scene with natural scale-locking furniture "
+            "set on the same floor plane, warm afternoon diagonal window sunbeams on the plaster wall behind, "
             "even clean natural daylight around the product, realistic floor contact shadow underneath the base, zero text."
         )
         sample_video_prompt = (
-            "Continuous, clearly visible 4-second 50mm forward camera push-in across the sunlit room, "
-            "so the softly blurred foreground table corner sweeps outward past the bottom-left frame edge in rich 3D optical parallax. "
-            "Subtle golden dust motes drift gently in the afternoon sunbeams while preserving the exact solid shape, proportions, "
-            "and surface texture of the product. No people, no camera equipment, zero morphing, zero text."
+            "Continuous, clearly visible 4-second 50mm gentle forward camera push-in across the sunlit room "
+            "with natural 3D architectural perspective while all furniture, architectural elements, and the product "
+            "remain 100% stationary anchored to the floor. Warm afternoon window sunbeams illuminate the subtle plaster wall texture "
+            "while preserving the exact solid shape, proportions, and surface texture of the product. "
+            "No people, no camera equipment, zero morphing, zero text."
         )
 
     return {
@@ -281,6 +282,50 @@ def cmd_download_1080p(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_audit_videos(args: argparse.Namespace) -> int:
+    from .flow_cdp import (
+        audit_videos_2zone_in_browser,
+        resolve_video_card_indices_by_start_frame,
+    )
+
+    cfg, proj_dir = _load_config(args.config)
+    videos = cfg.get("videos", [])
+    if not videos:
+        raise ValueError("No videos defined in SKU config.")
+
+    custom_map = cfg.get("video_card_indices")
+    uuid_path = os.path.join(proj_dir, f"{cfg['slug']}_scene_uuids.json")
+    if custom_map:
+        pairs = [(int(item["card_index"]), str(item["slug"])) for item in custom_map]
+    elif os.path.isfile(uuid_path) or all((v.get("uuid") or "").strip() for v in videos):
+        pairs = asyncio.run(
+            resolve_video_card_indices_by_start_frame(
+                config=cfg,
+                project_dir=proj_dir,
+                port=args.port,
+            )
+        )
+    else:
+        n = len(videos)
+        pairs = [((n - 1) - i, f"{i + 1:02d}_{v['key']}") for i, v in enumerate(videos)]
+
+    out_json = args.out_json or os.path.join(proj_dir, "qa", "video_2zone_audit.json")
+    results = asyncio.run(
+        audit_videos_2zone_in_browser(
+            project_id=cfg["project_id"],
+            card_index_to_slug=pairs,
+            out_json_path=out_json,
+            port=args.port,
+        )
+    )
+    failed = [r for r in results if not r.get("ok")]
+    if failed:
+        print(f"AUDIT FAILED on {len(failed)}/{len(results)} video(s). Saved report -> {out_json}", file=sys.stderr)
+        return 1
+    print(f"AUDIT PASSED on all {len(results)} video(s). Saved report -> {out_json}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="python3 -m flow_sku_tvc_toolkit",
@@ -355,6 +400,12 @@ def build_parser() -> argparse.ArgumentParser:
     sp_dl.add_argument("--master-name", default="", help="Merged master MP4 filename")
     sp_dl.add_argument("--port", type=int, default=None)
     sp_dl.set_defaults(func=cmd_download_1080p)
+
+    sp_aud = sub.add_parser("audit-videos", help="In-browser 2-Zone HTML5 <video> scrub QA (0 .mp4 downloads; catches frozen camera & sliding props)")
+    sp_aud.add_argument("--config", required=True)
+    sp_aud.add_argument("--out-json", default="", help="Optional output JSON report path (defaults to qa/video_2zone_audit.json)")
+    sp_aud.add_argument("--port", type=int, default=None)
+    sp_aud.set_defaults(func=cmd_audit_videos)
 
     return p
 

@@ -35,17 +35,17 @@
     {
       "key": "VC01_OAK_COFFEE_TABLE_MORNING_MUG_4S",
       "scene_key": "C01_OAK_COFFEE_TABLE_MORNING_MUG",
-      "prompt": "Continuous, clearly visible 4-second 85mm lateral camera truck-left across the sunlit solid white-oak coffee table, so the softly blurred beige linen book corner in the bottom-right foreground sweeps visibly rightward across the frame in rich 3D optical parallax against the stoneware latte cup and handmade crochet potted flower. Subtle warm steam rises gently from the distant latte cup while preserving the exact solid shape, crisp interlocking milk-cotton crochet yarn stitches, and true colors of the crochet flower pot. No people, no camera equipment, zero morphing, zero text."
+      "prompt": "Continuous, clearly visible 4-second 85mm lateral camera truck-left across the sunlit solid white-oak coffee table in rich 3D optical parallax while the stoneware latte cup, linen book, and handmade crochet potted flower remain 100% stationary anchored on the oak tabletop. Subtle warm steam rises gently from the distant latte cup while preserving the exact solid shape, crisp interlocking milk-cotton crochet yarn stitches, and true colors of the crochet flower pot. No people, no camera equipment, zero morphing, zero text."
     },
     {
       "key": "VC02_WALNUT_STUDY_DESK_WINDOW_LEDGE_4S",
       "scene_key": "C02_WALNUT_STUDY_DESK_WINDOW_LEDGE",
-      "prompt": "Continuous, clearly visible 4-second 85mm forward camera push-in across the warm walnut study desk, so the softly defocused ceramic pen holder in the bottom-left foreground glides outward past the frame edge in rich 3D optical parallax. Sunlit garden leaves outside the background window sway gently in the breeze while preserving the exact solid shape, crisp interlocking milk-cotton crochet yarn stitches, and true colors of the crochet flower pot. No people, no camera equipment, zero morphing, zero text."
+      "prompt": "Continuous, clearly visible 4-second 85mm forward camera push-in across the warm walnut study desk in rich 3D optical parallax while the ceramic pen holder, notebooks, and handmade crochet potted flower remain 100% stationary anchored on the desk surface. Sunlit garden leaves outside the background window sway gently in the breeze while preserving the exact solid shape, crisp interlocking milk-cotton crochet yarn stitches, and true colors of the crochet flower pot. No people, no camera equipment, zero morphing, zero text."
     },
     {
       "key": "VC03_TRAVERTINE_CONSOLE_PAIR_SYMMETRIC_4S",
       "scene_key": "C03_TRAVERTINE_CONSOLE_PAIR_SYMMETRIC",
-      "prompt": "Continuous, clearly visible 4-second 50mm lateral camera truck-right along the honey-oak entryway console shelf, so the softly blurred olive sprig in the bottom-left foreground sweeps visibly leftward past the lens in crisp 3D parallax against both handmade crochet flower pots and the travertine tray. Subtle golden dust motes float gently in the diagonal afternoon sunbeams while preserving the exact solid shape, crisp interlocking milk-cotton crochet yarn stitches, and true colors of both crochet items. No people, no camera equipment, zero morphing, zero text."
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle forward diagonal camera push-in along the honey-oak entryway console shelf in crisp 3D optical parallax while both handmade crochet flower pots and the travertine tray remain 100% stationary anchored on the oak shelf. Warm diagonal afternoon window sunbeams illuminate the clay-plaster wall texture behind while preserving the exact solid shape, crisp interlocking milk-cotton crochet yarn stitches, and true colors of both crochet items. No people, no camera equipment, zero morphing, zero text."
     }
   ]
 }

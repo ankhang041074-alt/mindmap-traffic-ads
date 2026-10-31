@@ -7,12 +7,13 @@ Repository này đóng gói trọn bộ **công cụ tự động hóa (`flow_sk
 ## 1. Bản Đồ Điều Hướng Nhanh (Đọc Đúng File Cần Tìm Trong 10 Giây)
 
 ### A. Sổ Tay & Quy Trình Cốt Lõi (Đọc Đầu Tiên Khi Làm Sản Phẩm Mới)
-1. **[`PLAYBOOK_CAY_4FT_SANG_CROCHET_VA_FLOW_SOP.md`](./PLAYBOOK_CAY_4FT_SANG_CROCHET_VA_FLOW_SOP.md)** — **Sổ tay thực chiến quan trọng nhất**:
-   - Đúc kết 5 bài học xương máu từ 2 SKU Cây `4ft` (`B15`, `B16`, `B19`, `B20`, `VB02`).
+1. **[`PLAYBOOK_RIENG_SAN_PHAM_CAY_4FT_TVC.md`](./PLAYBOOK_RIENG_SAN_PHAM_CAY_4FT_TVC.md)** — **Sổ tay đạo diễn & lưu ý dành riêng cho dòng Sản Phẩm Cây đặt sàn (`4ft` / `tree_4ft`)**:
+   - Đúc kết trọn bộ quy tắc từ 3 lô cây (`60 ảnh + 60 video 4s`): ngưỡng sàn tối thiểu `50%` (cấm mức `36%` làm cây teo nhỏ), đặt tủ/kệ neo tỷ lệ cùng mặt phẳng sàn, đặt xéo `3/4` nâng đáy `20.5%` bám đường chân tường, khác biệt giữa chậu vuông & chậu tròn, cấm đôn/ghế che đáy chậu, cấm hạt cát vàng ảo và cấm gán động từ làm ghế tiền cảnh tự chạy.
+2. **[`PLAYBOOK_CAY_4FT_SANG_CROCHET_VA_FLOW_SOP.md`](./PLAYBOOK_CAY_4FT_SANG_CROCHET_VA_FLOW_SOP.md)** — **Sổ tay chuyển đổi sang sản phẩm mới (`Crochet`, đồ để bàn, phụ kiện)**:
    - Hướng dẫn chi tiết **5 điểm phải đổi khi áp dụng quy trình tách nền trắng -> Plate `2K` sang đồ `Crochet` (`8cm–45cm`)** và các sản phẩm đặt bàn/kệ.
    - SOP thao tác ngầm Google Flow từng bước từ ảnh gốc đến xuất gộp `1080p`.
-2. **[`MASTER_LOGIC_GOOGLE_FLOW_EXACT_SKU_TVC_TOOL.md`](./MASTER_LOGIC_GOOGLE_FLOW_EXACT_SKU_TVC_TOOL.md)** — Kiến trúc kỹ thuật chuyên sâu 4 tầng của hệ thống (Sơ đồ luồng, Ma trận tỷ lệ vật lý, Thuật toán chống trôi cuộn ảo `CDK Virtual Scroll`, Tương thích kép URL `/asb/` & `flow-content`, tự tắt nút `'Tác nhân'`).
-3. **[`HUONG_DAN_LAM_TIEP_KHI_VE_NHA.md`](./HUONG_DAN_LAM_TIEP_KHI_VE_NHA.md)** — Quy tắc chống văng phiên đăng nhập Google Flow trên AdsPower khi chuyển đổi giữa máy Công ty <-> máy Nhà (`home_helper.py`).
+3. **[`MASTER_LOGIC_GOOGLE_FLOW_EXACT_SKU_TVC_TOOL.md`](./MASTER_LOGIC_GOOGLE_FLOW_EXACT_SKU_TVC_TOOL.md)** — Kiến trúc kỹ thuật chuyên sâu 4 tầng của hệ thống (Sơ đồ luồng, Ma trận tỷ lệ vật lý, Kiểm duyệt đọc lướt video 2 vùng trên trình duyệt không cần tải `.mp4`, Thuật toán chống trôi cuộn ảo `CDK Virtual Scroll`, tự tắt nút `'Tác nhân'`).
+4. **[`HUONG_DAN_LAM_TIEP_KHI_VE_NHA.md`](./HUONG_DAN_LAM_TIEP_KHI_VE_NHA.md)** — Quy tắc chống văng phiên đăng nhập Google Flow trên AdsPower khi chuyển đổi giữa máy Công ty <-> máy Nhà (`home_helper.py`).
 
 ---
 
@@ -27,11 +28,13 @@ Repository này đóng gói trọn bộ **công cụ tự động hóa (`flow_sk
 ---
 
 ### C. Hồ Sơ Lưu Trữ Các Dự Án Sản Phẩm Đã Triển Khai
-1. **[`barrel_cedar_20/`](./barrel_cedar_20)** — **SKU Cây #2: Cây Cedar `4ft+` Chậu Thùng Gỗ 3 Đai Sắt Đen (`ATF-9422`)**
+1. **[`products/cedar_sqpot_batch3_20/`](./products/cedar_sqpot_batch3_20)** — **Lô 3 Cây `4ft` Chậu Vuông Đen Cao Vát Đáy (`S21..S40` / `V21..V40`)**
+   - 20 kịch bản ảnh kiến trúc mới & 20 video `4s` lưu gọn qua [`sku_project.json`](./products/cedar_sqpot_batch3_20/sku_project.json) và [`cedar_sqpot_batch3_20_scene_uuids.json`](./products/cedar_sqpot_batch3_20/cedar_sqpot_batch3_20_scene_uuids.json).
+2. **[`barrel_cedar_20/`](./barrel_cedar_20)** — **SKU Cây #2: Cây Cedar `4ft+` Chậu Thùng Gỗ 3 Đai Sắt Đen (`ATF-9422`)**
    - 20 kịch bản ảnh `16:9` (`B01..B20`), bảng ánh xạ [`barrel20_scene_uuids.json`](./barrel_cedar_20/barrel20_scene_uuids.json), 20 kịch bản video `4s` (`VB01..VB20`) và script tải/ghép `1080p` [`download_and_merge_atf_9422_1080p.py`](./barrel_cedar_20/download_and_merge_atf_9422_1080p.py).
-2. **[`cedar_4ft_10s/`](./cedar_4ft_10s)** — **SKU Cây #1: Cây Cedar `4ft` Chậu Vuông Đen Cao Vát Đáy**
+3. **[`cedar_4ft_10s/`](./cedar_4ft_10s)** — **SKU Cây #1: Cây Cedar `4ft` Chậu Vuông Đen Cao Vát Đáy**
    - 20 kịch bản ảnh & video (`S01..S20` / `V01..V20`) và ghi chú dự án [`NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md`](./cedar_4ft_10s/NOTE_CEDAR_4FT_LOGIC_VA_LAM_TIEP_O_NHA.md).
-3. **[`flow_web_intro/`](./flow_web_intro)** — **Dự Án Crochet Đế Lót Ly Hoa Bật Mở 3D (`2-Frame Reverse Surgical Start -> End`)** & lõi kết nối CDP [`gen_batch_images.py`](./flow_web_intro/gen_batch_images.py), [`home_helper.py`](./flow_web_intro/home_helper.py).
+4. **[`flow_web_intro/`](./flow_web_intro)** — **Dự Án Crochet Đế Lót Ly Hoa Bật Mở 3D (`2-Frame Reverse Surgical Start -> End`)** & lõi kết nối CDP [`gen_batch_images.py`](./flow_web_intro/gen_batch_images.py), [`home_helper.py`](./flow_web_intro/home_helper.py).
 
 ---
 

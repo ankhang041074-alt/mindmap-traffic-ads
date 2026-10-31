@@ -57,10 +57,10 @@ flowchart TD
 | :--- | :--- | :---: | :--- | :--- |
 | `PLATE_01_PAIR_DOOR` | 2 cây đối xứng trái/phải | **`45% – 52%`** | `35mm–50mm` Cửa chính mặt tiền, Lò sưởi phòng trần cao `3.3m` | Ngọn cây cao ngang `1/2` cửa chính `2.45m` (nhỉnh hơn tay nắm cửa `~15–18cm`) hoặc ngang mặt kệ lò sưởi `1.15m–1.22m` |
 | `PLATE_02_PAIR_MEDIUM` | 2 cây đối xứng cận trung | **`56% – 62%`** | `50mm` Bàn Console sảnh Foyer, Cửa đôi kính Pháp, Cổng vòm | Bàn Console `85cm` hoặc phào chỉ tường `90cm` cao tới `~65–70%` thân cây (khung cửa/tường cắt qua mép trên ảnh) |
-| `PLATE_03_PAIR_DIAGONAL_3Q` | 2 cây lệch tầng góc `3/4` | **Trái `64%` / Phải `51%`** | `50mm` Hiên nhà góc xiên `20°`, Hành lang sân trong, Sàn Pergola | Cây gần đặt thấp & lớn hơn cây xa theo đúng đường tụ phối cảnh bậc thềm |
+| `PLATE_03_PAIR_DIAGONAL_3Q` | 2 cây bám xéo dọc tường `3/4` | **Trái `60%` (đáy `5.5%`) / Phải `46%` (đáy nâng `20.5%`)** | `50mm` Hành lang / Lan can đá góc xiên có lối mở bậc thềm, Cửa Pháp góc `3/4` | Đáy chậu xa nâng xéo lên `20.5%` bám đúng đường chân tường hút về điểm tụ để cả 2 cùng sát lan can và cao đúng `4ft` trong không gian 3D |
 | `PLATE_04 / 09_SINGLE_HERO` | 1 cây Hero Trái / Phải | **`72% – 76%`** | `50mm` Cận trung Hero: Phòng đọc sách, Cầu thang kính, Hồ bơi, Đảo bếp | Mặt bàn `75cm`, lưng ghế bành `72cm` hoặc ghế daybed lùi sau cao tới `~48–60%` thân cây |
 | `PLATE_08_SINGLE_COASTAL` | 1 cây Trung-Đại cảnh | **`56%`** | `50mm` Phòng khách rộng nhìn ra biển có thấy dầm trần | Lưng ghế sofa kem `78cm` cao tới `~60%` cây; ngọn cây vượt lưng sofa `~50cm` (quá nửa khung cửa kính), cách xa trần |
-| `PLATE_07_SINGLE_WIDE` | 1 cây Đại cảnh trần cao | **`36%`** | `35mm` Phòng ăn rộng thấy trọn dầm trần `3.2m` & bàn ghế ăn | Tủ Buffet gỗ sồi `85cm` thấp hơn ngọn cây `~35–40cm`, phía trên ngọn cây còn trống `~1.9m` tường & cửa sổ |
+| `PLATE_07_SINGLE_WIDE` | 1 cây Đại cảnh trần dầm gỗ | **`50%`** *(Ngưỡng tối thiểu — cấm dùng `36%`)* | `35mm–50mm` Phòng ăn rộng trần cao `3.3m` thấy trọn dầm gỗ, cửa vòm nắng & bàn ghế ăn | Tủ Buffet gỗ sồi `85cm` đặt **cùng mặt phẳng ngang** cao bằng `68%` cây (thấp hơn ngọn cây `~40cm`), phía trên ngọn cây vẫn còn `44%` khung hình khoe dầm gỗ & nắng xiên |
 
 ---
 
@@ -78,12 +78,15 @@ Ngay khi chạy script, bộ lọc Python tự động quét toàn bộ 20 promp
 - **Từ cấm tên loài cây / dáng sai:** `cedar`, `pine`, `topiary`, `slender`, `teardrop`, `chartreuse`, `conifer`, `spruce`, `cypress`, `juniper`.
 - **Từ cấm chất liệu dễ gây vẽ lại lá nhựa thô:** Tránh mô tả `"plastic"` hoặc nhắc `"spiky needles"` trong câu lệnh; thay bằng mô tả hình thái học thật của nhánh lá: `fine lacy flat-fan foliage sprigs, delicate airy feathery outer branchlet tips`.
 
-### 4.3. Ba Luật Thiết Kế Ánh Sáng & Nội Thất Để Cây Lên Đẹp Như Phim Quảng Cáo
+### 4.3. Bốn Luật Thiết Kế Đạo Diễn, Bố Cục Thực Tế & Ánh Sáng Để Cây Lên Đẹp Như TVC Thật
 1. **Không vắt bóng râm đen ngang qua tán lá:** Cho nắng vàng chiều (`warm afternoon golden sunbeams`) xiên lên mảng tường vữa, kệ sách hoặc sàn gỗ bên cạnh, còn vùng quanh cây giữ **ánh sáng tự nhiên sạch và đều (`even, clean natural daylight around the plant`)** để AI không lấy cớ tô bóng mà vẽ lại chùm lá.
 2. **Tránh hiệu ứng "Nội thất khổng lồ nuốt bề ngang cây":** Ở các góc đơn Hero (như hồ bơi `B19`), không đặt cột gỗ to hoặc tay vịn ghế sofa dày sát rạt bên cạnh chậu. Đẩy ghế sofa/daybed **lùi ra sau `~1.2m–1.4m`**, khóa mặt đệm ngồi ngang đai giữa của chậu và lưng tựa chỉ cao tới `~48–55%` cây để thân tán và chậu nổi bật bề thế ở tiền cảnh.
-3. **Luôn có 3 lớp chiều sâu quang học (`Kodak Vision3 250D`):**
-   - *Tiền cảnh mờ (`Foreground Bokeh`):* Mép bàn gỗ óc chó + sổ da, góc ghế sofa vải linen, ly gốm thủ công hoặc nhành lá ô-liu mờ ở góc dưới khung hình (làm bàn đạp tạo hiệu ứng trượt `3D Parallax` khi lên video).
-   - *Trung cảnh nét căng (`Sharp Midground`):* Sản phẩm khóa cứng + bóng đổ tiếp xúc (`realistic floor contact shadow`) bám sát đáy chậu.
+3. **Tư duy đạo diễn thực tế khi đặt dọc hành lang / lan can xiên (`Ground-Line Alignment & Architectural Purpose`):**
+   - **Bắt buộc nâng đáy chậu xa bám xéo theo đường chân tường:** Khi quay góc xiên `3/4` dọc hành lang hoặc lan can, nếu đáy chậu xa chỉ nhấc nhẹ (`8%`) gần ngang chậu gần (`5%`), AI sẽ vẽ lan can hút chéo ra sau làm **cây gần sát tường nhưng cây xa trôi lơ lửng ra giữa lối đi ~1.5m** (rất phi thực tế). Đáy chậu xa bắt buộc nâng xéo hẳn lên đường chân tường (`bottom_margin = 20.5%`, cao `46%` so với cây gần `60%` đáy `5.5%`) để **cả 2 chậu đều kê sát chân lan can `15–20cm`** và nhìn cao đúng `4ft` bằng nhau theo đường chân trời `1.30m`.
+   - **Phải có lý do bài trí thật ngoài đời & khớp góc xoay chậu vuông:** Không đặt 2 chậu chơ vơ giữa một dải lan can đặc kéo dài không có điểm nhấn — ở giữa cặp 2 cây bắt buộc phải có **điểm mở kiến trúc thật** (lối bậc tam cấp mở xuống vườn/bến hồ, cửa kính Pháp, cổng vòm, bàn console). Riêng với **chậu vuông** chỉ có 1 góc cutout thẳng mặt, ưu tiên đặt cặp 2 cây ở mặt tiền chính diện hoặc xiên rất nhẹ (`<= 5°`); còn góc hành lang hút chéo sâu `3/4` thì đặt **1 cây Hero nép gọn vào góc trụ đầu hành lang** là thật `100%` ngoài đời và không lộ góc xoay mặt chậu.
+4. **Luôn có 3 lớp chiều sâu quang học (`Kodak Vision3 250D`) — Không che khuất chân chậu:**
+   - *Tiền cảnh mờ (`Foreground Bokeh`):* Mép bàn gỗ óc chó + sổ da, góc ghế sofa vải linen, ly gốm thủ công ở sát rìa góc dưới khung hình (làm bàn đạp tạo hiệu ứng trượt `3D Parallax` khi lên video, **tuyệt đối không đè lên thân/đáy chậu sản phẩm**).
+   - *Trung cảnh nét căng (`Sharp Midground`):* Sản phẩm khóa cứng lộ trọn `100%` từ đáy chậu tới ngọn + bóng đổ tiếp xúc (`realistic floor contact shadow`) bám sát đáy chậu.
    - *Hậu cảnh có chiều sâu (`Architectural Depth`):* Cửa kính nhìn ra vườn cây nắng, mặt nước hồ bơi xanh ngọc hoặc phòng khách mở sâu phía sau.
 
 ---
@@ -93,13 +96,15 @@ Ngay khi chạy script, bộ lọc Python tự động quét toàn bộ 20 promp
 Được cài đặt kèm bộ lọc `FORBIDDEN_VIDEO_WORDS` trong [run_barrel20_veo4s_silent.py](file:///Users/dudumac5/Documents/antigravity/wonderful-lavoisier/barrel_cedar_20/run_barrel20_veo4s_silent.py#L283-L295).
 
 > [!CAUTION]
-> **Hai nhóm từ khóa tuyệt đối CẤM trong Prompt Video `Veo 3.1`:**
+> **Bốn nhóm từ khóa & cấu trúc tuyệt đối CẤM trong Prompt Video `Veo 3.1` ([guardrails.py](./flow_sku_tvc_toolkit/guardrails.py)):**
 > 1. **Cấm tên thiết bị quay (`slider`, `gimbal`, `dolly`, `tripod`, `steadicam`, `crane`, `rig`):** Viết các từ này làm `Veo 3.1` vẽ thanh ray sắt đen hoặc đầu gimbal thò vào mép dưới video!
 > 2. **Cấm từ đóng băng khung hình (`100% still`, `stay still`, `motionless`, `hold steady`, `frozen`, `static`, `5%`, `6%`):** Viết các từ này làm `Veo 3.1` khóa cứng toàn bộ video đứng im như tấm ảnh JPEG!
+> 3. **Cấm từ tạo hạt cát vàng / kim tuyến ảo (`dust mote`, `dust motes`, `golden dust`, `floating dust`, `glitter`, `sparkle`, `bokeh particles`):** Làm `Veo 3.1 - Fast` tự phủ lớp hạt cát/đốm vàng tự phát sáng bay ra từ cả hốc tối không có nắng hoặc làm ám vàng sản phẩm!
+> 4. **Cấm gán động từ chuyển động (`sweeps`, `glides`, `slides`, `moves`) cho bàn ghế / đồ vật tiền cảnh:** Viết kiểu `"foreground bench/ottoman/chair sweeps..."` làm `Veo 3.1` giữ nguyên camera đứng yên rồi **cho riêng chiếc ghế tự bò băng chuyền ngang qua mặt sàn**! Bắt buộc chỉ tả chuyển động của **Camera** và khóa cứng `all furniture and props remain 100% stationary anchored to the floor/table`.
 
-### 5.1. Công Thức Chuẩn "3 Lớp Chuyển Động Điện Ảnh 4 Giây"
+### 5.1. Công Thức Chuẩn "Chuyển Động Camera 3D Thật + Ghim Cứng Nội Thất & Không Hạt Cát Vàng"
 ```text
-Continuous, clearly visible 4-second [35mm/50mm] [forward camera push-in / lateral camera truck-right / diagonal push-in] across the sunlit [tên bối cảnh], so the softly blurred [vật thể tiền cảnh ở góc dưới ảnh] sweeps visibly [leftward / rightward / outward past the frame edge] in rich 3D optical parallax against [nội thất trung cảnh & cây]. [1 chuyển động vi mô tự nhiên của môi trường: mặt nước hồ lấp lánh / rèm voan khẽ thở nhẹ / hạt bụi nắng trôi nhẹ / bóng lá vườn ngoài xa đung đưa] while preserving the exact solid conical shape, [mô tả chậu], and fine lacy green flat-fan foliage of the plant. No people, no camera equipment, zero morphing, zero text.
+Continuous, clearly visible 4-second [35mm/50mm/85mm] [forward camera push-in / gentle forward diagonal camera push-in / lateral camera truck-right] across the sunlit [tên bối cảnh] in rich 3D optical parallax, while all furniture, props, architectural elements, and the product remain 100% stationary anchored to the [floor / tabletop]. [1 chuyển động vi mô tự nhiên THẬT của môi trường: mặt nước hồ lấp lánh (shimmers) / rèm voan khẽ thở nhẹ / bóng lá vườn ngoài cửa sổ đung đưa / hơi ấm bốc nhẹ từ tách trà] while preserving the exact solid shape, [mô tả chậu / mũi móc len], and surface detail of the product. No people, no camera equipment, zero morphing, zero text.
 ```
 
 ### 5.2. Luật Chọn Hướng Máy Quay Chống Lỗi "Mọc Thêm Cây Lạ Ở Rìa Ảnh"

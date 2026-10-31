@@ -73,10 +73,14 @@ TREE_4FT_PRESET = CategoryPreset(
         PlateTemplate(
             code="03",
             suffix="PLATE_03_PAIR_DIAGONAL_3Q_16x9",
-            description_vi="2 cây lệch tầng góc xiên 3/4 chuẩn tiêu cự 50mm (cây gần trái 60%, cây xa phải 56% — giữ đúng cỡ 4ft đồng đều trên ban công/view biển)",
+            description_vi=(
+                "2 cây đặt xéo bám dọc theo cùng đường chân tường/hành lang góc 3/4 "
+                "(cây gần trái 60% đáy 5.5%, cây xa phải 46% đáy nâng xéo lên 20.5% theo điểm tụ — "
+                "kẹp 2 bên lối mở bậc thềm/cửa Pháp để cả 2 cùng sát tường và bằng nhau 4ft trong không gian 3D, không trôi ra giữa lối đi)"
+            ),
             placements=(
-                PlacementSpec(height_pct=0.60, center_x_pct=0.28, bottom_margin_pct=0.050, max_width_pct=0.36),
-                PlacementSpec(height_pct=0.56, center_x_pct=0.70, bottom_margin_pct=0.082, max_width_pct=0.34),
+                PlacementSpec(height_pct=0.60, center_x_pct=0.28, bottom_margin_pct=0.055, max_width_pct=0.36),
+                PlacementSpec(height_pct=0.46, center_x_pct=0.70, bottom_margin_pct=0.205, max_width_pct=0.30),
             ),
         ),
         PlateTemplate(
@@ -105,10 +109,13 @@ TREE_4FT_PRESET = CategoryPreset(
         ),
         PlateTemplate(
             code="07",
-            suffix="PLATE_07_SINGLE_WIDE_RIGHT_36PCT_16x9",
-            description_vi="1 cây đại cảnh 35mm trần cao 3.2m thấy trọn bàn ăn & tủ buffet 85cm (36%)",
+            suffix="PLATE_07_SINGLE_WIDE_RIGHT_50PCT_16x9",
+            description_vi=(
+                "1 cây đại cảnh nắng kiến trúc 35mm-50mm trần dầm gỗ cao 3.3m thấy trọn bàn ăn & cửa vòm "
+                "(ngưỡng sàn tối thiểu 50% để cây chuẩn 4ft nổi bật vượt tủ buffet 85cm ~40cm, cấm dùng 36% gây teo nhỏ cây)"
+            ),
             placements=(
-                PlacementSpec(height_pct=0.36, center_x_pct=0.73, bottom_margin_pct=0.075, max_width_pct=0.28),
+                PlacementSpec(height_pct=0.50, center_x_pct=0.73, bottom_margin_pct=0.060, max_width_pct=0.34),
             ),
         ),
         PlateTemplate(

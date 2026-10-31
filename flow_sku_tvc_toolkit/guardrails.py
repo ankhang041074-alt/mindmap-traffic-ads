@@ -5,7 +5,7 @@ and Veo 3.1 - Fast (4s 3D-Parallax / 2-Frame Videos).
 
 import os
 import re
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Sequence
 
 from .presets import get_preset
 
@@ -36,6 +36,84 @@ FORBIDDEN_VIDEO_FREEZE_SUBSTRINGS = (
 FORBIDDEN_VIDEO_FREEZE_REGEXES = (
     r"\bstatic\b",
 )
+
+# Prevents Veo 3.1 - Fast from spawning fake self-luminous golden sand/glitter overlays in dark shadow zones.
+# Note: 'shimmer' / 'sparkling water' remain allowed for natural lake/pool water ripples.
+FORBIDDEN_VIDEO_PARTICLE_SUBSTRINGS = (
+    "dust mote",
+    "dust motes",
+    "golden dust",
+    "floating dust",
+    "bokeh particles",
+    "golden particles",
+)
+
+FORBIDDEN_VIDEO_PARTICLE_REGEXES = (
+    r"\bglitter(?:ing|y)?\b",
+    r"\bsparkles?\b",
+)
+
+# Prevents Veo 3.1 - Fast from locking the camera still and driving foreground furniture/props across the floor
+# like a conveyor belt (e.g. 'foreground oak bench sweeps leftward', 'velvet chair glides outward').
+FORBIDDEN_VIDEO_PROP_MOTION_REGEXES = (
+    r"\b(?:chair|bench|ottoman|sofa|table|handrail|balustrade|napkin|book|holder|sprig|carafe|pitcher|vanity|plinth|tray|ledge|rim|armrest|backrest)\b[^.;]{0,65}\b(?:sweeps|glides|slides|moves)\b",
+)
+
+
+def classify_two_zone_video_motion(
+    bg_seg_l1: Sequence[float],
+    fg_seg_l1: Sequence[float],
+    bg_e2e_l1: float,
+    fg_e2e_l1: float,
+) -> Dict[str, Any]:
+    """
+    Evaluate 2-zone in-browser HTML5 <video> scrub metrics (no .mp4 download needed):
+      - Top 65% zone (bg_*): measures true 3D camera ego-motion against background walls/architecture.
+      - Bottom 35% zone (fg_*): measures lower floor/tabletop & foreground prop displacement.
+
+    Catches two distinct Veo failure modes:
+      1. FROZEN_VIDEO: Both background and foreground barely move (still JPEG clip).
+      2. CONVEYOR_PROP_CAMERA_FROZEN: Background walls/doors barely move while a foreground
+         chair/bench/ottoman slides across the lower frame (tricking global L1 motion metrics).
+    """
+    bg_mean = sum(bg_seg_l1) / float(len(bg_seg_l1)) if bg_seg_l1 else 0.0
+    fg_mean = sum(fg_seg_l1) / float(len(fg_seg_l1)) if fg_seg_l1 else 0.0
+    fg_to_bg_e2e_ratio = fg_e2e_l1 / max(bg_e2e_l1, 0.5)
+    fg_to_bg_seg_ratio = fg_mean / max(bg_mean, 0.5)
+
+    if bg_e2e_l1 < 5.0 and fg_e2e_l1 < 6.5 and bg_mean < 3.0:
+        return {
+            "verdict": "FROZEN_VIDEO",
+            "ok": False,
+            "reason": (
+                f"Camera and scene are nearly frozen (bg_e2e_l1={bg_e2e_l1:.2f}, "
+                f"fg_e2e_l1={fg_e2e_l1:.2f}, bg_seg_mean={bg_mean:.2f})."
+            ),
+            "fg_to_bg_e2e_ratio": round(fg_to_bg_e2e_ratio, 2),
+        }
+
+    if (bg_e2e_l1 < 8.5 and fg_e2e_l1 >= 12.0 and fg_to_bg_e2e_ratio >= 2.3) or (
+        bg_mean < 4.5 and fg_mean >= 10.0 and fg_to_bg_seg_ratio >= 2.5
+    ):
+        return {
+            "verdict": "CONVEYOR_PROP_CAMERA_FROZEN",
+            "ok": False,
+            "reason": (
+                f"Camera/background is stationary while foreground prop slides across frame "
+                f"(bg_e2e_l1={bg_e2e_l1:.2f} vs fg_e2e_l1={fg_e2e_l1:.2f}, ratio={fg_to_bg_e2e_ratio:.2f}x)."
+            ),
+            "fg_to_bg_e2e_ratio": round(fg_to_bg_e2e_ratio, 2),
+        }
+
+    return {
+        "verdict": "OK",
+        "ok": True,
+        "reason": (
+            f"True 3D camera motion verified across background architecture "
+            f"(bg_e2e_l1={bg_e2e_l1:.2f}, fg_e2e_l1={fg_e2e_l1:.2f})."
+        ),
+        "fg_to_bg_e2e_ratio": round(fg_to_bg_e2e_ratio, 2),
+    }
 
 
 def validate_image_prompt(prompt: str, preset_name: str = "tree_4ft", scene_key: str = "") -> List[str]:
@@ -91,6 +169,28 @@ def validate_video_prompt(prompt: str, preset_name: str = "tree_4ft", video_key:
         if re.search(rx, low):
             errors.append(
                 f"{tag}Forbidden freeze pattern {rx!r} in Veo prompt (causes Veo 3.1 to freeze camera motion)."
+            )
+
+    for sub in FORBIDDEN_VIDEO_PARTICLE_SUBSTRINGS:
+        if sub in low:
+            errors.append(
+                f"{tag}Forbidden fake-particle phrase {sub!r} in Veo prompt "
+                f"(causes Veo 3.1 to spawn fake golden sand/glitter overlays even in dark shadow zones)."
+            )
+    for rx in FORBIDDEN_VIDEO_PARTICLE_REGEXES:
+        if re.search(rx, low):
+            errors.append(
+                f"{tag}Forbidden fake-particle pattern {rx!r} in Veo prompt "
+                f"(causes Veo 3.1 to spawn artificial glitter/sparkle overlays)."
+            )
+
+    for rx in FORBIDDEN_VIDEO_PROP_MOTION_REGEXES:
+        m = re.search(rx, low)
+        if m:
+            errors.append(
+                f"{tag}Forbidden foreground-prop motion clause {m.group(0)!r} in Veo prompt "
+                f"(assigning sweeps/glides/slides to furniture/props makes Veo freeze the camera and drive the prop across the floor; "
+                f"describe ONLY 3D camera motion and state that all furniture/props remain stationary anchored in place)."
             )
 
     for sub in preset.forbidden_image_substrings:

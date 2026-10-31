@@ -9,10 +9,12 @@ from PIL import Image, ImageDraw
 
 from flow_sku_tvc_toolkit.cli import main as cli_main
 from flow_sku_tvc_toolkit.guardrails import (
+    classify_two_zone_video_motion,
     validate_image_prompt,
     validate_sku_config,
     validate_video_prompt,
 )
+from flow_sku_tvc_toolkit.presets import TREE_4FT_PRESET
 from flow_sku_tvc_toolkit.plate_engine import (
      PlacementSpec,
     build_sku_plates_from_image,
@@ -245,6 +247,58 @@ class TestPromptGuardrailsAndCLI(unittest.TestCase):
             ),
             [],
         )
+
+    def test_guardrails_block_golden_sand_particles_and_conveyor_furniture_and_2zone_motion(self):
+        # 1. Fake golden dust motes / glitter / sparkles MUST be rejected, while 'sparkling water shimmers' stays valid
+        particle_veo = "Continuous 4-second 50mm forward camera push-in while golden dust motes and glitter sparkles float."
+        p_errs = validate_video_prompt(particle_veo, preset_name="tree_4ft")
+        self.assertGreaterEqual(len(p_errs), 2, p_errs)
+
+        water_veo = (
+            "Continuous 4-second 50mm forward camera push-in while all furniture and benches remain 100% stationary "
+            "anchored to the floor and sparkling turquoise lake water shimmers softly outside."
+        )
+        self.assertEqual(validate_video_prompt(water_veo, preset_name="tree_4ft"), [])
+
+        # 2. Assigning motion verbs (sweeps/glides/slides) to foreground benches/chairs/ottomans MUST be rejected
+        conveyor_veo = (
+            "Continuous 4-second 50mm lateral camera truck-right so the foreground oak bench corner sweeps leftward."
+        )
+        c_errs = validate_video_prompt(conveyor_veo, preset_name="tree_4ft")
+        self.assertTrue(any("foreground-prop motion clause" in e for e in c_errs), c_errs)
+
+        # 3. 2-Zone in-browser scrub classifier catches stationary camera + sliding bench (V30 Elevator pattern)
+        conveyor_verdict = classify_two_zone_video_motion(
+            bg_seg_l1=[1.8, 2.1, 2.0, 1.9],
+            fg_seg_l1=[9.5, 18.2, 17.6, 11.4],
+            bg_e2e_l1=3.2,
+            fg_e2e_l1=30.4,
+        )
+        self.assertFalse(conveyor_verdict["ok"])
+        self.assertEqual(conveyor_verdict["verdict"], "CONVEYOR_PROP_CAMERA_FROZEN")
+
+        frozen_verdict = classify_two_zone_video_motion(
+            bg_seg_l1=[0.9, 1.1, 1.0, 0.8],
+            fg_seg_l1=[1.2, 1.4, 1.3, 1.1],
+            bg_e2e_l1=2.1,
+            fg_e2e_l1=2.8,
+        )
+        self.assertFalse(frozen_verdict["ok"])
+        self.assertEqual(frozen_verdict["verdict"], "FROZEN_VIDEO")
+
+        ok_verdict = classify_two_zone_video_motion(
+            bg_seg_l1=[13.4, 15.8, 16.2, 15.9],
+            fg_seg_l1=[18.1, 21.0, 22.4, 21.8],
+            bg_e2e_l1=29.5,
+            fg_e2e_l1=36.2,
+        )
+        self.assertTrue(ok_verdict["ok"])
+        self.assertEqual(ok_verdict["verdict"], "OK")
+
+        # 4. Tree 4ft preset invariants: minimum single-tree height >= 50% (no 36% dwarfing) & 3/4 diagonal ground-line lift
+        plates_by_code = {pt.code: pt for pt in TREE_4FT_PRESET.plates}
+        self.assertGreaterEqual(plates_by_code["07"].placements[0].height_pct, 0.50)
+        self.assertGreaterEqual(plates_by_code["03"].placements[1].bottom_margin_pct, 0.18)
 
     def test_guardrails_reject_video_missing_both_scene_key_and_uuid(self):
         bad_cfg = {

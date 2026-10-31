@@ -38,7 +38,7 @@ if FLOW_WEB_INTRO_DIR not in sys.path:
 from gen_batch_images import FlowCDP  # noqa: E402
 from home_helper import discover_cdp_http_url  # noqa: E402
 
-from .guardrails import validate_sku_config  # noqa: E402
+from .guardrails import classify_two_zone_video_motion, validate_sku_config  # noqa: E402
 from .plate_engine import composite_to_rgb_white  # noqa: E402
 from .presets import get_preset  # noqa: E402
 
@@ -2312,3 +2312,157 @@ async def download_and_merge_1080p_pipeline(
     shutil.rmtree(dl_tmp, ignore_errors=True)
     print(f"Merged 1080p master MP4 -> {master_mp4}")
     return master_mp4
+
+
+async def audit_videos_2zone_in_browser(
+    project_id: str,
+    card_index_to_slug: Sequence[Tuple[int, str]],
+    out_json_path: str = "",
+    port: Optional[int] = None,
+) -> List[Dict[str, Any]]:
+    """
+    In-browser 2-Zone HTML5 <video> Scrubbing QA (ZERO .mp4 downloads to disk):
+    Seeks each Flow Video-tab card across 5 timestamps (0.15s..3.80s) onto an offscreen
+    160x90 <canvas> in browser RAM and independently measures:
+      - Top 65% Background Architecture Motion (bg_seg_l1, bg_e2e_l1)
+      - Bottom 35% Foreground Prop Motion (fg_seg_l1, fg_e2e_l1)
+    Automatically detects both FROZEN_VIDEO and CONVEYOR_PROP_CAMERA_FROZEN
+    (stationary camera while a foreground chair/bench/ottoman slides across the floor).
+    """
+    if not card_index_to_slug:
+        return []
+    max_card_idx = max(idx for idx, _ in card_index_to_slug)
+    ws_url = get_project_ws_url(project_id, port=port, auto_open=True)
+    results: List[Dict[str, Any]] = []
+
+    async with websockets.connect(ws_url, max_size=40 * 1024 * 1024) as ws:
+        flow = await init_silent_flow_session(ws, project_id=project_id)
+        await switch_gallery_tab(flow, "Video")
+        indexed_tiles = await _index_gallery_tiles_responsive(flow, max_card_idx)
+
+        for card_idx, slug in card_index_to_slug:
+            if card_idx >= len(indexed_tiles):
+                results.append({
+                    "card_index": card_idx,
+                    "slug": slug,
+                    "verdict": "MISSING_CARD",
+                    "ok": False,
+                    "reason": f"Card #{card_idx} not found (only {len(indexed_tiles)} tiles indexed).",
+                })
+                continue
+
+            card = await _scroll_to_indexed_tile(flow, indexed_tiles[card_idx])
+            if not card:
+                results.append({
+                    "card_index": card_idx,
+                    "slug": slug,
+                    "verdict": "SCROLL_MISS",
+                    "ok": False,
+                    "reason": f"Could not scroll Video-tab card #{card_idx} into viewport.",
+                })
+                continue
+
+            # Hover card briefly so Flow attaches/activates its <video> stream if lazy
+            await flow.call("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": card["cx"], "y": card["cy"]})
+            await asyncio.sleep(0.55)
+
+            metrics = await flow.js(f"""
+            (async () => {{
+                const vids = Array.from(document.querySelectorAll('video')).filter(v => {{
+                    const r = v.getBoundingClientRect();
+                    return r.width > 80 && r.x >= {card['x'] - 28} && r.x <= {card['x'] + card['w'] + 28}
+                        && r.y >= {card['y'] - 28} && r.y <= {card['y'] + card['h'] + 28};
+                }});
+                const domVid = vids[0];
+                if (!domVid) return {{error: 'No <video> element inside card bounds'}};
+                const src = domVid.currentSrc || domVid.src || '';
+                if (!src) return {{error: 'Empty <video> src'}};
+
+                const probe = document.createElement('video');
+                probe.crossOrigin = 'anonymous';
+                probe.muted = true;
+                probe.playsInline = true;
+                probe.preload = 'auto';
+                probe.src = src;
+
+                await new Promise((resolve, reject) => {{
+                    const t = setTimeout(() => reject(new Error('video metadata timeout')), 10000);
+                    probe.onloadeddata = () => {{ clearTimeout(t); resolve(); }};
+                    probe.onerror = () => {{ clearTimeout(t); reject(new Error('video load error')); }};
+                    probe.load();
+                }});
+
+                const W = 160, H = 90;
+                const splitY = Math.floor(H * 0.65);
+                const c = document.createElement('canvas');
+                c.width = W; c.height = H;
+                const ctx = c.getContext('2d', {{willReadFrequently: true}});
+                const dur = Math.max(probe.duration || 4.0, 1.0);
+                const stamps = [0.15, 1.05, 2.00, 2.95, Math.min(3.80, dur - 0.12)];
+                const frames = [];
+
+                for (const ts of stamps) {{
+                    await new Promise((resolve) => {{
+                        const t = setTimeout(resolve, 2500);
+                        probe.onseeked = () => {{ clearTimeout(t); resolve(); }};
+                        probe.currentTime = Math.min(Math.max(0.05, ts), dur - 0.05);
+                    }});
+                    ctx.drawImage(probe, 0, 0, W, H);
+                    frames.push(new Uint8ClampedArray(ctx.getImageData(0, 0, W, H).data));
+                }}
+                probe.src = '';
+
+                const zoneL1 = (a, b, y0, y1) => {{
+                    let sum = 0, cnt = 0;
+                    for (let y = y0; y < y1; y++) {{
+                        for (let x = 0; x < W; x++) {{
+                            const o = (y * W + x) * 4;
+                            sum += Math.abs(a[o] - b[o]) + Math.abs(a[o+1] - b[o+1]) + Math.abs(a[o+2] - b[o+2]);
+                            cnt += 3;
+                        }}
+                    }}
+                    return cnt ? Number((sum / cnt).toFixed(2)) : 0.0;
+                }};
+
+                const bg_seg_l1 = [], fg_seg_l1 = [];
+                for (let i = 0; i < frames.length - 1; i++) {{
+                    bg_seg_l1.push(zoneL1(frames[i], frames[i+1], 0, splitY));
+                    fg_seg_l1.push(zoneL1(frames[i], frames[i+1], splitY, H));
+                }}
+                const bg_e2e_l1 = zoneL1(frames[0], frames[frames.length - 1], 0, splitY);
+                const fg_e2e_l1 = zoneL1(frames[0], frames[frames.length - 1], splitY, H);
+                return {{bg_seg_l1, fg_seg_l1, bg_e2e_l1, fg_e2e_l1, duration: Number(dur.toFixed(2))}};
+            }})().catch(err => ({{error: String(err)}}))
+            """)
+
+            if not isinstance(metrics, dict) or metrics.get("error"):
+                results.append({
+                    "card_index": card_idx,
+                    "slug": slug,
+                    "verdict": "SCRUB_ERROR",
+                    "ok": False,
+                    "reason": (metrics or {}).get("error", "Unknown scrub failure"),
+                })
+                continue
+
+            verdict_info = classify_two_zone_video_motion(
+                bg_seg_l1=metrics["bg_seg_l1"],
+                fg_seg_l1=metrics["fg_seg_l1"],
+                bg_e2e_l1=metrics["bg_e2e_l1"],
+                fg_e2e_l1=metrics["fg_e2e_l1"],
+            )
+            entry = {
+                "card_index": card_idx,
+                "slug": slug,
+                **metrics,
+                **verdict_info,
+            }
+            status_tag = "PASS" if entry["ok"] else f"FAIL({entry['verdict']})"
+            print(f"  [{status_tag}] card #{card_idx} ({slug}): {entry['reason']}")
+            results.append(entry)
+
+    if out_json_path:
+        os.makedirs(os.path.dirname(os.path.abspath(out_json_path)), exist_ok=True)
+        with open(out_json_path, "w", encoding="utf-8") as f:
+            json.dump(results, f, indent=2, ensure_ascii=False)
+    return results
