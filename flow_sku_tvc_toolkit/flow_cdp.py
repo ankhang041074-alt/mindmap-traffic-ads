@@ -1483,10 +1483,11 @@ async def _populate_frame_slot_by_token(
             last_err = f"tokens {cand_tokens} not found in virtual scroll"
             continue
 
-        await asyncio.sleep(0.32)
-        await _wait_visible_option_thumbnails(flow, max_polls=4)
+        await asyncio.sleep(0.35)
+        await _wait_visible_option_thumbnails(flow, max_polls=5)
 
         async def recenter_and_inspect():
+            await _wait_visible_option_thumbnails(flow, max_polls=3)
             scrolled = await flow.js(f"""
             (() => {{
                 const cands = {json.dumps(cand_tokens)};
@@ -1506,21 +1507,27 @@ async def _populate_frame_slot_by_token(
             }})()
             """)
             if scrolled:
-                await asyncio.sleep(0.28)
+                await asyncio.sleep(0.35)
+                await _wait_visible_option_thumbnails(flow, max_polls=5)
             return await flow.js(f"""
             (() => {{
                 const cands = {json.dumps(cand_tokens)};
+                const lb = document.querySelector('cdk-virtual-scroll-viewport[role="listbox"], [role="listbox"]');
+                const lbRect = lb ? lb.getBoundingClientRect() : null;
                 const el = Array.from(document.querySelectorAll('[role="option"]')).find(
                     e => cands.some(uid => (e.querySelector('img')?.src || '').includes(uid))
                 );
                 let coords = null;
                 let isSelected = false;
-                if (el) {{
+                if (el && lbRect) {{
                     const r = el.getBoundingClientRect();
-                    const img = el.querySelector('img');
-                    const ir = img ? img.getBoundingClientRect() : null;
-                    const baseX = (ir && ir.width > 10) ? ir.x : r.x;
-                    coords = {{cx: Math.round(baseX + 24), cy: Math.round(r.y + r.height / 2), optWidth: Math.round(r.width)}};
+                    const cy = Math.round(r.y + r.height / 2);
+                    if (cy >= lbRect.top + 12 && cy <= lbRect.bottom - 12) {{
+                        const img = el.querySelector('img');
+                        const ir = img ? img.getBoundingClientRect() : null;
+                        const baseX = (ir && ir.width > 10) ? ir.x : r.x;
+                        coords = {{cx: Math.round(baseX + 24), cy, optWidth: Math.round(r.width)}};
+                    }}
                     isSelected = (
                         el.getAttribute('aria-selected') === 'true'
                         || el.classList.contains('asset-item-active')
@@ -2364,86 +2371,164 @@ async def audit_videos_2zone_in_browser(
 
             # Hover card briefly so Flow attaches/activates its <video> stream if lazy
             await flow.call("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": card["cx"], "y": card["cy"]})
-            await asyncio.sleep(0.55)
+            await asyncio.sleep(0.35)
+            await flow.call("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": 16, "y": 240})
+            await asyncio.sleep(0.15)
 
-            metrics = await flow.js(f"""
+            tm = indexed_tiles[card_idx]
+            prep = await flow.js(f"""
             (async () => {{
-                const vids = Array.from(document.querySelectorAll('video')).filter(v => {{
-                    const r = v.getBoundingClientRect();
-                    return r.width > 80 && r.x >= {card['x'] - 28} && r.x <= {card['x'] + card['w'] + 28}
-                        && r.y >= {card['y'] - 28} && r.y <= {card['y'] + card['h'] + 28};
-                }});
-                const domVid = vids[0];
+                const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+                if (!sc) return {{error: 'No .page-container'}};
+                const sr = sc.getBoundingClientRect();
+                let best = null, bestD = 1e9;
+                for (const el of Array.from(document.querySelectorAll('flow-grid-tile-container'))) {{
+                    const r = el.getBoundingClientRect();
+                    if (r.width < 140 || r.height < 90) continue;
+                    const dt = Math.round(r.top - sr.top + sc.scrollTop);
+                    const dl = Math.round(r.left - sr.left);
+                    const d = Math.abs(dt - {int(tm["docTop"])}) + Math.abs(dl - {int(tm["docLeft"])});
+                    if (d < 85 && d < bestD) {{ best = el; bestD = d; }}
+                }}
+                if (!best) return {{error: 'Tile container not found'}};
+                const domVid = best.querySelector('video');
                 if (!domVid) return {{error: 'No <video> element inside card bounds'}};
                 const src = domVid.currentSrc || domVid.src || '';
                 if (!src) return {{error: 'Empty <video> src'}};
 
-                const probe = document.createElement('video');
-                probe.crossOrigin = 'anonymous';
-                probe.muted = true;
-                probe.playsInline = true;
-                probe.preload = 'auto';
-                probe.src = src;
-
-                await new Promise((resolve, reject) => {{
-                    const t = setTimeout(() => reject(new Error('video metadata timeout')), 10000);
-                    probe.onloadeddata = () => {{ clearTimeout(t); resolve(); }};
-                    probe.onerror = () => {{ clearTimeout(t); reject(new Error('video load error')); }};
-                    probe.load();
-                }});
-
-                const W = 160, H = 90;
-                const splitY = Math.floor(H * 0.65);
-                const c = document.createElement('canvas');
-                c.width = W; c.height = H;
-                const ctx = c.getContext('2d', {{willReadFrequently: true}});
-                const dur = Math.max(probe.duration || 4.0, 1.0);
-                const stamps = [0.15, 1.05, 2.00, 2.95, Math.min(3.80, dur - 0.12)];
-                const frames = [];
-
-                for (const ts of stamps) {{
-                    await new Promise((resolve) => {{
-                        const t = setTimeout(resolve, 2500);
-                        probe.onseeked = () => {{ clearTimeout(t); resolve(); }};
-                        probe.currentTime = Math.min(Math.max(0.05, ts), dur - 0.05);
-                    }});
-                    ctx.drawImage(probe, 0, 0, W, H);
-                    frames.push(new Uint8ClampedArray(ctx.getImageData(0, 0, W, H).data));
-                }}
-                probe.src = '';
-
-                const zoneL1 = (a, b, y0, y1) => {{
-                    let sum = 0, cnt = 0;
-                    for (let y = y0; y < y1; y++) {{
-                        for (let x = 0; x < W; x++) {{
-                            const o = (y * W + x) * 4;
-                            sum += Math.abs(a[o] - b[o]) + Math.abs(a[o+1] - b[o+1]) + Math.abs(a[o+2] - b[o+2]);
-                            cnt += 3;
-                        }}
+                if (domVid.readyState < 2) {{
+                    try {{ await domVid.play(); }} catch (e) {{}}
+                    for (let i = 0; i < 25 && domVid.readyState < 2; i++) {{
+                        await new Promise(r => setTimeout(r, 120));
                     }}
-                    return cnt ? Number((sum / cnt).toFixed(2)) : 0.0;
-                }};
-
-                const bg_seg_l1 = [], fg_seg_l1 = [];
-                for (let i = 0; i < frames.length - 1; i++) {{
-                    bg_seg_l1.push(zoneL1(frames[i], frames[i+1], 0, splitY));
-                    fg_seg_l1.push(zoneL1(frames[i], frames[i+1], splitY, H));
                 }}
-                const bg_e2e_l1 = zoneL1(frames[0], frames[frames.length - 1], 0, splitY);
-                const fg_e2e_l1 = zoneL1(frames[0], frames[frames.length - 1], splitY, H);
-                return {{bg_seg_l1, fg_seg_l1, bg_e2e_l1, fg_e2e_l1, duration: Number(dur.toFixed(2))}};
+                domVid.pause();
+                best.setAttribute('data-audit-tile', '1');
+                for (const ch of Array.from(best.querySelectorAll('button, [role="button"]'))) {{
+                    ch.setAttribute('data-prev-vis-r', ch.style.visibility || '');
+                    ch.style.visibility = 'hidden';
+                }}
+                for (const ov of Array.from(document.querySelectorAll('.cdk-overlay-container, mat-snack-bar-container'))) {{
+                    ov.setAttribute('data-prev-vis-ov', ov.style.visibility || '');
+                    ov.style.visibility = 'hidden';
+                }}
+                const ed = document.querySelector('[aria-label="Bạn muốn tạo những gì?"], [aria-label="Bạn muốn tạo gì?"], [contenteditable="true"]');
+                if (ed) {{
+                    let comp = ed.parentElement;
+                    while (comp && comp.parentElement && !comp.contains(sc) && comp.getBoundingClientRect().height < 340) {{
+                        comp = comp.parentElement;
+                    }}
+                    if (comp && !comp.contains(sc)) {{
+                        comp.setAttribute('data-prev-vis-ov', comp.style.visibility || '');
+                        comp.style.visibility = 'hidden';
+                    }}
+                }}
+                const vr = domVid.getBoundingClientRect();
+                const r = (vr.width > 80 && vr.height > 50) ? vr : best.getBoundingClientRect();
+                return {{
+                    clip: {{
+                        x: Math.round(r.x) + 4,
+                        y: Math.round(r.y) + 4,
+                        width: Math.max(64, Math.round(r.width) - 8),
+                        height: Math.max(36, Math.round(r.height) - 8),
+                        scale: 1,
+                    }},
+                    duration: Number(Math.max(domVid.duration || 4.0, 1.0).toFixed(2)),
+                }};
             }})().catch(err => ({{error: String(err)}}))
             """)
 
-            if not isinstance(metrics, dict) or metrics.get("error"):
+            if not isinstance(prep, dict) or prep.get("error"):
                 results.append({
                     "card_index": card_idx,
                     "slug": slug,
                     "verdict": "SCRUB_ERROR",
                     "ok": False,
-                    "reason": (metrics or {}).get("error", "Unknown scrub failure"),
+                    "reason": (prep or {}).get("error", "Unknown scrub prep failure"),
                 })
                 continue
+
+            W, H = 160, 90
+            splitY = int(H * 0.65)
+            dur = float(prep["duration"])
+            stamps = [0.15, 1.05, 2.00, 2.95, min(3.80, max(0.2, dur - 0.12))]
+            rgb_frames: List[bytes] = []
+            scrub_err = ""
+
+            try:
+                for ts in stamps:
+                    target_ts = min(max(0.05, ts), max(0.05, dur - 0.05))
+                    seek_res = await flow.js(f"""
+                    (async () => {{
+                        const t = document.querySelector('[data-audit-tile="1"]');
+                        const v = t ? t.querySelector('video') : null;
+                        if (!v) return {{error: 'Lost video element during seek'}};
+                        v.pause();
+                        await new Promise((resolve) => {{
+                            let done = false;
+                            const fin = () => {{ if (!done) {{ done = true; resolve(); }} }};
+                            v.addEventListener('seeked', fin, {{once: true}});
+                            setTimeout(fin, 1200);
+                            v.currentTime = {target_ts:.3f};
+                        }});
+                        await new Promise(r => setTimeout(r, 45));
+                        return {{ok: true}};
+                    }})()
+                    """)
+                    if not isinstance(seek_res, dict) or seek_res.get("error"):
+                        scrub_err = (seek_res or {}).get("error", "Seek failed")
+                        break
+                    shot = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 88, "clip": prep["clip"]})
+                    im = Image.open(io.BytesIO(base64.b64decode(shot["data"]))).convert("RGB").resize((W, H), Image.Resampling.BILINEAR)
+                    rgb_frames.append(im.tobytes())
+            finally:
+                await flow.js("""
+                (() => {
+                    const t = document.querySelector('[data-audit-tile="1"]');
+                    if (t) {
+                        for (const ch of Array.from(t.querySelectorAll('[data-prev-vis-r]'))) {
+                            ch.style.visibility = ch.getAttribute('data-prev-vis-r') || '';
+                            ch.removeAttribute('data-prev-vis-r');
+                        }
+                        t.removeAttribute('data-audit-tile');
+                    }
+                    for (const ov of Array.from(document.querySelectorAll('[data-prev-vis-ov]'))) {
+                        ov.style.visibility = ov.getAttribute('data-prev-vis-ov') || '';
+                        ov.removeAttribute('data-prev-vis-ov');
+                    }
+                })()
+                """)
+
+            if scrub_err or len(rgb_frames) < len(stamps):
+                results.append({
+                    "card_index": card_idx,
+                    "slug": slug,
+                    "verdict": "SCRUB_ERROR",
+                    "ok": False,
+                    "reason": scrub_err or "Incomplete frame capture",
+                })
+                continue
+
+            def _zone_l1(a: bytes, b: bytes, y0: int, y1: int) -> float:
+                start_o = y0 * W * 3
+                end_o = y1 * W * 3
+                cnt = end_o - start_o
+                if cnt <= 0:
+                    return 0.0
+                total = sum(abs(a[i] - b[i]) for i in range(start_o, end_o))
+                return round(total / cnt, 2)
+
+            bg_seg_l1 = [_zone_l1(rgb_frames[i], rgb_frames[i + 1], 0, splitY) for i in range(len(rgb_frames) - 1)]
+            fg_seg_l1 = [_zone_l1(rgb_frames[i], rgb_frames[i + 1], splitY, H) for i in range(len(rgb_frames) - 1)]
+            bg_e2e_l1 = _zone_l1(rgb_frames[0], rgb_frames[-1], 0, splitY)
+            fg_e2e_l1 = _zone_l1(rgb_frames[0], rgb_frames[-1], splitY, H)
+            metrics = {
+                "bg_seg_l1": bg_seg_l1,
+                "fg_seg_l1": fg_seg_l1,
+                "bg_e2e_l1": bg_e2e_l1,
+                "fg_e2e_l1": fg_e2e_l1,
+                "duration": dur,
+            }
 
             verdict_info = classify_two_zone_video_motion(
                 bg_seg_l1=metrics["bg_seg_l1"],

@@ -1,0 +1,483 @@
+{
+  "slug": "cedar_roundpot_20",
+  "prefix": "RNDPOT",
+  "preset": "tree_4ft",
+  "project_id": "dfcf77a5-5374-4678-9f80-1c5ea7b5c305",
+  "notes_vi": "Lô 4 (R01 -> R20 & VR01 -> VR20): 20 ảnh TVC 16:9 Nano Banana Pro + 20 video 4s Veo 3.1 - Fast 3D-Camera cho SKU cây giả 4ft tán rộng tự nhiên lá đúc PE 2 tông xanh, lộ gốc thân gỗ nâu ngắn (~5cm) và chậu nhựa tròn trụ đen mờ nhỏ gọn 5in x 5.5in. Tuân thủ 100% 5 Quy tắc Đạo diễn: chiều cao 50%–76% (cấm 36%), vật neo cùng mặt phẳng sàn, góc xiên 3/4 bám chân tường, 0 ghế/đôn tiền cảnh che chậu hay trượt băng chuyền, 0 hạt cát vàng ảo.",
+  "exclude_uuids": [
+    "8c5ae9c1-5afd-4a59-ac02-fe88e604d098",
+    "6a6f121c-f7b4-4bfd-ac72-25eee72808c5",
+    "d9746c27-b134-48c5-bacf-3daa6acd519c",
+    "375cef84-4a76-46e4-9520-f25d019f2b06",
+    "2df175d4-9486-46d6-9140-bf9043b8a131",
+    "052eb69a-1a78-4eff-94bd-cb2f3d00e712",
+    "6c1f831e-6e4e-48d1-83f3-4986a90269c3",
+    "d6c29380-f83b-44ec-a6eb-f18116ee6286",
+    "495713f0-ea9d-4f6a-b754-db910889e5f2",
+    "8eaa1323-1f70-4314-85d1-faa1e5cfaf00",
+    "a39c8412-0522-4873-86d2-66ce43e75962",
+    "d8be70c1-b597-46be-9fda-cf1ae71061cc",
+    "279ac2a3-8b4f-422c-8c46-b6555a5308fa",
+    "1849c255-3663-45b4-a56b-3eaae1cc105e",
+    "667ca12c-611e-4472-8a5a-2669560300dd",
+    "f0d9ce0a-b705-46a3-b8f1-7aa9ddc4cd74",
+    "36389dec-ef10-4bec-a7c4-04ed7e55df07",
+    "65decb7f-22f5-4e95-8a95-c792e71a8814",
+    "da276718-80a1-49c8-9839-021b8c26f20b",
+    "2c384643-3ea0-4a76-83be-3448d470258b",
+    "352b2bd0-e57d-4798-a51a-5e5de445ad69",
+    "4f03eb3e-7631-4fc5-8a4f-3e41ce67d028",
+    "97d7f5d6-a835-48d6-9f74-529ae38c8d6d",
+    "d6b74296-6f95-4ec4-8758-8f004aacdcf9",
+    "07ca3cea-54d5-42f9-ac07-6cc00088d4db",
+    "94bd79f0-ec26-434c-a49d-b16244374267",
+    "280418e1-6063-4c53-8fbb-193b61070b93",
+    "5c0e6841-b2a9-46ee-a1d7-44e3a1edbb5e",
+    "a1ec88a7-8f1d-4326-aab1-818bc07e5f67",
+    "738d4df5-4d78-4ee0-81df-9ef226dc63df",
+    "7cfd4143-d2cf-4275-b8cb-153506086a44",
+    "c464825d-04db-47cb-af20-db42f90ff9ed",
+    "dc6353ce-f24f-4054-869f-f829945e28d5",
+    "c4943dff-0e78-4809-b4a6-0d28cdf55d05",
+    "b79f4640-6f8c-4dd6-9480-1f45c2ec382b",
+    "6db60962-6415-4f60-8eb5-9e7d4b0e0adc",
+    "1fc44fdf-158c-4d96-9e6e-552666fbf317",
+    "c5066b1a-0b95-4254-9bd6-cc4000362e59",
+    "404748ee-d746-49d5-8989-1b563972d632",
+    "f5277936-2ba7-4928-af1d-85398594f1bf",
+    "1a5e9d5c-017a-48c9-b9f6-6f08eaf1c019",
+    "c7ae3e32-37bf-414a-b516-ef72bf2352cf",
+    "b79e164b-e012-4687-adcd-56e3fc92c8a8",
+    "2a636fef-0562-4470-ad3d-8ff399015f8f",
+    "03731287-04a9-477e-a037-843e39e6cdf2",
+    "357a083b-bb15-4391-8461-42c738a6d409",
+    "255b13ff-e051-4f6b-8fc6-5de808f483de",
+    "88270262-e787-4d12-809c-1c3fb0a01be9",
+    "c8560aa3-3ce7-401f-831e-7cee9e229b90",
+    "80fe0aac-30fb-4d56-9fc3-8cd36fdeeba0",
+    "7cf09a22-e08a-4bb0-9634-ef73a6450557",
+    "72972fcc-5a93-464b-8324-399a9185d9d2",
+    "94476b2c-f110-4c1a-9c08-ee3d514ccc6c",
+    "5aae13ec-4112-4ba8-aede-fb6762e83210",
+    "96a57777-a359-4546-a363-756a1f5ccd73",
+    "ebc19d89-96d5-431c-bf48-65672b2852ec",
+    "7ef37782-5c33-4d76-972c-49b87d27735b",
+    "7a13b09d-c6cd-4dac-8732-d828f3a5429f",
+    "d81a1ece-9b49-4d8f-8576-510de683db46",
+    "56d84fb5-e098-432f-89ad-3c2b54ae048c",
+    "e89c5d87-3173-42d1-85ae-4a4edd69bb76",
+    "65f2c152-5db9-4ca7-8996-7dfd76b2ce9e",
+    "4f63712c-37c9-433d-8457-a47e3672cf34",
+    "5d275a3e-f828-4419-854f-a70ae267077a",
+    "3d63c790-7d60-4f2d-bce6-05114ca84031",
+    "af938552-9103-46c2-84c8-3bb0716f0140",
+    "b1b5b5eb-f77b-4c1b-9b28-d29493285231",
+    "fac94f0b-7394-4520-8f36-41232fbf67a2",
+    "dc2fce54-5c3a-4179-9abc-c1670f98d6c0",
+    "1e5c2fb2-baaa-41cd-a55d-ae1531610e88",
+    "cc3942a3-2658-4ba9-82db-9ea5df94939f",
+    "c2ecf29f-3def-4f68-93b4-71942bf88429",
+    "f918c19e-5ea1-4e50-9722-1c3afcaa5ee7",
+    "e342a771-5936-4100-a265-5a6687d792dd",
+    "f76d33ac-c9a7-4208-96f7-e7f7fbc8ea34",
+    "dd71ddb9-8726-43a9-a9aa-ab500a0c0834",
+    "c9038ef2-9203-4dd9-a562-d94f528c0b65",
+    "bc75f939-fb80-43f9-92ab-a8adfb3201cb",
+    "838b3534-67d4-4c24-8d5f-dd91cddd7fc2",
+    "e0c58070-7f5e-4b1e-bd33-5659aabaaab5",
+    "22733993-1e6c-4f1c-9d9e-04afe80a5fc8",
+    "f706d759-6258-483a-a112-48535bf42628",
+    "438224a8-3e66-42ee-a196-82493ee574bc",
+    "caac9a86-2541-43b1-a595-ec8b9f9f698f",
+    "286e457a-99b8-47ce-8838-42008a55b481",
+    "04655b2d-afff-44c5-8988-5b93d99c610d",
+    "ca79a6e9-70cc-4e1b-9259-5f514e47c49a",
+    "58bb6e45-5002-448b-91d4-cf18c82d8d6c",
+    "741a9ca3-0132-4a93-9632-bdfe35d376dc",
+    "d6e81524-6233-4051-b3d7-1bbfa557393a",
+    "4f0cb3ba-3938-4dfe-93ba-bcce84136073",
+    "0f106923-e78a-48a0-b1d4-9c4996ef1fd1",
+    "524b9c25-d5fa-4970-af95-a250e5059423",
+    "63a076cf-f43b-4f8b-8fd7-a4ac6bce59fc",
+    "9cc132d1-61b8-455f-9e95-65ef124964b3",
+    "23460d2f-3988-441d-bd00-e5b482079f3a",
+    "08aeac9a-4b9c-4a6d-bfeb-97f99bf3d972",
+    "8facbd9d-41ed-4ea7-861b-e6105fcfe46c",
+    "d6587f20-8cb3-4a03-b550-cd6c9d500d00",
+    "cf869a1f-27f9-4b21-9bc3-b982ff2e372b",
+    "77397d83-7177-4f63-94cd-91fa438561b3",
+    "dc6751d8-652d-43dd-9745-be4b0d20b5ac",
+    "4b1a1f00-40eb-4590-8b36-a3946e0e8af7",
+    "dad27022-42da-4de1-b4fb-ee742ec5e3b1",
+    "11292166-35de-4d99-ae5d-d76497805bba",
+    "7cc2af5f-e98c-496a-bcfd-a2843f697679",
+    "c07b522c-3f59-4e77-beae-2f20eb4f2392",
+    "b78f69b3-e533-42a1-a231-d7a84fa931d9",
+    "eb701e7f-4e31-4fe0-90d3-ea782e9ebad4",
+    "06567b61-f4c6-4e6d-b69d-df625851431d",
+    "91933026-b81b-4025-9d18-5161d3a1591b",
+    "e64cb883-4cf1-4360-b805-05d0c2cba273",
+    "5b47ac76-1bc3-48f2-b3d3-2b14385383e1",
+    "1354fa6a-f9b9-4b85-b4a5-3b55aefec7fb",
+    "aef8080a-6555-44c1-b699-c479d300d140",
+    "55dfa19a-1370-46ea-8485-00b1e12cc9d0",
+    "1c7a0dfb-cb77-4f92-a3a5-385186c156bd",
+    "6a68e8d1-2819-47e7-a489-eb67a47a13a4",
+    "a2b1701b-2415-44cb-b68e-ef44e57c2dfc",
+    "4836fea3-cdbd-434a-8d6e-a838d8140a58",
+    "d02c4807-2bcb-4047-9965-da5f9ec5d7a4",
+    "6b26ea38-8076-4441-af27-5b8b0b867d5f",
+    "00551f9d-c9d5-4bbc-8041-c30429e25eaa",
+    "7b218b63-45cf-4e74-8249-3cecb2763a74",
+    "e106d804-a960-49c4-984a-083a1020439d",
+    "12f6921c-00f5-41f0-821f-1e284178e77a",
+    "f31ae960-f2cd-4c4e-b7f5-7bce15e49f6d",
+    "bb70e918-d2ad-4ba0-bc17-92c77984c691"
+  ],
+  "scenes": [
+    {
+      "key": "R01_HAMPTONS_WHITE_OAK_FRONT_PORCH_PAIR",
+      "refs": [
+        "RNDPOT_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and compact round cylindrical black pots 100% pixel-identical to the 16:9 plate in exact position, height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone deep forest-green and vibrant spring-green feathery flat-fan molded foliage texture without enlarging or reshaping the compact round black pots, burying the exposed brown woody stem, pinching the lower skirt, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 35mm-50mm live-action Kodak Vision3 250D sunlit East Hampton coastal estate covered front porch beneath a 3.3-meter white beadboard ceiling: centered symmetrically between both 4ft plants is a tall 2.42-meter quarter-sawn natural white-oak 6-lite glazed front door with unlacquered satin-brass mortise lever handles positioned at 1.05m height (~17cm below the pointed top tips of both 4ft plants, locking exact 1/2-door physical scale), framed by crisp off-white painted fluted porch pilasters and pale weathered coastal clapboard siding, wide honed bluestone porch flagstones with a completely open, unobstructed foreground floor plane in front of both compact 5in x 5.5in matte-black round cylindrical pots (zero foreground furniture or objects near the bottom frame edges), warm morning coastal sunbeams slanting across the white trim and oak door grain, clean natural daylight on both plants, realistic bluestone floor contact shadows directly beneath both compact matte-black round cylindrical pots, zero text."
+    },
+    {
+      "key": "R02_PARISIAN_LIMESTONE_MANTEL_SALON_PAIR",
+      "refs": [
+        "RNDPOT_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and compact round cylindrical black pots 100% pixel-identical to the 16:9 plate in exact position, height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone deep forest-green and vibrant spring-green feathery flat-fan molded foliage texture without enlarging or reshaping the compact round black pots, burying the exposed brown woody stem, pinching the lower skirt, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm medium-shot live-action Kodak Vision3 250D sunlit Parisian Haussmann grand living salon: centered on the exact same floor depth plane between both 4ft plants is a carved 1.18-meter antique cream-limestone Louis XVI fireplace mantel whose horizontal stone mantel shelf aligns ~4cm below the pointed top tips of both 4ft plants (locking authentic 4ft physical scale), topped by a tall antique gilt-brass arched mirror against warm ivory boiserie paneled plaster walls, honey-toned European white-oak herringbone parquet flooring with a completely open, unobstructed foreground parquet floor plane in front of both compact 5in x 5.5in matte-black round cylindrical pots (zero foreground chairs, ottomans, or tables near the bottom edge), warm late-afternoon diagonal window sunbeams across the boiserie wall and herringbone oak floor, even natural daylight on both plants, crisp oak-floor contact shadows beneath both compact matte-black round cylindrical pots, zero text."
+    },
+    {
+      "key": "R03_COURTYARD_FRENCH_CASEMENT_DOORS_3Q_PAIR",
+      "refs": [
+        "RNDPOT_PLATE_03_PAIR_DIAGONAL_3Q_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and compact round cylindrical black pots 100% pixel-identical to the 16:9 plate in exact position, height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone deep forest-green and vibrant spring-green feathery flat-fan molded foliage texture without enlarging or reshaping the compact round black pots, burying the exposed brown woody stem, pinching the lower skirt, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm live-action Kodak Vision3 250D sunlit French chateau courtyard terrace viewed at a natural three-quarter receding diagonal perspective strictly matching the floor depth line connecting the left plant base and the elevated right plant base: running along that exact receding diagonal ground line is a carved cream-limestone chateau facade plinth with tall 2.45-meter arched charcoal-steel divided-light French casement double doors opening directly between the two plants into a warm sunlit gallery interior (aged-brass cremone door handles at 1.05m sitting proportionally ~17cm below each 4ft plant tip in true 3D perspective), so BOTH compact 5in x 5.5in matte-black round cylindrical pots rest uniformly 15cm from the receding limestone wall piers on either side of the French doorway without sticking out into the walkway, tumbled cream limestone courtyard flagstones completely open and unobstructed across the entire foreground floor, warm afternoon golden sunbeams across the carved stone facade, clean natural daylight on both plants, realistic stone contact shadows under both compact matte-black round cylindrical pots, zero text."
+    },
+    {
+      "key": "R04_SCANDI_FLUTED_OAK_FOYER_CONSOLE_PAIR",
+      "refs": [
+        "RNDPOT_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and compact round cylindrical black pots 100% pixel-identical to the 16:9 plate in exact position, height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone deep forest-green and vibrant spring-green feathery flat-fan molded foliage texture without enlarging or reshaping the compact round black pots, burying the exposed brown woody stem, pinching the lower skirt, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm medium-shot live-action Kodak Vision3 250D sunlit Copenhagen minimalist luxury residence entrance foyer: positioned laterally flush against the warm ivory limewash plaster back wall on the exact same floor depth plane centered between both 4ft plants is an 82cm-tall sculptural fluted pale white-oak console table (console tabletop reaching only ~67% of the 4ft plant height so both 4ft plant tips tower ~40cm higher than the console surface) styled minimally with a low honed travertine shallow vessel beneath a large round frameless architectural wall mirror, wide-plank Nordic pale-ash hardwood floor completely open and unobstructed across the entire foreground in front of both compact 5in x 5.5in matte-black round cylindrical pots (zero foreground benches or props), crisp morning side-window sunbeams slanting across the limewash wall and ash wood grain, clean natural daylight on both plants, realistic floor contact shadows beneath both compact matte-black round cylindrical pots, zero text."
+    },
+    {
+      "key": "R05_MONTECITO_SPANISH_ARCHED_WALNUT_ENTRY_PAIR",
+      "refs": [
+        "RNDPOT_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and compact round cylindrical black pots 100% pixel-identical to the 16:9 plate in exact position, height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone deep forest-green and vibrant spring-green feathery flat-fan molded foliage texture without enlarging or reshaping the compact round black pots, burying the exposed brown woody stem, pinching the lower skirt, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 35mm-50mm live-action Kodak Vision3 250D sunlit Montecito Spanish Colonial Revival villa courtyard entrance beneath a 3.4-meter smooth warm-ivory limewash stucco facade: centered symmetrically between both 4ft plants is a deeply recessed 2.45-meter arched hand-carved dark-walnut double entry door with blackened wrought-iron ring pulls positioned at 1.05m height (~17cm below the pointed top tips of both 4ft plants, locking exact 4ft physical scale), framed by smooth rounded stucco arch reveals and antique wrought-iron carriage lanterns high above, warm handmade terracotta courtyard tiles with a completely open, unobstructed foreground floor plane in front of both compact 5in x 5.5in matte-black round cylindrical pots (zero foreground furniture), golden late-afternoon Mediterranean sunbeams casting soft architectural arch shadows across the warm stucco and terracotta tiles, even natural daylight on both plants, realistic terracotta contact shadows directly under both compact matte-black round cylindrical pots, zero text."
+    },
+    {
+      "key": "R06_AMALFI_TRAVERTINE_GARDEN_STEPS_3Q_PAIR",
+      "refs": [
+        "RNDPOT_PLATE_03_PAIR_DIAGONAL_3Q_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and compact round cylindrical black pots 100% pixel-identical to the 16:9 plate in exact position, height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone deep forest-green and vibrant spring-green feathery flat-fan molded foliage texture without enlarging or reshaping the compact round black pots, burying the exposed brown woody stem, pinching the lower skirt, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm eye-level live-action Kodak Vision3 250D sunlit Italian coastal villa stone verandah viewed at a natural three-quarter receding diagonal perspective strictly aligned with the receding ground line between the near-left plant base and the far-right plant base: running along that exact receding diagonal floor line behind both pots is a LOW waist-high 82cm carved honey-beige Roman travertine balustrade railing (strictly flat continuous stone top rail with NO tall raised corner pedestals or high stone piers!) interrupted cleanly between the two plants by a wide open stone stairway threshold descending toward shimmering sunlit azure Mediterranean sea water, so the horizontal top rail of the low 82cm stone balustrade passes behind the mid-foliage (~68% up each plant) while the pointed green top tips of BOTH 4ft plants tower clearly ~38-40cm ABOVE the top edge of the stone railing against the open sparkling blue sea background, and BOTH compact 5in x 5.5in matte-black round cylindrical pots hug the receding stone balustrade base uniformly 15cm from the wall plinth on open honed cream travertine pavers (zero foreground furniture), warm golden-hour sunlight, realistic stone contact shadows under both compact round black pots, zero text."
+    },
+    {
+      "key": "R07_TRIBECA_LOFT_STEEL_GLASS_GALLERY_DOORS_PAIR",
+      "refs": [
+        "RNDPOT_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and compact round cylindrical black pots 100% pixel-identical to the 16:9 plate in exact position, height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone deep forest-green and vibrant spring-green feathery flat-fan molded foliage texture without enlarging or reshaping the compact round black pots, burying the exposed brown woody stem, pinching the lower skirt, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm medium-shot live-action Kodak Vision3 250D sunlit Tribeca architectural penthouse study portal: centered between both 4ft plants on the exact same floor depth plane are tall slim-profile brushed dark-bronze and clear-glass double French doors with horizontal satin-brass lever handles positioned at 1.05m height (~17cm below the pointed top tips of both 4ft plants) revealing warm sunlit walnut bookshelves in soft interior bokeh behind the glass, flanked by smooth warm pearl-grey Venetian plaster walls, wide-plank European natural white-oak flooring completely open and unobstructed across the entire foreground in front of both compact 5in x 5.5in matte-black round cylindrical pots (zero foreground furniture or objects near the bottom frame edge), warm afternoon loft window sunbeams across the oak floor, clean natural daylight on both plants, crisp floor contact shadows under both compact round black pots, zero text."
+    },
+    {
+      "key": "R08_BEVERLY_HILLS_LIMESTONE_COLONNADE_PORTICO_PAIR",
+      "refs": [
+        "RNDPOT_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and compact round cylindrical black pots 100% pixel-identical to the 16:9 plate in exact position, height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone deep forest-green and vibrant spring-green feathery flat-fan molded foliage texture without enlarging or reshaping the compact round black pots, burying the exposed brown woody stem, pinching the lower skirt, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 35mm-50mm live-action Kodak Vision3 250D sunlit Beverly Hills modern-classical limestone villa grand entrance portico beneath a 3.4-meter coffered limestone soffit: centered symmetrically between both 4ft plants are monumental 2.45-meter brushed champagne-bronze and clear architectural glass double entrance doors with vertical fluted white-oak side panels and satin-brass pull handles centered at 1.05m height (~17cm below the pointed top tips of both 4ft plants, locking exact 1/2-door 4ft scale), flanked by square honed cream-limestone pilasters, large-format honed sand-beige limestone slab pavers completely open and unobstructed across the entire foreground floor in front of both compact 5in x 5.5in matte-black round cylindrical pots, warm raking afternoon California sunbeams across the limestone columns, even natural daylight on both plants, crisp stone contact shadows beneath both compact matte-black round cylindrical pots, zero text."
+    },
+    {
+      "key": "R09_WELLNESS_SPA_TRAVERTINE_ALCOVE_BENCH_PAIR",
+      "refs": [
+        "RNDPOT_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and compact round cylindrical black pots 100% pixel-identical to the 16:9 plate in exact position, height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone deep forest-green and vibrant spring-green feathery flat-fan molded foliage texture without enlarging or reshaping the compact round black pots, burying the exposed brown woody stem, pinching the lower skirt, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm medium-shot live-action Kodak Vision3 250D sunlit five-star architectural wellness spa sanctuary foyer: positioned laterally flush against the warm sand-toned tadelakt plaster back wall on the exact same floor depth plane centered between both 4ft plants is a low 48cm-tall monolithic honed Roman travertine architectural bench (48cm stone bench reaching only ~39% of the 4ft plant height so both 4ft plants tower ~74cm above the bench seat) with folded ivory waffle-linen spa towels resting neatly on top beneath a recessed warm-lit plaster arch alcove, honed cream travertine slab flooring completely open and unobstructed across the entire foreground in front of both compact 5in x 5.5in matte-black round cylindrical pots (zero foreground props near the bottom frame edges), serene morning skylight sunbeams slanting softly across the tadelakt arch, clean natural daylight on both plants, realistic travertine contact shadows under both compact round black pots, zero text."
+    },
+    {
+      "key": "R10_CONSERVATORY_ARCHED_OAK_GARDEN_DOORS_PAIR",
+      "refs": [
+        "RNDPOT_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as untouched locked foreground photograph cutouts — keep BOTH plants and compact round cylindrical black pots 100% pixel-identical to the 16:9 plate in exact position, height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone deep forest-green and vibrant spring-green feathery flat-fan molded foliage texture without enlarging or reshaping the compact round black pots, burying the exposed brown woody stem, pinching the lower skirt, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 35mm-50mm live-action Kodak Vision3 250D sunlit English country estate limestone orangery sunroom beneath a 3.3-meter glazed conservatory cornice: centered symmetrically between both 4ft plants are soaring 2.42-meter arched natural European white-oak divided-light glass garden double doors with aged-brass lever handles at 1.05m height (~17cm below the pointed top tips of both 4ft plants, strictly locking 4ft scale) opening onto a sunlit manicured emerald lawn and carved stone fountain garden in soft optical bokeh, honed cream Portland limestone and pale dove-grey marble checkerboard floor tiles completely open and unobstructed across the entire foreground in front of both compact 5in x 5.5in matte-black round cylindrical pots, bright morning sun rays streaming through the conservatory glass onto the stone floor, clean natural daylight on both plants, realistic floor contact shadows beneath both compact round black pots, zero text."
+    },
+    {
+      "key": "R11_SUNLIT_READING_SALON_BOUCLE_LOUNGE_LEFT",
+      "refs": [
+        "RNDPOT_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet tip, full wide-skirted natural conical silhouette, short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket) 100% pixel-identical to the 16:9 plate without enlarging or reshaping the compact round black pot, burying the exposed brown woody stem, shrinking, clumping, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D sunlit architectural living and reading salon: the 4ft plant stands in the left foreground beside tall floor-to-ceiling sheer oatmeal-linen window drapery, while positioned laterally to the right on the exact same floor depth plane sits a low 74cm sculptural cream bouclé lounge armchair paired with a small 52cm round fluted-travertine drink table (the 74cm armchair back reaching ~60% of the 4ft plant height so the plant towers ~48cm above the chair), warm ivory limewash plaster wall behind with subtle classic panel molding, wide-plank European white-oak herringbone parquet floor completely open and unobstructed across the entire foreground in front of the compact 5in x 5.5in matte-black round cylindrical pot (zero foreground coffee tables or ottomans near the bottom frame edge), warm afternoon golden window sunbeams streaming across the oak parquet, even natural daylight on the plant, realistic wood-floor contact shadow directly under the compact round black pot, zero text."
+    },
+    {
+      "key": "R12_MARBLE_WATERFALL_KITCHEN_ISLAND_HERO_RIGHT",
+      "refs": [
+        "RNDPOT_PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet tip, full wide-skirted natural conical silhouette, short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket) 100% pixel-identical to the 16:9 plate without enlarging or reshaping the compact round black pot, burying the exposed brown woody stem, shrinking, clumping, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm standing eye-level live-action Kodak Vision3 250D sunlit luxury architectural kitchen gallery: standing on the exact same foreground floor plane immediately to the left of the 4ft plant (with its marble floor base resting on the exact same lower floor horizontal line as the black cylindrical pot, never elevated up in the frame) is an 85cm-tall honed Calacatta Oro marble waterfall kitchen counter island end whose horizontal marble countertop sits strictly ~35cm LOWER in the 2D frame than the pointed green top tip of the 4ft plant (the marble countertop aligning at ~68% of the 4ft plant's height so the 4ft plant unmistakably towers well above the kitchen island counter!), with two low tucked-in 62cm natural white-oak counter stools under the marble overhang, floor-to-ceiling fluted warm white-oak pantry cabinetry in the background and a slimline bronze patio glass window on the far right, wide-plank pale European oak flooring completely open and unobstructed across the foreground in front of the compact 5in x 5.5in matte-black round cylindrical pot (zero foreground props), crisp morning sunbeams, clean natural daylight on the plant, realistic floor contact shadow under the compact round black pot, zero text."
+    },
+    {
+      "key": "R13_SOARING_OAK_BEAM_DINING_CREDENZA_WIDE_RIGHT",
+      "refs": [
+        "RNDPOT_PLATE_07_SINGLE_WIDE_RIGHT_50PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet tip, full wide-skirted natural conical silhouette, short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket) 100% pixel-identical to the 16:9 plate without enlarging or reshaping the compact round black pot, burying the exposed brown woody stem, shrinking, clumping, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 35mm-50mm architectural wide live-action Kodak Vision3 250D soaring 3.3-meter high-ceilinged modern European dining and living salon: the 4ft plant stands prominently on the right beside an 82cm-tall fluted natural white-oak sideboard credenza placed laterally flush against the same warm-white plaster back wall on the exact same floor depth plane as the pot (never angled forward toward the camera, so the 82cm credenza top reaches ~67% of the 4ft plant height and the 4ft plant tip rises ~40cm higher than the sideboard), while to the left sits a 2.4-meter solid white-oak dining table with low 78cm oak wishbone chairs beneath exposed warm white-oak ceiling beams and tall arched steel-framed windows, wide-plank pale oak flooring completely open and unobstructed across the entire foreground in front of the compact 5in x 5.5in matte-black round cylindrical pot (zero foreground sofa backs or chairs), dramatic morning golden sunbeams slanting across the plaster wall and oak floor, clean natural daylight on the plant, realistic floor contact shadow under the compact round black pot, zero text."
+    },
+    {
+      "key": "R14_MALIBU_OCEANVIEW_LIVING_TERRACE_RIGHT",
+      "refs": [
+        "RNDPOT_PLATE_08_SINGLE_COASTAL_RIGHT_56PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet tip, full wide-skirted natural conical silhouette, short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket) 100% pixel-identical to the 16:9 plate without enlarging or reshaping the compact round black pot, burying the exposed brown woody stem, shrinking, clumping, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 35mm-50mm medium-wide Goldilocks live-action Kodak Vision3 250D sunlit Malibu modern coastal architectural living room: the 4ft plant stands on the right at the threshold of retracted floor-to-ceiling dark-bronze sliding glass doors opening onto a honed limestone oceanfront sun deck and shimmering sunlit turquoise Pacific ocean horizon in soft bokeh, while set back 1.3 meters in the left midground sits a low 74cm oatmeal-linen modular lounge sofa and low travertine slab coffee table beneath a warm slatted white-oak timber plank ceiling, wide-plank pale European white-oak floor completely open and unobstructed across the entire foreground in front of the compact 5in x 5.5in matte-black round cylindrical pot (zero foreground furniture near the bottom frame edges), warm late-afternoon golden coastal sunbeams stretching across the oak floorboards, clean natural daylight on the plant, realistic floor contact shadow beneath the compact round black pot, zero text."
+    },
+    {
+      "key": "R15_MEDITERRANEAN_INFINITY_POOL_CABANA_HERO_RIGHT",
+      "refs": [
+        "RNDPOT_PLATE_09_SINGLE_HERO_RIGHT_76PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet tip, full wide-skirted natural conical silhouette, short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket) 100% pixel-identical to the 16:9 plate without enlarging or reshaping the compact round black pot, burying the exposed brown woody stem, shrinking, clumping, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm Hero foreground-focus live-action Kodak Vision3 250D sunlit Mallorca luxury stone poolhouse cabana terrace: the 4ft plant stands prominently on the right foreground honed cream-travertine terrace slabs, while set back 1.4 meters in the left midground beneath a shaded cream-limestone cabana colonnade sits a low 70cm solid-teak outdoor lounge daybed with ivory linen cushions beside sparkling sunlit turquoise infinity-pool water shimmering softly in the background optical bokeh, completely open, unobstructed foreground travertine deck slabs surrounding the compact 5in x 5.5in matte-black round cylindrical pot (zero foreground drink tables or chairs near the bottom frame edges), warm late-afternoon golden sun-streaks across the travertine deck, clean natural daylight on the plant, crisp stone contact shadow directly beneath the compact matte-black round cylindrical pot, zero text."
+    },
+    {
+      "key": "R16_JAPANDI_SHOJI_COURTYARD_GALLERY_LEFT",
+      "refs": [
+        "RNDPOT_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet tip, full wide-skirted natural conical silhouette, short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket) 100% pixel-identical to the 16:9 plate without enlarging or reshaping the compact round black pot, burying the exposed brown woody stem, shrinking, clumping, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D serene luxury Japandi architectural engawa courtyard gallery: the 4ft plant stands in the left foreground on wide warm natural hinoki-ash timber floorboards beside a smooth warm clay-lime plaster wall pier, while to the right open floor-to-ceiling warm white-ash and clear-glass sliding courtyard doors reveal a tranquil sunlit raked white-pebble zen garden with mossy stones, soft Japanese maple foliage bokeh, and a low 45cm carved granite water basin in the midground, completely open and unobstructed foreground timber floorboards in front of the compact 5in x 5.5in matte-black round cylindrical pot (zero foreground tea tables or props), warm slanting morning sunbeams across the timber deck, clean natural daylight on the plant, realistic wood-floor contact shadow directly under the compact round black pot, zero text."
+    },
+    {
+      "key": "R17_ARCHITECTURAL_FLOATING_OAK_STAIR_ATRIUM_RIGHT",
+      "refs": [
+        "RNDPOT_PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet tip, full wide-skirted natural conical silhouette, short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket) 100% pixel-identical to the 16:9 plate without enlarging or reshaping the compact round black pot, burying the exposed brown woody stem, shrinking, clumping, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D sunlit double-height contemporary architectural residence atrium: the 4ft plant stands on the right on large-format honed cream Roman travertine floor slabs at the base of a sculptural floating cantilevered warm white-oak staircase with frameless clear architectural glass balustrade rising gracefully upward toward the upper-left against a smooth warm ivory Venetian marmorino plaster wall, completely open and unobstructed foreground travertine slab floor in front of the compact 5in x 5.5in matte-black round cylindrical pot (zero foreground benches or furniture near the bottom frame edges), dramatic afternoon skylight sunbeams casting crisp diagonal architectural light bands across the plaster wall and oak stair treads, clean natural daylight on the plant, realistic stone contact shadow beneath the compact round black pot, zero text."
+    },
+    {
+      "key": "R18_TUSCAN_LIMESTONE_LOGGIA_GARDEN_ARCH_WIDE_LEFT",
+      "refs": [
+        "RNDPOT_PLATE_06_SINGLE_WIDE_55PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet tip, full wide-skirted natural conical silhouette, short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket) 100% pixel-identical to the 16:9 plate without enlarging or reshaping the compact round black pot, burying the exposed brown woody stem, shrinking, clumping, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 35mm-50mm medium-wide live-action Kodak Vision3 250D sunlit Tuscan countryside villa vaulted limestone garden loggia: the 4ft plant stands on the left on weathered tumbled honey-cream limestone pavers beside a carved limestone colonnade pier and a low 48cm antique carved stone garden bench set laterally along the loggia wall (the 48cm stone bench reaching ~39% of the 4ft plant height), while tall semicircular stone loggia arches on the right open onto a sunlit Italian olive-and-lavender courtyard garden in soft optical bokeh, completely open and unobstructed foreground limestone pavers in front of the compact 5in x 5.5in matte-black round cylindrical pot (zero foreground bistro tables or chairs near the bottom frame edges), warm golden-hour afternoon sunbeams slanting through the stone arches across the limestone floor, clean natural daylight on the plant, realistic stone contact shadow under the compact round black pot, zero text."
+    },
+    {
+      "key": "R19_FREESTANDING_TRAVERTINE_TUB_SPA_BATH_LEFT",
+      "refs": [
+        "RNDPOT_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet tip, full wide-skirted natural conical silhouette, short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket) 100% pixel-identical to the 16:9 plate without enlarging or reshaping the compact round black pot, burying the exposed brown woody stem, shrinking, clumping, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D sunlit Architectural Digest luxury master spa bathroom sanctuary: the 4ft plant stands in the left foreground beside tall brass-framed casement windows draped with sheer white linen curtains, while set back 1.2 meters to the right on honed warm vein-cut Roman travertine floor slabs sits a sculptural 58cm-tall matte-white stone freestanding oval soaking tub with a brushed champagne-brass floor-mounted tub spout (the 58cm tub rim sitting clearly below half the height of the 4ft plant), warm sand-ivory tadelakt plaster walls behind, completely open and unobstructed foreground travertine floor slabs in front of the compact 5in x 5.5in matte-black round cylindrical pot (zero foreground stools or mats covering the pot), warm morning golden window sunbeams across the travertine floor, clean natural daylight on the plant, crisp stone contact shadow beneath the compact round black pot, zero text."
+    },
+    {
+      "key": "R20_LAKE_COMO_STONE_TERRACE_SALON_WIDE_RIGHT",
+      "refs": [
+        "RNDPOT_PLATE_08_SINGLE_COASTAL_RIGHT_56PCT_16x9.jpg",
+        "RNDPOT_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot in the 16:9 plate as an untouched locked foreground photograph cutout — keep every single fine flat-fan leaf sprig, airy feathery outer branchlet tip, full wide-skirted natural conical silhouette, short visible dark-brown textured woody trunk stem and lower branch forks rising ~2 inches above the black cylindrical pot rim, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket) 100% pixel-identical to the 16:9 plate without enlarging or reshaping the compact round black pot, burying the exposed brown woody stem, shrinking, clumping, or redrawing any leaf or pot pixels. Outpaint ONLY the pure white background with a 35mm-50mm medium-wide Goldilocks live-action Kodak Vision3 250D sunlit Lake Como Italian villa indoor-outdoor living salon: the 4ft plant stands on the right beside retracted slimline dark-bronze glass terrace doors opening onto a carved 1.00-meter cream-limestone balcony balustrade (~22cm lower than the 4ft plant tip) overlooking shimmering sunlit sapphire alpine lake water and distant misty mountains in soft bokeh, while set back 1.3 meters in the left interior sits a low 75cm cognac saddle-leather lounge sofa on herringbone European white-oak parquet flooring, completely open and unobstructed foreground oak parquet floor in front of the compact 5in x 5.5in matte-black round cylindrical pot (zero foreground tables or chairs near the bottom frame edges), warm late-afternoon golden sunbeams stretching across the herringbone oak floor, clean natural daylight on the plant, realistic wood-floor contact shadow under the compact round black pot, zero text."
+    }
+  ],
+  "videos": [
+    {
+      "key": "VR01_HAMPTONS_WHITE_OAK_PORCH_4S",
+      "scene_key": "R01_HAMPTONS_WHITE_OAK_FRONT_PORCH_PAIR",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle lateral camera truck-and-arc sliding smoothly left-to-right at a constant viewing distance across the sunlit Hamptons white-oak front porch in crisp 3D optical parallax (strictly maintaining wide full-length framing with no zoom-in and no bottom-edge cropping) while all architectural elements, fluted porch columns, bluestone flagstones, and both potted plants remain 100% stationary anchored to the floor, keeping BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots and the bluestone floor margin beneath them 100% visible head-to-toe inside the frame from start to finish. Warm morning coastal sunbeams gleam naturally across the satin-brass door handles and white-oak grain while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR02_PARISIAN_LIMESTONE_MANTEL_4S",
+      "scene_key": "R02_PARISIAN_LIMESTONE_MANTEL_SALON_PAIR",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle controlled central 3D camera push-in advancing only slightly (~10 percent closer along the center axis so the full floor margin beneath both pots stays in view from start to finish) across the sunlit herringbone oak salon toward the carved Parisian limestone fireplace mantel in rich 3D optical parallax while all architectural elements, boiserie walls, carved limestone fireplace mantel, gilt mirror, parquet floor, and both potted plants remain 100% stationary anchored to their exact floor positions on the left and right sides of the fireplace without moving toward each other, keeping BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots and the oak floor beneath them 100% visible head-to-toe inside the frame. Warm afternoon window sunlight gleams softly across the gilt mirror frame and carved limestone mantel while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. Strictly no extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR03_FRENCH_CASEMENT_COURTYARD_3Q_4S",
+      "scene_key": "R03_COURTYARD_FRENCH_CASEMENT_DOORS_3Q_PAIR",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle forward diagonal camera push-in along the sunlit limestone chateau courtyard toward the arched charcoal-steel French casement double doors in deep 3D optical parallax while all architectural stone piers, courtyard flagstones, French doors, and both potted plants remain 100% stationary anchored to the stone floor, keeping BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots from floor base to top foliage tip completely visible head-to-toe inside the frame. Soft sunlit interior sheer drapery beyond the glass panes breathes gently in the afternoon warmth while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "VR04_SCANDI_FLUTED_OAK_FOYER_4S",
+      "scene_key": "R04_SCANDI_FLUTED_OAK_FOYER_CONSOLE_PAIR",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle lateral camera truck-and-arc sliding smoothly left-to-right at a constant viewing distance across the sunlit Nordic pale-ash foyer in clean 3D architectural parallax (strictly maintaining full-length framing with no zoom-in and no bottom-edge cropping) while the fluted white-oak console table, travertine vessel, wall mirror, ash floor, and both potted plants remain 100% stationary anchored to the floor, keeping BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots and the ash floor margin beneath them 100% visible head-to-toe inside the frame from start to finish. Crisp morning window sunbeams illuminate the warm ivory limewash wall texture and fluted oak ribs while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR05_MONTECITO_SPANISH_WALNUT_ENTRY_4S",
+      "scene_key": "R05_MONTECITO_SPANISH_ARCHED_WALNUT_ENTRY_PAIR",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle controlled central 3D camera push-in advancing only slightly (~10 percent closer along the central courtyard axis so the full terracotta floor margin beneath both pots stays in view from start to finish) toward the arched carved dark-walnut double entry door in rich 3D optical parallax while all stucco walls, terracotta floor tiles, and both potted plants remain 100% stationary anchored to their exact courtyard floor positions flanking the doorway, keeping ONLY the two potted plants and BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots from floor base to top foliage tip 100% visible head-to-toe inside the frame. The carved dark-walnut double entry doors pivot gently inward by a few degrees into the sunlit foyer while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. Strictly no extra plants at the frame borders, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR06_AMALFI_TRAVERTINE_STEPS_3Q_4S",
+      "scene_key": "R06_AMALFI_TRAVERTINE_GARDEN_STEPS_3Q_PAIR",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle diagonal lateral camera truck-and-arc gliding smoothly at a constant viewing distance along the sunlit Italian travertine coastal verandah in deep 3D optical parallax (strictly maintaining full-length framing with no zoom-in cropping) while the low 82cm carved travertine balustrade railing, stone pavers, and both potted plants remain 100% stationary anchored to the terrace floor, keeping BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots from floor base to top foliage tip completely visible head-to-toe inside the frame from start to finish. Sparkling azure Mediterranean sea water shimmers gently with sunlit ripples in the background horizon bokeh while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR07_TRIBECA_BRONZE_GLASS_DOORS_4S",
+      "scene_key": "R07_TRIBECA_LOFT_STEEL_GLASS_GALLERY_DOORS_PAIR",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle lateral camera truck-and-arc sliding smoothly left-to-right at a constant viewing distance across the sunlit white-oak penthouse gallery in crisp 3D optical parallax (strictly maintaining full-length framing with no zoom-in and no bottom-edge cropping) while the Venetian plaster walls, brushed dark-bronze glass double French doors, oak floorboards, and both potted plants remain 100% stationary anchored to the floor, keeping BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots and the oak floor margin beneath them 100% visible head-to-toe inside the frame from start to finish. Warm afternoon loft sunlight glints subtly across the satin-brass door levers and clear glass panes while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR08_BEVERLY_HILLS_LIMESTONE_PORTICO_4S",
+      "scene_key": "R08_BEVERLY_HILLS_LIMESTONE_COLONNADE_PORTICO_PAIR",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle controlled central 3D camera push-in advancing only slightly (~10 percent closer along the central portico axis so the full limestone floor margin beneath both pots stays in view from start to finish) toward the champagne-bronze and fluted-oak double entrance doors in rich 3D architectural parallax while the limestone pilasters, portico pavers, and both potted plants remain 100% stationary anchored to their exact stone floor positions flanking the doorway, keeping ONLY the two potted plants and BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots from floor base to top foliage tip 100% visible head-to-toe inside the frame. The champagne-bronze glass double entrance doors swing gently inward by a few degrees into the sunlit villa foyer while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. Strictly no extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR09_WELLNESS_SPA_TRAVERTINE_ALCOVE_4S",
+      "scene_key": "R09_WELLNESS_SPA_TRAVERTINE_ALCOVE_BENCH_PAIR",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle controlled central 3D camera push-in advancing only slightly (~10 percent closer along the central axis so the full travertine floor margin beneath both pots stays in view from start to finish) across the sunlit travertine wellness spa sanctuary toward the low Roman travertine alcove bench in tranquil 3D optical parallax while the low Roman travertine alcove bench, folded spa linens, tadelakt arch wall, travertine floor slabs, and both potted plants remain 100% stationary anchored to their exact floor positions on the left and right sides of the alcove bench without moving toward each other, keeping BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots and the travertine floor margin beneath them 100% visible head-to-toe inside the frame. Serene morning skylight sunbeams shift gently across the warm tadelakt plaster arch while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. Strictly no extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR10_CONSERVATORY_ARCHED_OAK_DOORS_4S",
+      "scene_key": "R10_CONSERVATORY_ARCHED_OAK_GARDEN_DOORS_PAIR",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle forward camera push-in across the checkered limestone conservatory floor toward the arched white-oak glass garden double doors in crisp 3D optical parallax while all conservatory stonework, checkerboard tiles, arched oak doors, and both potted plants remain 100% stationary anchored to the floor, keeping BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots from floor base to top foliage tip completely visible head-to-toe inside the frame. Sunlit garden fountain water beyond the divided-light glass doors shimmers softly in the morning light while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "VR11_READING_SALON_BOUCLE_LOUNGE_4S",
+      "scene_key": "R11_SUNLIT_READING_SALON_BOUCLE_LOUNGE_LEFT",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle forward diagonal camera push-in across the sunlit reading salon so the left foreground plant separates in rich 3D optical parallax from the cream bouclé lounge chair while all furniture, the bouclé armchair, travertine drink table, herringbone oak floor, and the potted plant remain 100% stationary anchored to the floor, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot from floor base to top foliage tip completely visible head-to-toe inside the frame. Tall sheer oatmeal-linen window drapery breathes very softly in the warm afternoon sunlight while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "VR12_MARBLE_WATERFALL_KITCHEN_4S",
+      "scene_key": "R12_MARBLE_WATERFALL_KITCHEN_ISLAND_HERO_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle lateral camera truck-and-arc sliding smoothly right-to-left at a constant viewing distance across the sunlit luxury kitchen gallery so the right foreground plant separates in crisp 3D optical parallax from the Calacatta marble waterfall island (strictly maintaining full-length framing with no zoom-in and no bottom-edge cropping) while the marble island, oak counter stools, fluted cabinetry, pale oak floor, and the potted plant remain 100% stationary anchored to the floor, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot and the oak floor margin beneath it 100% visible head-to-toe inside the frame from start to finish. Crisp morning window sunbeams gleam softly across the honed Calacatta marble veining and pale oak floorboards while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR13_SOARING_OAK_BEAM_DINING_WIDE_4S",
+      "scene_key": "R13_SOARING_OAK_BEAM_DINING_CREDENZA_WIDE_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 35mm-50mm gentle forward camera push-in across the soaring oak-beamed European dining salon in expansive 3D architectural parallax while the fluted white-oak sideboard credenza, oak dining table, wishbone chairs, wide-plank floor, and the right potted plant remain 100% stationary anchored to the floor, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot from floor base to top foliage tip completely visible head-to-toe inside the frame. Golden morning sunbeams stream naturally through the tall arched steel windows across the plaster wall and oak floor grain while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "VR14_MALIBU_OCEANVIEW_LIVING_4S",
+      "scene_key": "R14_MALIBU_OCEANVIEW_LIVING_TERRACE_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle lateral camera truck-and-arc sliding smoothly right-to-left at a constant viewing distance across the sunlit Malibu coastal living room in rich 3D optical parallax (strictly maintaining full-length framing with no zoom-in and no bottom-edge cropping) while the setback linen sofa, travertine coffee table, bronze glass door frames, oak floor, and the right potted plant remain 100% stationary anchored to the floor, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot and the oak floor margin beneath it 100% visible head-to-toe inside the frame from start to finish. Sparkling turquoise Pacific ocean water shimmers gently with sunlit ripples on the distant coastal horizon while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR15_MEDITERRANEAN_POOL_CABANA_HERO_4S",
+      "scene_key": "R15_MEDITERRANEAN_INFINITY_POOL_CABANA_HERO_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle level-horizon forward camera push-in across the sunlit travertine poolhouse terrace so the right foreground plant separates in deep 3D optical parallax from the setback teak daybed while the teak daybed, limestone colonnade, travertine deck slabs, and the potted plant remain 100% stationary anchored to the terrace floor, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot from bottom floor base to top foliage tip completely uncut and visible head-to-toe inside the frame. Sparkling turquoise infinity-pool water shimmers with gentle sunlit ripples in the background bokeh while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "VR16_JAPANDI_COURTYARD_GALLERY_4S",
+      "scene_key": "R16_JAPANDI_SHOJI_COURTYARD_GALLERY_LEFT",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle forward diagonal camera push-in along the sunlit Japandi hinoki-ash engawa gallery in serene 3D optical parallax while all sliding wood-and-glass doors, clay-plaster wall pier, timber floorboards, and the left potted plant remain 100% stationary anchored to the floor, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot from floor base to top foliage tip completely visible head-to-toe inside the frame. Subtle water surface reflections in the courtyard granite basin shimmer softly in the morning sunlight while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "VR17_FLOATING_OAK_STAIR_ATRIUM_4S",
+      "scene_key": "R17_ARCHITECTURAL_FLOATING_OAK_STAIR_ATRIUM_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle forward diagonal camera push-in across the sunlit double-height travertine atrium toward the floating cantilevered white-oak staircase in dramatic architectural 3D parallax while the cantilevered oak stair treads, glass balustrade, marmorino plaster wall, travertine floor slabs, and the right potted plant remain 100% stationary anchored to the floor, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot from floor base to top foliage tip completely visible head-to-toe inside the frame. Clean afternoon skylight sunbeams cast crisp geometric light bands across the plaster wall and oak treads while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "VR18_TUSCAN_LIMESTONE_LOGGIA_4S",
+      "scene_key": "R18_TUSCAN_LIMESTONE_LOGGIA_GARDEN_ARCH_WIDE_LEFT",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle forward diagonal camera push-in through the sunlit Tuscan vaulted limestone garden loggia in warm 3D optical parallax while the carved stone bench, limestone colonnade arches, weathered stone pavers, and the left potted plant remain 100% stationary anchored to the stone floor, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot from floor base to top foliage tip completely visible head-to-toe inside the frame. Distant sunlit olive-and-lavender garden foliage beyond the stone arches sways very softly in the golden-hour breeze while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "VR19_FREESTANDING_TUB_SPA_BATH_4S",
+      "scene_key": "R19_FREESTANDING_TRAVERTINE_TUB_SPA_BATH_LEFT",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle forward diagonal camera push-in across the sunlit travertine master spa bathroom so the left foreground plant separates in smooth 3D optical parallax from the setback freestanding soaking tub while the matte-white stone soaking tub, brass floor spout, tadelakt walls, travertine floor slabs, and the left potted plant remain 100% stationary anchored to the floor, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot from floor base to top foliage tip completely visible head-to-toe inside the frame. Sheer white linen window curtains breathe very softly in the warm morning sunlight while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero morphing, zero text."
+    },
+    {
+      "key": "VR20_LAKE_COMO_TERRACE_SALON_4S",
+      "scene_key": "R20_LAKE_COMO_STONE_TERRACE_SALON_WIDE_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle lateral camera truck-and-arc sliding smoothly right-to-left at a constant viewing distance across the sunlit Lake Como herringbone-oak salon in rich 3D optical parallax (strictly maintaining full-length framing with no zoom-in, no bottom-edge cropping, and continuous bright sunlit exposure from start to finish with zero fade-to-black) while the setback cognac leather sofa, bronze terrace door frames, carved stone balcony balustrade, oak floor, and the right potted plant remain 100% stationary anchored to the floor, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot and the oak floor margin beneath it 100% visible head-to-toe inside the frame. Sparkling sapphire alpine lake water shimmers softly with sunlit ripples beyond the limestone balcony while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    }
+  ],
+  "video_card_indices": [
+    {
+      "card_index": 10,
+      "slug": "01_VR01_HAMPTONS_WHITE_OAK_PORCH_4S"
+    },
+    {
+      "card_index": 3,
+      "slug": "02_VR02_PARISIAN_LIMESTONE_MANTEL_4S"
+    },
+    {
+      "card_index": 19,
+      "slug": "03_VR03_FRENCH_CASEMENT_COURTYARD_3Q_4S"
+    },
+    {
+      "card_index": 9,
+      "slug": "04_VR04_SCANDI_FLUTED_OAK_FOYER_4S"
+    },
+    {
+      "card_index": 2,
+      "slug": "05_VR05_MONTECITO_SPANISH_WALNUT_ENTRY_4S"
+    },
+    {
+      "card_index": 8,
+      "slug": "06_VR06_AMALFI_TRAVERTINE_STEPS_3Q_4S"
+    },
+    {
+      "card_index": 7,
+      "slug": "07_VR07_TRIBECA_BRONZE_GLASS_DOORS_4S"
+    },
+    {
+      "card_index": 1,
+      "slug": "08_VR08_BEVERLY_HILLS_LIMESTONE_PORTICO_4S"
+    },
+    {
+      "card_index": 0,
+      "slug": "09_VR09_WELLNESS_SPA_TRAVERTINE_ALCOVE_4S"
+    },
+    {
+      "card_index": 18,
+      "slug": "10_VR10_CONSERVATORY_ARCHED_OAK_DOORS_4S"
+    },
+    {
+      "card_index": 17,
+      "slug": "11_VR11_READING_SALON_BOUCLE_LOUNGE_4S"
+    },
+    {
+      "card_index": 6,
+      "slug": "12_VR12_MARBLE_WATERFALL_KITCHEN_4S"
+    },
+    {
+      "card_index": 16,
+      "slug": "13_VR13_SOARING_OAK_BEAM_DINING_WIDE_4S"
+    },
+    {
+      "card_index": 5,
+      "slug": "14_VR14_MALIBU_OCEANVIEW_LIVING_4S"
+    },
+    {
+      "card_index": 15,
+      "slug": "15_VR15_MEDITERRANEAN_POOL_CABANA_HERO_4S"
+    },
+    {
+      "card_index": 14,
+      "slug": "16_VR16_JAPANDI_COURTYARD_GALLERY_4S"
+    },
+    {
+      "card_index": 13,
+      "slug": "17_VR17_FLOATING_OAK_STAIR_ATRIUM_4S"
+    },
+    {
+      "card_index": 12,
+      "slug": "18_VR18_TUSCAN_LIMESTONE_LOGGIA_4S"
+    },
+    {
+      "card_index": 11,
+      "slug": "19_VR19_FREESTANDING_TUB_SPA_BATH_4S"
+    },
+    {
+      "card_index": 4,
+      "slug": "20_VR20_LAKE_COMO_TERRACE_SALON_4S"
+    }
+  ]
+}

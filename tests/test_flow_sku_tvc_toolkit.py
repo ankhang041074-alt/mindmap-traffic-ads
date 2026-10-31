@@ -497,28 +497,29 @@ class TestRepoPortabilityAndSilentCDPInvariants(unittest.TestCase):
                     )
 
     def test_checked_in_product_configs_and_uuid_maps_are_valid(self):
-        batch3_dir = os.path.join(REPO_ROOT, "products", "cedar_sqpot_batch3_20")
-        cfg_path = os.path.join(batch3_dir, "sku_project.json")
-        uuid_path = os.path.join(batch3_dir, "cedar_sqpot_batch3_20_scene_uuids.json")
-        self.assertTrue(os.path.isfile(cfg_path))
-        self.assertTrue(os.path.isfile(uuid_path))
+        for slug in ("cedar_sqpot_batch3_20", "cedar_roundpot_20"):
+            sku_dir = os.path.join(REPO_ROOT, "products", slug)
+            cfg_path = os.path.join(sku_dir, "sku_project.json")
+            uuid_path = os.path.join(sku_dir, f"{slug}_scene_uuids.json")
+            self.assertTrue(os.path.isfile(cfg_path), f"Missing {cfg_path}")
+            self.assertTrue(os.path.isfile(uuid_path), f"Missing {uuid_path}")
 
-        with open(cfg_path, "r", encoding="utf-8") as f:
-            cfg = json.load(f)
-        with open(uuid_path, "r", encoding="utf-8") as f:
-            uuid_map = json.load(f)
+            with open(cfg_path, "r", encoding="utf-8") as f:
+                cfg = json.load(f)
+            with open(uuid_path, "r", encoding="utf-8") as f:
+                uuid_map = json.load(f)
 
-        self.assertEqual(validate_sku_config(cfg, project_dir=batch3_dir, require_local_plates=False), [])
-        self.assertEqual(len(cfg["scenes"]), 20)
-        self.assertEqual(len(cfg["videos"]), 20)
-        self.assertEqual(len(uuid_map), 20)
-        self.assertEqual(len(set(uuid_map.values())), 20)
+            self.assertEqual(validate_sku_config(cfg, project_dir=sku_dir, require_local_plates=False), [])
+            self.assertEqual(len(cfg["scenes"]), 20)
+            self.assertEqual(len(cfg["videos"]), 20)
+            self.assertEqual(len(uuid_map), 20)
+            self.assertEqual(len(set(uuid_map.values())), 20)
 
-        excluded = set(cfg.get("exclude_uuids", []))
-        for sc in cfg["scenes"]:
-            uid = uuid_map.get(sc["key"], "")
-            self.assertRegex(uid, r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
-            self.assertNotIn(uid, excluded)
+            excluded = set(cfg.get("exclude_uuids", []))
+            for sc in cfg["scenes"]:
+                uid = uuid_map.get(sc["key"], "")
+                self.assertRegex(uid, r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+                self.assertNotIn(uid, excluded)
 
 
 if __name__ == "__main__":
