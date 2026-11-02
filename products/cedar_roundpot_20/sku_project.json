@@ -148,7 +148,8 @@
     "af330ac9-36fd-4ebb-b333-6e88d5ba817c",
     "c9733351-8e3c-46da-a851-7d630de44575",
     "5f02582a-134d-424b-8e02-efa28817592a",
-    "df338731-d86b-4590-956e-6e042d632de7"
+    "df338731-d86b-4590-956e-6e042d632de7",
+    "bb01cf57-cd2b-4dc6-b29b-d41eac413aff"
   ],
   "scenes": [
     {
@@ -310,6 +311,46 @@
         "RNDPOT2_REF_2_CLOSEUP_1024.jpg"
       ],
       "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): keep the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot 100% identical to the 16:9 plate in exact position, height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket), short visible dark-brown textured woody trunk stem rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone green feathery flat-fan molded foliage geometry without enlarging or reshaping the compact round black pot or burying the exposed brown woody stem, while allowing warm golden Italian late-afternoon sunlight to naturally wrap the outer fresh spring-green branchlet tips with crisp optical rim-light highlights, natural leaf-to-leaf micro-shadow depth, and warm stone-floor bounce light. Replace ONLY the pure white background with a 35mm-50mm medium-wide Goldilocks live-action Kodak Vision3 250D sunlit Lake Como Italian villa open stone colonnade loggia salon (strictly an open carved limestone arch loggia with NO glass door frames, NO bronze mullions, and NO sliding door panels!): the 4ft plant stands on the right beside a carved cream-limestone colonnade column and a continuous 95cm carved stone balcony balustrade (~27cm lower than the 4ft plant tip) overlooking shimmering sunlit sapphire alpine lake water and distant misty mountains in soft bokeh, while set back 1.3 meters in the left interior sits a low 75cm cognac saddle-leather lounge sofa on honed cream travertine-and-oak flooring, open foreground floor margin in front of the compact 5in x 5.5in matte-black round cylindrical pot, warm late-afternoon golden sunbeams kissing the outer green foliage tips and stretching across the floor, realistic contact shadow under the compact round black pot, zero text."
+    },
+    {
+      "key": "R21_AMERICAN_FARMHOUSE_BOARD_AND_BATTEN_PORCH_PAIR",
+      "refs": [
+        "RNDPOT2_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg",
+        "RNDPOT2_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as locked foreground photograph cutouts at their exact symmetric 52% frame-height and 8% bottom-margin 2D canvas coordinates — do NOT enlarge, stretch taller, or shift either plant on the 16:9 canvas, keeping BOTH plants and compact round cylindrical black pots 100% identical to the 16:9 plate in exact 52% height, exact symmetric horizontal spacing, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone green feathery flat-fan molded foliage geometry, while allowing warm morning American suburban sunlight to naturally wrap the outer fresh spring-green branchlet tips with crisp optical rim-light highlights, natural leaf-to-leaf micro-shadow depth, and subtle wood-floor bounce light. Outpaint ONLY the pure white background with a 35mm-50mm live-action Kodak Vision3 250D sunlit Modern American Farmhouse wraparound front porch (Studio McGee / Magnolia Home residential aesthetic): running horizontally flush along the exact same floor depth line only 18cm behind both 4ft plants so BOTH pots sit at the exact same distance from the wall is a crisp warm-white painted vertical board-and-batten timber siding wall with a centered 80cm-tall solid weathered white-oak farmhouse porch welcome bench (reaching ~65% of the 4ft plant height so both 4ft plants tower ~42cm above the bench backrest) styled with a folded oatmeal-and-charcoal woven plaid throw pillow beneath a fixed black-trimmed Colonial multi-pane picture window with matte-black farmhouse shutters locked flat against the siding (strictly a solid window wall with ZERO doors!), wide grey-washed tongue-and-groove fir porch floorboards with a clean open foreground floor margin beneath both compact 5in x 5.5in matte-black round cylindrical pots, warm raking morning sunlight slanting across the board-and-batten siding and kissing the outer green foliage tips of both plants, crisp wood-porch contact shadows directly beneath both compact matte-black round cylindrical pots, zero text."
+    },
+    {
+      "key": "R22_SUBURBAN_PAINTED_BRICK_COLONIAL_PORCH_PAIR",
+      "refs": [
+        "RNDPOT2_PLATE_01_PAIR_DOOR_52PCT_16x9.jpg",
+        "RNDPOT2_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): treat BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots in the 16:9 plate as locked foreground photograph cutouts at their exact symmetric 52% frame-height and 8% bottom-margin 2D canvas coordinates — do NOT enlarge, stretch taller, or shift either plant on the 16:9 canvas, keeping BOTH plants and compact round cylindrical black pots 100% identical to the 16:9 plate in exact 52% height, exact symmetric horizontal spacing, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone green feathery flat-fan molded foliage geometry, while allowing warm golden late-afternoon neighborhood sunlight to naturally wrap the outer fresh spring-green branchlet tips with crisp optical rim-light highlights, rich leaf-to-leaf micro-shadow depth, and warm bluestone-floor bounce light. Outpaint ONLY the pure white background with a 35mm-50mm live-action Kodak Vision3 250D sunlit classic American suburban Georgian Colonial painted-brick front porch verandah: running horizontally flush along the exact same single flat floor depth plane only 16cm behind both 4ft plants so BOTH pots sit right alongside the bench on the exact same continuous flat bluestone floor (strictly a single flat porch floor with ZERO steps, ZERO ledges, and ZERO doors anywhere in the frame!) is a warm limewashed cream-and-terracotta American brick wall with a centered 82cm-tall classic matte-black American Windsor spindle wood porch bench (reaching ~67% of the 4ft plant height so both 4ft plants tower ~40cm above the bench backrest) beneath a fixed white Georgian divided-light picture window with a brick soldier-course lintel, leaving the top 40% of the frame open to the limewashed brick wall and window above the plant tips, wide Pennsylvania bluestone porch flagstones with a clean open foreground floor margin beneath both compact 5in x 5.5in matte-black round cylindrical pots, golden late-afternoon sunbeams raking across the limewashed brick texture and illuminating the outer green foliage tips of both plants, crisp bluestone contact shadows directly beneath both compact matte-black round cylindrical pots, zero text."
+    },
+    {
+      "key": "R23_AMERICAN_CRAFTSMAN_SHIPLAP_FIREPLACE_HEARTH_PAIR",
+      "refs": [
+        "RNDPOT2_PLATE_02_PAIR_MEDIUM_62PCT_16x9.jpg",
+        "RNDPOT2_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): keep BOTH potted artificial plants and their compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pots 100% identical to the 16:9 plate in exact symmetric position, 62% height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pots, NO barrels, NO urns, and NO woven baskets), short visible dark-brown textured woody trunk stem rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone green feathery flat-fan molded foliage geometry without enlarging or reshaping the compact round black pots or burying the exposed brown woody stem, while allowing warm golden afternoon family-room window sunbeams to naturally wrap the outer fresh spring-green branchlet tips with crisp optical rim-light highlights, rich leaf-to-leaf micro-shadow depth, and warm oak-floor bounce light. Replace ONLY the pure white background with a 50mm medium-shot live-action Kodak Vision3 250D sunlit cozy upscale American Craftsman / Pottery Barn family living room fireplace hearth: positioned horizontally along the exact same floor depth plane only 16cm behind both 4ft plants so BOTH pots rest symmetrically at the exact same distance from the hearth is a 1.16-meter-tall dry-stacked warm grey-and-buff American fieldstone fireplace surround topped by a chunky reclaimed white-oak barn-beam mantel shelf whose horizontal wood beam aligns ~4cm below the pointed top tips of both 4ft plants (locking authentic 4ft physical scale), set against a creamy-white horizontal shiplap paneled chimney breast with a framed vintage American pastoral landscape oil painting above and neatly stacked birch logs inside the firebox (strictly a solid stone hearth with ZERO glass doors or screens!), wide-plank warm honey American hickory-oak hardwood flooring with a generous open foreground floor margin in front of both compact 5in x 5.5in matte-black round cylindrical pots, warm diagonal afternoon sunbeams raking across the fieldstone hearth, shiplap wall, and outer green foliage tips of both plants, crisp oak-floor contact shadows beneath both compact matte-black round cylindrical pots, zero text."
+    },
+    {
+      "key": "R24_AMERICAN_SHAKER_MUDROOM_FOYER_BENCH_HERO_LEFT",
+      "refs": [
+        "RNDPOT2_PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9.jpg",
+        "RNDPOT2_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): keep the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot 100% identical to the 16:9 plate in exact left-foreground position, 72% height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket), short visible dark-brown textured woody trunk stem rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone green feathery flat-fan molded foliage geometry without enlarging or reshaping the compact round black pot or burying the exposed brown woody stem, while allowing warm morning side-window sunbeams to naturally wrap the outer fresh spring-green branchlet tips with crisp optical rim-light highlights, natural leaf-to-leaf micro-shadow depth, and warm brick-floor bounce light. Replace ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D sunlit upscale American suburban home Shaker mudroom and entryway foyer: the 4ft plant stands in the left foreground on classic warm terracotta-and-buff brick-herringbone floor tiles, while running horizontally along the exact same floor depth plane 16cm behind the pot to the right is a built-in warm sage-putty painted American Shaker vertical beadboard mudroom hall-tree bench featuring a low 48cm-tall solid natural white-oak bench seat (reaching ~39% of the 4ft plant height so the 4ft plant towers ~74cm above the bench seat!) with two woven seagrass storage baskets tucked neatly into the lower cubbies, a folded cream cable-knit throw blanket on the oak seat, and aged brass coat hooks on the beadboard backing above (strictly built-in Shaker mudroom millwork with ZERO doors!), completely open and unobstructed foreground brick-herringbone floor margin in front of the compact 5in x 5.5in matte-black round cylindrical pot, warm diagonal morning sunbeams slanting across the sage beadboard and kissing the outer green foliage tips of the plant, crisp floor contact shadow directly under the compact round black pot, zero text."
+    },
+    {
+      "key": "R25_NEW_ENGLAND_CAPE_COD_BAY_WINDOW_SUNROOM_HERO_RIGHT",
+      "refs": [
+        "RNDPOT2_PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9.jpg",
+        "RNDPOT2_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact two-tone deep forest-green inner branches, vibrant fresh spring-green fine feathery flat-fan molded outer branchlet tips, short visible dark-brown textured woody trunk stem, and compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot detail): keep the potted artificial plant and its compact 5-inch-tall by 5.5-inch-wide smooth matte-black round cylindrical nursery pot 100% identical to the 16:9 plate in exact right-foreground position, 70% height, compact cylindrical pot proportions (only ~10.5% of total 4ft height — strictly NO tall square pot, NO barrel, NO urn, and NO woven basket), short visible dark-brown textured woody trunk stem rising ~2 inches above the black cylindrical pot rim, full wide-skirted natural conical silhouette, and dense two-tone green feathery flat-fan molded foliage geometry without enlarging or reshaping the compact round black pot or burying the exposed brown woody stem, while allowing bright golden afternoon coastal American sunbeams to naturally wrap the outer fresh spring-green branchlet tips with crisp optical rim-light highlights, natural leaf-to-leaf micro-shadow depth, and warm oak-floor bounce light. Replace ONLY the pure white background with a 50mm Hero live-action Kodak Vision3 250D sunlit American New England Cape Cod family sunroom and breakfast reading nook: the 4ft plant stands in the right foreground on wide-plank natural honey American white-oak floorboards, while aligned horizontally along the exact same floor depth plane 16cm behind the pot to the left sits a built-in 50cm-tall crisp warm-white Shaker-paneled bay-window reading bench (reaching ~41% of the 4ft plant height so the 4ft plant towers ~72cm higher than the window seat!) topped with a tailored classic American navy-and-cream ticking-stripe linen bench cushion and two chambray-blue linen pillows beneath fixed white divided-light wooden bay windows (strictly fixed mullioned bay windows above a solid Shaker wood bench base with ZERO doors!) overlooking a sunny green American front lawn, blooming white hydrangeas, and a classic white picket fence in soft optical bokeh, completely open and unobstructed foreground white-oak floorboards in front of the compact 5in x 5.5in matte-black round cylindrical pot, warm golden afternoon sunbeams streaming through the bay windows across the oak floor and outer green foliage tips of the plant, crisp wood-floor contact shadow directly under the compact round black pot, zero text."
     }
   ],
   "videos": [
@@ -412,88 +453,133 @@
       "key": "VR20_LAKE_COMO_TERRACE_SALON_4S",
       "scene_key": "R20_LAKE_COMO_STONE_TERRACE_SALON_WIDE_RIGHT",
       "prompt": "Continuous, clearly visible 4-second 50mm gentle low-horizon forward-left 3D camera glide across the sunlit Lake Como stone colonnade loggia (with a 100% clear unobstructed view and zero foreground ceiling beams, bars, or objects ever passing in front of the lens, maintaining a wide framing so the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot and the floor beneath it stay 100% visible head-to-toe inside the frame from 0s to 4s) while the left cognac leather sofa, carved limestone colonnade column, and stone balcony balustrade shift smoothly in natural 3D optical parallax behind the 100% solid and stationary right potted plant anchored to the floor. Sparkling sunlit alpine lake water shimmers softly beyond the stone balustrade while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR21_AMERICAN_FARMHOUSE_PORCH_4S",
+      "scene_key": "R21_AMERICAN_FARMHOUSE_BOARD_AND_BATTEN_PORCH_PAIR",
+      "prompt": "Smooth 4-second 50mm horizontal 3D camera arc from left to right at a fixed wide camera distance across the sunlit Modern American Farmhouse grey-washed timber front porch (strictly maintaining the full wide-shot distance without zooming in closer, keeping BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots and the wood porch floorboards beneath them 100% visible head-to-toe inside the frame from 0s to 4s) while the warm-white vertical board-and-batten siding wall, fixed Colonial multi-pane window, black farmhouse shutters, weathered white-oak porch welcome bench, and plaid pillow shift smoothly in clean 3D optical parallax behind the 100% stationary potted plants bolted to their exact porch floorboard positions without sliding. Warm morning American suburban sunbeams gleam naturally across the weathered white-oak bench grain and outer spring-green branchlet tips while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR22_SUBURBAN_PAINTED_BRICK_COLONIAL_4S",
+      "scene_key": "R22_SUBURBAN_PAINTED_BRICK_COLONIAL_PORCH_PAIR",
+      "prompt": "Smooth 4-second 50mm horizontal 3D camera arc from left to right at a fixed wide camera distance across the sunlit American Colonial bluestone front porch (strictly maintaining the full wide-shot distance without zooming in closer, keeping BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots and the bluestone flagstones beneath them 100% visible head-to-toe inside the frame from 0s to 4s) while the limewashed American brick wall, fixed Georgian divided-light window, copper sconces, and matte-black Windsor spindle wood bench shift smoothly in clean 3D optical parallax behind the 100% stationary potted plants bolted to their exact bluestone flagstone positions without sliding. Golden late-afternoon neighborhood sunlight gleams naturally across the limewashed brick texture and outer spring-green branchlet tips while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR23_AMERICAN_CRAFTSMAN_SHIPLAP_HEARTH_4S",
+      "scene_key": "R23_AMERICAN_CRAFTSMAN_SHIPLAP_FIREPLACE_HEARTH_PAIR",
+      "prompt": "Smooth 4-second 50mm horizontal 3D camera arc from right to left at a fixed wide camera distance across the sunlit American hickory-oak living room floor (strictly maintaining the full wide-shot distance without zooming in closer, keeping BOTH compact 5-inch by 5.5-inch smooth matte-black round cylindrical pots and the hickory-oak floor planks beneath them 100% visible head-to-toe inside the frame from 0s to 4s) while the creamy-white shiplap wall, dry-stacked American fieldstone fireplace surround, reclaimed oak barn-beam mantel, framed landscape painting, and stacked birch logs shift smoothly in rich 3D optical parallax behind the 100% stationary potted plants bolted to their exact hardwood floor plank coordinates without sliding. Warm afternoon family-room sunbeams gleam softly across the stacked fieldstone texture, reclaimed oak beam, and outer spring-green branchlet tips while preserving the exposed short dark-brown woody stems, compact round black cylindrical pots, and dense two-tone green feathery flat-fan molded foliage of both plants. Strictly no extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR24_AMERICAN_SHAKER_MUDROOM_BENCH_4S",
+      "scene_key": "R24_AMERICAN_SHAKER_MUDROOM_FOYER_BENCH_HERO_LEFT",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle low-horizon forward diagonal 3D camera push-in across the sunlit brick-herringbone foyer floor so the left foreground plant separates in crisp 3D optical parallax from the built-in sage-putty American Shaker beadboard mudroom hall-tree bench while the Shaker beadboard wall, white-oak bench seat, woven seagrass baskets, brass coat hooks, brick-herringbone floor tiles, and the left potted plant remain 100% stationary anchored to their exact floor positions without sliding, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot from floor base to top foliage tip completely visible head-to-toe inside the frame. Warm morning side-window sunbeams gleam softly across the sage beadboard millwork, white-oak bench seat, and outer spring-green branchlet tips while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
+    },
+    {
+      "key": "VR25_NEW_ENGLAND_CAPE_COD_SUNROOM_4S",
+      "scene_key": "R25_NEW_ENGLAND_CAPE_COD_BAY_WINDOW_SUNROOM_HERO_RIGHT",
+      "prompt": "Continuous, clearly visible 4-second 50mm gentle low-horizon forward diagonal 3D camera push-in across the sunlit New England Cape Cod white-oak sunroom toward the built-in Shaker bay-window reading bench in bright 3D optical parallax while the built-in white Shaker window bench, navy ticking-stripe cushion, fixed divided-light bay window mullions, white-oak floorboards, and the right potted plant remain 100% stationary anchored to their exact oak floorboard positions without sliding, keeping the entire compact 5-inch by 5.5-inch smooth matte-black round cylindrical pot from floor base to top foliage tip completely visible head-to-toe inside the frame. Warm golden afternoon coastal sunlight gleams across the honey white-oak floor and outer spring-green branchlet tips while preserving the exposed short dark-brown woody stem, compact round black cylindrical pot, and dense two-tone green feathery flat-fan molded foliage of the plant. No extra plants, no people, no camera equipment, zero fade-out, zero morphing, zero text."
     }
   ],
   "video_card_indices": [
     {
-      "card_index": 13,
+      "card_index": 18,
       "slug": "01_VR01_HAMPTONS_WHITE_OAK_PORCH_4S"
     },
     {
-      "card_index": 12,
+      "card_index": 17,
       "slug": "02_VR02_PARISIAN_LIMESTONE_MANTEL_4S"
     },
     {
-      "card_index": 0,
+      "card_index": 5,
       "slug": "03_VR03_FRENCH_CASEMENT_COURTYARD_3Q_4S"
     },
     {
-      "card_index": 5,
+      "card_index": 10,
       "slug": "04_VR04_SCANDI_FLUTED_OAK_FOYER_4S"
     },
     {
-      "card_index": 4,
+      "card_index": 9,
       "slug": "05_VR05_MONTECITO_SPANISH_WALNUT_ENTRY_4S"
     },
     {
-      "card_index": 11,
+      "card_index": 16,
       "slug": "06_VR06_AMALFI_TRAVERTINE_STEPS_3Q_4S"
     },
     {
-      "card_index": 10,
+      "card_index": 15,
       "slug": "07_VR07_TRIBECA_BRONZE_GLASS_DOORS_4S"
     },
     {
-      "card_index": 1,
+      "card_index": 6,
       "slug": "08_VR08_BEVERLY_HILLS_LIMESTONE_PORTICO_4S"
     },
     {
-      "card_index": 9,
+      "card_index": 14,
       "slug": "09_VR09_WELLNESS_SPA_TRAVERTINE_ALCOVE_4S"
     },
     {
-      "card_index": 8,
+      "card_index": 13,
       "slug": "10_VR10_CONSERVATORY_ARCHED_OAK_DOORS_4S"
     },
     {
-      "card_index": 19,
+      "card_index": 24,
       "slug": "11_VR11_READING_SALON_BOUCLE_LOUNGE_4S"
     },
     {
-      "card_index": 3,
+      "card_index": 8,
       "slug": "12_VR12_MARBLE_WATERFALL_KITCHEN_4S"
     },
     {
-      "card_index": 18,
+      "card_index": 23,
       "slug": "13_VR13_SOARING_OAK_BEAM_DINING_WIDE_4S"
     },
     {
-      "card_index": 6,
+      "card_index": 11,
       "slug": "14_VR14_MALIBU_OCEANVIEW_LIVING_4S"
     },
     {
-      "card_index": 17,
+      "card_index": 22,
       "slug": "15_VR15_MEDITERRANEAN_POOL_CABANA_HERO_4S"
     },
     {
-      "card_index": 7,
+      "card_index": 12,
       "slug": "16_VR16_JAPANDI_COURTYARD_GALLERY_4S"
     },
     {
-      "card_index": 16,
+      "card_index": 21,
       "slug": "17_VR17_FLOATING_OAK_STAIR_ATRIUM_4S"
     },
     {
-      "card_index": 15,
+      "card_index": 20,
       "slug": "18_VR18_TUSCAN_LIMESTONE_LOGGIA_4S"
     },
     {
-      "card_index": 14,
+      "card_index": 19,
       "slug": "19_VR19_FREESTANDING_TUB_SPA_BATH_4S"
     },
     {
-      "card_index": 2,
+      "card_index": 7,
       "slug": "20_VR20_LAKE_COMO_TERRACE_SALON_4S"
+    },
+    {
+      "card_index": 1,
+      "slug": "21_VR21_AMERICAN_FARMHOUSE_PORCH_4S"
+    },
+    {
+      "card_index": 4,
+      "slug": "22_VR22_SUBURBAN_PAINTED_BRICK_COLONIAL_4S"
+    },
+    {
+      "card_index": 0,
+      "slug": "23_VR23_AMERICAN_CRAFTSMAN_SHIPLAP_HEARTH_4S"
+    },
+    {
+      "card_index": 3,
+      "slug": "24_VR24_AMERICAN_SHAKER_MUDROOM_BENCH_4S"
+    },
+    {
+      "card_index": 2,
+      "slug": "25_VR25_NEW_ENGLAND_CAPE_COD_SUNROOM_4S"
     }
   ]
 }

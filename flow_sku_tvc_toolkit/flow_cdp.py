@@ -1935,6 +1935,7 @@ async def _index_gallery_tiles_responsive(flow: FlowCDP, max_needed_idx: int) ->
             if (!sc) return false;
             const prev = sc.scrollTop;
             sc.scrollTop += 520;
+            sc.dispatchEvent(new Event('scroll', {bubbles: true}));
             return sc.scrollTop > prev;
         })()
         """)
@@ -1945,7 +1946,10 @@ async def _index_gallery_tiles_responsive(flow: FlowCDP, max_needed_idx: int) ->
     await flow.js("""
     (() => {
         const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
-        if (sc) sc.scrollTop = 0;
+        if (sc) {
+            sc.scrollTop = 0;
+            sc.dispatchEvent(new Event('scroll', {bubbles: true}));
+        }
     })()
     """)
     await asyncio.sleep(0.45)
@@ -1958,7 +1962,10 @@ async def _scroll_to_indexed_tile(flow: FlowCDP, tile_meta: Dict[str, Any]) -> O
     await flow.js(f"""
     (() => {{
         const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
-        if (sc) sc.scrollTop = {target_sy};
+        if (sc) {{
+            sc.scrollTop = {target_sy};
+            sc.dispatchEvent(new Event('scroll', {{bubbles: true}}));
+        }}
     }})()
     """)
     await asyncio.sleep(0.55)
@@ -2605,6 +2612,7 @@ async def audit_videos_2zone_in_browser(
                 const vr = domVid.getBoundingClientRect();
                 const r = (vr.width > 80 && vr.height > 50) ? vr : best.getBoundingClientRect();
                 return {{
+                    src,
                     clip: {{
                         x: Math.round(r.x) + 4,
                         y: Math.round(r.y) + 4,
@@ -2635,31 +2643,62 @@ async def audit_videos_2zone_in_browser(
             scrub_err = ""
 
             try:
-                for ts in stamps:
-                    target_ts = min(max(0.05, ts), max(0.05, dur - 0.05))
-                    seek_res = await flow.js(f"""
-                    (async () => {{
-                        const t = document.querySelector('[data-audit-tile="1"]');
-                        const v = t ? t.querySelector('video') : null;
-                        if (!v) return {{error: 'Lost video element during seek'}};
-                        v.pause();
-                        await new Promise((resolve) => {{
-                            let done = false;
-                            const fin = () => {{ if (!done) {{ done = true; resolve(); }} }};
-                            v.addEventListener('seeked', fin, {{once: true}});
-                            setTimeout(fin, 1200);
-                            v.currentTime = {target_ts:.3f};
-                        }});
-                        await new Promise(r => setTimeout(r, 45));
-                        return {{ok: true}};
-                    }})()
-                    """)
-                    if not isinstance(seek_res, dict) or seek_res.get("error"):
-                        scrub_err = (seek_res or {}).get("error", "Seek failed")
-                        break
-                    shot = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 88, "clip": prep["clip"]})
-                    im = Image.open(io.BytesIO(base64.b64decode(shot["data"]))).convert("RGB").resize((W, H), Image.Resampling.BILINEAR)
-                    rgb_frames.append(im.tobytes())
+                vid_src = (prep.get("src") or "").strip()
+                if vid_src:
+                    try:
+                        ck_res = await flow.call("Network.getCookies", {"urls": ["https://flow.google.com", "https://google.com", "https://labs.google"]})
+                        cookie_header = "; ".join(c.get("name", "") + "=" + c.get("value", "") for c in ck_res.get("cookies", []))
+                        ua = await flow.js("navigator.userAgent") or "Mozilla/5.0"
+                        req = urllib.request.Request(
+                            vid_src,
+                            headers={"Cookie": cookie_header, "User-Agent": ua, "Referer": "https://flow.google.com/"},
+                        )
+                        with urllib.request.urlopen(req, timeout=15) as resp:
+                            mp4_bytes = resp.read()
+                        for ts in stamps:
+                            target_ts = min(max(0.05, ts), max(0.05, dur - 0.05))
+                            cmd = [
+                                "ffmpeg", "-hide_banner", "-loglevel", "error",
+                                "-i", "pipe:0", "-ss", f"{target_ts:.2f}",
+                                "-frames:v", "1", "-vf", f"scale={W}:{H}",
+                                "-f", "rawvideo", "-pix_fmt", "rgb24", "pipe:1",
+                            ]
+                            proc = subprocess.run(cmd, input=mp4_bytes, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+                            if len(proc.stdout) == W * H * 3:
+                                rgb_frames.append(proc.stdout)
+                    except Exception:
+                        rgb_frames.clear()
+
+                if len(rgb_frames) < len(stamps):
+                    rgb_frames.clear()
+                    for ts in stamps:
+                        target_ts = min(max(0.05, ts), max(0.05, dur - 0.05))
+                        seek_res = await flow.js(f"""
+                        (async () => {{
+                            const t = document.querySelector('[data-audit-tile="1"]');
+                            const v = t ? t.querySelector('video') : null;
+                            if (!v) return {{error: 'Lost video element during seek'}};
+                            v.pause();
+                            await new Promise((resolve) => {{
+                                let done = false;
+                                const fin = () => {{ if (!done) {{ done = true; resolve(); }} }};
+                                v.addEventListener('seeked', fin, {{once: true}});
+                                setTimeout(fin, 1200);
+                                v.currentTime = {target_ts:.3f};
+                            }});
+                            await new Promise(r => setTimeout(r, 45));
+                            return {{ok: true}};
+                        }})()
+                        """)
+                        if not isinstance(seek_res, dict) or seek_res.get("error"):
+                            scrub_err = (seek_res or {}).get("error", "Seek failed")
+                            break
+                        shot = await asyncio.wait_for(
+                            flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 88, "clip": prep["clip"]}),
+                            timeout=3.0,
+                        )
+                        im = Image.open(io.BytesIO(base64.b64decode(shot["data"]))).convert("RGB").resize((W, H), Image.Resampling.BILINEAR)
+                        rgb_frames.append(im.tobytes())
             finally:
                 await flow.js("""
                 (() => {

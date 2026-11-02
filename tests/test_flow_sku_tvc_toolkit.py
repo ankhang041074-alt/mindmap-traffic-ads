@@ -568,11 +568,12 @@ class TestRepoPortabilityAndSilentCDPInvariants(unittest.TestCase):
             with open(uuid_path, "r", encoding="utf-8") as f:
                 uuid_map = json.load(f)
 
+            expected_count = 25 if slug == "cedar_roundpot_20" else 20
             self.assertEqual(validate_sku_config(cfg, project_dir=sku_dir, require_local_plates=False), [])
-            self.assertEqual(len(cfg["scenes"]), 20)
-            self.assertEqual(len(cfg["videos"]), 20)
-            self.assertEqual(len(uuid_map), 20)
-            self.assertEqual(len(set(uuid_map.values())), 20)
+            self.assertEqual(len(cfg["scenes"]), expected_count)
+            self.assertEqual(len(cfg["videos"]), expected_count)
+            self.assertEqual(len(uuid_map), expected_count)
+            self.assertEqual(len(set(uuid_map.values())), expected_count)
 
             excluded = set(cfg.get("exclude_uuids", []))
             for sc in cfg["scenes"]:
