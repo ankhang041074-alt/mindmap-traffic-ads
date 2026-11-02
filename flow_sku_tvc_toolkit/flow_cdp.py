@@ -103,6 +103,13 @@ async def init_silent_flow_session(ws, project_id: Optional[str] = None) -> Flow
     await flow.call("Page.enable")
     await flow.call("DOM.enable")
     await flow.call("Emulation.setFocusEmulationEnabled", {"enabled": True})
+    dims = await flow.js("({w: window.innerWidth || 0, h: window.innerHeight || 0})") or {}
+    if int(dims.get("w") or 0) < 1100 or int(dims.get("h") or 0) < 750:
+        await flow.call(
+            "Emulation.setDeviceMetricsOverride",
+            {"width": 1440, "height": 960, "deviceScaleFactor": 1, "mobile": False},
+        )
+        await asyncio.sleep(0.35)
     if project_id:
         cur_href = await flow.js("window.location.href") or ""
         if project_id not in cur_href:
@@ -149,8 +156,15 @@ async def clear_composer_strict(flow: FlowCDP) -> None:
 
 async def exit_edit_view_if_needed(flow: FlowCDP) -> None:
     href = await flow.js("window.location.href") or ""
-    if "/edit/" in href or "/trash" in href:
-        await flow.find_and_trusted_click("aria === 'Nút quay lại để quay về trang trước'", "exit /edit/ or /trash view")
+    has_done = await flow.js("Boolean(document.querySelector('[aria-label=\"Đã chỉnh sửa xong\"]'))")
+    if "/edit/" in href or has_done:
+        if has_done:
+            await flow.find_and_trusted_click("aria === 'Đã chỉnh sửa xong'", "exit /edit/ view via Xong")
+        else:
+            await flow.find_and_trusted_click("aria === 'Nút quay lại để quay về trang trước'", "exit /edit/ view")
+        await asyncio.sleep(1.0)
+    elif "/trash" in href:
+        await flow.find_and_trusted_click("aria === 'Nút quay lại để quay về trang trước'", "exit /trash view")
         await asyncio.sleep(1.0)
 
 
@@ -320,6 +334,19 @@ async def open_ingredient_modal(flow: FlowCDP) -> None:
     await _wait_visible_option_thumbnails(flow)
 
 
+async def close_ingredient_modal(flow: FlowCDP) -> None:
+    await flow.js("""
+    (() => {
+        const b = document.querySelector('[aria-label="Thêm thành phần vào ô nhập câu lệnh"]');
+        if (b && ((b.innerText || '').includes('close') || document.querySelector('[role="listbox"]'))) {
+            b.click();
+        }
+    })()
+    """)
+    await asyncio.sleep(0.4)
+    await exit_edit_view_if_needed(flow)
+
+
 async def build_gallery_media_bridge(flow: FlowCDP, max_steps: int = 65) -> Tuple[Dict[str, str], Dict[str, str]]:
     """
     Walk the 'Hình ảnh' gallery virtual scroller collecting <img data-media-id='<UUID>' src='.../asb/ANqvLO...'>
@@ -471,8 +498,10 @@ async def upload_missing_files_silent(
     uuid_cache_path: str,
 ) -> Dict[str, str]:
     """Silently upload missing plate/ref files via intercepted fileChooser + DOM.setFileInputFiles."""
+    await exit_edit_view_if_needed(flow)
     await press_escape(flow, 0.3)
     existing_opts = await scan_all_project_options(flow, max_steps=65)
+    await close_ingredient_modal(flow)
     await press_escape(flow, 0.3)
 
     missing: List[Tuple[str, str]] = []
@@ -506,23 +535,40 @@ async def upload_missing_files_silent(
     try:
         idx = 0
         while idx < len(missing):
-            rect = await flow.js("""
-            (() => {
-                const el = document.querySelector('[aria-label="Trình đơn thêm nội dung nghe nhìn"]');
-                const r = el.getBoundingClientRect();
-                return {x: Math.round(r.x + r.width/2), y: Math.round(r.y + r.height/2)};
-            })()
-            """)
-            await flow.trusted_click(rect["x"], rect["y"])
-            await asyncio.sleep(0.55)
+            await open_ingredient_modal(flow)
             item_rect = await flow.js("""
             (() => {
-                const els = Array.from(document.querySelectorAll('[role="menuitem"]'))
-                    .filter(el => (el.innerText || '').includes('Tải lên'));
-                const r = els[0].getBoundingClientRect();
+                const b = Array.from(document.querySelectorAll('button'))
+                    .find(el => (el.innerText || '').includes('Tải nội dung nghe nhìn lên') && el.getBoundingClientRect().width > 0);
+                if (!b) return null;
+                const r = b.getBoundingClientRect();
                 return {x: Math.round(r.x + r.width/2), y: Math.round(r.y + r.height/2)};
             })()
             """)
+            if not item_rect:
+                await close_ingredient_modal(flow)
+                rect = await flow.js("""
+                (() => {
+                    const el = document.querySelector('[aria-label="Trình đơn thêm nội dung nghe nhìn"]');
+                    if (!el) return null;
+                    const r = el.getBoundingClientRect();
+                    return {x: Math.round(r.x + r.width/2), y: Math.round(r.y + r.height/2)};
+                })()
+                """)
+                if rect:
+                    await flow.trusted_click(rect["x"], rect["y"])
+                    await asyncio.sleep(0.55)
+                    item_rect = await flow.js("""
+                    (() => {
+                        const els = Array.from(document.querySelectorAll('[role="menuitem"]'))
+                            .filter(el => (el.innerText || '').includes('Tải lên'));
+                        if (!els.length) return null;
+                        const r = els[0].getBoundingClientRect();
+                        return {x: Math.round(r.x + r.width/2), y: Math.round(r.y + r.height/2)};
+                    })()
+                    """)
+            if not item_rect:
+                raise RuntimeError("Upload button ('Tải nội dung nghe nhìn lên' / 'Tải lên') not found.")
             await ws.send(json.dumps({"id": 99001, "method": "Input.dispatchMouseEvent", "params": {"type": "mouseMoved", "x": item_rect["x"], "y": item_rect["y"]}}))
             await ws.send(json.dumps({"id": 99002, "method": "Input.dispatchMouseEvent", "params": {"type": "mousePressed", "x": item_rect["x"], "y": item_rect["y"], "button": "left", "clickCount": 1}}))
             await ws.send(json.dumps({"id": 99003, "method": "Input.dispatchMouseEvent", "params": {"type": "mouseReleased", "x": item_rect["x"], "y": item_rect["y"], "button": "left", "clickCount": 1}}))
@@ -571,6 +617,7 @@ async def upload_missing_files_silent(
 
     await asyncio.sleep(1.2)
     refreshed = await scan_all_project_options(flow, max_steps=65)
+    await close_ingredient_modal(flow)
     await press_escape(flow, 0.3)
     for fname, _ in missing:
         stem = os.path.splitext(fname)[0]
@@ -1072,6 +1119,51 @@ async def submit_single_image_scene(
     return None
 
 
+async def _safe_capture_screenshot_or_canvas(flow: FlowCDP, out_p: str) -> None:
+    """Capture page screenshot with 3s timeout, falling back to an offscreen DOM <canvas> composite when occluded."""
+    try:
+        res = await asyncio.wait_for(
+            flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 86}),
+            timeout=3.0,
+        )
+        with open(out_p, "wb") as f:
+            f.write(base64.b64decode(res["data"]))
+        return
+    except Exception:
+        pass
+
+    du = await flow.js("""
+    (() => {
+        const W = Math.max(1280, window.innerWidth || 1440);
+        const H = Math.max(720, window.innerHeight || 960);
+        const c = document.createElement('canvas');
+        c.width = W;
+        c.height = H;
+        const ctx = c.getContext('2d');
+        ctx.fillStyle = '#141416';
+        ctx.fillRect(0, 0, W, H);
+        for (const img of Array.from(document.querySelectorAll('img'))) {
+            if (!img.complete || img.naturalWidth < 64) continue;
+            const src = img.currentSrc || img.src || '';
+            if (!src.startsWith(window.location.origin + '/')) continue;
+            const r = img.getBoundingClientRect();
+            if (r.width < 60 || r.height < 40 || r.bottom < 0 || r.top > H) continue;
+            try {
+                ctx.drawImage(img, Math.round(r.x), Math.round(r.y), Math.round(r.width), Math.round(r.height));
+            } catch (e) {}
+        }
+        try {
+            return c.toDataURL('image/jpeg', 0.90);
+        } catch (e) {
+            return '';
+        }
+    })()
+    """)
+    if du and du.startswith("data:image/"):
+        with open(out_p, "wb") as f:
+            f.write(base64.b64decode(du.split(",", 1)[1]))
+
+
 async def capture_qa_pages(flow: FlowCDP, qa_dir: str, prefix: str, tab_label: str) -> None:
     os.makedirs(qa_dir, exist_ok=True)
     await switch_gallery_tab(flow, tab_label)
@@ -1088,11 +1180,9 @@ async def capture_qa_pages(flow: FlowCDP, qa_dir: str, prefix: str, tab_label: s
             window.scrollTo(0, {sy});
         }})()
         """)
-        await asyncio.sleep(0.9)
-        res = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 86})
+        await asyncio.sleep(0.6)
         out_p = os.path.join(qa_dir, f"qa_{prefix}_page{idx + 1}.jpg")
-        with open(out_p, "wb") as f:
-            f.write(base64.b64decode(res["data"]))
+        await _safe_capture_screenshot_or_canvas(flow, out_p)
         print("Saved local QA screenshot:", out_p)
     await flow.js("""
     (() => {
@@ -1177,11 +1267,9 @@ async def run_images_pipeline(
                 print(f"  Updated {os.path.basename(scene_uuids_path)}[{scenes[0]['key']!r}] -> {new_uuid}")
 
             os.makedirs(qa_dir, exist_ok=True)
-            await asyncio.sleep(1.5)
-            res = await flow.call("Page.captureScreenshot", {"format": "jpeg", "quality": 86})
+            await asyncio.sleep(1.0)
             out_p = os.path.join(qa_dir, f"qa_{slug}_{scenes[0]['key']}.jpg")
-            with open(out_p, "wb") as f:
-                f.write(base64.b64decode(res["data"]))
+            await _safe_capture_screenshot_or_canvas(flow, out_p)
             print("Saved single-scene QA screenshot:", out_p)
             return
 
@@ -1285,6 +1373,7 @@ async def map_scene_uuids_pipeline(
         _, asb_to_uuid = await build_gallery_media_bridge(flow, max_steps=65)
         await ensure_image_mode(flow, aspect_ratio="16:9")
         ordered = await scan_all_project_options(flow, max_steps=75)
+        await close_ingredient_modal(flow)
         await press_escape(flow, 0.3)
 
     filtered: List[Dict[str, str]] = []
@@ -1853,6 +1942,13 @@ async def _index_gallery_tiles_responsive(flow: FlowCDP, max_needed_idx: int) ->
             break
         await asyncio.sleep(0.28)
 
+    await flow.js("""
+    (() => {
+        const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+        if (sc) sc.scrollTop = 0;
+    })()
+    """)
+    await asyncio.sleep(0.45)
     return sorted(tiles_by_key.values(), key=lambda t: (round(t["docTop"] / 24), t["docLeft"]))
 
 
@@ -1965,10 +2061,20 @@ async def resolve_video_card_indices_by_start_frame(
         await asyncio.sleep(0.35)
 
         uuid_thumbs: Dict[str, Image.Image] = {}
-        wanted_list = list(needed_uuids)
-        for _ in range(65):
+        fullres_dir = os.path.join(project_dir, "qa", "scenes_fullres")
+        for sc in config.get("scenes", []):
+            sk = sc.get("key", "")
+            u_sc = scene_uuid_map.get(sk, "")
+            if u_sc in needed_uuids:
+                local_p = os.path.join(fullres_dir, f"{sk}__{u_sc[:8]}.jpg")
+                if os.path.isfile(local_p):
+                    with Image.open(local_p) as loc_im:
+                        uuid_thumbs[u_sc] = loc_im.convert("RGB").resize((160, 90), Image.Resampling.BILINEAR)
+
+        wanted_list = [u for u in needed_uuids if u not in uuid_thumbs]
+        for _ in range(65 if wanted_list else 0):
             rows = await flow.js(f"""
-            (() => {{
+            (async () => {{
                 const wanted = new Set({json.dumps(wanted_list)});
                 const out = [];
                 for (const img of Array.from(document.querySelectorAll('img[data-media-id]'))) {{
@@ -1980,7 +2086,20 @@ async def resolve_video_card_indices_by_start_frame(
                         c.height = 90;
                         c.getContext('2d').drawImage(img, 0, 0, 160, 90);
                         out.push({{mid, du: c.toDataURL('image/jpeg', 0.90)}});
-                    }} catch (e) {{}}
+                    }} catch (e) {{
+                        try {{
+                            const u = img.currentSrc || img.src || '';
+                            const resp = await fetch(u, {{credentials: u.startsWith(window.location.origin + '/') ? 'same-origin' : 'omit'}});
+                            const blob = await resp.blob();
+                            const bmp = await createImageBitmap(blob);
+                            const c = document.createElement('canvas');
+                            c.width = 160;
+                            c.height = 90;
+                            c.getContext('2d').drawImage(bmp, 0, 0, 160, 90);
+                            bmp.close();
+                            out.push({{mid, du: c.toDataURL('image/jpeg', 0.90)}});
+                        }} catch (e2) {{}}
+                    }}
                 }}
                 return out;
             }})()
@@ -2003,7 +2122,7 @@ async def resolve_video_card_indices_by_start_frame(
             """)
             if not moved:
                 break
-            await asyncio.sleep(0.22)
+            await asyncio.sleep(0.45)
 
         if len(uuid_thumbs) < len(needed_uuids):
             missing_u = sorted(needed_uuids - set(uuid_thumbs.keys()))
@@ -2026,19 +2145,79 @@ async def resolve_video_card_indices_by_start_frame(
             }})()
             """)
             await asyncio.sleep(0.24)
+            fast_thumb = await flow.js(f"""
+            (async () => {{
+                const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
+                if (!sc) return null;
+                const sr = sc.getBoundingClientRect();
+                let best = null, bestD = 1e9;
+                for (let retry = 0; retry < 10 && !best; retry++) {{
+                    for (const el of Array.from(document.querySelectorAll('flow-grid-tile-container'))) {{
+                        const r = el.getBoundingClientRect();
+                        if (r.width < 140 || r.height < 90) continue;
+                        const dt = Math.round(r.top - sr.top + sc.scrollTop);
+                        const dl = Math.round(r.left - sr.left);
+                        const d = Math.abs(dt - {int(tm["docTop"])}) + Math.abs(dl - {int(tm["docLeft"])});
+                        if (d < 80 && d < bestD) {{ best = el; bestD = d; }}
+                    }}
+                    if (!best) await new Promise(r => setTimeout(r, 60));
+                }}
+                if (!best) return null;
+                const txt = (best.innerText || '').trim();
+                if (txt.includes('Không thành công')) return null;
+                const img = best.querySelector('img.thumbnail, img');
+                if (img) {{
+                    for (let w = 0; w < 12 && (!img.complete || img.naturalWidth < 64); w++) {{
+                        await new Promise(r => setTimeout(r, 60));
+                    }}
+                }}
+                if (img && img.complete && img.naturalWidth >= 64) {{
+                    try {{
+                        const c = document.createElement('canvas');
+                        c.width = 160;
+                        c.height = 90;
+                        c.getContext('2d').drawImage(img, 0, 0, 160, 90);
+                        return {{du: c.toDataURL('image/jpeg', 0.90)}};
+                    }} catch (e) {{
+                        try {{
+                            const u = img.currentSrc || img.src || '';
+                            const resp = await fetch(u, {{credentials: u.startsWith(window.location.origin + '/') ? 'same-origin' : 'omit'}});
+                            const blob = await resp.blob();
+                            const bmp = await createImageBitmap(blob);
+                            const c = document.createElement('canvas');
+                            c.width = 160;
+                            c.height = 90;
+                            c.getContext('2d').drawImage(bmp, 0, 0, 160, 90);
+                            bmp.close();
+                            return {{du: c.toDataURL('image/jpeg', 0.90)}};
+                        }} catch (e2) {{}}
+                    }}
+                }}
+                return null;
+            }})()
+            """)
+            if fast_thumb and (fast_thumb.get("du") or "").startswith("data:image/"):
+                b64_f = fast_thumb["du"].split(",", 1)[1]
+                im = Image.open(io.BytesIO(base64.b64decode(b64_f))).convert("RGB")
+                card_thumbs.append((card_idx, im))
+                continue
+
             clip_info = await flow.js(f"""
             (async () => {{
                 const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
                 if (!sc) return null;
                 const sr = sc.getBoundingClientRect();
                 let best = null, bestD = 1e9;
-                for (const el of Array.from(document.querySelectorAll('flow-grid-tile-container'))) {{
-                    const r = el.getBoundingClientRect();
-                    if (r.width < 140 || r.height < 90) continue;
-                    const dt = Math.round(r.top - sr.top + sc.scrollTop);
-                    const dl = Math.round(r.left - sr.left);
-                    const d = Math.abs(dt - {int(tm["docTop"])}) + Math.abs(dl - {int(tm["docLeft"])});
-                    if (d < 80 && d < bestD) {{ best = el; bestD = d; }}
+                for (let retry = 0; retry < 10 && !best; retry++) {{
+                    for (const el of Array.from(document.querySelectorAll('flow-grid-tile-container'))) {{
+                        const r = el.getBoundingClientRect();
+                        if (r.width < 140 || r.height < 90) continue;
+                        const dt = Math.round(r.top - sr.top + sc.scrollTop);
+                        const dl = Math.round(r.left - sr.left);
+                        const d = Math.abs(dt - {int(tm["docTop"])}) + Math.abs(dl - {int(tm["docLeft"])});
+                        if (d < 80 && d < bestD) {{ best = el; bestD = d; }}
+                    }}
+                    if (!best) await new Promise(r => setTimeout(r, 60));
                 }}
                 if (!best) return null;
                 const txt = (best.innerText || '').trim();
@@ -2518,15 +2697,32 @@ async def audit_videos_2zone_in_browser(
                 total = sum(abs(a[i] - b[i]) for i in range(start_o, end_o))
                 return round(total / cnt, 2)
 
+            def _box_l1(a: bytes, b: bytes, x0: int, x1: int, y0: int, y1: int) -> float:
+                total = 0
+                cnt = 0
+                for yy in range(max(0, y0), min(H, y1)):
+                    row_o = yy * W * 3
+                    for xx in range(max(0, x0), min(W, x1)):
+                        idx_p = row_o + xx * 3
+                        total += abs(a[idx_p] - b[idx_p]) + abs(a[idx_p + 1] - b[idx_p + 1]) + abs(a[idx_p + 2] - b[idx_p + 2])
+                        cnt += 3
+                return round(total / cnt, 2) if cnt > 0 else 0.0
+
             bg_seg_l1 = [_zone_l1(rgb_frames[i], rgb_frames[i + 1], 0, splitY) for i in range(len(rgb_frames) - 1)]
             fg_seg_l1 = [_zone_l1(rgb_frames[i], rgb_frames[i + 1], splitY, H) for i in range(len(rgb_frames) - 1)]
             bg_e2e_l1 = _zone_l1(rgb_frames[0], rgb_frames[-1], 0, splitY)
             fg_e2e_l1 = _zone_l1(rgb_frames[0], rgb_frames[-1], splitY, H)
+            left_wall_l1 = _box_l1(rgb_frames[0], rgb_frames[-1], 0, 24, 0, int(H * 0.48))
+            right_wall_l1 = _box_l1(rgb_frames[0], rgb_frames[-1], W - 24, W, 0, int(H * 0.48))
+            wall_e2e_l1 = round((left_wall_l1 + right_wall_l1) / 2.0, 2)
+            center_e2e_l1 = _box_l1(rgb_frames[0], rgb_frames[-1], int(W * 0.34), int(W * 0.66), int(H * 0.10), int(H * 0.65))
             metrics = {
                 "bg_seg_l1": bg_seg_l1,
                 "fg_seg_l1": fg_seg_l1,
                 "bg_e2e_l1": bg_e2e_l1,
                 "fg_e2e_l1": fg_e2e_l1,
+                "wall_e2e_l1": wall_e2e_l1,
+                "center_e2e_l1": center_e2e_l1,
                 "duration": dur,
             }
 
@@ -2535,6 +2731,8 @@ async def audit_videos_2zone_in_browser(
                 fg_seg_l1=metrics["fg_seg_l1"],
                 bg_e2e_l1=metrics["bg_e2e_l1"],
                 fg_e2e_l1=metrics["fg_e2e_l1"],
+                wall_e2e_l1=metrics["wall_e2e_l1"],
+                center_e2e_l1=metrics["center_e2e_l1"],
             )
             entry = {
                 "card_index": card_idx,

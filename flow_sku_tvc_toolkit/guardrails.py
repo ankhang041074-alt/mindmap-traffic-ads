@@ -31,6 +31,10 @@ FORBIDDEN_VIDEO_FREEZE_SUBSTRINGS = (
     "5%",
     "6%",
     "frozen",
+    "no zoom-in",
+    "constant viewing distance",
+    "~10 percent",
+    "10 percent closer",
 )
 
 FORBIDDEN_VIDEO_FREEZE_REGEXES = (
@@ -59,51 +63,89 @@ FORBIDDEN_VIDEO_PROP_MOTION_REGEXES = (
     r"\b(?:chair|bench|ottoman|sofa|table|handrail|balustrade|napkin|book|holder|sprig|carafe|pitcher|vanity|plinth|tray|ledge|rim|armrest|backrest)\b[^.;]{0,65}\b(?:sweeps|glides|slides|moves)\b",
 )
 
+# Prevents Veo 3.1 - Fast from opening/swinging/pivoting/sliding background doors, gates, casements, or glass panels
+# by themselves ('poltergeist doors'), which ruins product TVC realism.
+FORBIDDEN_VIDEO_DOOR_MOTION_REGEXES = (
+    r"(?<!\bno\s)(?<!\bzero\s)(?<!\bwithout\s)\b(?:door|doors|gate|gates|casement|casements|shoji)\b[^.;]{0,65}\b(?:swings?|pivots?|opens?|slides?|glides?)\b",
+    r"\b(?:doors?|gates?|casements?)\s+(?:swing|swings|swinging|pivot|pivots|pivoting|open|opens|opening|slide|slides|sliding)\b",
+)
+
+# Prevents pairing the staggered diagonal 2-tree plate (PLATE_03_PAIR_DIAGONAL_3Q: left y=8%, right y=21.5%)
+# with frontal architectural portals/archways/gates/consoles/mantels. Nano Banana Pro renders portals/archways
+# in 1-point frontal symmetry (horizontal wall seam at y~22%), which leaves the near-left pot stranded 2m out
+# in the middle of the courtyard while only the right pot sits against the pillar.
+FORBIDDEN_DIAGONAL_PLATE_FRONTAL_REGEXES = (
+    r"\b(?:archway|portal|gate|gates|portico|mantel|fireplace|console|alcove|bookcase)\b",
+)
+
 
 def classify_two_zone_video_motion(
     bg_seg_l1: Sequence[float],
     fg_seg_l1: Sequence[float],
     bg_e2e_l1: float,
     fg_e2e_l1: float,
+    wall_e2e_l1: float = -1.0,
+    center_e2e_l1: float = -1.0,
 ) -> Dict[str, Any]:
     """
-    Evaluate 2-zone in-browser HTML5 <video> scrub metrics (no .mp4 download needed):
-      - Top 65% zone (bg_*): measures true 3D camera ego-motion against background walls/architecture.
-      - Bottom 35% zone (fg_*): measures lower floor/tabletop & foreground prop displacement.
+    Evaluate multi-zone in-browser HTML5 <video> scrub metrics (no .mp4 download needed):
+      - Top 65% zone (bg_*): measures 3D camera ego-motion against background walls/architecture.
+      - Bottom 35% zone (fg_*): measures lower floor/tabletop & foreground planter displacement.
+      - Optional wall_e2e_l1 vs center_e2e_l1: compares outer architectural wall strips against the
+        center doorway/hearth zone to catch self-opening doors ('poltergeist doors') or sliding trees.
 
-    Catches two distinct Veo failure modes:
-      1. FROZEN_VIDEO: Both background and foreground barely move (still JPEG clip).
-      2. CONVEYOR_PROP_CAMERA_FROZEN: Background walls/doors barely move while a foreground
-         chair/bench/ottoman slides across the lower frame (tricking global L1 motion metrics).
+    Catches four distinct Veo failure modes:
+      1. FROZEN_VIDEO: Camera and architecture barely move (still JPEG clip or only water ripples).
+      2. CONVEYOR_PROP_OR_SLIDING_TREES: Background walls/hearth barely move while foreground pots or props
+         slide across the floor toward/away from each other.
+      3. POLTERGEIST_DOOR_CAMERA_STATIC: Outer architectural walls stay static while a center door swings open.
     """
     bg_mean = sum(bg_seg_l1) / float(len(bg_seg_l1)) if bg_seg_l1 else 0.0
     fg_mean = sum(fg_seg_l1) / float(len(fg_seg_l1)) if fg_seg_l1 else 0.0
     fg_to_bg_e2e_ratio = fg_e2e_l1 / max(bg_e2e_l1, 0.5)
     fg_to_bg_seg_ratio = fg_mean / max(bg_mean, 0.5)
 
-    if bg_e2e_l1 < 5.0 and fg_e2e_l1 < 6.5 and bg_mean < 3.0:
+    if (bg_e2e_l1 < 5.0 and fg_e2e_l1 < 6.5 and bg_mean < 3.0) or (
+        bg_e2e_l1 < 11.5 and fg_e2e_l1 < 12.5 and bg_mean < 6.0
+    ):
         return {
             "verdict": "FROZEN_VIDEO",
             "ok": False,
             "reason": (
-                f"Camera and scene are nearly frozen (bg_e2e_l1={bg_e2e_l1:.2f}, "
+                f"Camera and architecture are nearly static (bg_e2e_l1={bg_e2e_l1:.2f}, "
                 f"fg_e2e_l1={fg_e2e_l1:.2f}, bg_seg_mean={bg_mean:.2f})."
             ),
             "fg_to_bg_e2e_ratio": round(fg_to_bg_e2e_ratio, 2),
         }
 
-    if (bg_e2e_l1 < 8.5 and fg_e2e_l1 >= 12.0 and fg_to_bg_e2e_ratio >= 2.3) or (
-        bg_mean < 4.5 and fg_mean >= 10.0 and fg_to_bg_seg_ratio >= 2.5
+    if (
+        (bg_e2e_l1 < 8.5 and fg_e2e_l1 >= 12.0 and fg_to_bg_e2e_ratio >= 2.3)
+        or (bg_mean < 4.5 and fg_mean >= 10.0 and fg_to_bg_seg_ratio >= 2.5)
+        or (fg_e2e_l1 >= 35.0 and fg_to_bg_e2e_ratio >= 1.85)
     ):
         return {
             "verdict": "CONVEYOR_PROP_CAMERA_FROZEN",
             "ok": False,
             "reason": (
-                f"Camera/background is stationary while foreground prop slides across frame "
+                f"Background architecture is too static relative to foreground displacement — "
+                f"trees or foreground props are sliding across the floor "
                 f"(bg_e2e_l1={bg_e2e_l1:.2f} vs fg_e2e_l1={fg_e2e_l1:.2f}, ratio={fg_to_bg_e2e_ratio:.2f}x)."
             ),
             "fg_to_bg_e2e_ratio": round(fg_to_bg_e2e_ratio, 2),
         }
+
+    if wall_e2e_l1 >= 0.0 and center_e2e_l1 >= 0.0:
+        center_to_wall_ratio = center_e2e_l1 / max(wall_e2e_l1, 0.5)
+        if wall_e2e_l1 < 11.0 and center_e2e_l1 >= 22.0 and center_to_wall_ratio >= 2.1:
+            return {
+                "verdict": "POLTERGEIST_DOOR_CAMERA_STATIC",
+                "ok": False,
+                "reason": (
+                    f"Outer architectural walls are static (wall_e2e_l1={wall_e2e_l1:.2f}) while center "
+                    f"doorway/panel moves by itself (center_e2e_l1={center_e2e_l1:.2f}, ratio={center_to_wall_ratio:.2f}x)."
+                ),
+                "fg_to_bg_e2e_ratio": round(fg_to_bg_e2e_ratio, 2),
+            }
 
     return {
         "verdict": "OK",
@@ -193,6 +235,15 @@ def validate_video_prompt(prompt: str, preset_name: str = "tree_4ft", video_key:
                 f"describe ONLY 3D camera motion and state that all furniture/props remain stationary anchored in place)."
             )
 
+    for rx in FORBIDDEN_VIDEO_DOOR_MOTION_REGEXES:
+        m = re.search(rx, low)
+        if m:
+            errors.append(
+                f"{tag}Forbidden self-opening/sliding door clause {m.group(0)!r} in Veo prompt "
+                f"(causes spooky poltergeist door opening/sliding in product TVC; all doors, gates, casements, and sliding panels "
+                f"must remain 100% locked motionless in their initial state)."
+            )
+
     for sub in preset.forbidden_image_substrings:
         if sub in low:
             errors.append(
@@ -247,7 +298,20 @@ def validate_sku_config(
                 if not (os.path.isfile(p1) or os.path.isfile(p2)):
                     errors.append(f"[{skey}] Missing local ingredient file {rf!r} in plates_2k/ or clean_refs/.")
 
-        errors.extend(validate_image_prompt(sc.get("prompt", ""), preset_name=preset_name, scene_key=skey))
+        scene_prompt = sc.get("prompt", "")
+        if any("PLATE_03_PAIR_DIAGONAL_3Q" in rf.upper() for rf in refs):
+            low_sp = scene_prompt.lower()
+            for rx in FORBIDDEN_DIAGONAL_PLATE_FRONTAL_REGEXES:
+                m = re.search(rx, low_sp)
+                if m:
+                    errors.append(
+                        f"[{skey}] Diagonal staggered plate ('PLATE_03_PAIR_DIAGONAL_3Q') cannot be paired with "
+                        f"frontal portal/archway/gate/console term {m.group(0)!r} in image prompt "
+                        f"(Nano Banana Pro renders portals/archways with a horizontal 1-point-perspective wall seam, "
+                        f"stranding the near-left tree 2m out in the courtyard; use symmetric PLATE_01 or PLATE_02 instead)."
+                    )
+
+        errors.extend(validate_image_prompt(scene_prompt, preset_name=preset_name, scene_key=skey))
 
     video_keys = set()
     for idx, vd in enumerate(videos):

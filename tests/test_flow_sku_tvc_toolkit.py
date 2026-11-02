@@ -291,14 +291,73 @@ class TestPromptGuardrailsAndCLI(unittest.TestCase):
             fg_seg_l1=[18.1, 21.0, 22.4, 21.8],
             bg_e2e_l1=29.5,
             fg_e2e_l1=36.2,
+            wall_e2e_l1=18.5,
+            center_e2e_l1=26.0,
         )
         self.assertTrue(ok_verdict["ok"])
         self.assertEqual(ok_verdict["verdict"], "OK")
+
+        # 3b. Catch poltergeist door opening and sliding trees on floor
+        door_err = validate_video_prompt(
+            "Continuous 4-second 50mm push-in. The champagne-bronze double entrance doors swing gently inward by a few degrees.",
+            preset_name="tree_4ft",
+        )
+        self.assertTrue(any("self-opening/sliding door" in e for e in door_err), door_err)
+
+        no_zoom_err = validate_video_prompt(
+            "Continuous 4-second 50mm lateral truck at a constant viewing distance with no zoom-in.",
+            preset_name="tree_4ft",
+        )
+        self.assertTrue(any("constant viewing distance" in e or "no zoom-in" in e for e in no_zoom_err), no_zoom_err)
+
+        sliding_trees_verdict = classify_two_zone_video_motion(
+            bg_seg_l1=[3.0, 14.3, 18.5, 20.1],
+            fg_seg_l1=[3.9, 30.6, 37.7, 39.6],
+            bg_e2e_l1=26.55,
+            fg_e2e_l1=59.83,
+        )
+        self.assertFalse(sliding_trees_verdict["ok"])
+        self.assertEqual(sliding_trees_verdict["verdict"], "CONVEYOR_PROP_CAMERA_FROZEN")
+
+        poltergeist_door_verdict = classify_two_zone_video_motion(
+            bg_seg_l1=[8.0, 14.0, 18.0, 16.0],
+            fg_seg_l1=[6.0, 10.0, 12.0, 11.0],
+            bg_e2e_l1=24.0,
+            fg_e2e_l1=20.0,
+            wall_e2e_l1=4.8,
+            center_e2e_l1=34.2,
+        )
+        self.assertFalse(poltergeist_door_verdict["ok"])
+        self.assertEqual(poltergeist_door_verdict["verdict"], "POLTERGEIST_DOOR_CAMERA_STATIC")
 
         # 4. Tree 4ft preset invariants: minimum single-tree height >= 50% (no 36% dwarfing) & 3/4 diagonal ground-line lift
         plates_by_code = {pt.code: pt for pt in TREE_4FT_PRESET.plates}
         self.assertGreaterEqual(plates_by_code["07"].placements[0].height_pct, 0.50)
         self.assertGreaterEqual(plates_by_code["03"].placements[1].bottom_margin_pct, 0.18)
+
+        # 5. Diagonal staggered plate (PLATE_03_PAIR_DIAGONAL_3Q) must NEVER be paired with a frontal archway/portal/gate/console
+        diag_portal_cfg = {
+            "slug": "test_diag",
+            "prefix": "TDIAG",
+            "preset": "tree_4ft",
+            "project_id": "dfcf77a5-5374-4678-9f80-1c5ea7b5c305",
+            "scenes": [
+                {
+                    "key": "R03_BAD_DIAGONAL_PORTAL",
+                    "refs": [
+                        "RNDPOT2_PLATE_03_PAIR_DIAGONAL_3Q_16x9.jpg",
+                        "RNDPOT2_REF_2_CLOSEUP_1024.jpg",
+                    ],
+                    "prompt": "Outpaint ONLY the pure white background with an open carved stone archway portal leading into a colonnade.",
+                }
+            ],
+            "videos": [],
+        }
+        diag_errs = validate_sku_config(diag_portal_cfg)
+        self.assertTrue(
+            any("Diagonal staggered plate" in e and "archway" in e for e in diag_errs),
+            diag_errs,
+        )
 
     def test_guardrails_reject_video_missing_both_scene_key_and_uuid(self):
         bad_cfg = {

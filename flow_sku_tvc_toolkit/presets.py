@@ -55,19 +55,19 @@ TREE_4FT_PRESET = CategoryPreset(
         PlateTemplate(
             code="01",
             suffix="PLATE_01_PAIR_DOOR_52PCT_16x9",
-            description_vi="2 cây đối xứng cửa chính 2.4m / lò sưởi trần cao 3.3m (52% chiều cao khung)",
+            description_vi="2 cây đối xứng cửa chính 2.4m / lò sưởi trần cao 3.3m (52% chiều cao khung, đáy 8.0% sát chân tường & chống cắt đáy chậu)",
             placements=(
-                PlacementSpec(height_pct=0.52, center_x_pct=0.29, bottom_margin_pct=0.055, max_width_pct=0.34),
-                PlacementSpec(height_pct=0.52, center_x_pct=0.71, bottom_margin_pct=0.055, max_width_pct=0.34),
+                PlacementSpec(height_pct=0.52, center_x_pct=0.29, bottom_margin_pct=0.080, max_width_pct=0.34),
+                PlacementSpec(height_pct=0.52, center_x_pct=0.71, bottom_margin_pct=0.080, max_width_pct=0.34),
             ),
         ),
         PlateTemplate(
             code="02",
             suffix="PLATE_02_PAIR_MEDIUM_62PCT_16x9",
-            description_vi="2 cây đối xứng cận trung 50mm: bàn Console 85cm, cửa đôi Pháp, cổng vòm (62%)",
+            description_vi="2 cây đối xứng cận trung 50mm: bàn Console 85cm, cửa đôi Pháp, cổng vòm (62%, đáy 8.0% sát chân tường & chống cắt đáy chậu)",
             placements=(
-                PlacementSpec(height_pct=0.62, center_x_pct=0.27, bottom_margin_pct=0.050, max_width_pct=0.36),
-                PlacementSpec(height_pct=0.62, center_x_pct=0.73, bottom_margin_pct=0.050, max_width_pct=0.36),
+                PlacementSpec(height_pct=0.62, center_x_pct=0.27, bottom_margin_pct=0.080, max_width_pct=0.36),
+                PlacementSpec(height_pct=0.62, center_x_pct=0.73, bottom_margin_pct=0.080, max_width_pct=0.36),
             ),
         ),
         PlateTemplate(
@@ -75,36 +75,36 @@ TREE_4FT_PRESET = CategoryPreset(
             suffix="PLATE_03_PAIR_DIAGONAL_3Q_16x9",
             description_vi=(
                 "2 cây đặt xéo bám dọc theo cùng đường chân tường/hành lang góc 3/4 "
-                "(cây gần trái 60% đáy 5.5%, cây xa phải 46% đáy nâng xéo lên 20.5% theo điểm tụ — "
+                "(cây gần trái 58% đáy 8.0%, cây xa phải 46% đáy nâng xéo lên 21.5% theo điểm tụ — "
                 "kẹp 2 bên lối mở bậc thềm/cửa Pháp để cả 2 cùng sát tường và bằng nhau 4ft trong không gian 3D, không trôi ra giữa lối đi)"
             ),
             placements=(
-                PlacementSpec(height_pct=0.60, center_x_pct=0.28, bottom_margin_pct=0.055, max_width_pct=0.36),
-                PlacementSpec(height_pct=0.46, center_x_pct=0.70, bottom_margin_pct=0.205, max_width_pct=0.30),
+                PlacementSpec(height_pct=0.58, center_x_pct=0.28, bottom_margin_pct=0.080, max_width_pct=0.36),
+                PlacementSpec(height_pct=0.46, center_x_pct=0.70, bottom_margin_pct=0.215, max_width_pct=0.30),
             ),
         ),
         PlateTemplate(
             code="04",
             suffix="PLATE_04_SINGLE_HERO_LEFT_72PCT_16x9",
-            description_vi="1 cây Hero bên trái 50mm: phòng khách, phòng đọc sách, sunroom (72%)",
+            description_vi="1 cây Hero bên trái 50mm: phòng khách, phòng đọc sách, sunroom (70%, đáy 7.5%)",
             placements=(
-                PlacementSpec(height_pct=0.72, center_x_pct=0.29, bottom_margin_pct=0.050, max_width_pct=0.42),
+                PlacementSpec(height_pct=0.70, center_x_pct=0.29, bottom_margin_pct=0.075, max_width_pct=0.42),
             ),
         ),
         PlateTemplate(
             code="05",
             suffix="PLATE_05_SINGLE_HERO_RIGHT_70PCT_16x9",
-            description_vi="1 cây Hero bên phải 50mm: hiên nhà, đảo bếp, cầu thang kính (70%)",
+            description_vi="1 cây Hero bên phải 50mm: hiên nhà, đảo bếp, cầu thang kính (68%, đáy 7.5%)",
             placements=(
-                PlacementSpec(height_pct=0.70, center_x_pct=0.71, bottom_margin_pct=0.050, max_width_pct=0.42),
+                PlacementSpec(height_pct=0.68, center_x_pct=0.71, bottom_margin_pct=0.075, max_width_pct=0.42),
             ),
         ),
         PlateTemplate(
             code="06",
             suffix="PLATE_06_SINGLE_WIDE_55PCT_16x9",
-            description_vi="1 cây trung-đại cảnh bên trái: phòng rộng có nội thất trung cảnh (55%)",
+            description_vi="1 cây trung-đại cảnh bên trái: phòng rộng có nội thất trung cảnh (55%, đáy 7.5%)",
             placements=(
-                PlacementSpec(height_pct=0.55, center_x_pct=0.30, bottom_margin_pct=0.060, max_width_pct=0.36),
+                PlacementSpec(height_pct=0.55, center_x_pct=0.30, bottom_margin_pct=0.075, max_width_pct=0.36),
             ),
         ),
         PlateTemplate(
@@ -115,38 +115,41 @@ TREE_4FT_PRESET = CategoryPreset(
                 "(ngưỡng sàn tối thiểu 50% để cây chuẩn 4ft nổi bật vượt tủ buffet 85cm ~40cm, cấm dùng 36% gây teo nhỏ cây)"
             ),
             placements=(
-                PlacementSpec(height_pct=0.50, center_x_pct=0.73, bottom_margin_pct=0.060, max_width_pct=0.34),
+                PlacementSpec(height_pct=0.50, center_x_pct=0.73, bottom_margin_pct=0.075, max_width_pct=0.34),
             ),
         ),
         PlateTemplate(
             code="08",
             suffix="PLATE_08_SINGLE_COASTAL_RIGHT_56PCT_16x9",
-            description_vi="1 cây Goldilocks 56% bên phải: phòng khách rộng nhìn ra biển / vườn lớn",
+            description_vi="1 cây Goldilocks 56% bên phải: phòng khách rộng nhìn ra biển / vườn lớn (đáy 7.5%)",
             placements=(
-                PlacementSpec(height_pct=0.56, center_x_pct=0.72, bottom_margin_pct=0.055, max_width_pct=0.36),
+                PlacementSpec(height_pct=0.56, center_x_pct=0.72, bottom_margin_pct=0.075, max_width_pct=0.36),
             ),
         ),
         PlateTemplate(
             code="09",
             suffix="PLATE_09_SINGLE_HERO_RIGHT_76PCT_16x9",
-            description_vi="1 cây Hero cận nổi khối tiền cảnh bên phải (hồ bơi / daybed lùi sau 1.3m, 76%)",
+            description_vi="1 cây Hero cận nổi khối tiền cảnh bên phải (hồ bơi / daybed lùi sau 1.3m, 72%, đáy 7.0%)",
             placements=(
-                PlacementSpec(height_pct=0.76, center_x_pct=0.71, bottom_margin_pct=0.045, max_width_pct=0.44),
+                PlacementSpec(height_pct=0.72, center_x_pct=0.71, bottom_margin_pct=0.070, max_width_pct=0.44),
             ),
         ),
     ),
     single_cutout_lock_header=(
         "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact foliage sprig and planter material detail): "
-        "treat the potted plant and planter in the 16:9 plate as an untouched locked foreground photograph cutout — "
-        "keep every single leaf sprig, outer branch contour, full foliage width, and full planter geometry 100% pixel-identical to the 16:9 plate "
-        "without shrinking, narrowing, clumping, thickening, or redrawing any leaf or planter pixels. "
-        "Outpaint ONLY the pure white background with "
+        "keep the potted plant and its planter 100% identical to the 16:9 plate in exact position, height, planter proportions, "
+        "outer silhouette contour, and two-tone green flat-fan molded leaf sprig geometry — DO NOT alter the planter shape or size, "
+        "DO NOT widen or slim the silhouette, and DO NOT redraw the leaves into spiky needles, while allowing natural directional environmental sunlight "
+        "to softly kiss the outer fresh spring-green branchlet tips with crisp optical rim-light highlights, natural leaf-to-leaf micro-shadow depth, "
+        "and realistic floor bounce light. Replace ONLY the pure white background with "
     ),
     pair_cutout_lock_header=(
         "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact foliage sprig and planter material detail): "
-        "keep BOTH potted plants and their planters 100% pixel-identical to the 16:9 plate in exact position, height, planter proportions, "
-        "outer silhouette contour, and leaf texture — DO NOT alter the planters, DO NOT widen or slim the silhouettes, and DO NOT redraw the leaves. "
-        "Outpaint ONLY the pure white background with "
+        "keep BOTH potted plants and their planters 100% identical to the 16:9 plate in exact position, height, planter proportions, "
+        "outer silhouette contour, and two-tone green flat-fan molded leaf sprig geometry — DO NOT alter the planters, DO NOT widen or slim the silhouettes, "
+        "and DO NOT redraw the leaves into spiky needles, while allowing natural directional environmental sunlight to softly kiss the outer fresh spring-green "
+        "branchlet tips with crisp optical rim-light highlights, natural leaf-to-leaf micro-shadow depth, and realistic floor bounce light. "
+        "Replace ONLY the pure white background with "
     ),
     white_isolation_prompt=(
         "Clean studio product isolation: keep ONLY this exact potted plant and its planter 100% identical in every leaf sprig, branch tip, silhouette, "
