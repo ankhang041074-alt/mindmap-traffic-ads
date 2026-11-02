@@ -70,6 +70,12 @@ FORBIDDEN_VIDEO_DOOR_MOTION_REGEXES = (
     r"\b(?:doors?|gates?|casements?)\s+(?:swing|swings|swinging|pivot|pivots|pivoting|open|opens|opening|slide|slides|sliding)\b",
 )
 
+# Prevents Veo 3.1 - Fast from tilting/panning upward during a forward push-in, which chops off the bottom
+# of the planters near the lower frame edge (unless explicitly negated with 'no' / 'without' / 'zero').
+FORBIDDEN_VIDEO_UPWARD_TILT_REGEXES = (
+    r"(?<!\bno\s)(?<!\bzero\s)(?<!\bwithout\s)(?<!\bnot\s)(?<!\bor\s)\b(?:tilts?\s+up(?:ward)?|tilting\s+up(?:ward)?|pans?\s+up(?:ward)?|panning\s+up(?:ward)?)\b",
+)
+
 # Prevents pairing the staggered diagonal 2-tree plate (PLATE_03_PAIR_DIAGONAL_3Q: left y=8%, right y=21.5%)
 # with frontal architectural portals/archways/gates/consoles/mantels. Nano Banana Pro renders portals/archways
 # in 1-point frontal symmetry (horizontal wall seam at y~22%), which leaves the near-left pot stranded 2m out
@@ -77,6 +83,116 @@ FORBIDDEN_VIDEO_DOOR_MOTION_REGEXES = (
 FORBIDDEN_DIAGONAL_PLATE_FRONTAL_REGEXES = (
     r"\b(?:archway|portal|gate|gates|portico|mantel|fireplace|console|alcove|bookcase)\b",
 )
+
+# Prevents single-tree plates from placing a deep receding hallway/corridor vanishing point behind the cutout
+# (unless negated with 'no' / 'zero' / 'without'), which visually dwarfs the architecture and makes a 4ft plant look 7ft tall.
+FORBIDDEN_SINGLE_TREE_HALLWAY_REGEXES = (
+    r"(?<!\bno\s)(?<!\bzero\s)(?<!\bwithout\s)\b(?:receding\s+(?:side\s+)?(?:hallway|corridor)|deep\s+(?:hallway|corridor))\b",
+)
+
+
+def evaluate_cutout_silhouette_fidelity(
+    plate_img: Any,
+    scene_img: Any,
+    max_cutout_l1: float = 58.0,
+    max_halo_fattening_pct: float = 9.0,
+) -> Dict[str, Any]:
+    """
+    Quantitative Stage-2 Image QA Gate comparing a generated 16:9 scene image against its 2K white plate:
+      1. Extracts the exact product cutout mask (non-white pixels on the 2K plate).
+      2. Measures mean RGB L1 difference inside the cutout mask (`cutout_rgb_l1`) to verify the product
+         remained at its exact 2D canvas coordinates and was not shifted, shrunk, or replaced.
+      3. Measures `halo_fattening_pct` inside a 4px..36px outer ring around the upper 82% of the product
+         silhouette to catch Nano Banana Pro puffing out / widening / fattening the foliage beyond the plate.
+    """
+    from PIL import Image, ImageFilter
+
+    p_rgb = plate_img.convert("RGB")
+    s_rgb = scene_img.convert("RGB").resize(p_rgb.size, Image.Resampling.LANCZOS)
+    w, h = p_rgb.size
+    p_px = p_rgb.load()
+    s_px = s_rgb.load()
+
+    mask = Image.new("L", (w, h), 0)
+    m_px = mask.load()
+    min_y, max_y = h, 0
+    for y in range(h):
+        for x in range(w):
+            r, g, b = p_px[x, y]
+            if r < 242 or g < 242 or b < 242:
+                m_px[x, y] = 255
+                if y < min_y:
+                    min_y = y
+                if y > max_y:
+                    max_y = y
+
+    if max_y <= min_y:
+        return {
+            "ok": False,
+            "verdict": "EMPTY_PLATE_MASK",
+            "cutout_rgb_l1": 999.0,
+            "halo_fattening_pct": 100.0,
+            "reason": "Plate image contains no non-white product cutout pixels.",
+        }
+
+    dil_inner = mask.filter(ImageFilter.MaxFilter(9))
+    dil_outer = dil_inner.filter(ImageFilter.MaxFilter(29))
+    di_px = dil_inner.load()
+    do_px = dil_outer.load()
+
+    foliage_cutoff_y = int(min_y + 0.82 * (max_y - min_y))
+    inside_diff_sum = 0.0
+    inside_count = 0
+    halo_green_count = 0
+    halo_total_count = 0
+
+    for y in range(0, h, 2):
+        for x in range(0, w, 2):
+            if m_px[x, y] > 0:
+                pr, pg, pb = p_px[x, y]
+                sr, sg, sb = s_px[x, y]
+                inside_diff_sum += (abs(pr - sr) + abs(pg - sg) + abs(pb - sb)) / 3.0
+                inside_count += 1
+            elif do_px[x, y] > 0 and di_px[x, y] == 0 and y < foliage_cutoff_y:
+                sr, sg, sb = s_px[x, y]
+                halo_total_count += 1
+                if sg > sr + 12 and sg > sb + 10 and 25 < sg < 190:
+                    halo_green_count += 1
+
+    cutout_l1 = round(inside_diff_sum / max(1, inside_count), 2)
+    fattening_pct = round(100.0 * halo_green_count / max(1, halo_total_count), 2)
+
+    if cutout_l1 > max_cutout_l1:
+        return {
+            "ok": False,
+            "verdict": "CUTOUT_SHIFTED_OR_ALTERED",
+            "cutout_rgb_l1": cutout_l1,
+            "halo_fattening_pct": fattening_pct,
+            "reason": (
+                f"Core cutout RGB L1 drift {cutout_l1:.2f} exceeds {max_cutout_l1:.1f} "
+                f"(product shifted, resized, or redrawn away from 2D plate coordinates)."
+            ),
+        }
+
+    if fattening_pct > max_halo_fattening_pct:
+        return {
+            "ok": False,
+            "verdict": "SILHOUETTE_FATTENED",
+            "cutout_rgb_l1": cutout_l1,
+            "halo_fattening_pct": fattening_pct,
+            "reason": (
+                f"Outer silhouette halo foliage spill {fattening_pct:.2f}% exceeds {max_halo_fattening_pct:.1f}% "
+                f"(AI puffed out / widened the plant beyond the locked plate contour)."
+            ),
+        }
+
+    return {
+        "ok": True,
+        "verdict": "OK",
+        "cutout_rgb_l1": cutout_l1,
+        "halo_fattening_pct": fattening_pct,
+        "reason": f"Cutout locked (cutout_rgb_l1={cutout_l1:.2f}, halo_fattening_pct={fattening_pct:.2f}%).",
+    }
 
 
 def classify_two_zone_video_motion(
@@ -244,6 +360,15 @@ def validate_video_prompt(prompt: str, preset_name: str = "tree_4ft", video_key:
                 f"must remain 100% locked motionless in their initial state)."
             )
 
+    for rx in FORBIDDEN_VIDEO_UPWARD_TILT_REGEXES:
+        m = re.search(rx, low)
+        if m:
+            errors.append(
+                f"{tag}Forbidden upward camera tilt/pan clause {m.group(0)!r} in Veo prompt "
+                f"(tilting upward during a forward push-in chops off the bottom of the planters near the lower frame border; "
+                f"maintain a level or slightly downward-angled horizon)."
+            )
+
     for sub in preset.forbidden_image_substrings:
         if sub in low:
             errors.append(
@@ -311,6 +436,17 @@ def validate_sku_config(
                         f"stranding the near-left tree 2m out in the courtyard; use symmetric PLATE_01 or PLATE_02 instead)."
                     )
 
+        if any("SINGLE_" in rf.upper() for rf in refs):
+            low_sp = scene_prompt.lower()
+            for rx in FORBIDDEN_SINGLE_TREE_HALLWAY_REGEXES:
+                m = re.search(rx, low_sp)
+                if m:
+                    errors.append(
+                        f"[{skey}] Single-tree plate cannot be paired with un-negated receding hallway/corridor term "
+                        f"{m.group(0)!r} in image prompt (draws a deep vanishing point behind the cutout that makes "
+                        f"a 4ft plant look 7ft tall; use a continuous flat front-facing wall plane behind the plant)."
+                    )
+
         errors.extend(validate_image_prompt(scene_prompt, preset_name=preset_name, scene_key=skey))
 
     video_keys = set()
@@ -335,9 +471,9 @@ def validate_sku_config(
 
     custom_indices = config.get("video_card_indices")
     if custom_indices is not None:
-        if not isinstance(custom_indices, list) or len(custom_indices) != len(videos):
+        if not isinstance(custom_indices, list) or not (1 <= len(custom_indices) <= len(videos)):
             errors.append(
-                f"video_card_indices must be a list of length {len(videos)} matching 'videos', "
+                f"video_card_indices must be a non-empty list of length <= {len(videos)} matching rendered 'videos', "
                 f"got {len(custom_indices) if isinstance(custom_indices, list) else type(custom_indices).__name__}."
             )
         else:
@@ -360,3 +496,91 @@ def validate_sku_config(
                 seen_cslugs.add(cslug)
 
     return errors
+
+
+def audit_project_images_cutout(
+    config: Dict[str, Any],
+    project_dir: str,
+    scenes_dir: Optional[str] = None,
+    only_key: str = "",
+    max_cutout_l1: float = 58.0,
+    max_halo_fattening_pct: float = 9.0,
+) -> List[Dict[str, Any]]:
+    """
+    Offline Stage-2 Image QA Auditor: checks every rendered scene image in `qa/scenes_fullres/`
+    against its corresponding 2K 16:9 plate in `plates_2k/` using `evaluate_cutout_silhouette_fidelity`.
+    Supports both `<KEY>.jpg` and `<KEY>__<8char_uuid>.jpg` filenames in `qa/scenes_fullres/`.
+    """
+    import glob
+    import json
+    from PIL import Image
+
+    sdir = scenes_dir or os.path.join(project_dir, "qa", "scenes_fullres")
+    pdir = os.path.join(project_dir, "plates_2k")
+    uuid_map: Dict[str, str] = {}
+    slug = config.get("slug", "")
+    if slug:
+        upath = os.path.join(project_dir, f"{slug}_scene_uuids.json")
+        if os.path.isfile(upath):
+            with open(upath, "r", encoding="utf-8") as f:
+                uuid_map = json.load(f)
+
+    results: List[Dict[str, Any]] = []
+
+    for sc in config.get("scenes", []):
+        skey = sc.get("key", "")
+        if only_key and only_key not in skey:
+            continue
+        refs = sc.get("refs") or []
+        plate_name = refs[0] if refs else ""
+        plate_path = os.path.join(pdir, plate_name)
+
+        scene_path = os.path.join(sdir, f"{skey}.jpg")
+        if not os.path.isfile(scene_path):
+            uid8 = (uuid_map.get(skey) or "")[:8]
+            if uid8:
+                cand = os.path.join(sdir, f"{skey}__{uid8}.jpg")
+                if os.path.isfile(cand):
+                    scene_path = cand
+            if not os.path.isfile(scene_path):
+                matches = sorted(glob.glob(os.path.join(sdir, f"{skey}__*.jpg")), key=os.path.getmtime, reverse=True)
+                if matches:
+                    scene_path = matches[0]
+
+        if not os.path.isfile(scene_path):
+            results.append(
+                {
+                    "key": skey,
+                    "plate": plate_name,
+                    "ok": False,
+                    "verdict": "MISSING_SCENE_IMAGE",
+                    "reason": f"Scene image not found at {scene_path}",
+                }
+            )
+            continue
+        if not os.path.isfile(plate_path):
+            results.append(
+                {
+                    "key": skey,
+                    "plate": plate_name,
+                    "ok": False,
+                    "verdict": "MISSING_PLATE_IMAGE",
+                    "reason": f"2K plate not found at {plate_path}",
+                }
+            )
+            continue
+
+        with Image.open(plate_path) as pim, Image.open(scene_path) as sim:
+            res = evaluate_cutout_silhouette_fidelity(
+                plate_img=pim,
+                scene_img=sim,
+                max_cutout_l1=max_cutout_l1,
+                max_halo_fattening_pct=max_halo_fattening_pct,
+            )
+        res["key"] = skey
+        res["plate"] = plate_name
+        res["scene_file"] = os.path.basename(scene_path)
+        results.append(res)
+
+    return results
+

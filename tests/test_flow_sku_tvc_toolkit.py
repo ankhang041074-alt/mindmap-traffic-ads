@@ -10,6 +10,7 @@ from PIL import Image, ImageDraw
 from flow_sku_tvc_toolkit.cli import main as cli_main
 from flow_sku_tvc_toolkit.guardrails import (
     classify_two_zone_video_motion,
+    evaluate_cutout_silhouette_fidelity,
     validate_image_prompt,
     validate_sku_config,
     validate_video_prompt,
@@ -359,6 +360,68 @@ class TestPromptGuardrailsAndCLI(unittest.TestCase):
             diag_errs,
         )
 
+        # 6. Single-tree hallway trap & upward video tilt guardrails + Cutout Silhouette Fattening QA gate
+        hallway_cfg = {
+            "slug": "test_hallway",
+            "prefix": "THALL",
+            "preset": "tree_4ft",
+            "project_id": "dfcf77a5-5374-4678-9f80-1c5ea7b5c305",
+            "scenes": [
+                {
+                    "key": "S01_BAD_HALLWAY",
+                    "refs": [
+                        "RNDPOT_PLATE_06_SINGLE_WIDE_55PCT_16x9.jpg",
+                        "RNDPOT_REF_2_CLOSEUP_1024.jpg",
+                    ],
+                    "prompt": "Outpaint ONLY the pure white background with a receding side hallway behind the plant.",
+                }
+            ],
+            "videos": [],
+        }
+        hallway_errs = validate_sku_config(hallway_cfg)
+        self.assertTrue(any("receding hallway/corridor" in e for e in hallway_errs), hallway_errs)
+
+        # Negated 'NO receding side hallway' must pass cleanly
+        hallway_cfg["scenes"][0]["prompt"] = (
+            "Outpaint ONLY the pure white background with a flat Shaker wall (strictly NO receding side hallway behind the plant)."
+        )
+        self.assertEqual(validate_sku_config(hallway_cfg), [])
+
+        # Upward camera tilt in Veo prompt must be blocked unless negated
+        tilt_errs = validate_video_prompt(
+            "Continuous 4-second 50mm forward camera push-in tilting upward toward the ceiling beams.",
+            preset_name="tree_4ft",
+        )
+        self.assertTrue(any("upward camera tilt/pan" in e for e in tilt_errs), tilt_errs)
+        self.assertEqual(
+            validate_video_prompt(
+                "Continuous 4-second 50mm forward camera push-in without tilting upward.",
+                preset_name="tree_4ft",
+            ),
+            [],
+        )
+
+        # Cutout silhouette fidelity gate: exact match passes; widened green foliage halo fails
+        plate_im = Image.new("RGB", (320, 180), (255, 255, 255))
+        dp = ImageDraw.Draw(plate_im)
+        dp.polygon([(160, 40), (130, 140), (190, 140)], fill=(45, 95, 42))
+        dp.rectangle((148, 140, 172, 162), fill=(28, 28, 28))
+
+        clean_scene = Image.new("RGB", (320, 180), (225, 218, 205))
+        ds_clean = ImageDraw.Draw(clean_scene)
+        ds_clean.polygon([(160, 40), (130, 140), (190, 140)], fill=(48, 98, 44))
+        ds_clean.rectangle((148, 140, 172, 162), fill=(30, 30, 30))
+        res_clean = evaluate_cutout_silhouette_fidelity(plate_im, clean_scene)
+        self.assertTrue(res_clean["ok"], res_clean)
+        self.assertEqual(res_clean["verdict"], "OK")
+
+        fattened_scene = clean_scene.copy()
+        ds_fat = ImageDraw.Draw(fattened_scene)
+        ds_fat.polygon([(160, 34), (102, 142), (218, 142)], fill=(48, 105, 42))
+        res_fat = evaluate_cutout_silhouette_fidelity(plate_im, fattened_scene)
+        self.assertFalse(res_fat["ok"], res_fat)
+        self.assertEqual(res_fat["verdict"], "SILHOUETTE_FATTENED")
+
     def test_guardrails_reject_video_missing_both_scene_key_and_uuid(self):
         bad_cfg = {
             "slug": "test_vid",
@@ -568,7 +631,7 @@ class TestRepoPortabilityAndSilentCDPInvariants(unittest.TestCase):
             with open(uuid_path, "r", encoding="utf-8") as f:
                 uuid_map = json.load(f)
 
-            expected_count = 25 if slug == "cedar_roundpot_20" else 20
+            expected_count = 29 if slug == "cedar_roundpot_20" else 20
             self.assertEqual(validate_sku_config(cfg, project_dir=sku_dir, require_local_plates=False), [])
             self.assertEqual(len(cfg["scenes"]), expected_count)
             self.assertEqual(len(cfg["videos"]), expected_count)

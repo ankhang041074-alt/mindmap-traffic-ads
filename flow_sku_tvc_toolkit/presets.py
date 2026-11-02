@@ -137,19 +137,21 @@ TREE_4FT_PRESET = CategoryPreset(
     ),
     single_cutout_lock_header=(
         "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact foliage sprig and planter material detail): "
-        "keep the potted plant and its planter 100% identical to the 16:9 plate in exact position, height, planter proportions, "
-        "outer silhouette contour, and two-tone green flat-fan molded leaf sprig geometry — DO NOT alter the planter shape or size, "
-        "DO NOT widen or slim the silhouette, and DO NOT redraw the leaves into spiky needles, while allowing natural directional environmental sunlight "
-        "to softly kiss the outer fresh spring-green branchlet tips with crisp optical rim-light highlights, natural leaf-to-leaf micro-shadow depth, "
-        "and realistic floor bounce light. Replace ONLY the pure white background with "
+        "treat the potted plant and its planter in the 16:9 plate as a locked foreground photograph cutout at its exact 2D canvas coordinates — "
+        "do NOT enlarge, widen, puff out, stretch taller, or shift the plant on the 16:9 canvas, keeping the plant and planter 100% identical "
+        "to the 16:9 plate in exact position, height, planter proportions, exact width-to-height natural conical silhouette, and two-tone green "
+        "flat-fan molded leaf sprig geometry without redrawing the leaves into spiky needles, while allowing warm directional window or garden sunbeams "
+        "to naturally wrap the outer fresh spring-green branchlet tips with crisp optical rim-light highlights, natural leaf-to-leaf micro-shadow depth, "
+        "and warm floor bounce light. Outpaint ONLY the pure white background with "
     ),
     pair_cutout_lock_header=(
         "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact foliage sprig and planter material detail): "
-        "keep BOTH potted plants and their planters 100% identical to the 16:9 plate in exact position, height, planter proportions, "
-        "outer silhouette contour, and two-tone green flat-fan molded leaf sprig geometry — DO NOT alter the planters, DO NOT widen or slim the silhouettes, "
-        "and DO NOT redraw the leaves into spiky needles, while allowing natural directional environmental sunlight to softly kiss the outer fresh spring-green "
-        "branchlet tips with crisp optical rim-light highlights, natural leaf-to-leaf micro-shadow depth, and realistic floor bounce light. "
-        "Replace ONLY the pure white background with "
+        "treat BOTH potted plants and their planters in the 16:9 plate as locked foreground photograph cutouts at their exact 2D canvas coordinates — "
+        "do NOT enlarge, widen, puff out, stretch taller, or shift either plant on the 16:9 canvas, keeping BOTH plants and planters 100% identical "
+        "to the 16:9 plate in exact position, height, horizontal spacing, planter proportions, exact width-to-height natural conical silhouettes, "
+        "and two-tone green flat-fan molded leaf sprig geometry without redrawing the leaves into spiky needles, while allowing warm directional window "
+        "or garden sunbeams to naturally wrap the outer fresh spring-green branchlet tips with crisp optical rim-light highlights, natural leaf-to-leaf "
+        "micro-shadow depth, and warm floor bounce light. Outpaint ONLY the pure white background with "
     ),
     white_isolation_prompt=(
         "Clean studio product isolation: keep ONLY this exact potted plant and its planter 100% identical in every leaf sprig, branch tip, silhouette, "

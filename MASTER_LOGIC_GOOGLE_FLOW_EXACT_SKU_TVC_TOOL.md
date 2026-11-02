@@ -175,8 +175,21 @@ sequenceDiagram
   - [run_barrel20_veo4s_silent.py](./barrel_cedar_20/run_barrel20_veo4s_silent.py) — Pipeline tạo 20 video `4 giây` `Veo 3.1 - Fast` hỗ trợ chạy toàn bộ (`--phase all20`), chạy tiếp từ giữa (`--phase slice --start-index N`), hoặc fix lẻ đúng 1 video (`--phase only --only-key VB20`).
   - [download_and_merge_atf_9422_1080p.py](./barrel_cedar_20/download_and_merge_atf_9422_1080p.py) — Pipeline tự động hover tải 20 clip `1080p` từ tab `Video` (chống trùng mã băm SHA-256 + kiểm định `ffprobe` `1920x1080`) và nối file Master MP4.
 
-### 7.2. Quy Trình 4 Bước Chuẩn Khi Bắt Đầu Một SKU Mới
+### 7.2. Quy Trình 5 Bước Chuẩn Khi Bắt Đầu Một SKU Mới
 1. **Bước 1 (Chuẩn bị tài nguyên từ 1 ảnh gốc):** Dùng `python3 -m flow_sku_tvc_toolkit isolate-white` (nếu ảnh gốc chưa có nền trắng) và `python3 -m flow_sku_tvc_toolkit build-plates` để tự động tách sạch nền trắng `#FFFFFF`, cắt ảnh `REF_2_CLOSEUP_1024` và sinh bộ Plate `2560x1440` đúng Preset tỷ lệ vật lý (`tree_4ft`, `crochet_coaster`, `crochet_decor`, `crochet_bag`).
-2. **Bước 2 (Test mẫu 1 ảnh đầu tiên):** Chạy `run-images --phase check1` để hệ thống tự upload bộ Plate lên Project Google Flow, render thử cảnh số 1 và chụp ảnh QA kiểm tra tỷ lệ & độ nét chi tiết.
-3. **Bước 3 (Chạy hàng loạt các ảnh còn lại & Map UUID):** Khi ảnh 1 đạt chuẩn, chạy `run-images --phase rest` (chạy ngầm theo từng đợt 3 ảnh/wave), sau đó chạy `map-uuids` để khóa chính xác `UUID` vào file JSON.
-4. **Bước 4 (Chạy hàng loạt Video `4s`, Soi QA & Tải `1080p`):** Chạy `run-videos --phase all` (2 video/wave), sửa lẻ bất kỳ cảnh nào bằng `--phase only --only-key <MÃ_CẢNH>`, và xuất gộp Master MP4 bằng `download-1080p`.
+2. **Bước 2 (Kiểm duyệt Prompt & Test mẫu):** Chạy `python3 -m flow_sku_tvc_toolkit validate --config ... --check-files` để chặn toàn bộ từ cấm gây sai SKU / lỗi video, sau đó chạy `run-images --phase check1` (hoặc `--phase rest`) để render ảnh bối cảnh `16:9`.
+3. **Bước 3 (Kiểm định Độ Chuẩn Cutout & Chống Phình Tán `audit-images` + Map UUID):** Chạy `python3 -m flow_sku_tvc_toolkit audit-images --config ...` để đo tự động `cutout_rgb_l1 <= 58.0` và `halo_fattening_pct <= 9.0%` (bắt ngay mọi ảnh bị AI làm phình mập hoặc dịch chuyển sản phẩm trước khi làm video), rồi chạy `map-uuids` để khóa `UUID` vào file JSON.
+4. **Bước 4 (Chạy hàng loạt Video `4s` & Kiểm định Đa vùng `audit-videos`):** Chạy `run-videos --phase all` (2 video/wave), sau đó chạy `python3 -m flow_sku_tvc_toolkit audit-videos --config ...` để chấm tự động 4 vùng chuyển động ngay trên trình duyệt (bắt lỗi video đứng im, cây/ghế tự trượt, hoặc cửa tự mở mà không cần tải `.mp4`).
+5. **Bước 5 (Tải & Gộp Master `1080p` khi cần):** Sửa lẻ bất kỳ cảnh nào bằng `--phase only --only-key <MÃ_CẢNH>`, và xuất gộp Master MP4 bằng `download-1080p`.
+
+---
+
+## 8. Phân Định Rõ Nguồn Gốc Logic: Phần Nào Do Cào Prompt Mẫu vs. Phần Nào Tự Fix Thực Chiến?
+
+Để tránh rối khi nâng cấp hệ thống hoặc chuyển sang ngành hàng mới, toàn bộ logic trong repo được chia rõ thành **2 tầng nguồn gốc**:
+
+| Tầng Logic | Nguồn gốc | Chi tiết kỹ thuật | Đã đóng gói vào đâu trong Repo? |
+| :--- | :--- | :--- | :--- |
+| **1. Ngữ pháp Điện ảnh & Ánh sáng (`Cinematography & Lighting Grammar`)** | **Cào từ 4 Dự án Mẫu trên Google Flow & Video TVC Thương mại** | • Cú pháp máy quay 1 hướng mượt mà (`Continuous 4-second 50mm gentle low-horizon forward 3D camera push-in...`)<br/>• Chất màu phim `Kodak Vision3 250D`, luồng nắng xiên qua cửa sổ (`warm diagonal window sunbeams`), và chuyển động vi mô tự nhiên của môi trường (rèm voan khẽ thở, mặt nước lấp lánh). | [`flow_sku_tvc_toolkit/presets.py`](./flow_sku_tvc_toolkit/presets.py), [`flow_sku_tvc_toolkit/cli.py`](./flow_sku_tvc_toolkit/cli.py) |
+| **2. Công thức 3 Lớp Chống Sai SKU & Chống Ảnh Ghép Giả (`3-Layer Exact-SKU & Lifestyle Realism`)** | **Tự phát hiện lỗi & Tinh chỉnh qua 4 lô thực chiến cùng User** *(Vì các dự án cào về là sáng tạo tự do, không bị ràng buộc giữ chuẩn 100% kích thước chậu/cây)* | • **Lớp 1 (Khóa Tọa Độ 2D & Tỷ Lệ Kiến Trúc):** Khóa cứng vị trí cutout trên Plate `2K`, cấm AI phóng to/làm phình tán (`audit-images` chặn `halo_fattening_pct > 9%`), cấm vẽ hành lang hút sâu sau lưng cây đơn, cấm đặt cây đè trước mặt ghế ngồi hoặc cấn chân bàn.<br/>• **Lớp 2 (Nắng Ôm Viền Lá Quang Học — `Optical Sunlight Rim-Wrap`):** Cho nắng từ cửa sổ thật chiếu ôm nhẹ qua đầu lá ngoài cùng và tạo bóng đổ tiếp xúc dưới đáy chậu để cây hòa vào phòng thật.<br/>• **Lớp 3 (Đạo Cụ Đời Sống Hợp Cảnh — `Contextual Lifestyle Props`):** Luôn có nguồn sáng nhìn thấy được (cửa sổ/vườn hoa) + 3–4 món đồ decor bản địa (bình hoa cẩm tú cầu, đèn lồng đồng, giỏ củi bạch dương, mũ cói, túi da) để ảnh có hồn thực tế.<br/>• **Kiểm định Video 4 Vùng (`audit-videos`):** Chặn từ cấm thiết bị quay/hạt cát vàng/cửa tự mở/camera ngẩng lên cắt đáy chậu. | [`flow_sku_tvc_toolkit/guardrails.py`](./flow_sku_tvc_toolkit/guardrails.py), [`flow_sku_tvc_toolkit/presets.py`](./flow_sku_tvc_toolkit/presets.py), [`PLAYBOOK_RIENG_SAN_PHAM_CAY_4FT_TVC.md`](./PLAYBOOK_RIENG_SAN_PHAM_CAY_4FT_TVC.md) |
+

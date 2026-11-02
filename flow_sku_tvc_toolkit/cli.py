@@ -21,7 +21,7 @@ import re
 import sys
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
-from .guardrails import validate_sku_config
+from .guardrails import audit_project_images_cutout, validate_sku_config
 from .plate_engine import build_sku_plates_from_image
 from .presets import PRESETS, get_preset, list_presets
 
@@ -59,16 +59,18 @@ def _build_starter_config(slug: str, prefix: str, preset_name: str, project_id: 
         )
     else:
         sample_scene_tail = (
-            "a 50mm live-action Kodak Vision3 250D sunlit architectural interior scene with natural scale-locking furniture "
-            "set on the same floor plane, warm afternoon diagonal window sunbeams on the plaster wall behind, "
-            "even clean natural daylight around the product, realistic floor contact shadow underneath the base, zero text."
+            "a 50mm live-action Kodak Vision3 250D sunlit architectural interior scene: positioned flush along the same flat floor depth plane "
+            "behind the product is natural scale-locking furniture (82cm oak console or bench styled with lived-in ceramic vase, books, and woven baskets) "
+            "beneath a sunlit window with sheer linen curtains casting warm diagonal sunbeams across the wall, floor, and outer product edges, "
+            "realistic floor contact shadow directly underneath the base, zero text."
         )
         sample_video_prompt = (
-            "Continuous, clearly visible 4-second 50mm gentle forward camera push-in across the sunlit room "
-            "with natural 3D architectural perspective while all furniture, architectural elements, and the product "
-            "remain 100% stationary anchored to the floor. Warm afternoon window sunbeams illuminate the subtle plaster wall texture "
-            "while preserving the exact solid shape, proportions, and surface texture of the product. "
-            "No people, no camera equipment, zero morphing, zero text."
+            "Continuous, clearly visible 4-second 50mm gentle low-horizon forward 3D camera push-in across the sunlit room "
+            "in rich 3D optical parallax (maintaining a locked level horizon without zooming in close, keeping the entire product "
+            "from floor base to top tip 100% uncut and visible head-to-toe inside the frame from 0s to 4s) while all furniture, "
+            "architectural elements, and the product remain 100% stationary anchored to the floor. Warm window sunbeams gleam softly "
+            "across the room while preserving the exact solid shape, proportions, and surface texture of the product. "
+            "No people, no camera equipment, zero fade-out, zero morphing, zero text."
         )
 
     return {
@@ -326,6 +328,36 @@ def cmd_audit_videos(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_audit_images(args: argparse.Namespace) -> int:
+    cfg, proj_dir = _load_config(args.config)
+    results = audit_project_images_cutout(
+        config=cfg,
+        project_dir=proj_dir,
+        scenes_dir=args.scenes_dir or None,
+        only_key=args.only_key,
+        max_cutout_l1=args.max_cutout_l1,
+        max_halo_fattening_pct=args.max_fattening_pct,
+    )
+    out_json = args.out_json or os.path.join(proj_dir, "qa", "image_cutout_audit.json")
+    os.makedirs(os.path.dirname(os.path.abspath(out_json)), exist_ok=True)
+    with open(out_json, "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
+
+    for r in results:
+        status = "PASS" if r.get("ok") else f"FAIL ({r.get('verdict')})"
+        print(
+            f"  [{status}] {r['key']} | cutout_l1={r.get('cutout_rgb_l1', 'N/A')} | "
+            f"fattening={r.get('halo_fattening_pct', 'N/A')}% | {r.get('reason', '')}"
+        )
+
+    failed = [r for r in results if not r.get("ok")]
+    if failed:
+        print(f"IMAGE AUDIT FAILED on {len(failed)}/{len(results)} scene(s). Saved -> {out_json}", file=sys.stderr)
+        return 1
+    print(f"IMAGE AUDIT PASSED on all {len(results)} scene(s). Saved -> {out_json}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="python3 -m flow_sku_tvc_toolkit",
@@ -400,6 +432,15 @@ def build_parser() -> argparse.ArgumentParser:
     sp_dl.add_argument("--master-name", default="", help="Merged master MP4 filename")
     sp_dl.add_argument("--port", type=int, default=None)
     sp_dl.set_defaults(func=cmd_download_1080p)
+
+    sp_aud_img = sub.add_parser("audit-images", help="Offline Stage-2 Cutout & Silhouette Fattening QA against 2K white plates")
+    sp_aud_img.add_argument("--config", required=True)
+    sp_aud_img.add_argument("--scenes-dir", default="", help="Optional custom scenes directory (defaults to qa/scenes_fullres)")
+    sp_aud_img.add_argument("--only-key", default="", help="Filter scenes by key substring")
+    sp_aud_img.add_argument("--max-cutout-l1", type=float, default=58.0, help="Max allowed RGB L1 inside cutout mask (default 58.0)")
+    sp_aud_img.add_argument("--max-fattening-pct", type=float, default=9.0, help="Max allowed outer halo foliage spill %% (default 9.0)")
+    sp_aud_img.add_argument("--out-json", default="", help="Optional output JSON report path (defaults to qa/image_cutout_audit.json)")
+    sp_aud_img.set_defaults(func=cmd_audit_images)
 
     sp_aud = sub.add_parser("audit-videos", help="In-browser 2-Zone HTML5 <video> scrub QA (0 .mp4 downloads; catches frozen camera & sliding props)")
     sp_aud.add_argument("--config", required=True)
