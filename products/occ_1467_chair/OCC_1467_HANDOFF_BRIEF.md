@@ -48,9 +48,15 @@
      * Bắt buộc dùng Plate đã lật chiều ghế sang trái `OCC1467_PLATE_01B_SINGLE_RIGHT_FACING_LEFT_58PCT_16x9.jpg` (tuyệt đối không ép nhân vật ngồi ngược chiều với Plate gốc làm AI lật ngược phần lưng ghế nhưng để lại chân chữ L bị hếch).
    - **Tạo ảnh xách ghế xếp gọn (`Folded Carry Outro` — `RED_LAKE08`)**:
      * Bắt buộc dùng duy nhất ref `OCC1467_REF_5_FOLDED_CARRY_S4_1024.jpg` (cắt riêng `STEP 4` từ `Main-8.jpg`, bỏ `STEP 3` cạnh ngang hẹp) để chiếc ghế gấp có đúng kích thước khung chữ nhật bản rộng (`80cm × 65cm`, kéo dài từ ngang hông xuống sát cổ chân), tuyệt đối không bị biến thành thanh hẹp.
-   - **Prompt Video đung đưa nhẹ (`V_RED_BEACH01..03`, `V_RED_LAKE09`, `V_RED_LAKE10`) & Cận cảnh đứng im (`V_RED_BEACH04`, `V_RED_LAKE04..07`)**:
-     * Với cảnh có người ngồi bập bênh: Dùng công thức đung đưa nhẹ nhàng tự nhiên đã kiểm chứng (`"lean gently and rhythmically back and forth in an effortless, soothing rocking motion"`), **không** nhồi mô tả cơ khí ép lò xo quá mức vào Veo 3.1 (tránh làm Veo 3.1 uốn cong ống thép đen như cao su).
-     * Với cảnh cận cảnh / bối cảnh ghế trống không người: Khóa cứng `"The empty chair remains 100% stationary and firmly planted..."` và dùng chuyển động máy quay `3D orbital push-in and lateral arc` trong `1 single continuous 8-second shot` (`NO cuts, NO cross-dissolves`).
+   - **Prompt Video đung đưa nhẹ (`V_RED_BEACH01..03`, `V_RED_LAKE02`, `V_RED_LAKE09`, `V_RED_LAKE10`) — Giải mã 3 lý do vì sao `V_RED_BEACH02` cử động nhún đúng 100% cơ học**:
+     1. **Tư thế 2 bàn chân trong Ảnh gốc (`Both Feet Planted on the Ground — NO Crossed Lifted Leg`)**: Ở `RED_BEACH02` (và các nhân vật nam trong `RED_BEACH01`, `RED_BEACH03`, `RED_LAKE03`), **cả 2 bàn chân đều đặt chạm sàn** (`both feet resting naturally on the ground, legs uncrossed`). Ngược lại, khi nhân vật nữ **vắt chéo chân làm 1 bàn chân nhấc bổng lơ lửng trên không** (do bắt chước cô gái vắt chân trong ảnh ref `OCC1467_COUPLE_CAMP_TALK_REF.jpg`), Veo 3.1 thấy bàn chân lơ lửng nên hiểu nhầm là đang đạp bập bênh ngửa cả khung đế ghế lên! Do đó khi tạo ảnh người ngồi, nên ghi rõ `"with both feet resting naturally on the ground (legs uncrossed)"`.
+     2. **Chủ ngữ hành động trong Prompt Video là "Người ngả lưng nhẹ" (`Person leans gently` — Tuyệt đối KHÔNG nhắc chữ `spring / hinge / bottom bar` trong prompt video)**:
+        - Công thức chuẩn Vàng của `V_RED_BEACH02`:
+          > `"the [man/woman] seated in the chair leans gently and rhythmically back and forth in an effortless, soothing rocking motion"`
+        - Khi chủ ngữ là **người ngồi ngả lưng nhẹ nhàng** và **không nhắc một chữ nào đến lò xo hay chân sắt** trong prompt video, Veo 3.1 mặc định coi phần chân đế sát đất là vật tĩnh cố định và chỉ cho phần thân trên + lưng ghế nhún nhẹ theo khớp chữ L. Ngược lại, hễ nhắc `"spring"`, `"hinge"`, `"bottom bar"` vào prompt video là Veo 3.1 lập tức cố làm chuyển động/uốn cong các thanh sắt dưới đất.
+     3. **Bóng nắng đen sát mặt sàn (`Hard Solar Contact Shadow`)**: Thanh đế ngang dưới cùng có vệt bóng đổ đen sắc nét chạm sát mặt sàn giúp Veo 3.1 "dán chặt" thanh đế ngang vào mặt đất, chỉ cho phần khung chữ L phía trên nhún.
+   - **Với cảnh cận cảnh / bối cảnh ghế trống không người (`V_RED_BEACH04`, `V_RED_LAKE04..07`)**:
+     * Khóa cứng `"The empty chair remains 100% stationary and firmly planted..."` và dùng chuyển động máy quay `3D orbital push-in and lateral arc` trong `1 single continuous 8-second shot` (`NO cuts, NO cross-dissolves`).
 
 ---
 
