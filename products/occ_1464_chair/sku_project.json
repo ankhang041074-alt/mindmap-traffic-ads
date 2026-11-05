@@ -1,0 +1,555 @@
+{
+  "slug": "occ_1464_chair",
+  "prefix": "OCC1464",
+  "preset": "generic_decor",
+  "project_id": "1d71c3d4-623e-4656-8d1e-915fbe5e59bd",
+  "video_duration": "8 giây",
+  "notes_vi": "Bổ sung 2 Shot 6 giây Ghế OCC-1464 Vibes Bãi Biển kiểu mới & nắng chiều (Sàn gỗ chòi lá cọ ven biển & Vịnh đá cuội gỗ lũa chiều muộn).",
+  "exclude_uuids": [],
+  "scenes": [
+    {
+      "key": "TVC09_BEACH_WOODEN_BOARDWALK_CABANA_LATE_AFTERNOON",
+      "refs": [
+        "OCC1464_PLATE_01_SINGLE_RIGHT_58PCT_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm daylight commercial photograph, f/5.6 deep natural depth of field, crisp direct 5000K late-afternoon coastal sun, NO HDR glow, NO artificial neon orange tint, NO fake blurry bokeh, natural neutral photographic color rendition: edit this 16:9 product plate (using the second 1024x1024 close-up reference image for exact royal-blue 600D Oxford canvas #21387F, breathable cool silver-grey mesh backrest panel #A1A0A5 with crisp white vertical piping, hanging blue side cup-holder pouch, matte-black X-brace tubular steel frame, and exact single L-bar seesaw rocker base with one short flat bottom runner bar, black U-bracket pivot, curved L-shaped rocker tube, and one vertical black cylindrical spring bumper per side — strictly NO four separate legs): keep the single folding rocker chair on the right at its exact 58% frame-height and 8% bottom-margin 2D canvas coordinates. Outpaint the background with an upscale coastal beach boardwalk deck in late-afternoon sunlight: anchor the chair on weathered sun-bleached teak boardwalk planks dusted with fine white beach sand, casting a sharp, hard-edged dark solar shadow and crisp organic dappled palm-frond shadows across the wooden deck and backrest. Immediately to the left on the same wooden deck sits a low woven-rattan and teak beach side table holding a fresh green drinking coconut, a brushed-steel insulated tumbler, and folded cream linen beach towel, with natural sand dunes, swaying coconut palms, and rolling turquoise ocean waves in crisp f/5.6 depth of field behind the deck. Strictly ONE chair, no people, zero text."
+    },
+    {
+      "key": "TVC10_BEACH_COVE_TIDAL_ROCKS_DRIFTWOOD_AFTERNOON",
+      "refs": [
+        "OCC1464_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm daylight commercial photograph, f/5.6 deep natural depth of field, crisp direct 5000K late-afternoon coastal sunlight, NO HDR glow, NO artificial neon orange tint, NO fake blurry bokeh, natural neutral photographic color rendition: edit this 16:9 product plate (using the second 1024x1024 close-up reference image for exact royal-blue 600D Oxford canvas #21387F, breathable cool silver-grey mesh backrest panel #A1A0A5 with crisp white vertical piping, hanging blue side cup-holder pouch, matte-black X-brace tubular steel frame, and exact single L-bar seesaw rocker base with one short flat bottom runner bar, black U-bracket pivot, curved L-shaped rocker tube, and one vertical black cylindrical spring bumper per side — strictly NO four separate legs): keep the single folding rocker chair on the left at its exact 58% frame-height and 8% bottom-margin 2D canvas coordinates. Outpaint the background with a scenic rocky coastal beach cove in late-afternoon sun: place the chair on firm rippled coastal sand scattered with smooth sea pebbles and small shells near the wet tide line, with a sharp hard-edged dark solar cast shadow beneath the bottom rocker rails. To the right along the sand sits a sun-bleached natural coastal driftwood log styled with a woven straw beach tote bag and a chilled glass bottle of rippling citrus water, while gentle foamy ocean surf washes against sculpted coastal sandstone boulders and a shimmering late-afternoon sea horizon in natural f/5.6 depth of field. Strictly ONE chair, no people, zero text."
+    },
+    {
+      "key": "LAKE01_FOREST_TRAIL_CARRY_ARRIVAL",
+      "refs": [
+        "OCC1464_REF_5_FOLDED_CARRY_1024.jpg",
+        "OCC1464_CHAR_1_SHEET.jpg"
+      ],
+      "prompt": "Raw unretouched 5600K daylight 50mm f/5.6 deep-focus commercial lifestyle photograph at a sunlit mountain pine-forest lakeside campsite: man walks along a natural pine-needle and gravel lakeside path carrying the folded OCC-1464 outdoor rocking chair by its royal-blue carry strap toward a canvas A-frame tent by the lake."
+    },
+    {
+      "key": "LAKE02_TWO_FRIENDS_PINE_CAMPSITE_TALK_ROCK",
+      "refs": [
+        "OCC1464_PLATE_05_PAIR_INWARD_TALK_16x9.jpg",
+        "OCC1464_COUPLE_CAMP_TALK_REF.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_1_SHEET.jpg"
+      ],
+      "prompt": "Raw unretouched 5600K daylight 50mm f/5.6 deep-focus outdoor commercial photograph at a sunlit Ponderosa pine-forest lakeside campsite: two friends seated in two identically-scaled OCC-1464 folding rocking chairs talking and laughing across a wooden camp table by the lake."
+    },
+    {
+      "key": "LAKE03_THREE_FRIENDS_LAKESHORE_GRAVEL_TALK_ROCK",
+      "refs": [
+        "OCC1464_PLATE_06_TRIO_CAMPSITE_16x9.jpg",
+        "OCC1464_COUPLE_RELAX_3Q_REF.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_1_SHEET.jpg"
+      ],
+      "prompt": "Raw unretouched 5600K daylight 50mm f/5.6 deep-focus commercial lifestyle photograph on a sunlit pebble-and-gravel lakeshore: three friends seated in three identically-proportioned OCC-1464 folding rocking chairs talking and laughing by the mountain lake."
+    },
+    {
+      "key": "LAKE04_SIDE_3Q_CONVERSATION_GENTLE_ROCK_HINGE_HERO",
+      "refs": [
+        "OCC1464_PLATE_04_SIDE_PROFILE_RIGHT_58PCT_16x9.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_1_SHEET.jpg"
+      ],
+      "prompt": "Raw unretouched 5600K daylight 50mm f/5.6 deep-focus commercial hero photograph at a sunlit pine-forest lakeshore campsite: man seated in the OCC-1464 folding rocking chair in side-3/4 profile talking warmly with friends across a wooden camp table."
+    },
+    {
+      "key": "LAKE05_EXTERIOR_PAIR_PINE_LAKE_CAMPSITE",
+      "refs": [
+        "OCC1464_PLATE_05_PAIR_INWARD_TALK_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm daylight commercial exterior product photograph, f/5.6 deep natural depth of field, crisp direct 5600K mountain lake sunlight, NO HDR glow, NO artificial neon orange tint, NO fake blurry bokeh, natural neutral photographic color rendition: edit this 16:9 two-chair cutout plate (using the second and third 1024x1024 close-up reference images for exact royal-blue 600D Oxford canvas #21387F, breathable cool silver-grey mesh backrest panel #A1A0A5 with crisp white vertical piping, hanging blue side cup-holder pouch, matte-black X-brace tubular steel frame, and exact single L-bar seesaw rocker base with one short flat horizontal ground runner bar, black U-bracket pivot, curved L-shaped rocker tube, and one vertical black cylindrical spring bumper with yellow warning label per side — strictly NO four separate legs): keep the TWO empty folding rocker chairs at their exact equal scale, height, and inward-facing conversation positions on the canvas (ZERO size difference between left and right chair). Outpaint the background with a scenic sunlit Ponderosa pine-forest lakeside campsite: anchor both chairs on natural pine-needle and pebble lakeshore ground casting sharp dark solar shadows and organic dappled pine-branch shadows. Between the two chairs sits a low slatted wooden roll-top camp table holding a brushed-steel pour-over coffee kettle and two cream enamel camp mugs; slightly behind on the right stands a beige canvas A-frame glamping tent and a natural stone campfire ring with split birch logs, overlooking the rippling emerald-blue mountain lake and pine-covered hills in crisp f/5.6 focus. Strictly TWO empty chairs, no people, zero text."
+    },
+    {
+      "key": "LAKE06_EXTERIOR_SINGLE_WOODEN_LAKE_DOCK",
+      "refs": [
+        "OCC1464_PLATE_04_SIDE_PROFILE_RIGHT_58PCT_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm daylight commercial exterior product photograph, f/5.6 deep natural depth of field, crisp direct 5600K mountain lake sunlight, NO HDR glow, NO artificial neon orange tint, NO fake blurry bokeh, natural neutral photographic color rendition: edit this 16:9 side-3/4 product cutout plate (using the second and third 1024x1024 close-up reference images for exact royal-blue 600D Oxford canvas #21387F, breathable cool silver-grey mesh backrest panel #A1A0A5 with crisp white vertical piping, hanging blue side cup-holder pouch, matte-black X-brace tubular steel frame, and exact single L-bar seesaw rocker base with one short flat horizontal ground runner bar, black U-bracket pivot, continuous curved L-shaped rocker tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — strictly NO four separate legs): keep the single empty folding rocker chair on the right at its exact 58% frame-height and 8% bottom-margin 2D canvas coordinates. Outpaint the background with a rustic weathered cedar-wood lakeshore dock extending out over a crystal-clear mountain pine lake: anchor the flat bottom runner bars of the chair directly on the sun-bleached wooden dock planks with a sharp dark solar shadow and dappled pine-needle shadows. To the left on the wooden dock sits a low slatted wooden camp crate holding a vintage matte-black camp lantern, a stainless insulated thermos, and a folded plaid wool camp blanket, with shimmering blue lake water, shoreline boulders, and tall Ponderosa pine forest in crisp f/5.6 depth of field. Strictly ONE empty chair, no people, zero text."
+    },
+    {
+      "key": "VILLA01_HOOK_COUPLE_3Q_TERRACE_ROCKING_CHILL",
+      "refs": [
+        "OCC1464_PLATE_03_PAIR_CAMPSITE_52PCT_16x9.jpg",
+        "OCC1464_COUPLE_RELAX_3Q_REF.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_2_SHEET.jpg"
+      ],
+      "prompt": "Raw unretouched 5600K daylight 50mm f/5.6 deep-focus architectural lifestyle photograph on a sunlit poured-concrete hillside villa terrace: woman in terracotta-rust linen shirt and man in sage-olive shirt seated in two identically-scaled OCC-1464 chairs rocking and chilling."
+    },
+    {
+      "key": "VILLA02_SOLO_TERRACE_SCENIC_ROCKING_CHILL",
+      "refs": [
+        "OCC1464_PLATE_01_SINGLE_RIGHT_58PCT_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_2_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm daylight commercial photograph, f/5.6 deep natural depth of field, crisp direct 5600K sunlight, NO HDR glow, NO fake blurry bokeh: edit this 16:9 product plate (using the second and third 1024x1024 close-up reference images for exact royal-blue 600D Oxford canvas #21387F, breathable cool silver-grey mesh backrest panel #A1A0A5 with white piping, hanging blue side cup-holder pouch, matte-black X-brace frame, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the floor, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — NEVER a curved arc runner and NEVER four separate legs): keep the single chair on the right at its exact 58% frame-height coordinates with its bottom metal frame 100% UNCHANGED. Seat the exact 27-year-old honey-brunette woman from the fourth reference image (wearing her warm terracotta-rust short-sleeve linen shirt over a white cotton tank top, cream tailored linen shorts, and white leather sneakers — single person only, never show the 3-panel split layout) comfortably in the chair holding an iced coffee glass while a stainless tumbler sits in the hanging blue side cupholder. Outpaint the background with a sunlit poured-concrete hillside villa terrace beside a low board-formed concrete parapet wall and a courtyard tree casting crisp dark solar shadows and dappled leaf shadows across the smooth concrete floor, overlooking lush green mountain hills and a calm blue river in sharp f/5.6 focus. Zero text."
+    },
+    {
+      "key": "VILLA03_CLOSEUP_PRODUCT_AND_SPRING_TERRACE",
+      "refs": [
+        "OCC1464_PLATE_07_CLOSEUP_DETAIL_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 85mm daylight commercial product close-up photograph, f/5.6 natural depth of field, crisp direct 5600K midday sunlight, NO HDR glow, NO artificial tint: edit this 16:9 close-up product cutout plate (using the second and third 1024x1024 reference images for exact royal-blue 600D Oxford canvas #21387F, breathable silver-grey mesh backrest #A1A0A5 with white vertical piping, padded blue armrest, hanging blue side cup-holder pouch, matte-black X-brace steel tubing, and exact bottom seesaw rocker mechanism with one short flat straight horizontal ground runner bar, black U-bracket pivot hinge, continuous L-shaped rocker tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep the entire chair frame 100% UNCHANGED at its exact 2D canvas coordinates): outpaint the pure white background with a sunlit poured-concrete hillside villa terrace floor and low board-formed concrete parapet wall, anchoring the flat bottom runner bars directly on the smooth warm-grey concrete surface with a razor-sharp dark solar cast shadow and organic dappled tree-leaf shadows across the concrete floor, with green mountain hills softly visible beyond the terrace wall. Strictly ONE chair close-up, no people, zero text."
+    },
+    {
+      "key": "VILLA04_EXTERIOR_STATIC_SINGLE_CONCRETE_TERRACE",
+      "refs": [
+        "OCC1464_PLATE_04_SIDE_PROFILE_RIGHT_58PCT_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw unretouched 50mm daylight commercial exterior product photograph on a sunlit poured-concrete hillside terrace with dappled tree shadows and a travertine side table."
+    },
+    {
+      "key": "VILLA05_EXTERIOR_STATIC_PAIR_CEDAR_PATIO_GARDEN",
+      "refs": [
+        "OCC1464_PLATE_05_PAIR_INWARD_TALK_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw unretouched 50mm daylight commercial exterior product photograph of two empty OCC-1464 chairs on a sunlit flagstone-and-concrete villa garden patio."
+    },
+    {
+      "key": "VILLA06_OUTRO_FOLDED_CARRY_VILLA_COURTYARD",
+      "refs": [
+        "OCC1464_REF_5_FOLDED_CARRY_1024.jpg",
+        "OCC1464_CHAR_2_SHEET.jpg"
+      ],
+      "prompt": "Raw unretouched 5600K daylight 50mm f/5.6 commercial lifestyle photograph: woman in terracotta-rust linen shirt walking along a sunlit concrete villa terrace carrying the folded OCC-1464 chair by its blue strap."
+    },
+    {
+      "key": "VILLA07_SIDE_PROFILE_READING_ROCKING_CHILL",
+      "refs": [
+        "OCC1464_PLATE_04_SIDE_PROFILE_RIGHT_58PCT_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_2_SHEET.jpg"
+      ],
+      "prompt": "Raw unretouched 50mm daylight commercial photograph on a sunlit minimalist poured-concrete and flagstone hillside villa patio: woman in terracotta-rust linen shirt seated in the single OCC-1464 chair reading an open hardcover book."
+    },
+    {
+      "key": "LAKE04_FIXED_SIDE_3Q_TALK_ROCK_HERO",
+      "refs": [
+        "OCC1464_PLATE_01_SINGLE_RIGHT_58PCT_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_1_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5200K morning sunlight through pine trees, NO HDR glow, NO fake blurry bokeh: edit this 16:9 3/4 product plate (using the second and third 1024x1024 close-up reference images for exact royal-blue 600D Oxford canvas #21387F including the royal-blue horizontal top header band across the top of the backrest above the breathable cool silver-grey mesh center panel #A1A0A5 with crisp white vertical piping, padded blue armrests, hanging cylindrical royal-blue side cup-holder pouch on the front-right post, complete unbroken matte-black X-brace tubular steel frame under the seat with ZERO dangling straps under the seat, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the pine-needle ground, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep the entire chair frame, top blue header band, side cup-holder pouch, X-brace, and bottom metal base 100% UNCHANGED at their exact 2D canvas coordinates): seat the exact 32-year-old sandy-brown-haired man from the fourth reference image (wearing his off-white short-sleeve linen camp-collar shirt over a white tee, light khaki-beige shorts, and off-white canvas slip-on sneakers — single person only, never show the 3-panel split layout) RELAXING WITH HIS BACK RESTING COMFORTABLY AGAINST THE SILVER-GREY MESH BACKREST (do NOT lean him forward away from the backrest; his upper back rests naturally against the mesh while the royal-blue top header band and silver-grey mesh remain clearly visible around his shoulders), holding an enamel coffee mug while smiling and talking warmly with two friends seated at a slatted wooden camp table on the left edge of the frame, with a cream canvas A-frame tent, tall pine trees, and a sparkling blue mountain lake in sharp focus behind them. Zero text."
+    },
+    {
+      "key": "LAKE04_V2_PERFECT_BACKREST_AND_FRAME",
+      "refs": [
+        "OCC1464_PLATE_01_SINGLE_RIGHT_58PCT_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_1_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5200K morning sunlight through pine trees, NO HDR glow, NO fake blurry bokeh: edit this 16:9 3/4 product plate (using the second and third 1024x1024 close-up reference images for exact royal-blue 600D Oxford canvas #21387F, the wide royal-blue horizontal top header band across the top of the backrest, the breathable cool silver-grey mesh center panel #A1A0A5 framed by two crisp white vertical piping lines, padded blue armrests, hanging cylindrical royal-blue side cup-holder pouch on the front post, clean unbroken matte-black X-brace tubular steel frame under the seat with ZERO hanging straps under the seat, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the pine-needle ground, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep 100% of the chair geometry UNCHANGED): seat the exact 32-year-old sandy-brown-haired man from the fourth reference image (wearing his off-white short-sleeve linen camp-collar shirt over a white tee, light khaki-beige shorts, and off-white canvas slip-on sneakers — single person in the chair, never show the 3-panel split layout) seated slightly toward the front-left of the cushion with his lower/mid back touching the backrest so the ENTIRE upper backrest behind his shoulder — specifically the royal-blue horizontal top header band, the two white vertical piping lines, and the silver-grey mesh center panel — is 100% CLEARLY VISIBLE AND UNOBSTRUCTED, holding an enamel mug and smiling warmly at two friends seated across a wooden camp table on the left, with a canvas A-frame tent, pine trees, and sparkling blue mountain lake behind them. Zero text."
+    },
+    {
+      "key": "DECK01_HOOK_THREE_FRIENDS_CEDAR_DECK_ROCK",
+      "refs": [
+        "OCC1464_PLATE_06_TRIO_CAMPSITE_16x9.jpg",
+        "OCC1464_COUPLE_CAMP_TALK_REF.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_3_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5200K warm afternoon sunlight, NO HDR glow, NO fake blurry bokeh: edit this 16:9 3-chair product plate (using the second and third reference images for exact royal-blue 600D Oxford canvas #21387F with the wide royal-blue horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 with two crisp white vertical piping lines, padded blue armrests, hanging cylindrical royal-blue side cup-holder pouch on the front post, unbroken matte-black X-brace tubular steel frame with ZERO dangling straps under the seat, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the wooden deck planks, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep all three chairs at their exact 1:1 identical scale and exact 2D canvas coordinates with 100% UNCHANGED frames): seat three happy friends in the three chairs — on the left chair seat the exact 30-year-old chestnut-brown-haired man from the fourth reference image (wearing his ivory-cream waffle-knit short-sleeve polo shirt, olive-khaki chino shorts, and white leather sneakers — never show the 3-panel split layout), in the center chair seat a smiling 28-year-old woman in a lightchambray shirt and beige trousers, and in the right chair seat a smiling 30-year-old man in a rust-terracotta henley tee and khaki shorts — all three sitting comfortably with their backs resting against the backrests, holding cold iced drinks and chatting warmly on a spacious warm-toned American cedar wood backyard deck overlooking a lush green lawn, maple trees, and a modern craftsman timber house porch in sharp f/5.6 focus. Zero text."
+    },
+    {
+      "key": "DECK02_REAR_VIEW_ROCKING_GARDEN",
+      "refs": [
+        "OCC1464_REF_4_REAR_MESH_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_3_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5200K warm afternoon sunlight, NO HDR glow, NO fake blurry bokeh: using the first reference image as the exact rear-view product blueprint of the single folding rocker chair and the second reference image for its exact bottom L-bar ground hinge, show a rear-3/4 view from directly behind the single chair placed on a sunlit warm cedar wood backyard deck looking out toward a lush green backyard lawn and sunlit maple trees: preserve 100% of the exact rear backrest design (wide royal-blue horizontal top fabric header band with two small silver corner rivets at the top-left and top-right corners, grey top edge trim, breathable silver-grey mesh center panel #A1A0A5, royal-blue side fabric panels), the unbroken matte-black rear X-brace tubular steel frame with the diagonal royal-blue fabric carry strap riveted across the lower X-brace, the hanging cylindrical royal-blue cup-holder pouch on the right front post holding an iced drink glass, and the exact bottom seesaw base with two short flat straight bottom runner bars resting flat on the cedar deck planks, black U-bracket pivot hinges, L-shaped rocker tubes, and two vertical black cylindrical spring bumpers (NEVER curved rockers). Seated comfortably in the chair seen from behind is the 30-year-old chestnut-brown-haired man from the third reference image wearing his ivory-cream waffle-knit short-sleeve polo shirt, olive-khaki chino shorts, and white leather sneakers (never show the 3-panel split layout), resting his right hand near the iced drink in the side cup-holder pouch while gazing peacefully across the sunlit backyard garden. Zero text."
+    },
+    {
+      "key": "DECK03_COUPLE_PATIO_LAWN_TALK_ROCK",
+      "refs": [
+        "OCC1464_PLATE_03_PAIR_CAMPSITE_52PCT_16x9.jpg",
+        "OCC1464_COUPLE_RELAX_3Q_REF.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_3_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5200K warm sunlight under dappled tree shade, NO HDR glow, NO fake blurry bokeh: edit this 16:9 2-chair product plate (using the second and third reference images for exact royal-blue 600D Oxford canvas #21387F with the wide royal-blue horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 with two crisp white vertical piping lines, padded blue armrests, hanging cylindrical royal-blue side cup-holder pouches, unbroken matte-black X-brace tubular steel frames with ZERO dangling straps under the seat, and exact bottom L-bar seesaw bases with one short flat straight bottom runner bar resting flat on the stone patio, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep BOTH chairs at their exact 52% identical scale and exact 2D canvas coordinates with 100% UNCHANGED frames): in the left chair seat the exact 30-year-old chestnut-brown-haired man from the fourth reference image (wearing his ivory-cream waffle-knit short-sleeve polo shirt, olive-khaki chino shorts, and white leather sneakers — never show the 3-panel split layout) and in the right chair seat a smiling 28-year-old woman in a soft sage-green linen top, cream shorts, and white sneakers, both sitting with their backs resting comfortably against the backrests beside a small teak garden side table with two glasses of iced lemonade on a flat natural flagstone garden patio bordered by a lush green backyard lawn, hydrangeas, and a cedar wood deck in sharp f/5.6 focus. Zero text."
+    },
+    {
+      "key": "DECK04_CLOSEUP_PRODUCT_CEDAR_DECK",
+      "refs": [
+        "OCC1464_PLATE_07_CLOSEUP_DETAIL_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 85mm afternoon daylight commercial product close-up photograph, f/5.6 natural depth of field, crisp direct 5200K sunlight, NO HDR glow, NO artificial tint: edit this 16:9 close-up product cutout plate (using the second and third 1024x1024 reference images for exact royal-blue 600D Oxford canvas #21387F, breathable silver-grey mesh backrest #A1A0A5 with crisp white vertical piping, padded blue armrest, hanging cylindrical royal-blue side cup-holder pouch, unbroken matte-black X-brace steel tubing, and exact bottom seesaw rocker mechanism with one short flat straight horizontal ground runner bar, black U-bracket pivot hinge, continuous L-shaped rocker tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep the entire chair frame 100% UNCHANGED at its exact 2D canvas coordinates): outpaint the pure white background with a sunlit warm American cedar wood backyard deck and wooden porch railing, anchoring the flat bottom runner bars directly on the horizontal cedar wood planks with a crisp dark solar cast shadow and dappled maple-leaf shadows, with a green backyard garden softly visible beyond the deck railing. Strictly ONE chair close-up, no people, zero text."
+    },
+    {
+      "key": "DECK05_EXTERIOR_STATIC_SINGLE_CEDAR_DECK",
+      "refs": [
+        "OCC1464_PLATE_01_SINGLE_RIGHT_58PCT_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm afternoon daylight commercial exterior product photograph, f/5.6 deep natural depth of field, crisp 5200K sunlight, NO HDR glow, NO fake blurry bokeh: edit this 16:9 single-chair product plate (using the second and third reference images for exact royal-blue 600D Oxford canvas #21387F with the wide royal-blue horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 with two crisp white vertical piping lines, padded blue armrests, hanging cylindrical royal-blue side cup-holder pouch, unbroken matte-black X-brace tubular steel frame, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the cedar deck planks, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep the entire empty chair 100% UNCHANGED at its exact 58% frame-height coordinates): outpaint the pure white background with an upscale sunlit American cedar wood backyard deck beside a low slatted teak side table holding a glass pitcher of iced lemonade and an open book, with dappled afternoon maple-tree shadows across the warm cedar planks and a lush green backyard lawn and craftsman house patio doors in sharp f/5.6 focus behind. Strictly ONE empty chair, no people, zero text."
+    },
+    {
+      "key": "DECK06_EXTERIOR_STATIC_PAIR_FLAGSTONE_GARDEN",
+      "refs": [
+        "OCC1464_PLATE_05_PAIR_INWARD_TALK_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm afternoon daylight commercial exterior product photograph, f/5.6 deep natural depth of field, crisp 5200K sunlight, NO HDR glow, NO fake blurry bokeh: edit this 16:9 2-chair product plate (using the second and third reference images for exact royal-blue 600D Oxford canvas #21387F with the wide royal-blue horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 with two crisp white vertical piping lines, padded blue armrests, hanging cylindrical royal-blue side cup-holder pouches, unbroken matte-black X-brace tubular steel frames, and exact bottom L-bar seesaw bases with one short flat straight bottom runner bar resting flat on the stone patio, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep BOTH empty chairs 100% UNCHANGED at their exact 2D canvas coordinates): outpaint the pure white background with a flat natural flagstone garden patio set into a lush green American backyard lawn beside a warm cedar wood deck, with a small round teak coffee table between the two chairs and sunlit maple trees casting natural dappled leaf shadows across the stone patio. Strictly TWO empty chairs, no people, zero text."
+    },
+    {
+      "key": "DECK07_OUTRO_FOLDED_CARRY_GARDEN_PATH",
+      "refs": [
+        "OCC1464_REF_5_FOLDED_CARRY_1024.jpg",
+        "OCC1464_CHAR_3_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm afternoon daylight outdoor commercial lifestyle photograph, f/5.6 deep natural depth of field, crisp 5200K warm sunlight: show the exact 30-year-old chestnut-brown-haired man from the second reference image (wearing his ivory-cream waffle-knit short-sleeve polo shirt, olive-khaki chino shorts, and clean white leather sneakers — single person only, never show the 3-panel split layout) walking naturally along a flat flagstone garden walkway stepping up onto a warm American cedar wood backyard deck, effortlessly carrying the slim folded royal-blue and silver-grey mesh OCC-1464 chair in his right hand by its integrated royal-blue fabric carry strap (matching the exact folded 4.9-inch flat geometry, black tubular frame, royal-blue fabric, and grey mesh of the first reference image). Crisp afternoon sunlight and natural dappled tree shadows across the stone path and cedar deck, lush green lawn in sharp f/5.6 focus. Zero text."
+    },
+    {
+      "key": "RV01_HOOK_THREE_FRIENDS_AIRSTREAM_ROCK",
+      "refs": [
+        "OCC1464_PLATE_06_TRIO_CAMPSITE_16x9.jpg",
+        "OCC1464_COUPLE_CAMP_TALK_REF.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_4_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5000K golden-afternoon sunlight, NO HDR glow, NO fake blurry bokeh: edit this 16:9 3-chair product plate (using the second and third reference images for exact royal-blue 600D Oxford canvas #21387F with the wide royal-blue horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 with two crisp white vertical piping lines, padded blue armrests, hanging cylindrical royal-blue side cup-holder pouch on the front post, unbroken matte-black X-brace tubular steel frame with ZERO dangling straps under the seat, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the compacted golden-gravel overlook pad, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep all three chairs at their exact 1:1 identical scale and exact 2D canvas coordinates with 100% UNCHANGED frames): seat three happy roadtrip friends in the three chairs — in the center chair seat the exact 26-year-old golden-blonde woman from the fourth reference image (wearing her light sky-blue chambray shirt open over a white ribbed tank top, warm sand-tan full-length chino trousers, and cream-white suede sneakers — never show the 3-panel split layout), on the left chair seat a smiling 29-year-old man in an olive-green overshirt, grey tee, and dark denim jeans, and on the right chair seat a smiling 27-year-old woman in a cream cable-knit sweater and tan trousers — all three sitting comfortably with their backs resting against the backrests, holding stainless travel tumblers and chatting warmly in front of a gleaming silver aluminum Airstream travel trailer parked at a scenic grassy mountain meadow overlook with distant sunlit rocky ridges in sharp f/5.6 focus. Zero text."
+    },
+    {
+      "key": "RV02_REAR_VIEW_OVERLOOK_ROCK",
+      "refs": [
+        "OCC1464_REF_4_REAR_MESH_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_4_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5000K golden-afternoon sunlight, NO HDR glow, NO fake blurry bokeh: using the first reference image as the exact rear-view product blueprint of the single folding rocker chair and the second reference image for its exact bottom L-bar ground hinge, show a rear-3/4 view from directly behind the single chair placed on a flat compacted golden-gravel and timber overlook platform beside a silver aluminum Airstream trailer, looking out toward a sweeping sunlit green meadow and distant red-rock mountain ridges: preserve 100% of the exact rear backrest design (wide royal-blue horizontal top fabric header band with two small silver corner rivets at the top-left and top-right corners, grey top edge trim, breathable silver-grey mesh center panel #A1A0A5, royal-blue side fabric panels), the unbroken matte-black rear X-brace tubular steel frame with the diagonal royal-blue fabric carry strap riveted across the lower X-brace, the hanging cylindrical royal-blue cup-holder pouch on the right front post holding an iced drink cup, and the exact bottom seesaw base with two short flat straight bottom runner bars resting flat on the flat overlook surface, black U-bracket pivot hinges, L-shaped rocker tubes, and two vertical black cylindrical spring bumpers (NEVER curved rockers). Seated comfortably in the chair seen from behind is the 26-year-old golden-blonde woman from the third reference image wearing her light sky-blue chambray shirt open over a white ribbed tank top, warm sand-tan chino trousers, and cream-white suede sneakers (never show the 3-panel split layout), resting her right hand near the drink in the side cup-holder pouch while gazing peacefully across the sunlit mountain meadow vista. Zero text."
+    },
+    {
+      "key": "RV03_COUPLE_AIRSTREAM_AWNING_TALK_ROCK",
+      "refs": [
+        "OCC1464_PLATE_03_PAIR_CAMPSITE_52PCT_16x9.jpg",
+        "OCC1464_COUPLE_RELAX_3Q_REF.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1464_CHAR_4_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5000K golden-afternoon sunlight, NO HDR glow, NO fake blurry bokeh: edit this 16:9 2-chair product plate (using the second and third reference images for exact royal-blue 600D Oxford canvas #21387F with the wide royal-blue horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 with two crisp white vertical piping lines, padded blue armrests, hanging cylindrical royal-blue side cup-holder pouches, unbroken matte-black X-brace tubular steel frames with ZERO dangling straps under the seat, and exact bottom L-bar seesaw bases with one short flat straight bottom runner bar resting flat on the flat gravel-and-stone overlook pad, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep BOTH chairs at their exact 52% identical scale and exact 2D canvas coordinates with 100% UNCHANGED frames): in the right chair seat the exact 26-year-old golden-blonde woman from the fourth reference image (wearing her light sky-blue chambray shirt open over a white ribbed tank top, warm sand-tan full-length chino trousers, and cream-white suede sneakers — never show the 3-panel split layout) and in the left chair seat a smiling 29-year-old man in an olive-green overshirt and tan trousers, both sitting with their backs resting comfortably against the backrests beside a slatted wooden camp side table with two iced coffees in front of a polished silver aluminum Airstream travel trailer and sunlit grassy mountain meadow in sharp f/5.6 focus. Zero text."
+    },
+    {
+      "key": "RV04_CLOSEUP_PRODUCT_OVERLOOK_DECK",
+      "refs": [
+        "OCC1464_PLATE_07_CLOSEUP_DETAIL_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 85mm late-afternoon daylight commercial product close-up photograph, f/5.6 natural depth of field, crisp direct 5000K golden sunlight, NO HDR glow, NO artificial tint: edit this 16:9 close-up product cutout plate (using the second and third 1024x1024 reference images for exact royal-blue 600D Oxford canvas #21387F, breathable silver-grey mesh backrest #A1A0A5 with crisp white vertical piping, padded blue armrest, hanging cylindrical royal-blue side cup-holder pouch, unbroken matte-black X-brace steel tubing, and exact bottom seesaw rocker mechanism with one short flat straight horizontal ground runner bar, black U-bracket pivot hinge, continuous L-shaped rocker tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep the entire chair frame 100% UNCHANGED at its exact 2D canvas coordinates): outpaint the pure white background with a flat compacted golden-gravel and timber roadtrip overlook pad beside a gleaming silver aluminum Airstream trailer and sunlit mountain meadow, anchoring the flat bottom runner bars directly on the flat ground with a crisp dark solar cast shadow. Strictly ONE chair close-up, no people, zero text."
+    },
+    {
+      "key": "RV05_EXTERIOR_STATIC_SINGLE_AIRSTREAM",
+      "refs": [
+        "OCC1464_PLATE_01_SINGLE_RIGHT_58PCT_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight commercial exterior product photograph, f/5.6 deep natural depth of field, crisp 5000K golden sunlight, NO HDR glow, NO fake blurry bokeh: edit this 16:9 single-chair product plate (using the second and third reference images for exact royal-blue 600D Oxford canvas #21387F with the wide royal-blue horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 with two crisp white vertical piping lines, padded blue armrests, hanging cylindrical royal-blue side cup-holder pouch, unbroken matte-black X-brace tubular steel frame, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the flat overlook ground, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep the entire empty chair 100% UNCHANGED at its exact 58% frame-height coordinates): outpaint the pure white background with a scenic roadtrip campsite in front of a polished silver aluminum Airstream travel trailer parked on a flat golden-gravel overlook pad beside a folding teak side table holding a stainless thermos and enamel mug, with a sweeping green mountain meadow and distant sunlit cliffs in sharp f/5.6 focus. Strictly ONE empty chair, no people, zero text."
+    },
+    {
+      "key": "RV06_EXTERIOR_STATIC_PAIR_MEADOW_OVERLOOK",
+      "refs": [
+        "OCC1464_PLATE_05_PAIR_INWARD_TALK_16x9.jpg",
+        "OCC1464_REF_2_CLOSEUP_1024.jpg",
+        "OCC1464_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight commercial exterior product photograph, f/5.6 deep natural depth of field, crisp 5000K golden sunlight, NO HDR glow, NO fake blurry bokeh: edit this 16:9 2-chair product plate (using the second and third reference images for exact royal-blue 600D Oxford canvas #21387F with the wide royal-blue horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 with two crisp white vertical piping lines, padded blue armrests, hanging cylindrical royal-blue side cup-holder pouches, unbroken matte-black X-brace tubular steel frames, and exact bottom L-bar seesaw bases with one short flat straight bottom runner bar resting flat on the flat stone-and-gravel overlook pad, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep BOTH empty chairs 100% UNCHANGED at their exact 2D canvas coordinates): outpaint the pure white background with a scenic grassy mountain meadow overlook and flat stone-and-gravel viewing pad with a low wooden camp table between the two chairs, overlooking sunlit golden wildflowers and distant mountain ridges in sharp f/5.6 focus. Strictly TWO empty chairs, no people, zero text."
+    },
+    {
+      "key": "RV07_OUTRO_FOLDED_CARRY_TO_AIRSTREAM",
+      "refs": [
+        "OCC1464_REF_5_FOLDED_CARRY_1024.jpg",
+        "OCC1464_CHAR_4_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight outdoor commercial lifestyle photograph, f/5.6 deep natural depth of field, crisp 5000K golden sunlight: show the exact 26-year-old golden-blonde woman from the second reference image (wearing her light sky-blue chambray shirt open over a white ribbed tank top, warm sand-tan full-length chino trousers, and cream-white suede sneakers — single person only, never show the 3-panel split layout) walking naturally across a sunlit golden-gravel roadtrip overlook pad toward a gleaming silver aluminum Airstream travel trailer, effortlessly carrying the slim folded royal-blue and silver-grey mesh OCC-1464 chair in her right hand by its integrated royal-blue fabric carry strap (matching the exact folded 4.9-inch flat geometry, black tubular frame, royal-blue fabric, and grey mesh of the first reference image). Crisp golden afternoon sunlight, green mountain meadow and distant ridges in sharp f/5.6 focus. Zero text."
+    }
+  ],
+  "videos": [
+    {
+      "key": "V10_BEACH_BOARDWALK_CABANA_6S",
+      "scene_key": "TVC09_BEACH_WOODEN_BOARDWALK_CABANA_LATE_AFTERNOON",
+      "duration": "6 giây",
+      "prompt": "Continuous, clearly visible 6-second 50mm raw late-afternoon daylight commercial shot: the camera performs a smooth, gentle 3D forward-and-lateral parallax push-in across the weathered teak beach boardwalk deck while the single royal-blue and silver-grey mesh folding rocker chair and low rattan side table remain anchored on the sand-dusted wooden planks. Crisp dappled palm-frond shadows sway gently across the teak deck and chair backrest in the coastal breeze while rolling turquoise ocean waves break softly onto the sandy beach behind the boardwalk. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V11_BEACH_COVE_TIDAL_ROCKS_6S",
+      "scene_key": "TVC10_BEACH_COVE_TIDAL_ROCKS_DRIFTWOOD_AFTERNOON",
+      "duration": "6 giây",
+      "prompt": "Continuous, clearly visible 6-second 50mm raw late-afternoon daylight commercial shot: the camera executes a smooth, gentle low-horizon 3D forward-and-orbiting push-in across the sunlit rocky coastal beach cove while the single royal-blue and silver-grey mesh folding rocker chair and weathered driftwood log remain anchored on the pebble-strewn sand. Clear foamy ocean waves roll gently onto the wet shoreline near the coastal sandstone boulders in the background as late-afternoon sunlight gleams across the breathable mesh backrest, hanging blue side cup-holder pouch, and single L-bar seesaw spring-bumper base. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_LAKE01_FOREST_TRAIL_CARRY_6S",
+      "scene_key": "LAKE01_FOREST_TRAIL_CARRY_ARRIVAL",
+      "uuid": "5222c7c7-eb61-4b26-9f87-4fe5e48f490f",
+      "duration": "6 giây",
+      "prompt": "Continuous, clearly visible 6-second 50mm raw daylight commercial tracking shot: the camera performs a smooth, steady 3D tracking motion along the sunlit pine-needle lakeshore path as the man walks naturally forward toward the canvas A-frame tent, effortlessly carrying the slim folded OCC-1464 chair in his right hand by its royal-blue strap. Natural walking stride, subtle swing of the folded chair, shimmering emerald-blue lake water ripples, and crisp solar shadows on the gravel path. Zero morphing, zero text."
+    },
+    {
+      "key": "V_LAKE02_TWO_FRIENDS_PINE_CAMPSITE_TALK_ROCK_8S",
+      "scene_key": "LAKE02_TWO_FRIENDS_PINE_CAMPSITE_TALK_ROCK",
+      "uuid": "11a8e42b-cc26-497d-8735-7be55cbe30aa",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial shot: the camera performs a smooth, gentle 3D forward-and-lateral push-in across the sunlit pine-forest lakeside campsite as the man on the left and woman on the right talk warmly, laugh, and gesture naturally with their coffee mugs. While conversing, both campers rock back and forth at a GENTLE, MODERATE, UNHURRIED pace (calm 3cm seesaw rocking motion, NOT fast or exaggerated bouncing): on both identically-sized OCC-1464 chairs, the short flat bottom runner bar stays planted on the pine-needle ground while the curved L-shaped rocker tube pivots smoothly on the black U-bracket ground hinge and gently compresses the single vertical black cylindrical spring bumper. Zero frame morphing, zero text."
+    },
+    {
+      "key": "V_LAKE03_THREE_FRIENDS_LAKESHORE_GRAVEL_TALK_ROCK_8S",
+      "scene_key": "LAKE03_THREE_FRIENDS_LAKESHORE_GRAVEL_TALK_ROCK",
+      "uuid": "efac9147-65ee-44fd-b1bd-1208602915e0",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial shot: the camera executes a smooth, gentle 3D lateral-and-forward parallax movement along the sunlit lakeshore gravel as the three friends chat animatedly, smile, and share a laugh by the rippling mountain lake. As they talk and listen, the friends sway and rock back and forth in their three identically-proportioned OCC-1464 chairs at a CALM, MODERATE, NATURAL rhythm (subtle, comfortable 3cm rocking arc): each chair's flat bottom ground bar remains firmly planted on the gravel while the upper L-shaped rocker tube tilts smoothly on the black U-bracket hinge and cushions against the single vertical black cylindrical spring bumper. Zero morphing, zero text."
+    },
+    {
+      "key": "V_LAKE04_SIDE_3Q_CONVERSATION_GENTLE_ROCK_HINGE_6S",
+      "scene_key": "LAKE04_SIDE_3Q_CONVERSATION_GENTLE_ROCK_HINGE_HERO",
+      "uuid": "039c9fd1-8925-42d9-9744-207f9bc2bd81",
+      "duration": "6 giây",
+      "prompt": "Continuous, clearly visible 6-second 50mm raw daylight commercial shot: the camera performs a smooth, steady 3D push-in from a side-3/4 angle at the sunlit pine-forest lakeshore as the man in the off-white linen shirt smiles, speaks warmly to his camping friends across the wooden table, and rocks back and forth at a GENTLE, MODERATE, RELAXED pace (calm 3-4cm front L-bar lift). The bottom flat ground runner bar stays planted on the pine-needle gravel while the curved L-shaped rocker tube pivots cleanly on the black U-bracket ground hinge and smoothly compresses and rebounds against the vertical black cylindrical spring bumper with its yellow label. Zero morphing, zero text."
+    },
+    {
+      "key": "V_LAKE02_TWO_FRIENDS_TALK_ROCK_8S_LOCKED",
+      "scene_key": "LAKE02_TWO_FRIENDS_PINE_CAMPSITE_TALK_ROCK",
+      "uuid": "11a8e42b-cc26-497d-8735-7be55cbe30aa",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial shot: the camera performs a smooth, gentle 3D forward-and-lateral push-in across the sunlit pine-forest lakeside campsite as the man on the left and woman on the right talk warmly, laugh, and gesture naturally with their coffee mugs. Throughout the full 8 seconds while conversing, both campers rock back and forth continuously at a GENTLE, MODERATE, UNHURRIED seesaw rhythm (clear, comfortable 3-4cm rocking motion): on both identically-sized OCC-1464 chairs, the short flat bottom runner bar stays planted on the pine-needle ground while the curved L-shaped rocker tube pivots smoothly on the black U-bracket ground hinge and gently compresses and rebounds against the single vertical black cylindrical spring bumper. Zero frame morphing, zero text."
+    },
+    {
+      "key": "V_LAKE03_THREE_FRIENDS_TALK_ROCK_8S_LOCKED",
+      "scene_key": "LAKE03_THREE_FRIENDS_LAKESHORE_GRAVEL_TALK_ROCK",
+      "uuid": "efac9147-65ee-44fd-b1bd-1208602915e0",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial shot: the camera executes a smooth, gentle 3D lateral-and-forward parallax movement along the sunlit lakeshore gravel as the three friends chat animatedly, smile, and share a laugh by the rippling mountain lake. Throughout the full 8 seconds as they talk and listen, the friends sway and rock back and forth continuously in their three identically-proportioned OCC-1464 chairs at a CALM, MODERATE, NATURAL seesaw rhythm (clear, comfortable 3-4cm rocking arc): each chair's flat bottom ground bar remains firmly planted on the gravel while the upper L-shaped rocker tube tilts smoothly on the black U-bracket hinge and cushions against the single vertical black cylindrical spring bumper. Zero morphing, zero text."
+    },
+    {
+      "key": "V_LAKE04_SIDE_3Q_TALK_ROCK_HINGE_8S_LOCKED",
+      "scene_key": "LAKE04_SIDE_3Q_CONVERSATION_GENTLE_ROCK_HINGE_HERO",
+      "uuid": "039c9fd1-8925-42d9-9744-207f9bc2bd81",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial shot: the camera performs a smooth, steady 3D push-in from a side-3/4 angle at the sunlit pine-forest lakeshore as the man in the off-white linen shirt smiles, speaks warmly to his camping friends across the wooden table, and rocks back and forth continuously at a GENTLE, MODERATE, RELAXED seesaw pace (clear 3-4cm front L-bar lift and return). The bottom flat ground runner bar stays planted on the pine-needle gravel while the curved L-shaped rocker tube pivots cleanly on the black U-bracket ground hinge and smoothly compresses and rebounds against the vertical black cylindrical spring bumper with its yellow label. Zero morphing, zero text."
+    },
+    {
+      "key": "V_LAKE05_EXTERIOR_PAIR_PINE_CAMPSITE_8S",
+      "scene_key": "LAKE05_EXTERIOR_PAIR_PINE_LAKE_CAMPSITE",
+      "uuid": "a4a6dfb1-2a2d-40d8-b616-38e5b574dfdf",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial exterior product shot: the camera performs a smooth, gentle 3D forward-and-lateral parallax glide across the sunlit Ponderosa pine-forest lakeside campsite while the two identically-scaled royal-blue and silver-grey mesh OCC-1464 folding rocking chairs and slatted wooden coffee table remain anchored on the pine-needle shore. Dappled pine-branch shadows sway softly across the ground and canvas A-frame tent in the mountain breeze as sunlight reflects on the emerald-blue lake water behind them, clearly showcasing both chairs' flat ground runner bars, black U-bracket pivots, curved L-shaped rocker tubes, and vertical black cylindrical spring bumpers. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_LAKE06_EXTERIOR_SINGLE_LAKE_DOCK_8S",
+      "scene_key": "LAKE06_EXTERIOR_SINGLE_WOODEN_LAKE_DOCK",
+      "uuid": "9f5d0c67-6745-43ee-9fa9-6236938b227d",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial exterior product shot: the camera executes a smooth, gentle low-horizon 3D forward-and-orbiting parallax push-in along the weathered cedar-wood lakeshore dock while the single royal-blue and silver-grey mesh OCC-1464 folding rocking chair remains anchored on the sunlit wooden planks. Clear mountain lake ripples lap gently against the wooden dock pilings as crisp daylight highlights the breathable grey mesh backrest, padded armrests, hanging blue side cup-holder pouch, and exact bottom L-bar seesaw base with its black U-bracket hinge and vertical cylindrical spring bumper. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_LAKE01_FOREST_TRAIL_CARRY_8S_LOCKED",
+      "scene_key": "LAKE01_FOREST_TRAIL_CARRY_ARRIVAL",
+      "uuid": "5222c7c7-eb61-4b26-9f87-4fe5e48f490f",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial tracking shot: the camera performs a smooth, steady 3D tracking motion along the sunlit pine-needle lakeshore path as the man walks naturally forward toward the canvas A-frame tent, effortlessly carrying the slim folded OCC-1464 chair in his right hand by its royal-blue strap. Natural walking stride, subtle swing of the folded chair, rippling emerald-blue lake water, and crisp solar shadows on the gravel path. Zero morphing, zero text."
+    },
+    {
+      "key": "V_VILLA01_HOOK_COUPLE_TERRACE_ROCKING_8S",
+      "scene_key": "VILLA01_HOOK_COUPLE_3Q_TERRACE_ROCKING_CHILL",
+      "uuid": "66b25e5e-6eca-4995-a57b-cf71c1eaf269",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial shot: the camera performs a smooth, gentle 3D forward-and-lateral push-in across the sunlit poured-concrete hillside villa terrace as the woman in the terracotta-rust linen shirt and the man in the sage-olive shirt smile, talk warmly, and chill together. Throughout the full 8 seconds, both seated people rock back and forth continuously at a CLEAR, RHYTHMIC, MODERATE seesaw pace (smooth 4cm rocking arc): on both identically-sized OCC-1464 chairs, the short flat bottom runner bar stays planted flush on the concrete floor while the L-shaped rocker tube pivots smoothly on the black U-bracket ground hinge and compresses and rebounds against the vertical black cylindrical spring bumper. Zero morphing, zero text."
+    },
+    {
+      "key": "V_VILLA02_SOLO_TERRACE_ROCKING_CHILL_8S",
+      "scene_key": "VILLA02_SOLO_TERRACE_SCENIC_ROCKING_CHILL",
+      "uuid": "f5a288ae-787a-4f33-8ac6-6aae590425f6",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial shot: the camera executes a smooth, gentle 3D lateral-and-forward parallax push-in across the sunlit poured-concrete hillside villa terrace as the woman in the terracotta-rust linen shirt holds her iced coffee glass, gazes out at the green mountain river valley, and rocks back and forth continuously at a CLEAR, RELAXED, RHYTHMIC seesaw pace (smooth 4cm rocking motion). The chair's short flat bottom ground runner bar stays planted flush on the concrete floor while the L-shaped upper tube pivots cleanly on the black U-bracket hinge and smoothly compresses and rebounds against the vertical black cylindrical spring bumper under dappled tree-leaf shadows. Zero morphing, zero text."
+    },
+    {
+      "key": "V_VILLA03_CLOSEUP_PRODUCT_SPRING_DETAIL_8S",
+      "scene_key": "VILLA03_CLOSEUP_PRODUCT_AND_SPRING_TERRACE",
+      "uuid": "6e33da9c-d3c2-478a-9ce2-1a8fdfed2405",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 85mm raw daylight commercial product detail shot: the camera performs a smooth, slow 3D close-up parallax glide across the lower frame of the empty OCC-1464 chair on the sunlit poured-concrete terrace while the chair remains COMPLETELY PLANTED AND ANCHORED on the floor (zero rocking, zero movement of the chair). Crisp midday sunlight and gentle dappled tree-leaf shadows highlight the breathable silver-grey mesh backrest, royal-blue 600D Oxford seat, hanging blue side cup-holder pouch, matte-black X-brace tubing, and the exact bottom seesaw base with its flat ground runner bar, black U-bracket pivot, L-shaped tube, and vertical black cylindrical spring bumper with its yellow label. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_VILLA04_EXTERIOR_STATIC_SINGLE_TERRACE_8S",
+      "scene_key": "VILLA04_EXTERIOR_STATIC_SINGLE_CONCRETE_TERRACE",
+      "uuid": "98a5c34b-28c9-4c39-a596-b14b67565282",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial exterior product shot: the camera performs a smooth, steady 3D forward-and-orbiting parallax glide across the sunlit minimalist poured-concrete hillside terrace while the single empty royal-blue and silver-grey mesh OCC-1464 chair and travertine side table remain COMPLETELY PLANTED AND ANCHORED on the smooth concrete floor (zero rocking or swaying of the chair). Organic dappled tree-leaf shadows sway gently across the concrete floor and parapet wall in the mountain breeze as sunlight illuminates the green hillside and river in the background. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_VILLA05_EXTERIOR_STATIC_PAIR_PATIO_8S",
+      "scene_key": "VILLA05_EXTERIOR_STATIC_PAIR_CEDAR_PATIO_GARDEN",
+      "uuid": "5415f1e1-825c-4081-9c66-f6ffa6d2d92c",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial exterior product shot: the camera executes a smooth, gentle 3D forward-and-lateral parallax push-in across the sunlit flagstone-and-concrete villa garden patio while BOTH empty identically-scaled OCC-1464 chairs and the teak coffee table remain COMPLETELY PLANTED AND ANCHORED on the stone floor (zero rocking or movement of the chairs). Olive-tree branches and dappled leaf shadows move softly in the warm breeze while crisp daylight showcases both chairs' breathable grey mesh backrests, blue side cupholders, and exact bottom L-bar ground hinges. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_VILLA06_OUTRO_FOLDED_CARRY_COURTYARD_8S",
+      "scene_key": "VILLA06_OUTRO_FOLDED_CARRY_VILLA_COURTYARD",
+      "uuid": "acccfc2b-3942-4700-96c3-91434d9e9b4e",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial tracking shot: the camera performs a smooth, steady 3D tracking motion along the sunlit poured-concrete hillside villa walkway as the woman in the terracotta-rust linen shirt walks naturally forward, effortlessly carrying the slim folded OCC-1464 chair in her right hand by its integrated royal-blue fabric carry strap. Natural walking stride, crisp dark solar shadows and dappled tree-leaf shadows on the concrete walkway, and lush green mountain hills in sharp focus behind her. Zero morphing, zero text."
+    },
+    {
+      "key": "V_VILLA03_FIXED_FEATURE_TOUR_8S",
+      "scene_key": "VILLA03_CLOSEUP_PRODUCT_AND_SPRING_TERRACE",
+      "uuid": "6e33da9c-d3c2-478a-9ce2-1a8fdfed2405",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 85mm close-up product feature tour shot in crisp 5600K daylight: the camera performs a smooth, steady close-up inspection tilt and pan across the empty folding rocker chair on the sunlit concrete terrace — starting at the breathable cool silver-grey mesh backrest panel with crisp white vertical piping and royal-blue 600D Oxford canvas, gliding smoothly along the padded royal-blue armrest to the hanging cylindrical royal-blue side cup-holder pouch on the front post, and tilting down across the matte-black X-brace tubular steel frame resting on the sunlit concrete floor. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_VILLA03B_PUSH_IN_TO_CLOSEUP_8S",
+      "scene_key": "VILLA04_EXTERIOR_STATIC_SINGLE_CONCRETE_TERRACE",
+      "uuid": "98a5c34b-28c9-4c39-a596-b14b67565282",
+      "end_scene_key": "VILLA03_CLOSEUP_PRODUCT_AND_SPRING_TERRACE",
+      "end_uuid": "6e33da9c-d3c2-478a-9ce2-1a8fdfed2405",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial camera push-in shot: the camera smoothly pushes in and transitions from a full view of the empty royal-blue and silver-grey mesh folding chair on the sunlit concrete terrace to a close-up inspection view of its breathable grey mesh backrest, padded blue armrests, hanging side cup-holder pouch, and matte-black X-brace frame on the concrete floor. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_VILLA02_FIXED_SOLO_ROCKING_8S",
+      "scene_key": "VILLA02_SOLO_TERRACE_SCENIC_ROCKING_CHILL",
+      "uuid": "f5a288ae-787a-4f33-8ac6-6aae590425f6",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial lifestyle shot: as the camera performs a smooth, gentle 3D forward-and-lateral arc across the sunlit poured-concrete hillside terrace under dappled tree-leaf shadows, the young woman in the terracotta-rust linen shirt seated in the royal-blue and silver-grey mesh folding rocker chair holds her iced coffee glass and leans gently back and forth in an effortless, soothing rocking motion while gazing out at the green mountain river valley. Strictly one chair and one person, zero morphing, zero text."
+    },
+    {
+      "key": "V_VILLA07_NEW_READING_ROCKING_8S",
+      "scene_key": "VILLA07_SIDE_PROFILE_READING_ROCKING_CHILL",
+      "uuid": "d13b7833-91d5-4612-8ba8-2644c92be9b4",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight commercial lifestyle shot: as the camera performs a smooth, gentle 3D forward-and-lateral arc across the sunlit poured-concrete villa terrace under dappled olive-tree shadows, the young woman in the terracotta-rust linen shirt seated in the royal-blue and silver-grey mesh folding rocker chair holds her open hardcover book and leans gently back and forth in an effortless, soothing rocking motion while relaxing in the mountain breeze. Strictly one chair and one person, zero morphing, zero text."
+    },
+    {
+      "key": "V_LAKE04_FIXED_SIDE_3Q_TALK_ROCK_8S",
+      "scene_key": "LAKE04_FIXED_SIDE_3Q_TALK_ROCK_HERO",
+      "uuid": "c74c94e9-b5e9-4882-8694-7b52b1d33ae6",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight outdoor commercial lifestyle shot at a pine-forest lakeshore campsite: as the camera performs a smooth, gentle 3D forward-and-lateral arc, the sandy-brown-haired man in the off-white linen shirt seated with his back resting comfortably against the backrest of the royal-blue and silver-grey mesh folding rocker chair holds his blue enamel coffee mug and leans gently back and forth in an effortless, soothing rocking motion while smiling and talking warmly with his two friends seated across the wooden camp table. Natural pine breeze, sparkling blue lake water in the background, zero morphing, zero text."
+    },
+    {
+      "key": "V_LAKE04_V2_GENTLE_ROCK_8S",
+      "scene_key": "LAKE04_V2_PERFECT_BACKREST_AND_FRAME",
+      "uuid": "71e4d6a7-bb3b-449b-9c5b-e22782f36100",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw daylight outdoor commercial lifestyle shot at a pine-forest lakeshore campsite: as the camera performs a smooth, gentle 3D forward-and-lateral arc, the sandy-brown-haired man in the off-white linen shirt seated in the royal-blue and silver-grey mesh folding rocker chair holds his blue enamel coffee mug, rests his back comfortably against the breathable grey mesh backrest with its royal-blue top header band, and rocks gently and rhythmically back and forth in an effortless, soothing rocking motion while smiling and chatting warmly with his friends at the wooden camp table. Natural pine breeze, sparkling blue lake water in the background, zero morphing, zero text."
+    },
+    {
+      "key": "V_DECK01_HOOK_THREE_FRIENDS_CEDAR_DECK_ROCK_8S",
+      "scene_key": "DECK01_HOOK_THREE_FRIENDS_CEDAR_DECK_ROCK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw afternoon daylight commercial lifestyle shot on a sunlit American cedar wood backyard deck: as the camera performs a smooth, gentle 3D forward-and-lateral parallax glide, the three friends seated comfortably in the three identically-scaled royal-blue and silver-grey mesh folding rocker chairs hold their iced drinks, smile and chat warmly with one another, and lean gently and rhythmically back and forth in an effortless, soothing rocking motion while relaxing in the warm afternoon breeze. Strictly three chairs and three people, zero morphing, zero text."
+    },
+    {
+      "key": "V_DECK02_REAR_VIEW_ROCKING_GARDEN_8S",
+      "scene_key": "DECK02_REAR_VIEW_ROCKING_GARDEN",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw afternoon daylight commercial lifestyle shot from a rear-3/4 angle on a sunlit American cedar wood backyard deck: as the camera performs a smooth, gentle 3D lateral-and-forward arc behind the single royal-blue and silver-grey mesh folding rocker chair, the chestnut-brown-haired man in the cream waffle-knit polo shirt seated in the chair leans gently and rhythmically back and forth in an effortless, soothing rocking motion while gazing out at the lush green backyard lawn and sunlit maple trees. Strictly one chair and one person, zero morphing, zero text."
+    },
+    {
+      "key": "V_DECK03_COUPLE_PATIO_LAWN_TALK_ROCK_8S",
+      "scene_key": "DECK03_COUPLE_PATIO_LAWN_TALK_ROCK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw afternoon daylight commercial lifestyle shot on a sunlit flagstone garden patio under dappled tree shade: as the camera performs a smooth, gentle 3D forward-and-lateral arc, the man in the cream waffle-knit polo shirt and the woman in the sage-green linen top seated in the two identically-scaled royal-blue and silver-grey mesh folding rocker chairs smile, chat warmly, and lean gently and rhythmically back and forth in an effortless, soothing rocking motion while relaxing in the garden breeze. Strictly two chairs and two people, zero morphing, zero text."
+    },
+    {
+      "key": "V_DECK04_CLOSEUP_PRODUCT_CEDAR_DECK_8S",
+      "scene_key": "DECK04_CLOSEUP_PRODUCT_CEDAR_DECK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 85mm close-up product feature tour shot in crisp 5200K afternoon daylight: the camera performs a smooth, steady close-up inspection tilt and pan across the empty folding rocker chair on the sunlit cedar wood deck — starting at the breathable cool silver-grey mesh backrest panel with crisp white vertical piping and royal-blue 600D Oxford canvas, gliding smoothly along the padded royal-blue armrest to the hanging cylindrical royal-blue side cup-holder pouch on the front post, and tilting down across the matte-black X-brace tubular steel frame resting on the cedar wood planks. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_DECK05_EXTERIOR_STATIC_SINGLE_CEDAR_DECK_8S",
+      "scene_key": "DECK05_EXTERIOR_STATIC_SINGLE_CEDAR_DECK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw afternoon daylight commercial exterior product shot: the camera performs a smooth, steady 3D orbital parallax glide across the sunlit American cedar wood backyard deck while the single empty royal-blue and silver-grey mesh folding chair and teak side table remain COMPLETELY PLANTED AND ANCHORED on the cedar wood planks (zero rocking or swaying of the chair). Dappled maple-leaf shadows sway gently across the wooden deck in the afternoon breeze. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_DECK06_EXTERIOR_STATIC_PAIR_FLAGSTONE_GARDEN_8S",
+      "scene_key": "DECK06_EXTERIOR_STATIC_PAIR_FLAGSTONE_GARDEN",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw afternoon daylight commercial exterior product shot: the camera executes a smooth, gentle 3D forward camera push-in across the sunlit flagstone garden patio while BOTH empty identically-scaled royal-blue and silver-grey mesh folding chairs and the round teak coffee table remain COMPLETELY PLANTED AND ANCHORED on the stone floor (zero rocking or movement of the chairs). Maple-tree leaves and dappled shadows move softly in the warm garden breeze. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_DECK07_OUTRO_FOLDED_CARRY_GARDEN_PATH_8S",
+      "scene_key": "DECK07_OUTRO_FOLDED_CARRY_GARDEN_PATH",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw afternoon daylight commercial tracking shot: the camera performs a smooth, steady 3D tracking motion along the sunlit flagstone garden path stepping up onto the cedar wood deck as the chestnut-brown-haired man in the cream waffle-knit polo shirt walks naturally forward, effortlessly carrying the slim folded royal-blue and silver-grey mesh chair in his right hand by its integrated royal-blue fabric carry strap. Natural walking stride, dappled tree shadows, and lush green lawn in sharp focus. Zero morphing, zero text."
+    },
+    {
+      "key": "V_RV01_HOOK_THREE_FRIENDS_AIRSTREAM_ROCK_8S",
+      "scene_key": "RV01_HOOK_THREE_FRIENDS_AIRSTREAM_ROCK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw golden-afternoon daylight commercial lifestyle shot in front of a silver aluminum Airstream travel trailer at a scenic mountain meadow overlook: as the camera performs a smooth, gentle 3D forward-and-lateral parallax glide, the three friends seated comfortably in the three identically-scaled royal-blue and silver-grey mesh folding rocker chairs hold their travel tumblers, smile and chat warmly with one another, and lean gently and rhythmically back and forth in an effortless, soothing rocking motion while relaxing in the mountain breeze. Strictly three chairs and three people, zero morphing, zero text."
+    },
+    {
+      "key": "V_RV02_REAR_VIEW_OVERLOOK_ROCK_8S",
+      "scene_key": "RV02_REAR_VIEW_OVERLOOK_ROCK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw golden-afternoon daylight commercial lifestyle shot from a rear-3/4 angle at a scenic mountain meadow overlook beside a silver Airstream trailer: as the camera performs a smooth, gentle 3D lateral-and-forward arc behind the single royal-blue and silver-grey mesh folding rocker chair, the golden-blonde woman in the sky-blue chambray shirt seated in the chair leans gently and rhythmically back and forth in an effortless, soothing rocking motion while gazing out at the sunlit green meadow and distant mountain ridges. Strictly one chair and one person, zero morphing, zero text."
+    },
+    {
+      "key": "V_RV02_V2_SINGLE_CUP_REAR_ROCK_8S",
+      "scene_key": "RV02_REAR_VIEW_OVERLOOK_ROCK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw golden-afternoon daylight commercial lifestyle shot from a rear-3/4 angle at a scenic mountain meadow overlook beside a silver Airstream trailer: as the camera performs a smooth, gentle 3D lateral-and-forward arc behind the single royal-blue and silver-grey mesh folding rocker chair, the golden-blonde woman in the sky-blue chambray shirt seated in the chair leans gently and rhythmically back and forth in an effortless, soothing rocking motion while gazing out at the sunlit green meadow and distant mountain ridges. Her right hand remains resting calmly on top of the single iced coffee cup sitting inside the right-side royal-blue cup-holder pouch while her left arm and hand stay resting down on her lap out of view — she never lifts a drink and no second cup ever appears near her shoulder or chest. Strictly one chair, one person, and one single cup in the right-side cup-holder pouch, zero morphing, zero text."
+    },
+    {
+      "key": "V_RV03_COUPLE_AIRSTREAM_AWNING_TALK_ROCK_8S",
+      "scene_key": "RV03_COUPLE_AIRSTREAM_AWNING_TALK_ROCK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw golden-afternoon daylight commercial lifestyle shot in front of a polished silver Airstream travel trailer: as the camera performs a smooth, gentle 3D forward-and-lateral arc, the golden-blonde woman in the sky-blue chambray shirt and the man in the olive overshirt seated in the two identically-scaled royal-blue and silver-grey mesh folding rocker chairs smile, chat warmly, and lean gently and rhythmically back and forth in an effortless, soothing rocking motion while relaxing in the afternoon breeze. Strictly two chairs and two people, zero morphing, zero text."
+    },
+    {
+      "key": "V_RV04_CLOSEUP_PRODUCT_OVERLOOK_DECK_8S",
+      "scene_key": "RV04_CLOSEUP_PRODUCT_OVERLOOK_DECK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 85mm close-up product feature tour shot in crisp 5000K golden-afternoon daylight: the camera performs a smooth, steady close-up inspection tilt and pan across the empty folding rocker chair at the sunlit roadtrip overlook — starting at the breathable cool silver-grey mesh backrest panel with crisp white vertical piping and royal-blue 600D Oxford canvas, gliding smoothly along the padded royal-blue armrest to the hanging cylindrical royal-blue side cup-holder pouch on the front post, and tilting down across the matte-black X-brace tubular steel frame resting on the flat gravel overlook pad. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_RV05_EXTERIOR_STATIC_SINGLE_AIRSTREAM_8S",
+      "scene_key": "RV05_EXTERIOR_STATIC_SINGLE_AIRSTREAM",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw golden-afternoon daylight commercial exterior product shot: the camera performs a smooth, steady 3D orbital parallax glide across the sunlit roadtrip overlook in front of the polished silver Airstream trailer while the single empty royal-blue and silver-grey mesh folding chair and teak side table remain COMPLETELY PLANTED AND ANCHORED on the flat ground (zero rocking or swaying of the chair). Golden meadow grass sways gently in the background breeze. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_RV06_EXTERIOR_STATIC_PAIR_MEADOW_OVERLOOK_8S",
+      "scene_key": "RV06_EXTERIOR_STATIC_PAIR_MEADOW_OVERLOOK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw golden-afternoon daylight commercial exterior product shot: the camera executes a smooth, gentle 3D forward camera push-in across the sunlit mountain meadow overlook while BOTH empty identically-scaled royal-blue and silver-grey mesh folding chairs and the low wooden camp table remain COMPLETELY PLANTED AND ANCHORED on the flat stone-and-gravel pad (zero rocking or movement of the chairs). Wildflowers and meadow grass move softly in the warm afternoon breeze. No people, zero morphing, zero text."
+    },
+    {
+      "key": "V_RV07_OUTRO_FOLDED_CARRY_TO_AIRSTREAM_8S",
+      "scene_key": "RV07_OUTRO_FOLDED_CARRY_TO_AIRSTREAM",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 50mm raw golden-afternoon daylight commercial tracking shot: the camera performs a smooth, steady 3D tracking motion across the sunlit roadtrip overlook pad toward the gleaming silver Airstream trailer as the golden-blonde woman in the sky-blue chambray shirt and tan chino trousers walks naturally forward, effortlessly carrying the slim folded royal-blue and silver-grey mesh chair in her right hand by its integrated royal-blue fabric carry strap. Natural walking stride, crisp golden afternoon light, and mountain meadow in sharp focus. Zero morphing, zero text."
+    }
+  ]
+}

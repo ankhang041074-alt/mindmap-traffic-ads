@@ -1,0 +1,182 @@
+{
+  "slug": "occ_1467_chair_tvc2_lake",
+  "prefix": "OCC1467",
+  "preset": "generic_decor",
+  "project_id": "1d71c3d4-623e-4656-8d1e-915fbe5e59bd",
+  "video_duration": "8 giây",
+  "notes_vi": "TVC #2 Ghế Đỏ OCC-1467 (Crimson Red #B12233 & Silver-Grey Mesh #A1A0A5) — Concept Hồ Tuyết Sơn & Trại Gỗ Tùng Mùa Thu Bắc Mỹ (8 Cảnh / 8 Giây/Shot · Nhân vật mới @CHAR_2).",
+  "exclude_uuids": [
+    "4a42b6cb-d06d-41e7-b15c-7f21682f0921",
+    "5720202f-9b3a-4670-b632-708cee42b71d",
+    "3a949848-17c6-49d4-9737-fb578531c9b0",
+    "f9e9f5de-576b-4cfe-bdbe-4d2dc14900ab",
+    "f08828f9-ad35-4400-a077-7927cae540c8",
+    "0b08ae50-8b70-4b74-92b2-599671c24e08",
+    "1de28518-3d59-45e2-a179-5afd2c150db3",
+    "9c16dfa5-8d5e-4fbc-90f2-009fa656a643",
+    "b318c234-4b43-4aff-be5c-b3128c6c8cf8",
+    "0c7d74a8-97e8-4891-a8b1-b39e116a77ad",
+    "a5e894cc-3ce1-447a-b3f7-528226ab72b2"
+  ],
+  "scenes": [
+    {
+      "key": "RED_LAKE01_HOOK_PHOTOGRAPHER_GOLDEN_RETRIEVER_CABIN_ROCK",
+      "refs": [
+        "OCC1467_PLATE_01B_SINGLE_RIGHT_FACING_LEFT_58PCT_16x9.jpg",
+        "OCC1467_COUPLE_CAMP_TALK_REF.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1467_CHAR_2_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5000K golden-autumn mountain sunlight, natural 35mm film color grading, NO HDR glow, NO fake blurry bokeh: edit this 16:9 single-chair product plate where the chair on the right faces front-left (keep the entire chair frame and bottom base 100% UNCHANGED in its exact front-left orientation — do NOT flip or reverse the bottom base: the rear legs on the right connect directly to the flat horizontal bottom runner bars resting flat on the wooden deck planks, the two vertical black cylindrical spring bumpers with yellow warning stickers sit on the flat bottom runner bars, and the hanging crimson-red cup-holder pouch hangs on the front-left post): seat the exact 31-year-old Nordic-American female wildlife photographer from the fifth reference image comfortably in the chair facing front-left (matching the exact direction of the chair — with warm chestnut-auburn hair in a low ponytail, natural sun-freckles, wearing her warm ivory-cream quilted down vest over a deep forest-sage waffle-knit merino sweater, warm camel-tan field trousers, and dark espresso leather hiking boots — never show the 3-panel split layout), holding a vintage silver-and-black 35mm film camera in her hands and smiling warmly while a friendly adult Golden Retriever dog lies relaxed on the sunlit red-cedar timber porch planks on the left side beside her chair, with a wooden tripod, warm amber bistro string-lights overhead, and an emerald alpine lake and golden autumn larch trees in sharp f/5.6 focus. Strictly ONE chair with its rear bottom runner bar flat on the wooden deck, one woman, and one Golden Retriever dog, zero text."
+    },
+    {
+      "key": "RED_LAKE02_REAR_VIEW_ALPINE_OVERLOOK_ROCK",
+      "refs": [
+        "OCC1467_REF_4_REAR_MESH_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1467_CHAR_2_SHEET.jpg"
+      ],
+      "prompt": "Full-bleed borderless 16:9 cinema frame captured with an Arri Alexa Mini LF and Panavision Primo 50mm T2.8 lens, f/5.6 deep optical depth of field, natural photochemical film color grading and organic micro-contrast, strictly full-frame edge-to-edge image with NO black bars and NO film-strip borders, crisp 5000K golden-autumn mountain sunlight, NO HDR glow, NO plastic CGI sheen: using the first reference image as the exact rear-view product blueprint of the single crimson-red folding rocker chair and the second reference image for its exact bottom L-bar ground hinge, show a rear-3/4 view from directly behind the single chair placed on a flat sun-warmed granite lakeside terrace dusted with golden pine needles overlooking a crystal-clear emerald alpine lake, golden autumn larch forests, and majestic snow-capped mountain peaks: preserve 100% of the exact rear backrest design (wide crimson-red #B12233 horizontal top fabric header band with two small silver corner rivets at the top-left and top-right corners, dark grey top edge trim, breathable semi-translucent silver-grey mesh center panel #A1A0A5, crimson-red side fabric panels), the unbroken matte-black rear X-brace tubular steel frame with the diagonal crimson-red fabric carry strap riveted across the lower rear X-brace, the hanging cylindrical crimson-red cup-holder pouch on the right front post holding ONE matte-black insulated tumbler, and the exact bottom seesaw base with two short flat straight bottom runner bars resting flat on the flat granite stone surface, black U-bracket pivot hinges, L-shaped rocker tubes, and two vertical black cylindrical spring bumpers with yellow warning labels (strictly NEVER curved rockers). Seated comfortably in the chair seen from behind is the exact 31-year-old woman from the third reference image with chestnut-auburn hair in a low ponytail, wearing her ivory-cream quilted down vest over a forest-sage waffle-knit sweater, camel-tan field trousers, and espresso leather hiking boots (never show the 3-panel split layout), resting her right hand calmly near the single matte-black tumbler in the right-side cup-holder pouch while her left hand rests on her lap, gazing peacefully out across the mirror-calm alpine lake. Zero text."
+    },
+    {
+      "key": "RED_LAKE03_COUPLE_AUTUMN_PINE_CAMP_TALK_ROCK",
+      "refs": [
+        "OCC1467_PLATE_03_PAIR_CAMPSITE_52PCT_16x9.jpg",
+        "OCC1467_COUPLE_CAMP_TALK_REF.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1467_CHAR_2_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5000K golden-autumn sunlight filtering through golden larch and pine branches, natural 35mm film color grading, NO HDR glow, NO fake blurry bokeh: edit this 16:9 2-chair product plate (using the second, third, and fourth reference images for exact crimson-red 600D Oxford canvas #B12233 with the wide horizontal crimson-red top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouches on the front-right posts, unbroken matte-black X-brace tubular steel frames with ZERO loose dangling straps under the seat, and exact bottom L-bar seesaw base with one short flat straight horizontal bottom runner bar resting flat on the flat lakeside river-stone patio, black U-bracket pivot hinge, straight L-shaped upper tube, and one separate vertical black cylindrical spring bumper with yellow warning sticker standing on the bottom runner bar per side — strictly NEVER curved rocking rails, keep BOTH chairs at their exact 52% identical low-back director-chair height and exact 2D canvas coordinates with 100% UNCHANGED frames): seat two happy friends facing forward in the two chairs — in the left chair seat the exact 31-year-old woman from the fifth reference image (wearing her ivory-cream quilted down vest over a forest-sage waffle-knit merino sweater, camel-tan field trousers, and espresso leather hiking boots — never show the 3-panel split layout) and in the right chair seat a smiling 34-year-old man in a charcoal-grey wool fleece overshirt over a cream henley tee and dark olive chinos with brown leather boots, both sitting comfortably with the wide crimson-red top header band, two white vertical piping lines, and silver-grey mesh backrest panel clearly visible around their shoulders, holding warm enamel camp mugs and chatting warmly on a flat lakeside stone terrace overlooking golden autumn pines and shimmering emerald lake water in sharp f/5.6 focus. Zero text."
+    },
+    {
+      "key": "RED_LAKE04_CLOSEUP_PRODUCT_CEDAR_PORCH",
+      "refs": [
+        "OCC1467_PLATE_07_CLOSEUP_DETAIL_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Full-bleed borderless 16:9 cinema frame captured with an Arri Alexa Mini LF and Panavision Primo 85mm T2.8 lens, f/5.6 natural optical depth of field, crisp direct 5000K golden-autumn mountain sunlight, real tactile fabric weave and metal micro-texture, NO HDR glow, NO plastic sheen: edit this 16:9 close-up product cutout plate (using the second and third 1024x1024 reference images for exact crimson-red 600D Oxford canvas #B12233 with dark charcoal-grey edge binding, wide horizontal crimson-red top header band, breathable silver-grey mesh backrest #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrest sleeves, hanging cylindrical crimson-red side cup-holder pouch, unbroken matte-black X-brace steel tubing, and exact bottom seesaw rocker mechanism with one short flat straight horizontal ground runner bar, black U-bracket pivot hinge, continuous L-shaped rocker tube, and one vertical black cylindrical spring bumper with yellow 'ROTATION PROHIBITED' warning sticker per side — keep the entire chair frame 100% UNCHANGED at its exact 2D canvas coordinates): outpaint the pure white background with warm weathered red-cedar cabin porch planks scattered with a few crisp golden autumn maple and larch leaves beside an alpine lake, anchoring the flat bottom runner bars directly on the flat cedar planks with a crisp dark solar cast shadow and sunlit emerald lake water and golden pines in natural f/5.6 depth of field behind the porch. Strictly ONE empty chair close-up, no people, zero text."
+    },
+    {
+      "key": "RED_LAKE05_CLOSEUP_ROCKER_SPRING_FRAME_SLATE_PATIO",
+      "refs": [
+        "OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 85mm late-afternoon daylight commercial product detail photograph, f/5.6 crisp optical depth of field, 5000K golden-autumn side-sunlight highlighting the matte-black powder-coated steel and 600D crimson-red fabric weave, NO HDR glow, NO plastic sheen: edit this 16:9 single-chair product plate (using the second and third reference images for exact crimson-red 600D Oxford canvas #B12233 with the wide horizontal crimson-red top header band, breathable silver-grey mesh center panel #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouch, unbroken matte-black X-brace tubular steel frame with silver pivot rivets, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the stone surface, black U-bracket pivot hinge, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow 'ROTATION PROHIBITED' warning sticker per side — keep the entire empty chair 100% UNCHANGED at its exact 2D canvas coordinates): outpaint the pure white background with a flat natural dark-grey alpine slate flagstone patio dusted with golden pine needles at the edge of a crystal-clear mountain stream, with a vintage brass compass and a folded wool camp blanket resting on a flat boulder beside the chair and golden autumn birch trees glowing in the afternoon sun behind. Strictly ONE empty chair, no people, zero text."
+    },
+    {
+      "key": "RED_LAKE06_EXTERIOR_STATIC_SINGLE_CABIN_FIREPIT_DECK",
+      "refs": [
+        "OCC1467_PLATE_01_SINGLE_RIGHT_58PCT_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Full-bleed borderless 16:9 cinema frame captured with an Arri Alexa Mini LF and Panavision Primo 50mm T2.8 lens, f/5.6 deep optical depth of field, natural photochemical film color grading and organic micro-contrast, strictly full-frame edge-to-edge image with NO black bars and NO film-strip borders, crisp 5000K golden-autumn afternoon sunlight, asymmetric Rule-of-Thirds 1/3-to-2/3 architectural composition, ONE SINGLE SEAMLESS UNIFIED WIDE-ANGLE PHOTOGRAPH (strictly NO split screen), NO HDR glow, NO plastic sheen: edit this 16:9 single-chair product plate (using the second and third reference images for exact crimson-red 600D Oxford canvas #B12233 with the wide crimson-red horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouch, unbroken matte-black X-brace tubular steel frame, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the timber deck, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep the entire empty chair 100% UNCHANGED on the right 1/3 at its exact 58% frame-height coordinates): outpaint the pure white background with an authentic Scandinavian-American A-frame cedar cabin timber deck in golden autumn — immediately beside the chair sits a rustic live-edge cedar stump side table holding a copper pour-over coffee kettle, two stoneware mugs, and a vintage film camera, while the left 2/3 of the frame opens up into a warm three-layer alpine vista of a stacked river-stone outdoor firepit, golden-amber larch trees, and sunlit mountain ridges in sharp f/5.6 focus. Strictly ONE empty chair on the right 1/3, no people, zero text."
+    },
+    {
+      "key": "RED_LAKE07_EXTERIOR_STATIC_SINGLE_OVERLAND_SUV_AUTUMN_WOODS",
+      "refs": [
+        "OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight commercial exterior product photograph, f/5.6 deep natural depth of field, crisp 5000K golden-autumn sunlight filtering through amber maple trees, natural 35mm film color grading, ONE SINGLE SEAMLESS UNIFIED WIDE-ANGLE PHOTOGRAPH (strictly NO split screen, NO vertical dividing line): edit this 16:9 single-chair product plate (using the second and third reference images for exact crimson-red 600D Oxford canvas #B12233 with the wide crimson-red horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouch, unbroken matte-black X-brace tubular steel frame, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the packed earth-and-stone forest clearing, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep the entire empty chair 100% UNCHANGED on the left side at its exact 58% frame-height coordinates): outpaint the pure white background into one continuous wide-angle autumn overland glamping scene in a sunlit golden-maple forest clearing — beside the chair sit a vintage olive-drab metal storage trunk holding a matte-black kettle and two enamel mugs, while parked in realistic full-size 1:1 scale on the right 2/3 in the midground is a classic vintage sand-beige boxy 4x4 overland expedition SUV with a deployed tan canvas side-awning and rooftop expedition rack beneath towering golden-amber and burnt-orange autumn trees in sharp f/5.6 focus. Strictly ONE empty chair, no boats, no people, zero text."
+    },
+    {
+      "key": "RED_LAKE08_OUTRO_FOLDED_CARRY_FOREST_TRAIL",
+      "refs": [
+        "OCC1467_REF_5_FOLDED_CARRY_S4_1024.jpg",
+        "OCC1467_CHAR_2_SHEET.jpg"
+      ],
+      "prompt": "Full-bleed borderless 16:9 cinema frame captured with an Arri Alexa Mini LF and Panavision Primo 50mm T2.8 lens, f/5.6 deep optical depth of field, natural photochemical film color grading and organic micro-contrast, strictly full-frame edge-to-edge image with NO black bars and NO film-strip borders, crisp 5000K golden-autumn sunlight, NO HDR glow, NO plastic CGI skin: show the exact 31-year-old Nordic-American female photographer from the second reference image (with warm chestnut-auburn hair in a low ponytail, natural sun-freckles, wearing her warm ivory-cream quilted down vest over a deep forest-sage waffle-knit merino sweater, warm camel-tan field trousers, and dark espresso leather hiking boots — single person only, never show the 3-panel split layout) walking naturally across a rustic timber footbridge over a leaf-strewn mountain creek lined with glowing golden autumn aspen and larch trees toward a sunlit alpine lake, carrying the FULL-SIZE WIDE RECTANGULAR FOLDED crimson-red and silver-grey mesh OCC-1467 chair in her right hand by its top crimson-red fabric carry strap at exact 1:1 real-world scale matching the first reference image (the large 80cm-tall × 65cm-wide folded rectangular chair frame spans vertically from her hip all the way down to her lower shin just above her ankle — showing the wide rectangular matte-black tubular frame with two horizontal black cylindrical spring bumpers with yellow labels on the rear half, the vertically folded crimson-red backrest with grey trim on the front half, and the cylindrical crimson-red cup-holder pouch hanging underneath the bottom bar near her ankle — strictly NEVER a thin narrow stick). Crisp golden afternoon sunlight, fallen golden leaves on the wooden planks, and sparkling creek water in sharp f/5.6 focus. Zero text."
+    },
+    {
+      "key": "RED_LAKE09_CABIN_TERRACE_COUPLE_CHAT_ROCK",
+      "refs": [
+        "OCC1467_PLATE_09_PAIR_RIGHT_TERRACE_16x9.jpg",
+        "OCC1467_COUPLE_CAMP_TALK_REF.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1467_CHAR_2_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5000K golden-autumn mountain sunlight with warm amber bistro string-lights overhead, natural 35mm film color grading, NO HDR glow, NO fake blurry bokeh: edit this 16:9 2-chair right-offset product plate (using the second, third, and fourth reference images for exact crimson-red 600D Oxford canvas #B12233 with the wide horizontal crimson-red top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouches on the front-right and front-left posts, unbroken matte-black X-brace tubular steel frames with ZERO loose dangling straps under the seat, and exact bottom L-bar seesaw base with one short flat straight horizontal bottom runner bar resting flat on the flat red-cedar cabin timber veranda, black U-bracket pivot hinge, straight L-shaped upper tube, and one separate vertical black cylindrical spring bumper with yellow warning sticker standing on the bottom runner bar per side — strictly NEVER curved rocking rails, keep BOTH chairs at their exact 52% identical low-back director-chair height and exact 2D canvas coordinates with 100% UNCHANGED frames, do NOT rotate or redraw the chairs): seat two happy friends facing forward in the two chairs while turning their heads toward each other to chat warmly (never looking at the camera) — in the left chair seat the exact 31-year-old woman from the fifth reference image (wearing her ivory-cream quilted down vest over a forest-sage waffle-knit merino sweater, camel-tan field trousers, and espresso leather hiking boots — never show the 3-panel split layout) and in the right chair seat a smiling 35-year-old man in a cognac-tan suede field jacket over an oatmeal waffle henley and dark navy chinos, both sitting comfortably with the wide crimson-red top header band, two white vertical piping lines, and silver-grey mesh backrest panel clearly visible around their shoulders, talking and laughing together on a sunlit Scandinavian A-frame cedar cabin veranda with a stacked river-stone outdoor hearth on the left 1/3 and crimson-and-gold autumn maple trees behind them in sharp f/5.6 focus. Zero text."
+    },
+    {
+      "key": "RED_LAKE10_CASCADE_STREAM_FRIENDS_CHAT_ROCK",
+      "refs": [
+        "OCC1467_PLATE_10_PAIR_LEFT_STREAM_16x9.jpg",
+        "OCC1467_COUPLE_CAMP_TALK_REF.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1467_CHAR_2_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5000K golden-autumn sunlight filtering through glowing golden birch and aspen trees beside a cascading mountain waterfall stream, natural 35mm film color grading, NO HDR glow, NO fake blurry bokeh: edit this 16:9 2-chair left-offset product plate (using the second, third, and fourth reference images for exact crimson-red 600D Oxford canvas #B12233 with the wide horizontal crimson-red top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouches on the front posts, unbroken matte-black X-brace tubular steel frames with ZERO loose dangling straps under the seat, and exact bottom L-bar seesaw base with one short flat straight horizontal bottom runner bar resting flat on the flat streamside granite flagstone terrace, black U-bracket pivot hinge, straight L-shaped upper tube, and one separate vertical black cylindrical spring bumper with yellow warning sticker standing on the bottom runner bar per side — strictly NEVER curved rocking rails, keep BOTH chairs at their exact 52% identical low-back director-chair height and exact 2D canvas coordinates with 100% UNCHANGED frames, do NOT rotate or redraw the chairs): seat two happy female friends facing forward in the two chairs while turning their heads toward each other in lively conversation (never looking at the camera) — in the left chair seat the exact 31-year-old woman from the fifth reference image (wearing her ivory-cream quilted down vest over a forest-sage waffle-knit merino sweater, camel-tan field trousers, and espresso leather hiking boots — never show the 3-panel split layout) and in the right chair seat a smiling 29-year-old woman in a rust-terracotta knit cardigan over a cream tee and olive-drab utility pants, both sitting comfortably with the wide crimson-red top header band, two white vertical piping lines, and silver-grey mesh backrest panel clearly visible around their shoulders, holding stainless camp mugs and chatting warmly beside a sun-dappled cascading mountain waterfall and rustic timber footbridge on the right 1/3 in sharp f/5.6 focus. Zero text."
+    }
+  ],
+  "videos": [
+    {
+      "key": "V_RED_LAKE01_HOOK_PHOTOGRAPHER_GOLDEN_RETRIEVER_CABIN_ROCK_8S",
+      "scene_key": "RED_LAKE01_HOOK_PHOTOGRAPHER_GOLDEN_RETRIEVER_CABIN_ROCK",
+      "duration": "8 giây",
+      "prompt": "One single continuous, unbroken 8-second 35mm cinema shot on a sunlit cedar cabin porch: as the camera glides slowly and smoothly forward, the woman in the ivory down vest sits comfortably in the red and grey folding chair, holding her vintage camera, smiling warmly at the Golden Retriever dog lying beside her, and gently leaning her upper back against the cushioned backrest while the black metal chair frame and legs stay completely solid and flat on the wooden deck. Zero morphing, zero text."
+    },
+    {
+      "key": "V_RED_LAKE02_REAR_VIEW_ALPINE_OVERLOOK_ROCK_8S",
+      "scene_key": "RED_LAKE02_REAR_VIEW_ALPINE_OVERLOOK_ROCK",
+      "duration": "8 giây",
+      "prompt": "One single continuous, unbroken 8-second 35mm cinema shot from a rear-3/4 angle overlooking a sunlit mountain lake: as the camera glides slowly and smoothly sideways in 3D parallax, the woman in the ivory down vest sits comfortably in the red and grey folding chair, gazing peacefully at the lake and gently leaning her upper back against the backrest while the black metal chair frame and legs stay completely solid and flat on the stone floor. Her right hand rests calmly near the single black tumbler in the right cup holder. Zero morphing, zero text."
+    },
+    {
+      "key": "V_RED_LAKE03_COUPLE_AUTUMN_PINE_CAMP_TALK_ROCK_8S",
+      "scene_key": "RED_LAKE03_COUPLE_AUTUMN_PINE_CAMP_TALK_ROCK",
+      "duration": "8 giây",
+      "prompt": "One single continuous, unbroken 8-second 35mm cinema shot on a sunlit lakeside stone terrace under autumn trees: as the camera glides slowly and smoothly forward, the woman in the ivory down vest and the man in the charcoal overshirt sit comfortably in the two red and grey folding chairs, holding their camp mugs, chatting warmly, smiling, and gently leaning their upper backs against the backrests while the black metal chair frames and legs stay completely solid and flat on the stone floor. Zero morphing, zero text."
+    },
+    {
+      "key": "V_RED_LAKE04_CLOSEUP_PRODUCT_CEDAR_PORCH_8S",
+      "scene_key": "RED_LAKE04_CLOSEUP_PRODUCT_CEDAR_PORCH",
+      "duration": "8 giây",
+      "prompt": "One single continuous, unbroken 8-second 85mm close-up product showcase shot in crisp 5000K golden-autumn mountain daylight (strictly ONE continuous single-take camera movement with NO cuts, NO transitions, and NO cross-dissolves): the camera performs a slow, smooth, continuous 3D orbital push-in across the empty crimson-red and silver-grey mesh folding chair resting on the red-cedar cabin porch planks, clearly showcasing the wide crimson-red top header band, breathable silver-grey mesh panel with crisp white vertical piping, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouch, matte-black X-brace tubular steel frame, and flat bottom runner bar with its vertical black cylindrical spring bumper. The empty chair remains 100% stationary and firmly planted on the wooden porch planks while golden autumn leaves and emerald lake water ripple softly in the background. No people, zero cuts, zero morphing, zero text."
+    },
+    {
+      "key": "V_RED_LAKE05_CLOSEUP_ROCKER_SPRING_FRAME_SLATE_PATIO_8S",
+      "scene_key": "RED_LAKE05_CLOSEUP_ROCKER_SPRING_FRAME_SLATE_PATIO",
+      "duration": "8 giây",
+      "prompt": "One single continuous, unbroken 8-second 85mm commercial product detail shot in crisp 5000K golden-autumn afternoon sunlight (strictly ONE continuous single-take camera movement with NO cuts, NO transitions, and NO cross-dissolves): the camera performs a smooth, continuous 3D lateral-and-forward orbital arc around the empty crimson-red and silver-grey mesh folding chair on the alpine slate flagstone patio, showcasing the hanging crimson-red side cup-holder pouch, powder-coated matte-black X-brace tubular steel frame, flat horizontal bottom runner bars, and vertical black cylindrical spring bumpers in razor-sharp focus. The empty chair remains 100% stationary and firmly planted on the stone patio while the clear mountain stream flows gently behind. No people, zero cuts, zero morphing, zero text."
+    },
+    {
+      "key": "V_RED_LAKE06_EXTERIOR_STATIC_SINGLE_CABIN_FIREPIT_DECK_8S",
+      "scene_key": "RED_LAKE06_EXTERIOR_STATIC_SINGLE_CABIN_FIREPIT_DECK",
+      "duration": "8 giây",
+      "prompt": "One single continuous, unbroken 8-second 50mm alpine cinema shot in crisp 5000K golden-autumn daylight (strictly ONE continuous single-take camera movement with NO cuts, NO transitions, and NO cross-dissolves): the camera performs a clearly visible, smooth, continuous 3D orbital push-in and lateral arc from left to right across the A-frame cedar cabin timber deck toward the empty crimson-red and silver-grey mesh folding chair and live-edge cedar side table, creating rich 3D optical parallax between the foreground deck planks, the chair and copper kettle in the midground, and the stone firepit and golden larch forest in the background. The empty chair remains 100% stationary and planted on the timber deck planks while golden larch branches sway gently in the breeze. No people, zero cuts, zero morphing, zero text."
+    },
+    {
+      "key": "V_RED_LAKE07_EXTERIOR_STATIC_SINGLE_OVERLAND_SUV_AUTUMN_WOODS_8S",
+      "scene_key": "RED_LAKE07_EXTERIOR_STATIC_SINGLE_OVERLAND_SUV_AUTUMN_WOODS",
+      "duration": "8 giây",
+      "prompt": "One single continuous, unbroken 8-second 50mm alpine cinema shot in crisp 5000K golden-autumn daylight (strictly ONE continuous single-take camera movement with NO cuts, NO transitions, and NO cross-dissolves): the camera performs a clearly visible, smooth, continuous 3D orbital push-in and lateral arc from right to left across the sunlit golden-maple forest clearing toward the empty crimson-red and silver-grey mesh folding chair and the olive metal camp trunk, creating rich 3D optical parallax between the chair in the foreground and the classic vintage sand-beige 4x4 overland SUV with its canvas awning parked beneath the golden autumn trees in the midground. The empty chair remains 100% stationary and planted on the ground while golden maple leaves sway gently in the autumn breeze. No people, zero cuts, zero morphing, zero text."
+    },
+    {
+      "key": "V_RED_LAKE08_OUTRO_FOLDED_CARRY_FOREST_TRAIL_8S",
+      "scene_key": "RED_LAKE08_OUTRO_FOLDED_CARRY_FOREST_TRAIL",
+      "duration": "8 giây",
+      "prompt": "One single continuous, unbroken 8-second 35mm Kodak Vision3 250D commercial tracking shot (strictly ONE continuous single-take camera movement with NO cuts and NO cross-dissolves): the camera performs a smooth, steady 3D tracking motion along the rustic timber footbridge over the leaf-strewn mountain creek lined with glowing golden autumn larch trees as the woman in the ivory-cream down vest, forest-sage sweater, and camel-tan field trousers walks naturally forward toward the sunlit alpine lake, effortlessly carrying the slim folded crimson-red and silver-grey mesh chair horizontally in her right hand by its integrated crimson-red fabric carry strap. Natural walking stride, crisp golden afternoon light, and sparkling creek water in sharp focus. Zero morphing, zero text."
+    },
+    {
+      "key": "V_RED_LAKE09_CABIN_TERRACE_COUPLE_CHAT_ROCK_8S",
+      "scene_key": "RED_LAKE09_CABIN_TERRACE_COUPLE_CHAT_ROCK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D alpine lifestyle shot in front of a sunlit A-frame cedar cabin veranda under warm bistro string-lights: as the camera performs a smooth, gentle 3D forward-and-lateral arc, the woman in the ivory-cream down vest and the man in the cognac suede jacket seated in the two identically-scaled crimson-red and silver-grey mesh folding rocker chairs look at each other, smile, chat warmly, and lean gently and rhythmically back and forth in an effortless, soothing rocking motion while relaxing in the crisp autumn breeze. Strictly two chairs and two people, zero morphing, zero text."
+    },
+    {
+      "key": "V_RED_LAKE10_CASCADE_STREAM_FRIENDS_CHAT_ROCK_8S",
+      "scene_key": "RED_LAKE10_CASCADE_STREAM_FRIENDS_CHAT_ROCK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D alpine lifestyle shot beside a sunlit cascading mountain boulder stream beneath golden autumn birch trees: as the camera performs a smooth, gentle 3D forward-and-lateral arc, the woman in the ivory-cream down vest and her female friend in the rust-terracotta cardigan seated in the two identically-scaled crimson-red and silver-grey mesh folding rocker chairs look at each other, laugh, chat warmly, and lean gently and rhythmically back and forth in an effortless, soothing rocking motion while the clear mountain creek flows behind them. Strictly two chairs and two people, zero morphing, zero text."
+    }
+  ]
+}

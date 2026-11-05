@@ -188,7 +188,10 @@ async def switch_gallery_tab(flow: FlowCDP, tab_label: str) -> None:
         const btns = Array.from(document.querySelectorAll('button, [role="tab"]')).filter(b => {{
             const r = b.getBoundingClientRect();
             const txt = (b.innerText || '').trim();
-            return r.width > 0 && r.x < 360 && r.y > 40 && r.y < 280 && txt.includes(label);
+            const aria = (b.getAttribute('aria-label') || '').trim();
+            const isVideoMatch = label === 'Video' && (txt.includes('Video') || aria.includes('Video') || txt === 'videocam');
+            const isImgMatch = label === 'Hình ảnh' && (txt.includes('Hình ảnh') || aria.includes('Hình ảnh') || txt === 'image');
+            return r.width > 0 && r.x < 360 && r.y > 40 && r.y < 320 && (txt.includes(label) || aria.includes(label) || isVideoMatch || isImgMatch);
         }});
         if (!btns.length) return null;
         const r = btns[0].getBoundingClientRect();
@@ -252,8 +255,8 @@ async def ensure_image_mode(flow: FlowCDP, aspect_ratio: str = "16:9") -> None:
         await asyncio.sleep(0.4)
 
 
-async def ensure_veo31_fast_4s_16x9(flow: FlowCDP) -> None:
-    """Ensure manual Video composer: Video · Khung hình · 16:9 · Veo 3.1 - Fast · 4 giây · x1."""
+async def ensure_veo31_fast_4s_16x9(flow: FlowCDP, duration_label: str = "8 giây") -> None:
+    """Ensure manual Video composer: Video · Khung hình · 16:9 · Veo 3.1 - Fast · <duration_label> · x1."""
     await exit_edit_view_if_needed(flow)
     await press_escape(flow, 0.3)
     await disable_agent_mode_if_active(flow)
@@ -266,7 +269,7 @@ async def ensure_veo31_fast_4s_16x9(flow: FlowCDP) -> None:
         return r.y > Math.max(180, window.innerHeight - 340) && r.width > 0 && (txt.includes('Bắt đầu') || txt.includes('Kết thúc') || (b.getAttribute('aria-label')||'').includes('Hoán đổi khung hình'));
     })
     """)
-    if "Video" in pill and "4 giây" in pill and "crop_16_9" in pill and "x1" in pill and has_start_slot:
+    if "Video" in pill and duration_label in pill and "crop_16_9" in pill and "x1" in pill and has_start_slot:
         return
 
     if not await flow.js("Boolean(document.querySelector('[role=\"radio\"]'))"):
@@ -299,14 +302,16 @@ async def ensure_veo31_fast_4s_16x9(flow: FlowCDP) -> None:
         await flow.find_and_trusted_click("el.getAttribute('role') === 'menuitem' && text.includes('Veo 3.1 - Fast')", "Veo 3.1 - Fast")
         await asyncio.sleep(0.4)
 
-    await flow.find_and_trusted_click("el.getAttribute('role') === 'radio' && text === '4 giây'", "4 giây")
-    await asyncio.sleep(0.25)
+    await flow.find_and_trusted_click(f"el.getAttribute('role') === 'radio' && text.includes({json.dumps(duration_label)})", duration_label)
+    await asyncio.sleep(0.35)
     await flow.find_and_trusted_click("el.getAttribute('role') === 'radio' && text === 'x1'", "x1")
     await asyncio.sleep(0.25)
 
     if await flow.js("Boolean(document.querySelector('[role=\"radio\"]'))"):
         await flow.find_and_trusted_click("aria === 'Điều kiện kích hoạt cài đặt'", "close settings")
         await asyncio.sleep(0.4)
+    pill_after = await flow.js("(document.querySelector('[aria-label=\"Điều kiện kích hoạt cài đặt\"]')?.innerText || '').trim()")
+    print(f"  [Settings Locked] {pill_after}")
 
 
 async def _wait_visible_option_thumbnails(flow: FlowCDP, max_polls: int = 5) -> None:
@@ -1777,8 +1782,9 @@ async def run_videos_pipeline(
                 start_alts = [uuid_to_asb[start_tok]] if start_tok in uuid_to_asb else []
                 end_alts = [uuid_to_asb[end_tok]] if end_tok and end_tok in uuid_to_asb else []
 
-                print(f"\n=== QUEUEING 4S VEO 3.1 CLIP: {item['key']} ===")
-                await ensure_veo31_fast_4s_16x9(flow)
+                dur_lbl = item.get("duration") or config.get("video_duration") or "8 giây"
+                print(f"\n=== QUEUEING {dur_lbl.upper()} VEO 3.1 CLIP: {item['key']} ===")
+                await ensure_veo31_fast_4s_16x9(flow, duration_label=dur_lbl)
                 await clear_frame_slots_and_text(flow)
                 await _populate_frame_slot_by_token(flow, "Bắt đầu", start_tok, alt_tokens=start_alts)
                 if end_tok:
@@ -2309,7 +2315,11 @@ async def resolve_video_card_indices_by_start_frame(
         ]
         if not candidates:
             raise RuntimeError(f"Ran out of Video-tab cards while matching {v['key']!r}.")
-        best_cidx, best_l1 = min(candidates, key=lambda kv: (kv[1], kv[0]))
+        matching_cands = [kv for kv in candidates if kv[1] <= 14.0]
+        if matching_cands:
+            best_cidx, best_l1 = min(matching_cands, key=lambda kv: kv[0])
+        else:
+            best_cidx, best_l1 = min(candidates, key=lambda kv: (kv[1], kv[0]))
         if best_l1 > max_match_l1:
             raise RuntimeError(
                 f"Could not match video {v['key']!r} (UUID {u}) to any Video-tab card (closest card #{best_cidx} had L1={best_l1:.2f} > {max_match_l1})."
@@ -2641,11 +2651,19 @@ async def audit_videos_2zone_in_browser(
             stamps = [0.15, 1.05, 2.00, 2.95, min(3.80, max(0.2, dur - 0.12))]
             rgb_frames: List[bytes] = []
             scrub_err = ""
+            grid_16f_path = ""
+            grids_dir = (
+                os.path.join(os.path.dirname(os.path.abspath(out_json_path)), "video_grids")
+                if out_json_path
+                else os.path.join(os.getcwd(), "qa", "video_grids")
+            )
 
             try:
                 vid_src = (prep.get("src") or "").strip()
                 if vid_src:
                     try:
+                        from .guardrails import extract_16f_video_grid
+
                         ck_res = await flow.call("Network.getCookies", {"urls": ["https://flow.google.com", "https://google.com", "https://labs.google"]})
                         cookie_header = "; ".join(c.get("name", "") + "=" + c.get("value", "") for c in ck_res.get("cookies", []))
                         ua = await flow.js("navigator.userAgent") or "Mozilla/5.0"
@@ -2655,17 +2673,26 @@ async def audit_videos_2zone_in_browser(
                         )
                         with urllib.request.urlopen(req, timeout=15) as resp:
                             mp4_bytes = resp.read()
-                        for ts in stamps:
-                            target_ts = min(max(0.05, ts), max(0.05, dur - 0.05))
-                            cmd = [
-                                "ffmpeg", "-hide_banner", "-loglevel", "error",
-                                "-i", "pipe:0", "-ss", f"{target_ts:.2f}",
-                                "-frames:v", "1", "-vf", f"scale={W}:{H}",
-                                "-f", "rawvideo", "-pix_fmt", "rgb24", "pipe:1",
-                            ]
-                            proc = subprocess.run(cmd, input=mp4_bytes, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
-                            if len(proc.stdout) == W * H * 3:
-                                rgb_frames.append(proc.stdout)
+                        # 1. Xuất luôn 1 tấm ảnh lưới 16 khung hình (4fps = mỗi 0.25s, 4x4) nhẹ ~200KB từ RAM (0 file .mp4 lưu ổ cứng!)
+                        safe_slug = re.sub(r"[^A-Za-z0-9_.\-]+", "_", slug)
+                        grid_16f_path = extract_16f_video_grid(
+                            mp4_bytes,
+                            os.path.join(grids_dir, f"{safe_slug}_16f_grid.jpg"),
+                            fps=4,
+                            cols=4,
+                            rows=4,
+                        )
+                        # 2. Chạy ĐÚNG 1 LỆNH ffmpeg duy nhất (0.09s) lấy toàn bộ 16 khung hình (4fps) trong RAM thay vì gọi 5 lần
+                        cmd_all = [
+                            "ffmpeg", "-hide_banner", "-loglevel", "error",
+                            "-i", "pipe:0", "-vf", f"fps=4,scale={W}:{H}",
+                            "-f", "rawvideo", "-pix_fmt", "rgb24", "pipe:1",
+                        ]
+                        proc = subprocess.run(cmd_all, input=mp4_bytes, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+                        frame_sz = W * H * 3
+                        n_f = len(proc.stdout) // frame_sz
+                        for f_i in range(n_f):
+                            rgb_frames.append(proc.stdout[f_i * frame_sz : (f_i + 1) * frame_sz])
                     except Exception:
                         rgb_frames.clear()
 
@@ -2776,11 +2803,14 @@ async def audit_videos_2zone_in_browser(
             entry = {
                 "card_index": card_idx,
                 "slug": slug,
+                "frames_sampled": len(rgb_frames),
+                "grid_16f_path": grid_16f_path,
                 **metrics,
                 **verdict_info,
             }
             status_tag = "PASS" if entry["ok"] else f"FAIL({entry['verdict']})"
-            print(f"  [{status_tag}] card #{card_idx} ({slug}): {entry['reason']}")
+            grid_note = f" | 16f_grid={os.path.basename(grid_16f_path)}" if grid_16f_path else ""
+            print(f"  [{status_tag}] card #{card_idx} ({slug}): {entry['reason']}{grid_note}")
             results.append(entry)
 
     if out_json_path:

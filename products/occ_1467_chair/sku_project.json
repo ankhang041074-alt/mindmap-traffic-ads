@@ -1,0 +1,128 @@
+{
+  "slug": "occ_1467_chair",
+  "prefix": "OCC1467",
+  "preset": "generic_decor",
+  "project_id": "1d71c3d4-623e-4656-8d1e-915fbe5e59bd",
+  "video_duration": "8 giây",
+  "notes_vi": "TVC #1 Ghế Đỏ OCC-1467 (Crimson Red #B12233 & Silver-Grey Mesh #A1A0A5) — Concept Bờ Biển Địa Trung Hải & Đầm Phá Gỗ Lũa 35mm Kodak Vision3 250D (8 Giây/Shot).",
+  "exclude_uuids": [],
+  "scenes": [
+    {
+      "key": "RED_BEACH01_HOOK_THREE_FRIENDS_COASTAL_DECK_ROCK",
+      "refs": [
+        "OCC1467_PLATE_06_TRIO_CAMPSITE_16x9.jpg",
+        "OCC1467_COUPLE_CAMP_TALK_REF.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1467_CHAR_1_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5000K golden-afternoon coastal sunlight, natural 35mm film color grading, NO HDR glow, NO fake blurry bokeh: edit this 16:9 3-chair product plate (using the second, third, and fourth reference images for exact crimson-red 600D Oxford canvas #B12233 with the wide crimson-red horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouch on the front post, unbroken matte-black X-brace tubular steel frame with ZERO loose dangling straps under the seat, and exact bottom L-bar seesaw base with one short flat straight horizontal bottom runner bar resting flat on the wooden deck planks, black U-bracket pivot hinge, straight L-shaped upper tube, and one separate vertical black cylindrical spring bumper with yellow warning sticker standing on the bottom runner bar per side — strictly NEVER curved rocking rails, keep all three chairs at their exact 1:1 identical low-back director-chair height and exact 2D canvas coordinates with 100% UNCHANGED frames): seat three happy coastal friends facing forward in the three chairs — in the center chair seat the exact 38-year-old Mediterranean coastal architect from the fifth reference image (wearing his unbuttoned washed slate-indigo slub-linen overshirt over an oatmeal-cream ribbed henley tee, sandstone-taupe linen trousers rolled at the ankles, and cognac-tan suede espadrilles — never show the 3-panel split layout), on the left chair seat a smiling 34-year-old woman in an olive-green linen shirt and cream linen trousers, and on the right chair seat a smiling 36-year-old man in a sand-beige linen knit sweater and navy chinos — all three sitting comfortably with the wide crimson-red top header band, two white vertical piping lines, and silver-grey mesh backrest panel clearly visible around their shoulders, holding glasses of citrus spritz on a weathered coastal cliffside timber deck overlooking turquoise Mediterranean surf and limestone sea cliffs in sharp f/5.6 focus. Zero text."
+    },
+    {
+      "key": "RED_BEACH02_REAR_VIEW_COASTAL_CLIFF_ROCK",
+      "refs": [
+        "OCC1467_REF_4_REAR_MESH_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1467_CHAR_1_SHEET.jpg"
+      ],
+      "prompt": "Full-bleed borderless 16:9 cinema frame captured with an Arri Alexa Mini LF and Panavision Primo 50mm T2.8 lens, f/5.6 deep optical depth of field, natural photochemical film color grading and organic micro-contrast, strictly full-frame edge-to-edge image with NO black bars and NO film-strip borders, crisp 5000K golden-afternoon coastal sunlight, NO HDR glow, NO plastic CGI sheen: using the first reference image as the exact rear-view product blueprint of the single crimson-red folding rocker chair and the second reference image for its exact bottom L-bar ground hinge, show a rear-3/4 view from directly behind the single chair placed on a flat sun-warmed coastal sandstone ledge dusted with shell-sand overlooking a dramatic turquoise ocean cove, sculpted limestone sea stacks, and a distant white coastal lighthouse: preserve 100% of the exact rear backrest design (wide crimson-red #B12233 horizontal top fabric header band with two small silver corner rivets at the top-left and top-right corners, dark grey top edge trim, breathable semi-translucent silver-grey mesh center panel #A1A0A5, crimson-red side fabric panels), the unbroken matte-black rear X-brace tubular steel frame with the diagonal crimson-red fabric carry strap riveted across the lower rear X-brace, the hanging cylindrical crimson-red cup-holder pouch on the right front post holding ONE matte-black insulated tumbler, and the exact bottom seesaw base with two short flat straight bottom runner bars resting flat on the flat coastal stone surface, black U-bracket pivot hinges, L-shaped rocker tubes, and two vertical black cylindrical spring bumpers with yellow warning labels (strictly NEVER curved rockers). Seated comfortably in the chair seen from behind is the exact 38-year-old Mediterranean coastal architect from the third reference image wearing his unbuttoned washed slate-indigo slub-linen overshirt over an oatmeal-cream henley tee, sandstone-taupe linen trousers, and cognac-tan suede espadrilles (never show the 3-panel split layout), resting his right hand calmly near the single matte-black tumbler in the right-side cup-holder pouch while his left hand rests on his lap, gazing peacefully out across the sunlit turquoise sea horizon. Zero text."
+    },
+    {
+      "key": "RED_BEACH03_COUPLE_DRIFTWOOD_COVE_TALK_ROCK",
+      "refs": [
+        "OCC1467_PLATE_03_PAIR_CAMPSITE_52PCT_16x9.jpg",
+        "OCC1467_COUPLE_CAMP_TALK_REF.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "OCC1467_CHAR_1_SHEET.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight outdoor commercial photograph, f/5.6 deep natural depth of field, crisp 5000K golden-afternoon coastal sunlight with natural dappled coastal-tree leaf shadows, natural 35mm film color grading, NO HDR glow, NO fake blurry bokeh: edit this 16:9 2-chair product plate (using the second, third, and fourth reference images for exact crimson-red 600D Oxford canvas #B12233 with the wide horizontal crimson-red top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouches on the front-right posts, unbroken matte-black X-brace tubular steel frames with ZERO loose dangling straps under the seat, and exact bottom L-bar seesaw base with one short flat straight horizontal bottom runner bar resting flat on the flat coastal stone terrace, black U-bracket pivot hinge, straight L-shaped upper tube, and one separate vertical black cylindrical spring bumper with yellow warning sticker standing on the bottom runner bar per side — strictly NEVER curved rocking rails, keep BOTH chairs at their exact 52% identical low-back director-chair height and exact 2D canvas coordinates with 100% UNCHANGED frames): seat two happy friends facing forward in the two chairs — in the left chair seat the exact 38-year-old Mediterranean coastal architect from the fifth reference image (wearing his unbuttoned washed slate-indigo slub-linen overshirt over an oatmeal-cream ribbed henley tee, sandstone-taupe linen trousers rolled at the ankles, and cognac-tan suede espadrilles — never show the 3-panel split layout) and in the right chair seat a smiling 33-year-old woman in an ivory linen resort shirt and olive-khaki chino shorts with tan leather sandals, both sitting comfortably with the wide crimson-red top header band, two white vertical piping lines, and silver-grey mesh backrest panel clearly visible around their shoulders, holding iced coffee glasses and chatting warmly on a flat sun-warmed coastal flagstone beach terrace overlooking golden sand dunes and rolling turquoise ocean surf in sharp f/5.6 focus. Zero text."
+    },
+    {
+      "key": "RED_BEACH04_CLOSEUP_PRODUCT_COASTAL_BOARDWALK",
+      "refs": [
+        "OCC1467_PLATE_07_CLOSEUP_DETAIL_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Full-bleed borderless 16:9 cinema frame captured with an Arri Alexa Mini LF and Panavision Primo 85mm T2.8 lens, f/5.6 natural optical depth of field, crisp direct 5000K golden-afternoon coastal sunlight, real tactile fabric weave and metal micro-texture, NO HDR glow, NO plastic sheen: edit this 16:9 close-up product cutout plate (using the second and third 1024x1024 reference images for exact crimson-red 600D Oxford canvas #B12233 with dark charcoal-grey edge binding, wide horizontal crimson-red top header band, breathable silver-grey mesh backrest #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrest sleeves, hanging cylindrical crimson-red side cup-holder pouch, unbroken matte-black X-brace steel tubing, and exact bottom seesaw rocker mechanism with one short flat straight horizontal ground runner bar, black U-bracket pivot hinge, continuous L-shaped rocker tube, and one vertical black cylindrical spring bumper with yellow 'ROTATION PROHIBITED' warning sticker per side — keep the entire chair frame 100% UNCHANGED at its exact 2D canvas coordinates): outpaint the pure white background with weathered sun-bleached teak beach boardwalk planks lightly dusted with real windblown quartz sand grains at a golden-hour coastal overlook, anchoring the flat bottom runner bars directly on the flat wooden planks with a crisp dark solar cast shadow and shimmering turquoise ocean surf in natural f/5.6 depth of field behind the boardwalk. Strictly ONE empty chair close-up, no people, zero text."
+    },
+    {
+      "key": "RED_BEACH05_EXTERIOR_STATIC_SINGLE_CLIFFSIDE_CABANA",
+      "refs": [
+        "OCC1467_PLATE_01_SINGLE_RIGHT_58PCT_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Full-bleed borderless 16:9 cinema frame captured with an Arri Alexa Mini LF and Panavision Primo 50mm T2.8 lens, f/5.6 deep optical depth of field, natural photochemical film color grading and organic micro-contrast, strictly full-frame edge-to-edge image with NO black bars and NO film-strip borders, crisp 5000K golden-afternoon Mediterranean sunlight, asymmetric Rule-of-Thirds 1/3-to-2/3 architectural composition, NO HDR glow, NO plastic sheen: edit this 16:9 single-chair product plate (using the second and third reference images for exact crimson-red 600D Oxford canvas #B12233 with the wide crimson-red horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouch, unbroken matte-black X-brace tubular steel frame, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the limestone terrace, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep the entire empty chair 100% UNCHANGED on the right 1/3 at its exact 58% frame-height coordinates): outpaint the pure white background with an authentic Mediterranean cliffside stone terrace beneath the gnarled branches of an ancient coastal olive tree casting crisp dappled leaf shadows — immediately beside the chair sits a low hand-carved travertine stone side table holding a glass carafe of sparkling lemon water, a linen-bound field notebook, and vintage brass marine binoculars, while the left 2/3 of the frame opens up into a breathtaking three-layer coastal vista of weathered limestone cliff steps, foamy white surf breaking against rocky coves, and a deep sapphire sea horizon in sharp f/5.6 focus. Strictly ONE empty chair on the right 1/3, no people, zero text."
+    },
+    {
+      "key": "RED_BEACH06_EXTERIOR_STATIC_SINGLE_TIDAL_LAGOON_DOCK",
+      "refs": [
+        "OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "prompt": "Raw, unretouched real-world 50mm late-afternoon daylight commercial exterior product photograph, f/5.6 deep natural depth of field, crisp 5000K coastal sunlight, natural 35mm film color grading, ONE SINGLE SEAMLESS UNIFIED WIDE-ANGLE PHOTOGRAPH (strictly NO split screen, NO vertical dividing line): edit this 16:9 single-chair product plate (using the second and third reference images for exact crimson-red 600D Oxford canvas #B12233 with the wide crimson-red horizontal top header band across the top of the backrest, breathable cool silver-grey mesh center panel #A1A0A5 framed by two crisp white vertical piping lines, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouch, unbroken matte-black X-brace tubular steel frame, and exact bottom L-bar seesaw base with one short flat straight bottom runner bar resting flat on the wooden pier planks, black U-bracket pivot, straight L-shaped upper tube, and one vertical black cylindrical spring bumper with yellow warning sticker per side — keep the entire empty chair 100% UNCHANGED on the wooden pier at its exact 58% frame-height coordinates): outpaint the pure white background into one continuous wide-angle coastal scene on a wide weathered silver-grey timber boat pier extending across a crystal-clear emerald coastal tidal lagoon — beside the chair on the sunlit wooden planks sit a coiled natural Manila hemp rope, a brass storm lantern, and a woven seagrass beach tote with a rolled cream linen towel, while moored alongside the timber pier pilings in the translucent emerald lagoon water is a REALISTIC FULL-SIZE 5.5-METER CLASSIC VARNISHED MAHOGANY WOODEN BOAT (true 1:1 real-world boat scale — the large wide wooden boat hull is 4 times larger than the chair, with full-sized adult wooden benches, brass cleats, and its long hull extending naturally along the pier pilings, strictly NEVER a small or miniature rowboat) with umbrella pine trees along the distant sandstone shore in sharp f/5.6 focus. Strictly ONE empty chair, true full-scale wooden boat, no people, zero text."
+    },
+    {
+      "key": "RED_BEACH07_OUTRO_FOLDED_CARRY_DUNE_BOARDWALK",
+      "refs": [
+        "OCC1467_REF_5_FOLDED_CARRY_1024.jpg",
+        "OCC1467_CHAR_1_SHEET.jpg"
+      ],
+      "prompt": "Full-bleed borderless 16:9 cinema frame captured with an Arri Alexa Mini LF and Panavision Primo 50mm T2.8 lens, f/5.6 deep optical depth of field, natural photochemical film color grading and organic micro-contrast, strictly full-frame edge-to-edge image with NO black bars and NO film-strip borders, crisp 5000K golden-afternoon coastal sunlight, NO HDR glow, NO plastic CGI skin: show the exact 38-year-old Mediterranean coastal architect from the second reference image (with wavy dark espresso hair streaked with silver at the temples, 3-day salt-and-pepper stubble, wearing his unbuttoned washed slate-indigo slub-linen overshirt over an oatmeal-cream ribbed henley tee, sandstone-taupe linen trousers rolled at the ankles, and cognac-tan suede espadrilles — single person only, never show the 3-panel split layout) walking naturally along a sand-dusted weathered timber dune boardwalk lined with swaying golden sea-oats grass toward a sunlit turquoise ocean cove, effortlessly carrying the slim folded crimson-red and silver-grey mesh OCC-1467 chair horizontally in his right hand by its integrated crimson-red fabric carry strap (matching the exact folded 4.9-inch flat geometry, matte-black tubular frame, two horizontal black cylindrical spring bumpers with yellow labels, folded crimson-red fabric with grey mesh, and hanging cylindrical crimson-red cup-holder pouch at the bottom edge from the first reference image). Crisp golden afternoon sunlight, real sand grains on the wooden planks, and rolling ocean surf in sharp f/5.6 focus. Zero text."
+    }
+  ],
+  "videos": [
+    {
+      "key": "V_RED_BEACH01_HOOK_THREE_FRIENDS_COASTAL_DECK_ROCK_8S",
+      "scene_key": "RED_BEACH01_HOOK_THREE_FRIENDS_COASTAL_DECK_ROCK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D coastal lifestyle shot on a sunlit cliffside driftwood timber deck: as the camera performs a smooth, gentle 3D forward-and-lateral parallax glide, the three friends seated comfortably in the three identically-scaled crimson-red and silver-grey mesh folding rocker chairs hold their citrus spritz glasses, smile and chat warmly with one another, and lean gently and rhythmically back and forth in an effortless, soothing rocking motion while relaxing in the golden coastal breeze. Strictly three chairs and three people, zero morphing, zero text.",
+      "uuid": "5720202f-9b3a-4670-b632-708cee42b71d"
+    },
+    {
+      "key": "V_RED_BEACH02_REAR_VIEW_COASTAL_CLIFF_ROCK_8S",
+      "scene_key": "RED_BEACH02_REAR_VIEW_COASTAL_CLIFF_ROCK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D coastal lifestyle shot from a rear-3/4 angle at a sunlit sandstone cliff overlook above a turquoise ocean cove: as the camera performs a smooth, gentle 3D lateral-and-forward arc behind the single crimson-red and silver-grey mesh folding rocker chair, the Mediterranean man in the slate-indigo linen overshirt seated in the chair leans gently and rhythmically back and forth in an effortless, soothing rocking motion while gazing out at the rolling turquoise ocean waves and distant white lighthouse. His right hand remains resting calmly near the single matte-black tumbler sitting inside the right-side crimson-red cup-holder pouch while his left hand stays resting down on his lap out of view — he never lifts a second drink and no extra cup ever appears. Strictly one chair, one person, and one single tumbler in the right-side cup-holder pouch, zero morphing, zero text.",
+      "uuid": "3a949848-17c6-49d4-9737-fb578531c9b0"
+    },
+    {
+      "key": "V_RED_BEACH03_COUPLE_DRIFTWOOD_COVE_TALK_ROCK_8S",
+      "scene_key": "RED_BEACH03_COUPLE_DRIFTWOOD_COVE_TALK_ROCK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D coastal lifestyle shot under a sun-dappled driftwood beach pergola: as the camera performs a smooth, gentle 3D forward-and-lateral arc, the Mediterranean man in the slate-indigo linen overshirt and the woman in the ivory resort blouse seated in the two identically-scaled crimson-red and silver-grey mesh folding rocker chairs smile, chat warmly, and lean gently and rhythmically back and forth in an effortless, soothing rocking motion while relaxing in the coastal breeze. Strictly two chairs and two people, zero morphing, zero text.",
+      "uuid": "f9e9f5de-576b-4cfe-bdbe-4d2dc14900ab"
+    },
+    {
+      "key": "V_RED_BEACH04_CLOSEUP_PRODUCT_COASTAL_BOARDWALK_8S",
+      "scene_key": "RED_BEACH04_CLOSEUP_PRODUCT_COASTAL_BOARDWALK",
+      "duration": "8 giây",
+      "prompt": "One single continuous, unbroken 8-second 85mm close-up product showcase shot in crisp 5000K golden-afternoon coastal daylight (strictly ONE continuous single-take camera movement with NO cuts, NO transitions, and NO cross-dissolves): the camera performs a slow, smooth, continuous 3D orbital push-in across the empty crimson-red and silver-grey mesh folding rocker chair anchored on the sand-dusted teak beach boardwalk planks, clearly showcasing the breathable silver-grey mesh panel with crisp white vertical piping, padded crimson-red armrests, hanging cylindrical crimson-red side cup-holder pouch, matte-black X-brace tubular steel frame, and flat bottom runner bar with its vertical black cylindrical spring bumper. The chair remains 100% stationary and planted on the wooden boardwalk planks while turquoise ocean surf rolls gently in the background. No people, zero cuts, zero morphing, zero text.",
+      "uuid": "f08828f9-ad35-4400-a077-7927cae540c8"
+    },
+    {
+      "key": "V_RED_BEACH05_EXTERIOR_STATIC_SINGLE_CLIFFSIDE_CABANA_8S",
+      "scene_key": "RED_BEACH05_EXTERIOR_STATIC_SINGLE_CLIFFSIDE_CABANA",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D commercial exterior product shot: the camera performs a smooth, steady 3D orbital parallax glide across the sunlit Mediterranean limestone cliffside terrace beneath the ancient olive tree while the single empty crimson-red and silver-grey mesh folding chair on the right 1/3 and the carved travertine side table remain COMPLETELY PLANTED AND ANCHORED on the stone floor (zero rocking or swaying of the chair). Dappled olive-leaf shadows sway gently across the stone terrace and rolling turquoise surf breaks in the cove below. No people, zero morphing, zero text.",
+      "uuid": "0b08ae50-8b70-4b74-92b2-599671c24e08"
+    },
+    {
+      "key": "V_RED_BEACH06_EXTERIOR_STATIC_SINGLE_TIDAL_LAGOON_DOCK_8S",
+      "scene_key": "RED_BEACH06_EXTERIOR_STATIC_SINGLE_TIDAL_LAGOON_DOCK",
+      "duration": "8 giây",
+      "prompt": "One single continuous, unbroken 8-second 50mm coastal cinema shot in crisp 5000K golden-afternoon daylight (strictly ONE continuous single-take camera movement with NO cuts, NO transitions, and NO cross-dissolves): the camera performs a slow, smooth, continuous 3D orbital push-in and lateral arc from left to right along the weathered timber boat pier toward the empty crimson-red and silver-grey mesh folding rocker chair and the full-size varnished mahogany wooden boat moored alongside the pier, creating rich 3D optical parallax between the coiled hemp rope, brass lantern, and chair on the wooden planks in the foreground and the moored mahogany boat and sandstone cliffs in the background. The empty chair remains 100% stationary and planted on the wooden pier planks while emerald lagoon water ripples gently against the mahogany boat hull. No people, zero cuts, zero morphing, zero text.",
+      "uuid": "1de28518-3d59-45e2-a179-5afd2c150db3"
+    },
+    {
+      "key": "V_RED_BEACH07_OUTRO_FOLDED_CARRY_DUNE_BOARDWALK_8S",
+      "scene_key": "RED_BEACH07_OUTRO_FOLDED_CARRY_DUNE_BOARDWALK",
+      "duration": "8 giây",
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D commercial tracking shot: the camera performs a smooth, steady 3D tracking motion along the sand-dusted timber dune boardwalk lined with swaying golden sea-oats grass as the Mediterranean man in the slate-indigo linen overshirt and sandstone-taupe linen trousers walks naturally forward toward the sunlit ocean cove, effortlessly carrying the slim folded crimson-red and silver-grey mesh chair horizontally in his right hand by its integrated crimson-red fabric carry strap. Natural walking stride, crisp golden afternoon light, and ocean waves in sharp focus. Zero morphing, zero text.",
+      "uuid": "b318c234-4b43-4aff-be5c-b3128c6c8cf8"
+    }
+  ]
+}

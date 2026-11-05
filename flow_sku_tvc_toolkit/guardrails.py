@@ -584,3 +584,67 @@ def audit_project_images_cutout(
 
     return results
 
+
+def extract_16f_video_grid(
+    mp4_source: Any,
+    out_grid_path: str,
+    fps: int = 4,
+    cols: int = 4,
+    rows: int = 4,
+    tile_width: int = 420,
+) -> str:
+    """
+    Generate a single lightweight 16-frame (`4x4` at `4fps` = every `0.25s`) storyboard JPEG
+    from either a file path (`str`) or in-memory `bytes` (`pipe:0`) in ~0.12s using `ffmpeg`.
+    """
+    import shutil
+    import subprocess
+
+    ff = shutil.which("ffmpeg") or "ffmpeg"
+    abs_out = os.path.abspath(out_grid_path)
+    os.makedirs(os.path.dirname(abs_out), exist_ok=True)
+    vf_filter = f"fps={fps},scale={tile_width}:-1,tile={cols}x{rows}:padding=4:margin=4:color=black"
+
+    if isinstance(mp4_source, (bytes, bytearray)):
+        cmd = [
+            ff,
+            "-y",
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-i",
+            "pipe:0",
+            "-vf",
+            vf_filter,
+            "-frames:v",
+            "1",
+            "-update",
+            "1",
+            "-q:v",
+            "5",
+            abs_out,
+        ]
+        subprocess.run(cmd, input=bytes(mp4_source), stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+    else:
+        cmd = [
+            ff,
+            "-y",
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-i",
+            os.path.abspath(str(mp4_source)),
+            "-vf",
+            vf_filter,
+            "-frames:v",
+            "1",
+            "-update",
+            "1",
+            "-q:v",
+            "5",
+            abs_out,
+        ]
+        subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+    return abs_out
+
+
