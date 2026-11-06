@@ -1,0 +1,83 @@
+{
+  "project_slug": "occ1467-red-folding-rocking-chair",
+  "product_label": "OCC1467 Outdoor Crimson-Red & Cool-Grey Mesh Folding Freestyle Rocking Chair",
+  "product_family": "outdoor_folding_chair",
+  "stream": "brand_product_tvc",
+  "product_scale": "large_room_decor",
+  "aspect_ratio": "16:9",
+  "approval_status": "approved_locked",
+  "human_approved": true,
+  "approved_strategy": "hybrid_locked",
+  "approved_at_utc": "2026-11-05T17:50:00Z",
+  "approved_by_note": "Khóa cứng 100% chi tiết vật lý & Công thức Video 8 giây cho Ghế Xếp Bập Bênh Đỏ OCC1467: (1) Vải Oxford Đỏ Crimson (#A3262A) kết hợp mảng lưới thoáng khí Xám Lạnh (#A8ACB0) ở giữa lưng ghế có 2 đường viền chỉ trắng dọc sắc nét (white vertical piping) và viền mép xám than (#4A4D50); (2) Tay vịn khung thép đen bọc đệm vải đỏ ở mặt trên + 1 túi đựng ly vải đỏ hình trụ viền miệng xám treo ở trụ trước bên tay phải của ghế; (3) Khung thép sơn tĩnh điện đen chữ X (có tem vàng nhỏ) + 2 thanh đế phẳng chạm đất + 2 trụ Piston nhún (Spring-Action Rocking Pistons) hình trụ tròn màu đen có tem cảnh báo màu vàng dựng thẳng đứng ở phần chân sau; (4) Khi gấp gọn xách tay (Folded Carry S04): khung thép đen xếp phẳng, piston đen nằm ngang, vải đỏ-xám gấp gọn và túi đựng ly đỏ treo rủ ở cạnh dưới; (5) Cảnh góc lưng 3/4 (S05): khóa cứng 2 chiếc giày đặt phẳng trên sàn (CẤM vắt chân, CẤM sinh chiếc giày thứ 3) và đúng 1 bình nước đen trong túi đựng ly đỏ; (6) Logic Video 8 giây (Veo 3.1 - Fast): V01-V03 dùng Camera-Only 3D Arc khóa ghế đứng yên 0% rung; V04 dùng 8s Lateral Tracking Walk; V05 dùng Prompt Cũ hoặc công thức Video 5 Cũ (nhún 2 piston đen phía sau trên thanh đế phẳng); V06 (ngồi đung đưa cùng chó Golden PLATE_01B): ở ảnh S06 bắt buộc gập gối 90 độ ống chân thẳng đứng trên mặt sàn gỗ thoáng (cấm đặt giỏ/bình sát mũi giày), ở video V06 dùng 'spring-cushioned chair', 'the chair's flat matte-black steel base frame stays planted on the wood deck while the woman... gently sways only her upper torso and shoulders rhythmically back and forth against the backrest', khóa 'with zero zoom-in', và tuyệt đối KHÔNG nhắc từ 'boots/feet/legs' trong prompt video để tránh rò rỉ chuyển động vào đôi giày; V07-V08 (cặp đôi góc trước) dùng Prompt Cũ ('lean gently and rhythmically back and forth in an effortless, soothing rocking motion'), cấm tả 'front seat tubes rise into front spring pistons' hoặc 'hydraulic' ở góc trước.",
+  "closed_loop_invariants": {
+    "do_not_merge_across_projects": true,
+    "isolation_rule_vn": "Tư duy khép kín riêng của dự án Ghế Xếp Bập Bênh Đỏ OCC1467 — cấm gộp chéo quy tắc của cây thông hay máy sưởi.",
+    "locked_reference_assets": [
+      {
+        "slot": 1,
+        "tag": "[@IMG_1_CLOSEUP]",
+        "local_path": "products/occ1467_red_rocking_chair/refs/OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "role": "primary_1024_closeup_red_fabric_grey_mesh_cup_holder_and_pistons"
+      },
+      {
+        "slot": 2,
+        "tag": "[@IMG_2_PISTON_MACRO]",
+        "local_path": "products/occ1467_red_rocking_chair/refs/OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg",
+        "role": "macro_l_bar_runner_and_black_cylindrical_spring_pistons_with_yellow_labels"
+      }
+    ],
+    "mandatory_product_lock_clauses_en": [
+      "crimson-red",
+      "mesh",
+      "cup holder",
+      "piston"
+    ],
+    "mandatory_spatial_zones_en": [
+      "16:9"
+    ],
+    "required_validation_regexes": [
+      "crimson-red|red-and-grey|red\\s+folding\\s+rocking\\s+chair",
+      "mesh",
+      "cup\\s+holder",
+      "piston"
+    ],
+    "project_forbidden_terms": [
+      "wooden rocking chair",
+      "wicker chair",
+      "rattan chair",
+      "curved wooden rockers",
+      "pot base",
+      "planter",
+      "branchlet",
+      "heating element",
+      "airflow ribbons"
+    ]
+  },
+  "project_closed_thinking_notes": [
+    {
+      "note_id": "OCC1467_CLOSED_01_PISTON_AND_RUNNER_LOCK",
+      "scope": "project_closed_loop",
+      "title_vn": "Khóa Chân Đế Thanh Phẳng & 2 Trụ Piston Nhún Đen Tem Vàng (Cấm Đế Gỗ Cong Truyền Thống)",
+      "detail_vn": "Ghế bập bênh xếp gọn OCC1467 hoạt động bằng 2 trụ piston hình trụ màu đen có tem vàng (Spring-Action Rocking Pistons) gắn trên 2 thanh chân đế phẳng màu đen, tuyệt đối không phải chân bập bênh cong kiểu ghế gỗ truyền thống."
+    },
+    {
+      "note_id": "OCC1467_CLOSED_02_GREY_MESH_WHITE_PIPING_AND_CUP_HOLDER",
+      "scope": "project_closed_loop",
+      "title_vn": "Khóa Lưng Lưới Xám Viền Chỉ Trắng & Túi Đựng Ly Đỏ Bên Phải",
+      "detail_vn": "Mặt lưng ghế có mảng lưới xám thoáng khí ở trung tâm ngăn cách với vải đỏ hai bên bằng 2 đường viền chỉ trắng dọc, kèm 1 túi đựng ly vải đỏ viền miệng xám treo ở trụ tay vịn bên phải."
+    },
+    {
+      "note_id": "OCC1467_CLOSED_03_8S_VIDEO_PROMPT_FORMULAS",
+      "scope": "project_closed_loop",
+      "title_vn": "Bộ 4 Công Thức Prompt Video 8 Giây Chuẩn (V01..V08) Cho Ghế Đỏ OCC1467",
+      "detail_vn": "(1) V01-V03 (Ghế trống & cận cảnh): dùng 'only the camera moves in a smooth, gentle 3D lateral-and-forward arc... while the empty chair remains completely fixed and planted in its exact spot on the floor with zero self-movement, zero vibration, and zero swaying'; (2) V04 (Xách ghế gấp phẳng): 8s lateral tracking walk giữ nguyên khung xếp phẳng, piston đen nằm ngang và túi ly đỏ treo cạnh dưới; (3) V05, V06, V07, V08 (Toàn bộ các cảnh ngồi đung đưa): gọi ghế là 'spring-cushioned chair' (không gọi 'rocker chair' để tránh bẩy chân ghế trước), khóa 'with zero zoom-in', khóa 'the chair's flat matte-black steel base frame stays planted on the floor while the woman/man... gently sways only her/their upper torso and shoulders rhythmically back and forth against the backrest in a subtle, soothing motion', và TUYỆT ĐỐI KHÔNG nhắc từ 'boots / feet / legs' trong prompt video để không rò rỉ chuyển động xuống đôi giày."
+    },
+    {
+      "note_id": "OCC1467_CLOSED_04_V06_DOG_SCENE_BOOT_LOCK",
+      "scope": "project_closed_loop",
+      "title_vn": "Bộ 3 Quy Luật Vàng Cho Cảnh Ngồi Ghế Đơn Đung Đưa Cùng Chó Golden (S06 & V06 / PLATE_01B)",
+      "detail_vn": "Ở cảnh S06/V06 (PLATE_01B_SINGLE_RIGHT_FACING_LEFT_58PCT_16x9.jpg): (1) Trong ảnh S06 bắt buộc gập gối 90 độ, ống chân thẳng đứng, 2 giày nâu đặt phẳng ngay trước chân ghế trên sàn gỗ thoáng và CẤM đặt giỏ mây/bình gốm sát mũi giày (x=45%..58%) để AI không tưởng là ghế đôn gác chân; (2) Trong video V06 gọi ghế là 'spring-cushioned chair' (không gọi là 'rocker chair' ở góc đơn trước để tránh AI bẩy cong thanh đáy ghế lên), khóa 'with zero zoom-in' và 'the chair's flat matte-black steel base frame stays planted on the wood deck while the woman... gently sways only her upper torso and shoulders rhythmically back and forth against the backrest in a subtle, soothing motion'; (3) Tuyệt đối KHÔNG nhắc từ 'boots / feet / legs' trong prompt video V06 (giống V07/V08) để triệt tiêu hoàn toàn hiện tượng rò rỉ attention chuyển động xuống đôi giày."
+    }
+  ]
+}

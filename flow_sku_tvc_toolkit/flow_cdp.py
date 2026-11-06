@@ -255,8 +255,14 @@ async def ensure_image_mode(flow: FlowCDP, aspect_ratio: str = "16:9") -> None:
         await asyncio.sleep(0.4)
 
 
-async def ensure_veo31_fast_4s_16x9(flow: FlowCDP, duration_label: str = "8 giây") -> None:
+async def ensure_veo31_fast_4s_16x9(
+    flow: FlowCDP,
+    duration_label: str = "8 giây",
+    duration_sec: Optional[int] = None,
+) -> None:
     """Ensure manual Video composer: Video · Khung hình · 16:9 · Veo 3.1 - Fast · <duration_label> · x1."""
+    if duration_sec is not None:
+        duration_label = f"{int(duration_sec)} giây"
     await exit_edit_view_if_needed(flow)
     await press_escape(flow, 0.3)
     await disable_agent_mode_if_active(flow)
@@ -1782,7 +1788,12 @@ async def run_videos_pipeline(
                 start_alts = [uuid_to_asb[start_tok]] if start_tok in uuid_to_asb else []
                 end_alts = [uuid_to_asb[end_tok]] if end_tok and end_tok in uuid_to_asb else []
 
-                dur_lbl = item.get("duration") or config.get("video_duration") or "8 giây"
+                dur_sec = item.get("duration_sec") or config.get("video_duration_sec")
+                dur_lbl = (
+                    item.get("duration")
+                    or config.get("video_duration")
+                    or (f"{int(dur_sec)} giây" if dur_sec else "8 giây")
+                )
                 print(f"\n=== QUEUEING {dur_lbl.upper()} VEO 3.1 CLIP: {item['key']} ===")
                 await ensure_veo31_fast_4s_16x9(flow, duration_label=dur_lbl)
                 await clear_frame_slots_and_text(flow)

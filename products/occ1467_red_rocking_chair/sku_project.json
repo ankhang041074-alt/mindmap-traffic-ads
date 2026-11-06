@@ -1,0 +1,152 @@
+{
+  "slug": "occ1467_red_rocking_chair",
+  "project_slug": "occ1467-red-folding-rocking-chair",
+  "prefix": "OCC1467",
+  "preset": "generic_decor",
+  "project_id": "1d71c3d4-623e-4656-8d1e-915fbe5e59bd",
+  "video_duration_sec": 8,
+  "notes_vi": "Kịch bản 8 Ảnh + 8 Video TVC (8 giây) cho Ghế Xếp Bập Bênh Đỏ OCC1467 (Concept 5: Santa Barbara Montecito Spanish-Revival Arched Villa, Citrus Courtyard & Emerald Oasis Pool Terrace). Toàn bộ các cảnh ngồi đung đưa (V05, V06, V07, V08) áp dụng chuẩn: khóa khung đáy thép phẳng sát sàn ('flat matte-black steel base frame stays planted on the floor'), gọi ghế là 'spring-cushioned chair' (không gọi 'rocker chair' để tránh bẩy chân ghế trước), chỉ đung đưa phần lưng trên và vai ('gently sways only her/their upper torso and shoulders rhythmically back and forth against the backrest'), khóa 'with zero zoom-in', và tuyệt đối KHÔNG nhắc từ 'boots / feet / legs' trong prompt video để không rò rỉ chuyển động xuống đôi giày.",
+  "exclude_uuids": [
+    "cdeaff2c-2016-4302-baca-ba351caadb30"
+  ],
+  "scenes": [
+    {
+      "key": "OCC1467_C5_S01_PISTON_DETAIL_TEAK_VERANDA",
+      "refs": [
+        "OCC1467_PLATE_07_CLOSEUP_DETAIL_16x9.jpg",
+        "OCC1467_REF_3_MACRO_L_BAR_PIVOT_1024.jpg"
+      ],
+      "scene_brief": "Macro-medium engineering hero of OCC1467 lower frame and spring-action rocking pistons on sunlit Santa Barbara honey-teak arched veranda overlooking Spanish courtyard fountain and citrus trees",
+      "locked": true,
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact matte-black tubular steel X-frame, flat horizontal runner base bars, dual vertical black cylindrical spring-action rocking pistons with small yellow warning labels, crimson-red fabric cup holder pouch with charcoal-grey rim, and crimson-and-cool-grey mesh seat detail): treat the red-and-grey folding rocking chair in the 16:9 plate as a locked foreground photograph cutout at its exact 2D canvas coordinates — do NOT enlarge, widen, shrink, or shift the chair on the 16:9 canvas, keeping the entire chair frame, pistons, cup holder, and fabric 100% identical to the 16:9 plate, while allowing warm 4200K golden-hour Santa Barbara sunbeams to naturally wrap the outer edges with crisp optical rim-light highlights and cast a sharp contact occlusion shadow beneath the flat runner bars. Outpaint ONLY the pure white background with a sun-drenched Santa Barbara Montecito Spanish-revival villa veranda: the chair rests squarely on wide-plank honey-teak decking; directly behind the veranda railing, whitewashed Spanish stucco arches, a carved stone courtyard fountain, and lush green citrus and palm trees glow in creamy T2.0 optical bokeh. Shot on ARRI Alexa 65 with 50mm lens, Kodak Vision3 250D, zero text, zero watermarks."
+    },
+    {
+      "key": "OCC1467_C5_S02_SINGLE_LEFT_ARCHED_CITRUS_COURTYARD",
+      "refs": [
+        "OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "scene_brief": "Empty single hero chair on left (58%) on Santa Barbara cream sandstone courtyard beside a low carved-teak side table under Spanish stucco arches and citrus trees",
+      "locked": true,
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact crimson-red #A3262A Oxford fabric, light cool-grey #A8ACB0 breathable mesh backrest panel with two crisp vertical white piping lines, red padded armrest sleeves, hanging crimson fabric cup holder pouch, matte-black X-frame, and dual vertical black cylindrical rocking pistons): treat the red folding rocking chair on the left (x=29%, 58% frame height) as a locked foreground photograph cutout at its exact 2D canvas coordinates — do NOT resize, shift, or redraw any chair pixels, while allowing warm golden afternoon sunlight to wrap the outer contour edges and ground the base runners with a crisp floor contact shadow. Outpaint ONLY the pure white background with a sunlit Santa Barbara Montecito Spanish-colonial courtyard paved in honed cream Santa Barbara sandstone flagstones: strictly BESIDE the chair on the right along the same floor plane (x=58%..84%) sits a low 50cm-tall weathered teak courtyard side table topped with a folded cream linen throw blanket, a glass carafe of iced citrus water, and a woven Panama sunhat; in the background, warm whitewashed stucco archways and terracotta planters of green citrus trees open onto sunlit coastal foothills in soft T2.4 bokeh. Clean commercial photography, zero text."
+    },
+    {
+      "key": "OCC1467_C5_S03_SINGLE_LEFT_CRUISER_PALM_OVERLOOK",
+      "refs": [
+        "OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg"
+      ],
+      "scene_brief": "Empty single hero chair on left (58%) at a sunlit Montecito palm-lined gravel overlook beside a vintage cream-and-tan 4x4 cruiser and teak camp table",
+      "locked": true,
+      "prompt": "Edit this 16:9 product photograph (using the second 1024x1024 close-up reference image for exact crimson-red #A3262A fabric, light cool-grey breathable mesh backrest panel with white vertical piping, hanging red fabric cup holder pouch, matte-black tubular X-frame, and dual vertical black cylindrical rocking pistons): treat the red folding rocking chair on the left (x=29%, 58% frame height) as a locked foreground photograph cutout at its exact 2D canvas coordinates — do NOT enlarge, shrink, or shift the chair on the 16:9 canvas, keeping the chair 100% identical to the 16:9 plate with crisp golden-hour rim lighting and natural ground contact shadow. Outpaint ONLY the pure white background with a scenic Santa Barbara Montecito foothill gravel overlook at golden hour: immediately to the right of the chair (x=36%..56%) sits a low slatted teak camp table topped with a matte-black pour-over coffee kettle and two cream ceramic mugs under a cream canvas side awning; parked on the right (x=48%..95%) is a classic vintage cream-and-tan open-top 4x4 cruiser framed by tall California fan palms, agaves, and sunlit Santa Ynez mountain ridges glowing in warm 4000K afternoon sunbeams. Shot on 35mm cinema prime, Kodak Vision3 250D, zero text."
+    },
+    {
+      "key": "OCC1467_C5_S04_FOLDED_CARRY_SPANISH_ARCH_COLONNADE",
+      "refs": [
+        "OCC1467_REF_5_FOLDED_CARRY_S4_1024.jpg",
+        "OCC1467_CHAR_2_SHEET.jpg"
+      ],
+      "scene_brief": "Full-body tracking shot of the woman from CHAR_2_SHEET walking along a sunlit Santa Barbara Spanish-revival arched colonnade pathway carrying the folded flat OCC1467 red chair in one hand",
+      "locked": true,
+      "prompt": "Photorealistic 16:9 commercial lifestyle photograph (using the first reference image for the exact folded-flat OCC1467 red-and-grey rocking chair geometry and the second character sheet for the exact woman's facial identity, auburn ponytail, cream puffer vest over dark forest-green waffle-knit sweater, camel chino pants, and brown hiking boots — the split-screen sheet layout of the reference must never appear on screen): the woman walks gracefully from left to right along a sunlit Santa Barbara Spanish-revival courtyard pathway paved in warm terracotta-and-cream flagstones bordered by whitewashed stucco arches and lush green citrus trees in terracotta urns, carrying the folded-flat crimson-red and cool-grey rocking chair effortlessly at her right hip with one hand gripping the upper black frame and crimson carry strap. Keep the folded chair 100% identical to the first reference image: flat-folded matte-black tubular steel frame, horizontal black cylindrical piston with yellow label, folded crimson-red and cool-grey mesh fabric panels, and the cylindrical red fabric cup holder pouch hanging cleanly at the bottom edge. Warm 4200K golden-hour sunlight filters through the courtyard arches in soft T2.0 optical bokeh, commercial healthy skin tone, zero text."
+    },
+    {
+      "key": "OCC1467_C5_S05_REAR_3Q_SEATED_OASIS_VALLEY_VISTA",
+      "refs": [
+        "OCC1467_REF_REAR_3Q_CLIFF_POSE.jpg",
+        "OCC1467_REF_4_REAR_MESH_1024.jpg",
+        "OCC1467_CHAR_2_SHEET.jpg"
+      ],
+      "scene_brief": "Rear 3/4 view of the woman relaxing in the OCC1467 chair on an open cream limestone terrace overlook above a panoramic Santa Barbara palm-and-citrus oasis valley, showcasing the breathable grey mesh back, two rear rocking pistons with yellow labels, single black tumbler in cup holder, and strictly two brown boots flat on the stone floor",
+      "locked": true,
+      "prompt": "Photorealistic 16:9 commercial lifestyle photograph (using the first and second reference images for the exact rear-three-quarter OCC1467 chair geometry, single matte-black tumbler in the right-side crimson cup holder, and uncrossed two-foot floor placement, and the third reference for the woman in the cream puffer vest, forest-green waffle sweater, camel chino pants, and dark-brown hiking boots — the split-screen sheet layout must never appear on screen): medium-wide rear-three-quarter view of the woman seated comfortably in the single OCC1467 red folding rocking chair on an open, flat honed cream Santa Barbara limestone terrace overlook edge (strictly NO raised stone parapet wall in front of the chair), gazing out across a sunlit Montecito valley panorama of lush green citrus orchards, tall California palms, cypress trees, and golden coastal mountains. Her right hand rests calmly on the front tip of the right red padded armrest just above the single matte-black tumbler sitting inside the right-side crimson-red cup-holder pouch while her left hand rests down on her lap out of view; both of her legs are uncrossed with strictly TWO dark-brown leather hiking boots planted flat on the cream limestone floor (left boot slightly under the frame, right boot planted flat in front of the right front chair leg — strictly TWO boots total, NO crossed legs, and NO third shoe or foot anywhere near the cup holder). Keep the chair 100% faithful to the references: crimson-red upper backrest header with two small silver corner grommets, light cool-grey breathable mesh center backrest panel, matte-black X-frame crossbars with the diagonal crimson safety strap, and dual rear vertical black cylindrical spring-action rocking pistons with small yellow rectangular warning labels mounted on the flat horizontal runner bars. Warm 4200K golden-hour sunlight, crisp contact shadows, zero text."
+    },
+    {
+      "key": "OCC1467_C5_S06_SEATED_SINGLE_RIGHT_PERGOLA_WITH_DOG",
+      "refs": [
+        "OCC1467_PLATE_01B_SINGLE_RIGHT_FACING_LEFT_58PCT_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_CHAR_2_SHEET.jpg"
+      ],
+      "scene_brief": "Front-3/4 view of the woman seated in the right-side OCC1467 chair (58%) with vertical shins and both boots planted flat on open wood decking under a sunlit Santa Barbara pergola, with a Golden Retriever lying on the left and zero props near her feet",
+      "locked": true,
+      "prompt": "Edit this 16:9 product photograph (using the second close-up reference for exact OCC1467 crimson-red fabric, cool-grey mesh backrest with white vertical piping, hanging red cup holder pouch, and black piston base, and the third character reference for the woman in the cream puffer vest, forest-green sweater, camel pants, and brown boots — the split-screen sheet layout must never appear on screen): keep the red folding rocking chair on the right (x=68%, 58% frame height, facing slightly left) at its exact 2D canvas coordinates and proportions, with the woman seated naturally and comfortably inside the chair holding a vintage silver-and-black rangefinder camera in her lap and smiling warmly, with her knees bent at 90 degrees, her lower legs vertical, and BOTH dark-brown hiking boots planted flat and separated on the open wood deck directly in front of the front chair legs (strictly uncrossed legs, NO feet angled to the side). Outpaint and replace the pure white background with a sunlit Santa Barbara Montecito Spanish-revival pergola veranda over wide-plank honey-teak decking: keep the wood deck floor between the chair and the left side 100% open and clear of any objects (strictly NO basket, NO pitcher, NO jar, and NO props near her boots); on the left side of the open deck (x=18%..44%) a friendly Golden Retriever dog lies relaxed on the sunlit wood planks; overhead, warm Edison string lights hang between heavy teak pergola beams and whitewashed stucco columns with sunlit palm and citrus trees in creamy T2.0 background bokeh. Clean commercial photography, zero text."
+    },
+    {
+      "key": "OCC1467_C5_S07_PAIR_RIGHT_COURTYARD_FIREPLACE_TALK",
+      "refs": [
+        "OCC1467_PLATE_09_PAIR_RIGHT_TERRACE_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_COUPLE_CAMP_TALK_REF.jpg",
+        "OCC1467_CHAR_1_SHEET.jpg",
+        "OCC1467_CHAR_2_SHEET.jpg"
+      ],
+      "scene_brief": "Couple seated facing each other in the pair of OCC1467 chairs on the right (PLATE_09) on a Santa Barbara Spanish-revival veranda beside a whitewashed adobe outdoor fireplace on the left",
+      "locked": true,
+      "prompt": "Edit this 16:9 product photograph (using the second reference for exact OCC1467 crimson-red and cool-grey mesh chair details, the third reference for natural seated couple posture, and the fourth and fifth character sheets for the man in the blue linen shirt over cream henley and the woman in the cream vest over forest-green sweater — the split-screen sheet layouts must never appear on screen): keep BOTH red folding rocking chairs on the right side of the frame (from the 16:9 plate) at their exact 2D canvas coordinates, scale, matte-black X-frames, hanging red cup holders, and dual vertical black cylindrical rocking pistons, with the woman seated in the left chair and the man seated in the right chair facing each other in warm, joyful conversation. Replace ONLY the pure white background with a luxury Santa Barbara Montecito Spanish-revival villa veranda at golden hour: on the far left (x=0%..24%) stands a sculptural smooth whitewashed adobe outdoor fireplace with a flush floor-level hearth and heavy reclaimed teak mantel beam; under the chairs runs continuous wide-plank honey-teak veranda flooring; overhead, warm glowing bistro string lights drape across a timber pergola overlooking sunlit citrus gardens and Spanish stucco arches in T2.0 bokeh. Commercial healthy skin tones, zero text."
+    },
+    {
+      "key": "OCC1467_C5_S08_PAIR_LEFT_OASIS_POOL_FINALE",
+      "refs": [
+        "OCC1467_PLATE_10_PAIR_LEFT_STREAM_16x9.jpg",
+        "OCC1467_REF_2_CLOSEUP_1024.jpg",
+        "OCC1467_COUPLE_CAMP_TALK_REF.jpg",
+        "OCC1467_CHAR_1_SHEET.jpg",
+        "OCC1467_CHAR_2_SHEET.jpg"
+      ],
+      "scene_brief": "Couple seated in the pair of OCC1467 chairs on the left (PLATE_10) on a cream flagstone terrace overlooking a sunlit Santa Barbara emerald reflection pool and arched stone bridge at golden hour",
+      "locked": true,
+      "prompt": "Edit this 16:9 product photograph (using the second reference for exact OCC1467 crimson-red and cool-grey mesh chair details, the third reference for natural seated conversation posture, and the fourth and fifth character sheets for the woman in the cream vest over forest-green sweater and the man in the blue linen shirt over cream henley — the split-screen sheet layouts must never appear on screen): keep BOTH red folding rocking chairs on the left-to-center of the frame (from the 16:9 plate) at their exact 2D canvas coordinates, scale, crimson-red fabric, cool-grey mesh panels with white piping, hanging red cup holders, matte-black X-frames, and dual vertical black cylindrical rocking pistons, with the woman seated in the left chair and the man seated in the right chair holding brushed stainless-steel camp mugs and laughing together. Replace ONLY the pure white background with a scenic Santa Barbara Montecito estate terrace paved in honed cream sandstone flagstones overlooking a crystal-clear emerald-turquoise oasis reflection pool, a graceful Spanish arched stone footbridge, and sun-drenched citrus trees and tall palms glowing in warm 4200K late-afternoon sunlight. Shot on ARRI Alexa 65 50mm prime at T2.2, zero text."
+    }
+  ],
+  "videos": [
+    {
+      "key": "OCC1467_C5_V01_PISTON_DETAIL_TEAK_VERANDA",
+      "scene_key": "OCC1467_C5_S01_PISTON_DETAIL_TEAK_VERANDA",
+      "duration_sec": 8,
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D macro-medium product detail shot on a sunlit Santa Barbara honey-teak arched veranda: only the camera moves in a smooth, slow 3D lateral-and-forward arc around the single empty crimson-red and cool-grey mesh folding rocker chair while the chair remains completely fixed and planted in its exact spot on the wide-plank teak deck with zero self-movement and zero vibration, showcasing the exact matte-black tubular steel X-frame with silver rivets, flat horizontal runner base bars, dual vertical black cylindrical spring-action rocking pistons with small yellow warning labels, hanging right-side crimson-red fabric cup-holder pouch with grey rim, and crimson-and-grey mesh seat panel with crisp white vertical piping as warm golden-hour sunlight wraps the frame edges against the Spanish stucco arches and citrus trees in soft background bokeh. Strictly one empty chair, zero hardware distortion, zero morphing, zero text."
+    },
+    {
+      "key": "OCC1467_C5_V02_SINGLE_LEFT_ARCHED_CITRUS_COURTYARD",
+      "scene_key": "OCC1467_C5_S02_SINGLE_LEFT_ARCHED_CITRUS_COURTYARD",
+      "duration_sec": 8,
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D architectural lifestyle shot in a sunlit Santa Barbara sandstone courtyard: only the camera moves in a smooth, gentle 3D lateral-and-forward arc across the honed cream flagstone terrace toward the single empty crimson-red and cool-grey mesh folding outdoor chair on the left and the low teak side table on the right, while both the empty chair and the teak side table remain completely fixed and planted in their exact spots on the stone floor with zero self-movement, zero vibration, and zero swaying. Showcase the crisp crimson-red Oxford fabric, breathable cool-grey mesh backrest with two vertical white piping lines, red padded armrests, right-side crimson cup-holder pouch, matte-black X-frame, and dual rear vertical black cylindrical pistons with small yellow labels in warm golden-hour sunlight. Strictly one empty chair anchored on the stone floor, zero morphing, zero text."
+    },
+    {
+      "key": "OCC1467_C5_V03_SINGLE_LEFT_CRUISER_PALM_OVERLOOK",
+      "scene_key": "OCC1467_C5_S03_SINGLE_LEFT_CRUISER_PALM_OVERLOOK",
+      "duration_sec": 8,
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D outdoor lifestyle shot at a sunlit Santa Barbara Montecito palm-lined gravel overlook: only the camera moves in a smooth, gentle 3D lateral-and-forward arc past the single empty crimson-red and cool-grey mesh folding rocker chair on the left, the low slatted teak camp table with coffee kettle in the center, and the parked vintage cream-and-tan 4x4 cruiser under its canvas awning on the right while the chair, table, and vehicle remain completely fixed and planted in place on the gravel terrace with zero self-movement and zero vibration, showcasing the chair's crimson-red Oxford fabric, cool-grey mesh backrest with white vertical piping, hanging right-side red cup-holder pouch, matte-black X-frame, and dual rear vertical black cylindrical spring pistons in warm 4000K golden-hour sunlight. Strictly one empty chair, zero morphing, zero text."
+    },
+    {
+      "key": "OCC1467_C5_V04_FOLDED_CARRY_SPANISH_ARCH_COLONNADE",
+      "scene_key": "OCC1467_C5_S04_FOLDED_CARRY_SPANISH_ARCH_COLONNADE",
+      "duration_sec": 8,
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D lifestyle tracking shot along a sunlit Santa Barbara Spanish-revival arched courtyard pathway bordered by whitewashed stucco arches and green citrus trees: as the camera performs a smooth 3D lateral tracking motion alongside her from left to right, the woman in the cream puffer vest, forest-green waffle sweater, camel chino pants, and two brown hiking boots walks gracefully forward along the flagstone path while effortlessly carrying the single folded-flat crimson-red and cool-grey mesh rocking chair at her right hip with her right hand gripping the upper black frame and red carry strap. The folded chair retains its exact flat-folded matte-black tubular steel frame, horizontal black cylindrical piston with yellow label, folded red-and-grey mesh panels, and single red fabric cup-holder pouch hanging cleanly at the bottom edge. Strictly one person with two boots and one folded chair, zero morphing, zero text."
+    },
+    {
+      "key": "OCC1467_C5_V05_REAR_3Q_ROCKING_OASIS_VALLEY",
+      "scene_key": "OCC1467_C5_S05_REAR_3Q_SEATED_OASIS_VALLEY_VISTA",
+      "duration_sec": 8,
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D Santa Barbara lifestyle shot from a rear-3/4 angle at a sunlit cream limestone terrace overlook above an emerald Montecito palm-and-citrus valley: as the camera performs a smooth, gentle lateral arc behind the chair with zero zoom-in, the chair's flat matte-black steel base frame stays planted flat on the stone floor while the woman in the cream puffer vest and forest-green waffle sweater seated in the single crimson-red and silver-grey mesh spring-cushioned chair gently sways only her upper torso and shoulders rhythmically back and forth against the backrest in a subtle, soothing motion while gazing out at the sunlit palm groves and distant golden foothills. Her right hand remains resting calmly near the single matte-black tumbler sitting inside the right-side crimson-red cup-holder pouch while her left hand stays resting down on her lap out of view — she never lifts a second drink and no extra cup ever appears. Strictly one chair, one woman, and one single tumbler in the right-side cup-holder pouch, zero morphing, zero text."
+    },
+    {
+      "key": "OCC1467_C5_V06_SEATED_SINGLE_RIGHT_PERGOLA_WITH_DOG",
+      "scene_key": "OCC1467_C5_S06_SEATED_SINGLE_RIGHT_PERGOLA_WITH_DOG",
+      "duration_sec": 8,
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D Santa Barbara lifestyle shot from a front-3/4 angle under a sunlit Montecito teak-and-stucco pergola veranda: as the camera performs a smooth, gentle lateral arc across the wide honey-teak deck with zero zoom-in, the chair's flat matte-black steel base frame stays planted on the wood deck while the woman in the cream puffer vest and forest-green waffle sweater seated in the single crimson-red and silver-grey mesh spring-cushioned chair on the right gently sways only her upper torso and shoulders rhythmically back and forth against the backrest in a subtle, soothing motion, holding the vintage camera calmly in her lap and smiling warmly beside the Golden Retriever dog resting peacefully on the sunlit wood deck on the left. Strictly one chair, one woman, and one dog, zero morphing, zero text."
+    },
+    {
+      "key": "OCC1467_C5_V07_PAIR_RIGHT_COURTYARD_FIREPLACE_TALK",
+      "scene_key": "OCC1467_C5_S07_PAIR_RIGHT_COURTYARD_FIREPLACE_TALK",
+      "duration_sec": 8,
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D Santa Barbara lifestyle shot from a front-3/4 angle on a sunlit Spanish-revival arched veranda beside a whitewashed adobe outdoor fireplace: as the camera performs a smooth, gentle lateral arc across the wide-plank teak terrace with zero zoom-in, the flat matte-black steel base frames of both chairs stay planted on the wood deck while the woman in the cream puffer vest seated in the left crimson-red and silver-grey mesh spring-cushioned chair and the man in the blue linen shirt seated in the right crimson-red and silver-grey mesh spring-cushioned chair gently sway only their upper torsos and shoulders rhythmically back and forth against the backrests in a subtle, soothing motion while chatting and smiling warmly at each other. Their hands remain resting calmly on the armrests and laps — neither person ever lifts a drink and no extra cup ever appears. Strictly two chairs and two people, zero morphing, zero text."
+    },
+    {
+      "key": "OCC1467_C5_V08_PAIR_LEFT_OASIS_POOL_FINALE",
+      "scene_key": "OCC1467_C5_S08_PAIR_LEFT_OASIS_POOL_FINALE",
+      "duration_sec": 8,
+      "prompt": "Continuous, clearly visible 8-second 35mm Kodak Vision3 250D Santa Barbara finale shot from a front-3/4 angle on a sunlit cream flagstone terrace overlooking a crystal-clear emerald oasis reflection pool and arched stone bridge at golden hour: as the camera performs a smooth, gentle lateral arc across the stone terrace with zero zoom-in, the flat matte-black steel base frames of both chairs stay planted on the stone floor while the woman in the cream puffer vest seated in the left crimson-red and silver-grey mesh spring-cushioned chair and the man in the blue linen shirt seated in the right crimson-red and silver-grey mesh spring-cushioned chair gently sway only their upper torsos and shoulders rhythmically back and forth against the backrests in a subtle, soothing motion while chatting and smiling warmly together. Each person holds only their single brushed stainless-steel camp mug calmly in hand without any extra cups appearing in the red side cup-holder pouches. Strictly two chairs and two people, zero morphing, zero text."
+    }
+  ]
+}

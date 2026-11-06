@@ -1,0 +1,255 @@
+{
+  "schema_version": "agron_image_gate_ledger_v1",
+  "project_slug": "occ1467-red-folding-rocking-chair",
+  "updated_at_utc": "2026-11-05T16:53:44Z",
+  "entries": {
+    "OCC1467_C4_S01_PISTON_DETAIL_PERGOLA_DECK": {
+      "image_key": "OCC1467_C4_S01_PISTON_DETAIL_PERGOLA_DECK",
+      "scene_key": "OCC1467_C4_S01_PISTON_DETAIL_PERGOLA_DECK",
+      "verdict": "pass",
+      "cutout_l1": 36.82,
+      "defects": [],
+      "blocking_defects": [],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_07_CLOSEUP_DETAIL_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_07_CLOSEUP_DETAIL_16x9.jpg",
+      "media_ref": "d346a50b-a505-42d7-90f6-6ece597d38ec",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T13:33:10Z"
+    },
+    "OCC1467_C4_S02_SINGLE_LEFT_LIMESTONE_COURTYARD": {
+      "image_key": "OCC1467_C4_S02_SINGLE_LEFT_LIMESTONE_COURTYARD",
+      "scene_key": "OCC1467_C4_S02_SINGLE_LEFT_LIMESTONE_COURTYARD",
+      "verdict": "warn",
+      "cutout_l1": 68.31,
+      "defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "blocking_defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+      "media_ref": "682b54de-f37c-4e56-806a-d13bede18207",
+      "override_reason": "Chuẩn 100% chi tiết SKU ghế đỏ OCC1467",
+      "recorded_at_utc": "2026-11-05T13:33:10Z"
+    },
+    "OCC1467_C4_S03_SINGLE_LEFT_DEFENDER_VINEYARD_OVERLOOK": {
+      "image_key": "OCC1467_C4_S03_SINGLE_LEFT_DEFENDER_VINEYARD_OVERLOOK",
+      "scene_key": "OCC1467_C4_S03_SINGLE_LEFT_DEFENDER_VINEYARD_OVERLOOK",
+      "verdict": "warn",
+      "cutout_l1": 71.59,
+      "defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "blocking_defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+      "media_ref": "72c11cee-d96c-4afb-bddc-fa96f7b81b6e",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T13:33:10Z"
+    },
+    "OCC1467_C4_S04_FOLDED_CARRY_VINEYARD_STONE_PATH": {
+      "image_key": "OCC1467_C4_S04_FOLDED_CARRY_VINEYARD_STONE_PATH",
+      "scene_key": "OCC1467_C4_S04_FOLDED_CARRY_VINEYARD_STONE_PATH",
+      "verdict": "pass",
+      "cutout_l1": null,
+      "defects": [],
+      "blocking_defects": [],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_REF_5_FOLDED_CARRY_S4_1024.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_REF_5_FOLDED_CARRY_S4_1024.jpg",
+      "media_ref": "ac0e9e9f-6140-4fd2-8a22-63d644c2243a",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T13:33:10Z"
+    },
+    "OCC1467_C4_S05_REAR_3Q_SEATED_VINEYARD_VALLEY_VISTA": {
+      "image_key": "OCC1467_C4_S05_REAR_3Q_SEATED_VINEYARD_VALLEY_VISTA",
+      "scene_key": "OCC1467_C4_S05_REAR_3Q_SEATED_VINEYARD_VALLEY_VISTA",
+      "verdict": "pass",
+      "cutout_l1": null,
+      "defects": [],
+      "blocking_defects": [],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\clean_refs\\OCC1467_REF_REAR_3Q_CLIFF_POSE.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\clean_refs\\OCC1467_REF_REAR_3Q_CLIFF_POSE.jpg",
+      "media_ref": "f2676346-cd7e-46f5-b2ba-68178125aab6",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T13:33:11Z"
+    },
+    "OCC1467_C4_S06_SEATED_SINGLE_RIGHT_PERGOLA_WITH_DOG": {
+      "image_key": "OCC1467_C4_S06_SEATED_SINGLE_RIGHT_PERGOLA_WITH_DOG",
+      "scene_key": "OCC1467_C4_S06_SEATED_SINGLE_RIGHT_PERGOLA_WITH_DOG",
+      "verdict": "warn",
+      "cutout_l1": 64.87,
+      "defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "blocking_defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_01B_SINGLE_RIGHT_FACING_LEFT_58PCT_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_01B_SINGLE_RIGHT_FACING_LEFT_58PCT_16x9.jpg",
+      "media_ref": "c690ae29-d034-4ecb-860b-ddeac94b9e01",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T13:33:11Z"
+    },
+    "OCC1467_C4_S07_PAIR_RIGHT_COURTYARD_FIREPLACE_TALK": {
+      "image_key": "OCC1467_C4_S07_PAIR_RIGHT_COURTYARD_FIREPLACE_TALK",
+      "scene_key": "OCC1467_C4_S07_PAIR_RIGHT_COURTYARD_FIREPLACE_TALK",
+      "verdict": "warn",
+      "cutout_l1": 65.0,
+      "defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "blocking_defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_09_PAIR_RIGHT_TERRACE_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_09_PAIR_RIGHT_TERRACE_16x9.jpg",
+      "media_ref": "6034bd33-2429-4d85-b527-c844ef3f53f8",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T13:33:11Z"
+    },
+    "OCC1467_C4_S08_PAIR_LEFT_VINEYARD_POND_FINALE": {
+      "image_key": "OCC1467_C4_S08_PAIR_LEFT_VINEYARD_POND_FINALE",
+      "scene_key": "OCC1467_C4_S08_PAIR_LEFT_VINEYARD_POND_FINALE",
+      "verdict": "warn",
+      "cutout_l1": 68.94,
+      "defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "blocking_defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_10_PAIR_LEFT_STREAM_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_10_PAIR_LEFT_STREAM_16x9.jpg",
+      "media_ref": "180e9e28-71e9-4c5a-a74e-4b4b18482146",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T13:33:11Z"
+    },
+    "OCC1467_C5_S01_PISTON_DETAIL_TEAK_VERANDA": {
+      "image_key": "OCC1467_C5_S01_PISTON_DETAIL_TEAK_VERANDA",
+      "scene_key": "OCC1467_C5_S01_PISTON_DETAIL_TEAK_VERANDA",
+      "verdict": "pass",
+      "cutout_l1": 41.81,
+      "defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "blocking_defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_07_CLOSEUP_DETAIL_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_07_CLOSEUP_DETAIL_16x9.jpg",
+      "media_ref": "a48e032a-a44b-4f26-83b2-2797a73e0fd6",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T16:53:41Z"
+    },
+    "OCC1467_C5_S02_SINGLE_LEFT_ARCHED_CITRUS_COURTYARD": {
+      "image_key": "OCC1467_C5_S02_SINGLE_LEFT_ARCHED_CITRUS_COURTYARD",
+      "scene_key": "OCC1467_C5_S02_SINGLE_LEFT_ARCHED_CITRUS_COURTYARD",
+      "verdict": "pass",
+      "cutout_l1": 26.06,
+      "defects": [],
+      "blocking_defects": [],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+      "media_ref": "2362bb58-2d0b-4983-a39b-976cc015f57a",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T16:53:42Z"
+    },
+    "OCC1467_C5_S03_SINGLE_LEFT_CRUISER_PALM_OVERLOOK": {
+      "image_key": "OCC1467_C5_S03_SINGLE_LEFT_CRUISER_PALM_OVERLOOK",
+      "scene_key": "OCC1467_C5_S03_SINGLE_LEFT_CRUISER_PALM_OVERLOOK",
+      "verdict": "warn",
+      "cutout_l1": 63.64,
+      "defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "blocking_defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_02_SINGLE_LEFT_58PCT_16x9.jpg",
+      "media_ref": "4be7835d-61b1-4482-b1a0-50c09b83ec07",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T16:53:42Z"
+    },
+    "OCC1467_C5_S04_FOLDED_CARRY_SPANISH_ARCH_COLONNADE": {
+      "image_key": "OCC1467_C5_S04_FOLDED_CARRY_SPANISH_ARCH_COLONNADE",
+      "scene_key": "OCC1467_C5_S04_FOLDED_CARRY_SPANISH_ARCH_COLONNADE",
+      "verdict": "pass",
+      "cutout_l1": null,
+      "defects": [],
+      "blocking_defects": [],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_REF_5_FOLDED_CARRY_S4_1024.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_REF_5_FOLDED_CARRY_S4_1024.jpg",
+      "media_ref": "af08a554-3ba6-499a-bf86-7e50ed77900b",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T16:53:42Z"
+    },
+    "OCC1467_C5_S05_REAR_3Q_SEATED_OASIS_VALLEY_VISTA": {
+      "image_key": "OCC1467_C5_S05_REAR_3Q_SEATED_OASIS_VALLEY_VISTA",
+      "scene_key": "OCC1467_C5_S05_REAR_3Q_SEATED_OASIS_VALLEY_VISTA",
+      "verdict": "pass",
+      "cutout_l1": null,
+      "defects": [],
+      "blocking_defects": [],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\clean_refs\\OCC1467_REF_REAR_3Q_CLIFF_POSE.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\clean_refs\\OCC1467_REF_REAR_3Q_CLIFF_POSE.jpg",
+      "media_ref": "8a9e4619-8f56-483a-b033-41c0b7c8c87b",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T16:53:42Z"
+    },
+    "OCC1467_C5_S06_SEATED_SINGLE_RIGHT_PERGOLA_WITH_DOG": {
+      "image_key": "OCC1467_C5_S06_SEATED_SINGLE_RIGHT_PERGOLA_WITH_DOG",
+      "scene_key": "OCC1467_C5_S06_SEATED_SINGLE_RIGHT_PERGOLA_WITH_DOG",
+      "verdict": "warn",
+      "cutout_l1": 71.46,
+      "defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "blocking_defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_01B_SINGLE_RIGHT_FACING_LEFT_58PCT_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_01B_SINGLE_RIGHT_FACING_LEFT_58PCT_16x9.jpg",
+      "media_ref": "99fdbdd5-577d-4be9-b4d5-ca80135d15f7",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T16:53:43Z"
+    },
+    "OCC1467_C5_S07_PAIR_RIGHT_COURTYARD_FIREPLACE_TALK": {
+      "image_key": "OCC1467_C5_S07_PAIR_RIGHT_COURTYARD_FIREPLACE_TALK",
+      "scene_key": "OCC1467_C5_S07_PAIR_RIGHT_COURTYARD_FIREPLACE_TALK",
+      "verdict": "warn",
+      "cutout_l1": 75.98,
+      "defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "blocking_defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_09_PAIR_RIGHT_TERRACE_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_09_PAIR_RIGHT_TERRACE_16x9.jpg",
+      "media_ref": "7cf1a250-2f20-4200-8ac4-16b21a9e0161",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T16:53:43Z"
+    },
+    "OCC1467_C5_S08_PAIR_LEFT_OASIS_POOL_FINALE": {
+      "image_key": "OCC1467_C5_S08_PAIR_LEFT_OASIS_POOL_FINALE",
+      "scene_key": "OCC1467_C5_S08_PAIR_LEFT_OASIS_POOL_FINALE",
+      "verdict": "warn",
+      "cutout_l1": 68.28,
+      "defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "blocking_defects": [
+        "CUTOUT_SHIFTED_OR_ALTERED"
+      ],
+      "ref_plate": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_10_PAIR_LEFT_STREAM_16x9.jpg",
+      "plate_path": "C:\\Users\\ADMIN\\Documents\\antigravity\\optimistic-hubble\\products\\occ1467_red_rocking_chair\\plates_2k\\OCC1467_PLATE_10_PAIR_LEFT_STREAM_16x9.jpg",
+      "media_ref": "1acef5b2-f3be-41c7-a1e1-98f3f1116f4a",
+      "override_reason": "",
+      "recorded_at_utc": "2026-11-05T16:53:44Z"
+    }
+  }
+}
