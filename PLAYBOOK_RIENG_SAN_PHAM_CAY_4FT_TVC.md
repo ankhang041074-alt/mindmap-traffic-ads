@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Hồ Sơ 4 Lô Sản Phẩm Cây Đã Triển Khai
+## 1. Hồ Sơ 5 Lô Sản Phẩm Cây Đã Triển Khai
 
 | Lô / Thư mục | Đặc điểm vật lý SKU Cây | Quy mô | Điểm nhấn kỹ thuật đã khóa |
 | :--- | :--- | :---: | :--- |
@@ -13,6 +13,7 @@
 | **Lô 2:** [`barrel_cedar_20/`](./barrel_cedar_20) (`ATF-9422`) | Cây tùng `4ft+` tán lá dẹt mảnh, **chậu thùng gỗ xám nâu 3 đai sắt đen** | `20 Ảnh` + `20 Video 4s` | Khóa ảnh cận `REF_2_CLOSEUP_1024` (`1.65x`) chống vẽ lại lá thông nhọn (`B16`); khóa `56%` phòng biển (`B20`) & lùi ghế daybed hồ bơi `1.3m` (`B19`) |
 | **Lô 3:** [`products/cedar_sqpot_batch3_20/`](./products/cedar_sqpot_batch3_20) | Cây tùng PE 2 tông xanh `4ft`, **chậu vuông đen cao vát đáy** (20 bối cảnh kiến trúc mới `S21..S40`) | `20 Ảnh` + `20 Video 4s` | Khóa 4 bài học đạo diễn nâng cao: **Cấm hạt cát vàng ảo**, **Đặt xéo bám đúng đường chân tường `3/4`**, **Cấm mức `36%` làm cây teo nhỏ**, **Cấm ghế tiền cảnh tự chạy băng chuyền** |
 | **Lô 4:** [`products/cedar_roundpot_20/`](./products/cedar_roundpot_20) | Cây lá đúc PE 2 tông xanh `4ft` tán rộng, lộ gốc gỗ nâu `~5cm`, **chậu nhựa tròn trụ đen mờ nhỏ gọn `5in x 5.5in`** (`R01..R29`: `20` cảnh Quốc tế + `9` cảnh Nhà Mỹ `American Lifestyle`) | `29 Ảnh` + `25 Video 4s` (+ `4` spec `VR26..VR29`) | Khóa **Cấm cửa tự mở (`Poltergeist Doors`)**, **Cấm 2 cây tự trượt trên sàn (`Sliding Trees`)**, **Công thức 3 Lớp Chống Ảnh Ghép Giả (`2D Lock + Sunlight Rim-Wrap + Lived-In Props`)**, và lệnh kiểm định tự động độ phình tán `audit-images` |
+| **Lô 5:** [`products/atf_9462_cedar_4ft/`](./products/atf_9462_cedar_4ft) (`ATF-9462`) | Cây thông tuyết tùng PE `4ft` (`122cm`) cành ngang rủ sát miệng chậu (**0% lộ gốc gỗ nâu**), **chậu tròn đen mờ có vành miệng `6.7" × 7.9"`** (`S01..S48` & `V01..V48`, Flow Project `7e3df0de-fb44-4860-945f-f1a7bfbfd70b`) | `48 Ảnh` + `48 Video 4s` | Khóa **Công thức Cứu Sáng & Độ Xanh Tươi TVC (`CRITICAL FOLIAGE EXPOSURE LIFT +1.5 EV BRIGHTNESS & LUSH GREEN TRANSLUCENCY` / `+1.2 EV NATURAL SUNLIT GREEN`)** trên **`🍌 Nano Banana Pro`** với Plate gốc 100% (**0% Python tô màu lá**), xử lý dứt điểm lỗi cây tối (`太暗了`) & kém xanh (`颜色不够绿`) ở bộ 4 cảnh `S45..S48` / `V45..V48` |
 
 ---
 
@@ -78,4 +79,23 @@ Khi làm ảnh bối cảnh đời thực (đặc biệt là phong cách nhà M�
    - Bổ sung **3–4 món đồ decor đúng chất bản địa** ở vùng xung quanh (`mantel / console / mudroom bench`) mà không che khuất sản phẩm: *bình gốm cắm hoa cẩm tú cầu trắng hoặc cành ô-liu, chân nến đồng cổ, đèn bão thuỷ tinh, giỏ mây đựng củi bạch dương & khăn len, mũ cói & túi da bò treo móc đồng*.
 4. **Kiểm định định lượng bằng lệnh `audit-images` trước khi làm Video:**
    - Chạy `python3 -m flow_sku_tvc_toolkit audit-images --config products/<slug>/sku_project.json` để đo tự động `cutout_rgb_l1 <= 58.0` (không trôi/biến dạng sản phẩm) và `halo_fattening_pct <= 9.0%` (không phình mập tán lá).
+
+### Quy tắc 7: Công Thức Cứu Sáng & Độ Xanh Tươi TVC (`CRITICAL FOLIAGE EXPOSURE LIFT +1.5 EV` / `+1.2 EV`) Trên `🍌 Nano Banana Pro` (`S45..S48` Lô 5 `ATF-9462`)
+Khi ảnh cutout gốc của nhà máy bị chụp thiếu sáng (hốc lá bên trong bị đen sẫm, màu xanh bị xỉn và khách hàng phản hồi `"颜色不够绿"` / `"太暗了"`):
+1. **CẤM TUYỆT ĐỐI dùng Python chỉnh màu / tô xanh lại ảnh Plate gốc (`0% Python Recoloring`)**: Chỉnh màu bằng Python sẽ làm bệt chi tiết lá nhựa PE hoặc biến sang giống cây khác. Phải giữ nguyên **100% Plate gốc (`PLATE_01`, `PLATE_06`, `PLATE_07`, `PLATE_08` + `ATF9462_REF_2_CLOSEUP_1024.jpg`)**.
+2. **Bắt buộc khóa cứng Model `🍌 Nano Banana Pro` ở thanh công cụ dưới đáy Flow (`ensure_image_mode`)**:
+   - Nếu nút chọn model ở đáy trang (`y >= 1100`) bị trượt sang `🍌 Nano Banana 2.1`, ảnh sinh ra sẽ giữ nguyên mảng đen tối thui trong tán lá hoặc vẽ nền giả (`ảo quá`). Đã khóa tự động trong [`flow_sku_tvc_toolkit/flow_cdp.py`](./flow_sku_tvc_toolkit/flow_cdp.py).
+3. **Bắt buộc nhúng mệnh đề `CRITICAL FOLIAGE EXPOSURE LIFT (+1.5 EV BRIGHTNESS & LUSH GREEN TRANSLUCENCY)` (hoặc `+1.2 EV NATURAL SUNLIT GREEN` cho cảnh cầu thang gỗ sồi `S47`) và CẤM dùng LUT tối `Kodak Vision3 250D`**:
+   - **Mẫu chuẩn `+1.5 EV` (`S45`, `S46`, `S48`)**:
+     ```text
+     CRITICAL FOLIAGE EXPOSURE LIFT (+1.5 EV BRIGHTNESS & LUSH GREEN TRANSLUCENCY): Actively brighten and lift the exposure of the entire plant foliage by +1.5 stops so the plant is NEVER dark, heavy, or underexposed in the bright sunlit room! Completely eliminate all dark black shadow crevices inside the inner core of the branches — flood the inner foliage with bright, luminous emerald-green fill light and illuminate all outer layered horizontal-fanning soft-PE needle tips with vibrant, fresh, saturated spring-emerald sunlight translucency and tack-sharp 3D needle-by-needle macro clarity, so the entire plant glows with bright, cheerful, lush commercial TVC green from inner core to outer tips with zero black shadow holes and zero pale washout!
+     ```
+   - **Mẫu chuẩn `+1.2 EV Natural Sunlit Green` (`S47` Oak Staircase)**:
+     ```text
+     CRITICAL NATURAL FOLIAGE BRIGHTNESS (+1.2 EV NATURAL SUNLIT GREEN): Brighten the entire plant foliage naturally with clean front-side 5200K morning daylight so the plant is bright, cheerful, and never dark or shadowy — open up the dark shadow crevices between the branches into rich, natural botanical forest-and-emerald green and illuminate the outer layered soft-PE needle tips with fresh, crisp spring-green daylight clarity (strictly 100% natural photographic needle texture and uniform natural green color from center to tips — ZERO artificial neon green glow inside the trunk!).
+     ```
+   - **Khóa chống cắt ngọn khi dùng Plate `70%` Hero (`PLATE_06`, `PLATE_07` như `S46`)**: Luôn ghi rõ `keeping the entire 70%-tall conical tree from bottom pot base to the very top needle tip 100% visible inside the frame with a clean 22% top headroom margin above the top tip — do NOT zoom in or crop the top tip`.
+4. **Quy trình Kiểm Duyệt Bắt Buộc (`Xem Ảnh Lại` + `16-Frame FFmpeg Grid`)**:
+   - Tạo 4 ảnh trong 1 đợt (`image_wave_size = 4`), **chụp màn hình xem lại từng ảnh ngay trên trình duyệt** (không tải ảnh 2K về máy), đạt chuẩn 100% mới chạy 4 video trong 1 đợt (`video_wave_size = 4`) và kiểm tra bằng lưới `16-frame` `ffmpeg` (`qa/video_grids/*_16f_grid.jpg`).
+
 

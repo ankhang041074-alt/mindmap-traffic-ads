@@ -210,12 +210,34 @@ def cmd_run_images(args: argparse.Namespace) -> int:
             port=args.port,
         )
     )
-    if getattr(args, "auto_audit", True):
+    if getattr(args, "auto_audit", False):
         print("\n=== [AUTO-AUDIT EYE] HẬU KIỂM ẢNH SAU KHI TẠO (ADVISORY) ===")
         audit_and_record_scenes(
             config=cfg,
             project_dir=proj_dir,
             only_key=args.only_key,
+        )
+    else:
+        from .flow_cdp import map_scene_uuids_pipeline
+        all_scenes = list(cfg.get("scenes", []))
+        if eff_phase == "only":
+            target_keys = args.only_key
+        elif eff_phase == "check1":
+            target_keys = all_scenes[0]["key"] if all_scenes else ""
+        elif eff_phase == "rest":
+            target_keys = ",".join(s["key"] for s in all_scenes[1:])
+        elif eff_phase == "slice":
+            target_keys = ",".join(s["key"] for s in all_scenes[args.start_index:])
+        else:
+            target_keys = ""
+        asyncio.run(
+            map_scene_uuids_pipeline(
+                config=cfg,
+                project_dir=proj_dir,
+                port=args.port,
+                only_key=target_keys,
+                force_remap=(eff_phase == "all"),
+            )
         )
     return 0
 
@@ -281,6 +303,8 @@ def cmd_run_videos(args: argparse.Namespace) -> int:
                 config=args.config,
                 out_json=os.path.join(proj_dir, "qa", "video_2zone_audit.json"),
                 port=args.port,
+                start_index=args.start_index if eff_phase == "slice" else 0,
+                only_key=args.only_key,
             )
             cmd_audit_videos(audit_args)
         except Exception as exc:
@@ -353,6 +377,14 @@ def cmd_audit_videos(args: argparse.Namespace) -> int:
     else:
         n = len(videos)
         pairs = [((n - 1) - i, f"{i + 1:02d}_{v['key']}") for i, v in enumerate(videos)]
+
+    only_key_filter = str(getattr(args, "only_key", "") or "").strip()
+    start_idx_filter = int(getattr(args, "start_index", 0) or 0)
+    if only_key_filter:
+        tokens = [t.strip() for t in only_key_filter.split(",") if t.strip()]
+        pairs = [p for p in pairs if any(t in p[1] for t in tokens)]
+    elif start_idx_filter > 0:
+        pairs = pairs[start_idx_filter:]
 
     out_json = args.out_json or os.path.join(proj_dir, "qa", "video_2zone_audit.json")
     results = asyncio.run(
@@ -760,8 +792,8 @@ def build_parser() -> argparse.ArgumentParser:
     sp_img.add_argument(
         "--auto-audit",
         action=argparse.BooleanOptionalAction,
-        default=True,
-        help="Automatically run post-render image gate audit after generating images (default: True)",
+        default=False,
+        help="Optional post-render fullres image gate audit (default: False — use fast grid screenshots qa_<slug>_img_page1.jpg instead of downloading 2K images)",
     )
     sp_img.set_defaults(func=cmd_run_images)
 

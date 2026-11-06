@@ -57,6 +57,16 @@ Never leave furniture tops or floors bare/plastic:
   - *Fireplace Mantel & Hearth*: Framed vintage pastoral landscape oil painting, matte-cream ceramic pitcher with olive branches, aged brass pillar candlesticks, woven rattan firewood basket filled with split white-birch logs.
   - *Colonial Console*: Matte-cream ceramic vase of blooming white hydrangeas, glass hurricane candle lantern, Nantucket rattan basket with folded striped linen towel.
 
+### Layer 4: The "True 3-Layer Cinema TVC & Emerald-Pop Contrast" Upgrade (When Avoid-Whitewash / High-Contrast TVC Look Is Wanted)
+When the user wants **"chất TVC điện ảnh sắc nét, cây xanh đậm đà nổi khối, không bị trắng bệch và không bị vệt nắng cắt chéo"**:
+1. **FORBID Whitewashed High-Key Rooms**: Never combine white/alabaster walls + bleached pale floors + 5000K flat white light — that creates high-key glare (`L* > 85`) which washes out the green foliage.
+2. **Use Medium-Rich Architectural Tones (`L* = 35..58`) Behind & Under the Product**:
+   - Pair the green foliage with **rich medium-warm walnut/aged-oak millwork, heritage olive-taupe or warm greige wainscoting, natural stone, and medium-warm herringbone oak or dark slate/bluestone floors**. Against these rich mid-tones, the **two-tone deep forest-green inner needles and vibrant spring-emerald outer branchlet tips** pop with 3D razor micro-contrast!
+3. **3-Layer Optical Depth (`Arri Alexa Mini LF + Cooke S4/i 50mm T2.0`)**:
+   - **Foreground Layer (Subtle Soft Bokeh Corner)**: A soft out-of-focus foreground framing edge at the extreme bottom-left or bottom-right corner (e.g., edge of a walnut table with a warm glowing brass candle or pine sprig in creamy `T2.0` bokeh).
+   - **Midground Hero Plane (100% Tack-Sharp)**: The locked Exact-SKU product (`64%` Hero or `52%` Pair) + adjacent low-profile scale-locking furniture, sculpted by **crisp directional `4300K` natural side-window key light (NO harsh zebra window-bar stripes, NO white overexposure)** that gives every PE needle sprig rich micro-shadow depth and vibrant emerald color saturation.
+   - **Deep Background Vista (Open 3D Room Depth)**: Instead of a flat wall blocking the view `16cm` behind the product, open the architectural space behind the furniture into a warm, richly layered room vista (`2400K` warm glowing brass chandelier/sconces, distant holiday garland bokeh, built-in wood shelving or dining room depth).
+
 ---
 
 ## 3. Mandatory 10-Node AI Director Workflow, 3-Scope Memory & 4-Gate Post-Render Image Verification
@@ -69,18 +79,10 @@ Whenever starting a task in a new chat, **DO NOT improvise prompts from scratch*
 2. **Step 2 — Run Stage 12 Dual-Track Evaluator (`Track A Corpus-Applied` vs `Track B Agron Self-Crafted`)**:
    - Run `python3 -m analyzer.project_director_loop evaluate --project <slug> --scene "<brief>" --media image`
    - Compares Track A (adapted from clean scraped corpus) vs Track B (Agron self-crafted 3-layer `R26..R29` recipe), picks the winner (`>= 78.0` Soul Score), and respects the project's isolated `project_lock.json` (`Scope 1` never leaks across incompatible products like Tree -> Heater!).
-3. **Step 3 — Mandatory 4-Gate Post-Render Image Verification (`4 Chốt Kiểm Ảnh` Before Showing User)**:
-   - Immediately after rendering any keyframe image on Google Flow (`Nano Banana Pro`), the working hand (`BatchGuard.verify_and_promote_image` / `flow_generate_keyframe`) **MUST** verify the actual rendered image file before promoting to `ART_DIR`:
-     ```bash
-     python3 -m analyzer.post_render_image_gate verify-image \
-       --image "<rendered_image.jpg>" \
-       --cutout-plate "<plate_16x9.png>" \
-       --old-bg-ref "<raw_source.png>" \
-       --project-slug "<slug>" \
-       --prompt "<prompt>"
-     ```
-   - **4 Mandatory Checks**: (1) `product_fidelity_check` (`cutout_rgb_l1 <= 58.0`), (2) `background_replacement_check` (`bg_diff_l1 >= 14.0` vs old background + non-blank canvas), (3) `visual_physics_check` (no blown highlights / crushed shadows), (4) `requirement_contract_check` (100% compliance with `project_lock.json` & user brief).
-   - Also run `python3 -m flow_sku_tvc_toolkit audit-images --config products/<slug>/sku_project.json` when using `sku_project.json`.
+3. **Step 3 — Fast Screenshot & FFmpeg 16-Frame Grid QA (`Chụp Nhanh Lưới Ảnh & Video — CẤM Tải Ảnh 2K / Video 1080p Về Máy Để Phân Tích`)**:
+   - **STRICT SPEED RULE**: NEVER download full-resolution 2K images (`scenes_fullres`) or 1080p MP4 files to disk just to inspect/analyze them!
+   - For **Images**: Always inspect the instant browser grid screenshot (`qa/qa_<slug>_img_page1.jpg` or single-scene `qa/qa_<slug>_<key>.jpg`) captured in `<1s` right after generation.
+   - For **Videos**: Always use the in-memory `ffmpeg` `16-frame (4x4)` storyboard grid (`qa/video_grids/*_16f_grid.jpg`) extracted directly from the `720p` browser stream in `~0.12s` (`0s` wait for 1080p upscaling).
 4. **Translucent Thermal / Airflow Ribbons ("Tia Tia" Heat Rays) on Veo 3.1 — 3-Part Mandatory Formula (`H34` / `H37` Benchmark)**:
    When animating translucent golden-orange heat/airflow ribbons (`tia tia`) emerging from a space heater or fan in a wide room where the background behind the grille is a dark wooden pillar/wall (`R-B > 110`):
    - **(A) Bridged Orange Core Keyframe (`WIDE_PERFECT_01_V3_BRIDGED_CORE.jpg`)**: The 6 curved golden ribbons MUST originate directly on top of the glowing orange heating mesh core (`x=76%`) and cross seamlessly over the black left rim (`x=73.5%..75.5%`) to their compact endpoint (`x=51%`, never stretching across the room).
@@ -98,3 +100,5 @@ Whenever starting a task in a new chat, **DO NOT improvise prompts from scratch*
    - Master Toolkit Logic: `/Users/dudumac5/Documents/antigravity/wonderful-lavoisier/MASTER_LOGIC_GOOGLE_FLOW_EXACT_SKU_TVC_TOOL.md`
    - Space Heater WHJ-0907 Airflow & Camera Playbook: `data/products/airyeah-whj-0907-24-inch-tower-space-heater/CONG_THUC_LUONG_GIO_CHUAN_WHJ0907.md`
    - Red Folding Rocking Chair OCC1467 8-Scene & 8s Video Playbook: `data/products/occ1467-red-folding-rocking-chair/PLAYBOOK_GHE_XEP_BAP_BENH_DO_OCC1467.md` & `products/occ1467_red_rocking_chair/sku_project.json`
+   - ATF-9462 4ft Cedar Pine Tree Bright Sunlit Lush Green TVC Benchmark (`S45..S48` & `V45..V48`, `+1.5 EV BRIGHTNESS & LUSH GREEN TRANSLUCENCY` on `🍌 Nano Banana Pro` with 100% Unmodified SKU Plates): `products/atf_9462_cedar_4ft/sku_project.json` & `products/atf_9462_cedar_4ft/ATF_9462_HANDOFF_BRIEF.md`
+

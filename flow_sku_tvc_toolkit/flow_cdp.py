@@ -232,17 +232,17 @@ async def ensure_image_mode(flow: FlowCDP, aspect_ratio: str = "16:9") -> None:
     already_pro = await flow.js("""
     Array.from(document.querySelectorAll('button, [role="button"]')).some(b => {
         const r = b.getBoundingClientRect();
-        return r.width > 0 && r.y > Math.max(120, window.innerHeight - 560) && r.y < window.innerHeight - 60 && (b.innerText || '').includes('Nano Banana Pro');
+        return r.width > 0 && r.y > Math.max(120, window.innerHeight - 600) && (b.innerText || '').includes('Nano Banana Pro');
     })
     """)
     if not already_pro:
         await flow.find_and_trusted_click(
-            "(text.includes('Nano Banana') || text.includes('Imagen')) && r.y > Math.max(120, window.innerHeight - 560) && r.y < window.innerHeight - 60",
+            "aria === 'Chọn nhóm mô hình' || ((text.includes('Nano Banana') || text.includes('Imagen')) && r.y > Math.max(120, window.innerHeight - 600))",
             "image model dropdown",
         )
-        await asyncio.sleep(0.4)
+        await asyncio.sleep(0.45)
         await flow.find_and_trusted_click(
-            "el.getAttribute('role') === 'menuitem' && text.includes('Nano Banana Pro')",
+            "(el.getAttribute('role') === 'menuitem' || el.getAttribute('role') === 'option' || el.tagName === 'BUTTON') && text.includes('Nano Banana Pro')",
             "Nano Banana Pro",
         )
         await asyncio.sleep(0.3)
@@ -1175,10 +1175,11 @@ async def _safe_capture_screenshot_or_canvas(flow: FlowCDP, out_p: str) -> None:
             f.write(base64.b64decode(du.split(",", 1)[1]))
 
 
-async def capture_qa_pages(flow: FlowCDP, qa_dir: str, prefix: str, tab_label: str) -> None:
+async def capture_qa_pages(flow: FlowCDP, qa_dir: str, prefix: str, tab_label: str, max_pages: int = 1) -> None:
     os.makedirs(qa_dir, exist_ok=True)
     await switch_gallery_tab(flow, tab_label)
-    for idx, sy in enumerate((0, 540, 1080, 1620)):
+    scroll_offsets = (0, 540, 1080, 1620)[:max(1, max_pages)]
+    for idx, sy in enumerate(scroll_offsets):
         await flow.js(f"""
         (() => {{
             const primary = document.querySelector('.cdk-virtual-scrollable.page-container');
@@ -1191,7 +1192,7 @@ async def capture_qa_pages(flow: FlowCDP, qa_dir: str, prefix: str, tab_label: s
             window.scrollTo(0, {sy});
         }})()
         """)
-        await asyncio.sleep(0.6)
+        await asyncio.sleep(0.5)
         out_p = os.path.join(qa_dir, f"qa_{prefix}_page{idx + 1}.jpg")
         await _safe_capture_screenshot_or_canvas(flow, out_p)
         print("Saved local QA screenshot:", out_p)
@@ -1284,8 +1285,9 @@ async def run_images_pipeline(
             print("Saved single-scene QA screenshot:", out_p)
             return
 
-        for w_idx in range(0, len(scenes), 3):
-            wave = scenes[w_idx:w_idx + 3]
+        img_wave_size = max(1, int(config.get("image_wave_size") or 4))
+        for w_idx in range(0, len(scenes), img_wave_size):
+            wave = scenes[w_idx:w_idx + img_wave_size]
             await flow.js("""
             (() => {
                 const sc = document.querySelector('.cdk-virtual-scrollable.page-container');
@@ -1295,12 +1297,15 @@ async def run_images_pipeline(
             """)
             await asyncio.sleep(0.3)
             wave_before_bases = {it["base"] for it in await get_rendered_gallery_items(flow)}
-            for sc in wave:
+            for sc_idx, sc in enumerate(wave):
                 await submit_single_image_scene(flow, sc, uuid_cache, uuid_cache_path, wait_for_render=False)
-            print(f"  Waiting for {slug} wave {w_idx // 3 + 1} ({len(wave)} images)...")
+                if sc_idx + 1 < len(wave):
+                    await asyncio.sleep(2.5)
+            print(f"  Waiting for {slug} wave {w_idx // img_wave_size + 1} ({len(wave)} images)...")
             saw_pct = False
             zero_streak = 0
-            for step in range(75):
+            retry_attempts = 0
+            for step in range(55):
                 await asyncio.sleep(2.2)
                 await flow.js("""
                 (() => {
@@ -1309,10 +1314,10 @@ async def run_images_pipeline(
                     window.scrollTo(0, 0);
                 })()
                 """)
-                if await _click_retry_if_failed_card(flow, f"wave-{w_idx // 3 + 1}"):
+                if retry_attempts < 3 and await _click_retry_if_failed_card(flow, f"wave-{w_idx // img_wave_size + 1}"):
+                    retry_attempts += 1
                     saw_pct = True
                     zero_streak = 0
-                    continue
                 pcts = await flow.js("""
                 Array.from(document.querySelectorAll('div, span'))
                     .map(e => (e.innerText || '').trim())
@@ -1326,11 +1331,11 @@ async def run_images_pipeline(
                 elif (len(new_wave_items) >= len(wave) and (saw_pct or step >= 5)) or step >= 55:
                     zero_streak += 1
                 if zero_streak >= 2:
-                    print(f"  Wave {w_idx // 3 + 1} finished ({len(new_wave_items)}/{len(wave)} new rendered cards ready)!")
+                    print(f"  Wave {w_idx // img_wave_size + 1} finished ({len(new_wave_items)}/{len(wave)} new rendered cards ready)!")
                     break
 
-        await asyncio.sleep(3.5)
-        await capture_qa_pages(flow, qa_dir, f"{slug}_img", "Hình ảnh")
+        await asyncio.sleep(2.0)
+        await capture_qa_pages(flow, qa_dir, f"{slug}_img", "Hình ảnh", max_pages=1 if len(scenes) <= 6 else 4)
 
 
 async def map_scene_uuids_pipeline(
@@ -1775,8 +1780,9 @@ async def run_videos_pipeline(
         # Bridge permanent 36-char UUIDs -> post-reload '/asb/ANqvLO...' picker tokens before queueing clips
         uuid_to_asb, _ = await build_gallery_media_bridge(flow, max_steps=65)
 
-        for w_i in range(0, len(videos), 2):
-            wave = videos[w_i:w_i + 2]
+        wave_size = max(1, int(config.get("video_wave_size") or 4))
+        for w_i in range(0, len(videos), wave_size):
+            wave = videos[w_i:w_i + wave_size]
             for item in wave:
                 start_tok = item.get("uuid") or scene_uuids.get(item.get("scene_key", ""), "")
                 if not start_tok:
@@ -1843,7 +1849,7 @@ async def run_videos_pipeline(
                         break
                 await asyncio.sleep(2.4)
 
-            wave_label = f"{slug} Veo Wave {w_i // 2 + 1} ({len(wave)} clips)"
+            wave_label = f"{slug} Veo Wave {w_i // wave_size + 1} ({len(wave)} clips)"
             print(f"  Waiting for {wave_label}...")
             saw_pct = False
             zero_streak = 0
@@ -1874,8 +1880,8 @@ async def run_videos_pipeline(
                     print(f"  Completed {wave_label}!")
                     break
 
-        await asyncio.sleep(3.5)
-        await capture_qa_pages(flow, qa_dir, f"{slug}_veo", "Video")
+        await asyncio.sleep(2.0)
+        await capture_qa_pages(flow, qa_dir, f"{slug}_veo", "Video", max_pages=1 if len(videos) <= 6 else 4)
 
 
 def _probe_video(path: str) -> Dict[str, Any]:
